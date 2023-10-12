@@ -21,6 +21,9 @@ import java.util.List;
  * @author ASUS
  */
 public class CategorieService implements CrudInterface<Categorie> {
+
+    
+   
         Connection con;
         Statement ste;
 
@@ -136,14 +139,27 @@ try {
           } catch (SQLException ex) {
          ex.printStackTrace();         
           }
-           return (ArrayList<Categorie>) ListeCategCherchee ;
+           return (ArrayList<Categorie>) ListeCategCherchee ;}
 
 
-    }
-
-    @Override
-    public ArrayList<Categorie> chercher() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+           public Categorie RetournerT(String s) {
+        Categorie c = new Categorie();
+        try {
+            
+       String req="SELECT * FROM categorie WHERE `nom_categorie`='"+s+"'";
+            Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = st.executeQuery(req);
+            rs.beforeFirst();
+            rs.next();
+                c.setId_categorie(rs.getInt(1));
+                c.setNom_categorie(rs.getString(2));
+                c.setDescription_categorie(rs.getString(3));           
+                c.setType_categorie(rs.getString(4)); 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return  c;
+        
     }
 
     @Override
@@ -151,6 +167,13 @@ try {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public ArrayList<Categorie> chercher() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    }
+
+  
    
     
         
@@ -158,5 +181,5 @@ try {
 
    
 
-}
+
 

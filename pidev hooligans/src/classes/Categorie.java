@@ -5,6 +5,9 @@
  */
 package classes;
 
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+
 /**
  *
  * @author ASUS
@@ -31,6 +34,9 @@ public class Categorie {
         this.type_categorie = type_categorie;
     }
 
+  
+
+   
    
    
 

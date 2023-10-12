@@ -25,10 +25,10 @@ public class PidevHooligans {
     
     
    public static void main(String[] args) throws SQLException {
-       User utilisateur = new User(33, "NomUtilisateur", "EmailUtilisateur");
+      User utilisateur = new User(100, "NomUtilisateur", "EmailUtilisateur");
     
     //Créez une instance de Panier.
-    panier panier = new panier(33, utilisateur);
+    panier panier = new panier(100, utilisateur);
     
     //Créez une instance de PanierService.
     PanierService PanierService = new PanierService();
@@ -38,7 +38,7 @@ public class PidevHooligans {
     System.out.println(panier);
     
     System.out.println("Panier ajouté avec succès !");
-     PanierService.supprimer(11);
+     PanierService.supprimer(122);
      
   
           
@@ -51,18 +51,21 @@ public class PidevHooligans {
        Categorie categorie; 
          CategorieService c =new CategorieService();
         
-        categorie = new Categorie(23,"foot","sport","activite");
+        categorie = new Categorie(9,"foot","sport","activite");
          c.ajout(categorie);
          Produit p1;
-        p1 = new Produit(1, "long", 11.0, "rond", 13, "image", categorie);
+        p1 = new Produit( "long", 11.0, "rond", 13, "image", categorie);
         Produitservice ps = new Produitservice() {};
-       ps.ajout(p1);
+        ps.ajout(p1);
         System.out.println(p1);
         
         System.out.println(categorie);
-       
-        c.supprimer(5); 
+          // Produit p2;
+       // p2 = new Produit(7, "llll", 11.0, "rrr", 13, "image", categorie);
+        c.supprimer(26); 
         ps.supprimer(5);
+        System.out.println("update  ");
+        //ps.modifier(p1);
          
     
     
@@ -84,7 +87,7 @@ public class PidevHooligans {
          CategorieService categorieService = new CategorieService();
     
     //Créez une nouvelle catégorie que vous souhaitez modifier.
-    Categorie categorieAModifier = new Categorie( 1,"NouveauNom", "NouvelleDescription", "NouveauType");
+    Categorie categorieAModifier = new Categorie( 22,"NouveauNom", "NouvelleDescription", "NouveauType");
 
     // Utilisez la méthode modifier pour mettre à jour la catégorie.
     categorieService.modifier(categorieAModifier);
@@ -98,7 +101,8 @@ public class PidevHooligans {
   
     
      
-    
+   
+   
        
 
 

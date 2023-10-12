@@ -128,7 +128,7 @@ public ArrayList<Produit> affihcer() {
            
      
          try {
-            String req ="UPDATE produit SET `nom_prod`= ? ,`prix_prod`= ? ,`description_prod`= ? ,`quantite_prod`= ? ,`image`= ?,`id_categorie`= ? WHERE id_prod = ?";
+            String req ="UPDATE produit SET `nom_prod`= ? ,`prix_prod`= ? ,`description_prod`= ? ,`quantite`= ? ,`image`= ?,`id_categorie`= ? WHERE id_prod = ?";
             PreparedStatement ps = con.prepareStatement(req);
             ps.setString(1,p.getNom_prod());
             ps.setDouble(2, p.getPrix_prod());
@@ -140,6 +140,7 @@ public ArrayList<Produit> affihcer() {
             ps.executeUpdate();
             System.out.println("produit updated successfully !");
         } catch (SQLException ex) {
+             System.out.println(ex.getMessage());
         }
     }
        
