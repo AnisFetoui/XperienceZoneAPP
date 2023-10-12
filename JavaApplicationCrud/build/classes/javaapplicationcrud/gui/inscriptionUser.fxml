@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaapplicationcrud.gui.InscriptionUserController">
+   <children>
+      <AnchorPane prefHeight="406.0" prefWidth="215.0">
+         <children>
+            <ImageView fitHeight="123.0" fitWidth="171.0" layoutX="30.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="6.0" layoutY="211.0" prefHeight="38.0" prefWidth="201.0" text="Bienvenue !!" textFill="#74da39" underline="true">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="400.0" prefWidth="395.0">
+         <children>
+            <Label layoutX="12.0" layoutY="25.0" prefHeight="22.0" prefWidth="66.0" text="Identifiant">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="144.0" prefHeight="22.0" prefWidth="79.0" text="Confirmation">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="107.0" prefHeight="22.0" prefWidth="79.0" text="Mot de passe">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="67.0" prefHeight="22.0" prefWidth="66.0" text="Email">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="179.0" prefHeight="22.0" prefWidth="31.0" text="Age">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="16.0" layoutY="234.0" prefHeight="22.0" prefWidth="66.0" text="Role">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="19.0" layoutY="279.0" prefHeight="22.0" prefWidth="66.0" text="Sexe">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField id="tf_inscri_mdp" fx:id="tf_inscri_mdp" layoutX="104.0" layoutY="106.0" prefHeight="23.0" prefWidth="170.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField id="tf_inscri_age" fx:id="tf_inscri_image" layoutX="101.0" layoutY="319.0" prefHeight="23.0" prefWidth="170.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField id="tf_inscri_ident" fx:id="tf_inscri_ident" layoutX="104.0" layoutY="24.0" prefHeight="23.0" prefWidth="170.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField id="tf_inscri_email" fx:id="tf_inscri_email" layoutX="104.0" layoutY="66.0" prefHeight="23.0" prefWidth="170.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField id="tf_inscri_cfrmmdp" fx:id="tf_inscri_cfrmmdp" layoutX="104.0" layoutY="144.0" prefHeight="23.0" prefWidth="170.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </TextField>
+            <Button id="btn_inscri_inscri" fx:id="btn_inscri_inscri" layoutX="146.0" layoutY="491.0" mnemonicParsing="false" onAction="#insc" prefHeight="22.0" prefWidth="124.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" text="S'inscrire">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="173.0" layoutY="532.0" prefHeight="22.0" prefWidth="94.0" text="Déja client ?">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="15.0" />
+               </font>
+            </Label>
+            <Button id="btn_inscri_cnx" fx:id="btn_inscri_cnx" layoutX="274.0" layoutY="531.0" mnemonicParsing="false" onAction="#Retour" prefHeight="27.0" prefWidth="115.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Connecter !!" textFill="#317246" underline="true">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="15.0" />
+               </font>
+            </Button>
+            <Line endX="100.0" endY="267.0" layoutX="-100.0" layoutY="346.0" startX="100.0" startY="-346.0" />
+            <TextField id="tf_inscri_age" fx:id="tf_inscri_age" layoutX="104.0" layoutY="190.0" prefHeight="23.0" prefWidth="170.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="27.0" layoutY="320.0" prefHeight="22.0" prefWidth="50.0" text="Image">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cb_inscri_rl" layoutX="104.0" layoutY="232.0" prefHeight="25.0" prefWidth="170.0" />
+            <ComboBox fx:id="cb_inscri_sx" layoutX="101.0" layoutY="278.0" prefHeight="25.0" prefWidth="170.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>
