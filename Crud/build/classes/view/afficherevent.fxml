@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="view.AffichereventController">
+    <stylesheets>
+        <URL value="@afficherevent.css" />
+    </stylesheets>
+   <children>
+      <ImageView fitHeight="423.0" fitWidth="754.0" layoutX="-9.0">
+         <image>
+            <Image url="@../../../../../Downloads/Design%20sans%20titre%20(1).png" />
+         </image>
+      </ImageView>
+      <Label layoutX="74.0" layoutY="39.0" prefHeight="17.0" prefWidth="191.0" text="Nom Evenement">
+         <textFill>
+            <RadialGradient centerX="0.4944751381215469" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.8333333134651184" opacity="0.5699999928474426" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </textFill>
+         <font>
+            <Font name="Book Antiqua Bold Italic" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="82.0" layoutY="82.0" prefHeight="40.0" prefWidth="222.0" text="Description">
+         <font>
+            <Font name="Book Antiqua Bold Italic" size="15.0" />
+         </font>
+         <textFill>
+            <RadialGradient centerX="0.24033149171270718" centerY="0.45734597156398105" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.8333333134651184" opacity="0.5699999928474426" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </textFill>
+      </Label>
+      <Label layoutX="65.0" layoutY="151.0" text="Nombre participants">
+         <font>
+            <Font name="Book Antiqua Bold Italic" size="15.0" />
+         </font>
+         <textFill>
+            <RadialGradient centerX="0.23480662983425415" centerY="0.49526066350710907" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.8333333134651184" opacity="0.5699999928474426" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </textFill>
+      </Label>
+      <Label layoutX="77.0" layoutY="202.0" prefHeight="19.0" prefWidth="134.0" text="Date Evenement">
+         <textFill>
+            <RadialGradient centerX="0.7430939226519337" centerY="0.45734597156398105" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.8333333134651184" opacity="0.5699999928474426" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </textFill>
+         <font>
+            <Font name="Book Antiqua Bold Italic" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="77.0" layoutY="253.0" text="Heure Evenement">
+         <textFill>
+            <RadialGradient centerX="0.3342541436464089" centerY="0.7369668246445498" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.8333333134651184" opacity="0.5699999928474426" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </textFill>
+         <font>
+            <Font name="Book Antiqua Bold Italic" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="77.0" layoutY="304.0" prefHeight="19.0" prefWidth="116.0" text="Lieu Evenement">
+         <font>
+            <Font name="Book Antiqua Bold Italic" size="15.0" />
+         </font>
+         <textFill>
+            <RadialGradient centerX="0.45027624309392267" centerY="0.8270142180094787" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.8333333134651184" opacity="0.5699999928474426" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </textFill>
+      </Label>
+      <TextField layoutX="255.0" layoutY="82.0" prefHeight="40.0" prefWidth="184.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="255.0" layoutY="36.0" prefHeight="25.0" prefWidth="184.0" />
+      <TextField layoutX="250.0" layoutY="250.0" prefHeight="25.0" prefWidth="191.0" />
+      <TextField layoutX="255.0" layoutY="148.0" prefHeight="25.0" prefWidth="184.0" />
+      <DatePicker layoutX="255.0" layoutY="199.0" prefHeight="26.0" prefWidth="184.0" />
+      <ChoiceBox layoutX="255.0" layoutY="301.0" prefHeight="26.0" prefWidth="191.0" />
+      <Button fx:id="idbtn_suiv1_bf" layoutX="626.0" layoutY="369.0" mnemonicParsing="false" onAction="#act_suiv1_bf" prefHeight="26.0" prefWidth="80.0" text="Suivant" />
+      <Button fx:id="idbtn_ret1_bf" layoutX="42.0" layoutY="370.0" mnemonicParsing="false" onAction="#act_ret1_bf" prefHeight="25.0" prefWidth="80.0" text="Retour" />
+   </children>
+</AnchorPane>

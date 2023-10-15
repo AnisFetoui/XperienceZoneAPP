@@ -5,6 +5,8 @@
  */
 package service;
 
+import crud.User;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,13 +17,15 @@ import java.util.List;
 public interface interface_crud <T> {
     
     void ajouter(T t);
-     void supprimer(T t);
+    void supprimer(T t);
     void modifier(T t);
-
+    void ajouterTicket(T t ,User user);
     /**
      *
      * @return
      */
-    List<T> afficher();
     
+    List<T> afficher();
+    T readById(int id);
+   ArrayList<T> chercher();
 }

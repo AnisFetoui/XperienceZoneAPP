@@ -10,7 +10,7 @@ package crud;
  * @author ZAHRA
  */
 public class Ticket { 
-     private int id_ticket;
+    private int id_ticket;
     private int num_ticket;
     private User user ;
     private Evenement event;
@@ -18,16 +18,21 @@ public class Ticket {
     private double prix;
     private Catégorie categorie ;
 
+
     public Ticket(int id_ticket, User user, Evenement event, String image, double prix, Catégorie categorie) {
         this.id_ticket = id_ticket;
         this.user = user;
         this.event = event;
         this.image = image;
         this.prix = prix;
-        this.Catégorie = categorie;
+        this.categorie = categorie;
     }
 
     public Ticket() {
+    }
+
+    Ticket(int i, int i0, User u, Evenement E1, String image, double d, String vip) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getId_ticket() {
