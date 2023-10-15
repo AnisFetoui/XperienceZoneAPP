@@ -12,9 +12,12 @@ public interface CrudInterface<P> {
     void ajout(P p);
     void supprimer(int id);
     void modifier(P p);
-    ArrayList<P> affihcer();
+    ArrayList<P> afficher();
     P readById(int id);
 
     
     ArrayList<P> chercher();
+
+    
+    ArrayList<P> sortBy(String nom_column,String Asc_Dsc);
 }

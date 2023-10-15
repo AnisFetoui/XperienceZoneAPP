@@ -25,7 +25,7 @@ public class PidevHooligans {
     
     
    public static void main(String[] args) throws SQLException {
-      User utilisateur = new User(100, "NomUtilisateur", "EmailUtilisateur");
+      /*User utilisateur = new User(100, "NomUtilisateur", "EmailUtilisateur");
     
     //Créez une instance de Panier.
     panier panier = new panier(100, utilisateur);
@@ -87,7 +87,7 @@ public class PidevHooligans {
          CategorieService categorieService = new CategorieService();
     
     //Créez une nouvelle catégorie que vous souhaitez modifier.
-    Categorie categorieAModifier = new Categorie( 22,"NouveauNom", "NouvelleDescription", "NouveauType");
+    Categorie categorieAModifier = new Categorie( 51,"NouveauNom", "NouvelleDescription", "NouveauType");
 
     // Utilisez la méthode modifier pour mettre à jour la catégorie.
     categorieService.modifier(categorieAModifier);
@@ -97,7 +97,38 @@ public class PidevHooligans {
     
    
    }
-   }}
+   }}*/
+     
+    // Créez une instance de votre classe de gestion des catégories
+    // Supposons que vous avez une classe CategorieService avec la méthode sortBy
+    CategorieService categorieService = new CategorieService();
+
+    // Appelez la méthode sortBy pour trier les catégories par nom en ordre croissant
+    ArrayList<Categorie> categoriesAsc = categorieService.sortBy("nom_categorie", "ASC");
+
+    // Affichez les catégories triées par ordre croissant
+    for (Categorie categorie : categoriesAsc) {
+        System.out.println("ID: " + categorie.getId_categorie());
+        System.out.println("Nom: " + categorie.getNom_categorie());
+        System.out.println("Description: " + categorie.getDescription_categorie());
+        System.out.println("Type: " + categorie.getType_categorie());
+        System.out.println();
+    }
+
+    // Appelez la méthode sortBy pour trier les catégories par nom en ordre décroissant
+    ArrayList<Categorie> categoriesDesc = categorieService.sortBy("nom_categorie", "DESC");
+
+    // Affichez les catégories triées par ordre décroissant
+    for (Categorie categorie : categoriesDesc) {
+        System.out.println("ID: " + categorie.getId_categorie());
+        System.out.println("Nom: " + categorie.getNom_categorie());
+        System.out.println("Description: " + categorie.getDescription_categorie());
+        System.out.println("Type: " + categorie.getType_categorie());
+        System.out.println();
+    }
+      }}
+       
+     
   
     
      

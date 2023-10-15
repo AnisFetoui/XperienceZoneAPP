@@ -63,7 +63,6 @@ import java.util.List;
      * @throws java.sql.SQLException
      */
     
-@Override
 public ArrayList<Produit> affihcer() {
     List<Produit> produits = new ArrayList<>();
     try {
@@ -195,6 +194,16 @@ public ArrayList<Produit> affihcer() {
 
     @Override
     public ArrayList<Produit> chercher() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Produit> afficher() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Produit> sortBy(String nom_column, String Asc_Dsc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

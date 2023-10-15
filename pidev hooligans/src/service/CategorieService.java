@@ -162,10 +162,33 @@ try {
         
     }
 
-    @Override
-    public ArrayList<Categorie> affihcer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        @Override
+        public ArrayList<Categorie> sortBy(String nom_column, String Asc_Dsc) {
+    List<Categorie> ListeCategTriee = new ArrayList<>();
+    try {
+        // Utilisez des requêtes préparées pour éviter les attaques SQL par injection
+        String req = "SELECT * FROM categorie ORDER BY ? " + Asc_Dsc;
+        PreparedStatement preparedStatement = con.prepareStatement(req);
+        preparedStatement.setString(1, nom_column);
+
+        ResultSet res = preparedStatement.executeQuery();
+
+        while (res.next()) {
+            Categorie c = new Categorie();
+            c.setId_categorie(res.getInt(1));
+            c.setNom_categorie(res.getString(2));
+            c.setDescription_categorie(res.getString(3));
+            c.setType_categorie(res.getString(4));
+
+            ListeCategTriee.add(c);
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
     }
+
+    return new ArrayList<>(ListeCategTriee);
+}
+
 
     @Override
     public ArrayList<Categorie> chercher() {

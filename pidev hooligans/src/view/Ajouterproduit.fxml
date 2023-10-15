@@ -24,37 +24,39 @@
          </font>
       </Text>
       <TextField fx:id="nomprod" layoutX="681.0" layoutY="128.0" opacity="0.6" prefHeight="31.0" prefWidth="187.0" />
-      <TextField fx:id="prixprod" layoutX="681.0" layoutY="203.0" opacity="0.6" prefHeight="31.0" prefWidth="187.0" />
-      <TextArea fx:id="descprod" layoutX="681.0" layoutY="269.0" opacity="0.6" prefHeight="70.0" prefWidth="199.0" />
-      <TextField fx:id="quantiteprod" layoutX="687.0" layoutY="383.0" opacity="0.6" />
-      <ChoiceBox fx:id="choixcp" layoutX="687.0" layoutY="464.0" prefHeight="31.0" prefWidth="187.0" />
-      <Button layoutX="422.0" layoutY="529.0" mnemonicParsing="false" opacity="0.6" prefHeight="31.0" prefWidth="146.0" text="choisir image" />
-      <Button layoutX="422.0" layoutY="610.0" mnemonicParsing="false" onAction="#ajoutproduit" opacity="0.6" prefHeight="31.0" prefWidth="146.0" text="Ajouter produit" />
+      <TextField fx:id="prixprod" layoutX="681.0" layoutY="181.0" opacity="0.6" prefHeight="31.0" prefWidth="187.0" />
+      <TextArea fx:id="descprod" layoutX="681.0" layoutY="233.0" opacity="0.6" prefHeight="70.0" prefWidth="199.0" />
+      <TextField fx:id="quantiteprod" layoutX="687.0" layoutY="330.0" opacity="0.6" />
+      <ChoiceBox fx:id="choixcp" layoutX="687.0" layoutY="380.0" prefHeight="31.0" prefWidth="187.0" />
+      <Button layoutX="387.0" layoutY="442.0" mnemonicParsing="false" onAction="#chooseImage" opacity="0.6" prefHeight="31.0" prefWidth="146.0" text="choisir image" />
+      <Button layoutX="422.0" layoutY="610.0" mnemonicParsing="false" onAction="#ajoutProduit" opacity="0.6" prefHeight="31.0" prefWidth="146.0" text="Ajouter produit" />
       <Button layoutX="701.0" layoutY="610.0" mnemonicParsing="false" opacity="0.6" prefHeight="31.0" prefWidth="179.0" text="Nos Produit" />
       <Text fill="#393333" layoutX="390.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom Produit">
          <font>
             <Font name="Book Antiqua" size="24.0" />
          </font>
       </Text>
-      <Text fill="#3c3838" layoutX="395.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix Produit">
+      <Text fill="#3c3838" layoutX="395.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix Produit">
          <font>
             <Font name="Book Antiqua" size="24.0" />
          </font>
       </Text>
-      <Text fill="#433f3f" layoutX="367.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description Produit">
+      <Text fill="#433f3f" layoutX="367.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description Produit">
          <font>
             <Font name="Book Antiqua" size="24.0" />
          </font>
       </Text>
-      <Text fill="#3c3b3b" layoutX="379.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Quantite Produit">
+      <Text fill="#3c3b3b" layoutX="379.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Quantite Produit">
          <font>
             <Font name="Book Antiqua" size="24.0" />
          </font>
       </Text>
-      <Text fill="#3c3a3a" layoutX="421.0" layoutY="487.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie">
+      <Text fill="#3c3a3a" layoutX="421.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie">
          <font>
             <Font name="Book Antiqua" size="24.0" />
          </font>
       </Text>
+      <ImageView fx:id="image_view" fitHeight="150.0" fitWidth="200.0" layoutX="681.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="image_label" layoutX="609.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>
