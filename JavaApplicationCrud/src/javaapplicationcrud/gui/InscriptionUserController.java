@@ -5,8 +5,12 @@
  */
 package javaapplicationcrud.gui;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +30,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.MediaView;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -49,11 +58,21 @@ public class InscriptionUserController implements Initializable {
     private ComboBox<String> cb_inscri_rl;
     @FXML
     private ComboBox<String> cb_inscri_sx;
-  
+    
+    private String ImagePath;
      @FXML
     private Button btn_inscri_inscri;
       @FXML
     private Button btn_inscri_cnx;
+
+        @FXML
+        private Label imageLabel;
+         @FXML
+        private ImageView ImagePreviw;
+         @FXML
+        private Button Add_image_button;
+         @FXML
+        private MediaView MediaView;
       
      
     //private ToggleGroup role;
@@ -76,6 +95,9 @@ public class InscriptionUserController implements Initializable {
            cb_inscri_sx.setItems(listS);
            cb_inscri_sx.setValue("HOMME");
            
+        ImagePath = "C:\\Users\\ANIS\\Documents/profile.jpg";
+        ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
+           
 
     }          
 
@@ -93,8 +115,8 @@ public class InscriptionUserController implements Initializable {
             
         if (tf_inscri_ident.getText().isEmpty() || tf_inscri_email.getText().isEmpty() || mdp1.isEmpty() || 
             mdp2.isEmpty()  || 
-            age1.isEmpty() ||
-            tf_inscri_image.getText().isEmpty()
+            age1.isEmpty()
+         
             ) {
         // Afficher un message d'alerte
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -161,7 +183,7 @@ public class InscriptionUserController implements Initializable {
             u.setAge(Integer.parseInt(age1));
             u.setRole(role1);
             u.setSexe(sexe);
-            u.setImage("aaa");
+            u.setImage(ImagePath);
 
             su.ajouter(u);
      try {
@@ -191,6 +213,36 @@ public class InscriptionUserController implements Initializable {
     stage.show();} catch (IOException ex) {
             Logger.getLogger(InscriptionUserController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void copyFileToDirectory(File sourceFile, File destDir) throws IOException {
+    Path sourcePath = sourceFile.toPath();
+    Path destPath = destDir.toPath().resolve(sourceFile.getName());
+    Files.copy(sourcePath, destPath, StandardCopyOption.REPLACE_EXISTING);
+    }
+    
+    
+    @FXML
+    private void add_image_action(ActionEvent event) throws IOException {
+        FileChooser fc = new FileChooser();
+        File defaultDir = new File("C:\\Users\\ANIS\\Documents");
+        fc.setInitialDirectory(defaultDir);
+        File SelectedFile = fc.showOpenDialog(null);
+
+        if (SelectedFile != null) {
+            copyFileToDirectory(SelectedFile, defaultDir);
+
+            ImagePath = defaultDir + "/" + SelectedFile.getName();
+            imageLabel.setText(ImagePath);
+            ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
+        } else {
+
+            ImagePath = "C:\\Users\\ANIS\\Documents/profile.jpg";
+            imageLabel.setText(ImagePath);
+            ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
+
+        }
+
     }
 }
 

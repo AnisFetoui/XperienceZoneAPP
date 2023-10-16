@@ -6,6 +6,8 @@
 package javaapplicationcrud.gui;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -53,15 +55,16 @@ public class xperiencezone_main extends Application {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().
-                    getResource("MdpOubUser.fxml"));
+            getResource("ConnexionUser.fxml"));
             Scene scene = new Scene(root);
-            primaryStage.setTitle("message inscri");
+            primaryStage.setTitle("Home");
             primaryStage.setScene(scene);
             primaryStage.show();
-        } catch (IOException ex) {
+            } catch (IOException ex) {
             System.out.println(ex.getMessage());
-        }
+            Logger.getLogger(InscriptionUserController.class.getName()).log(Level.SEVERE, null, ex);
 
+        }
     }
 
     public static void main(String[] args) {

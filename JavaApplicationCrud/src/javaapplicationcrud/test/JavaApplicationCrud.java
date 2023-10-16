@@ -7,8 +7,6 @@ package javaapplicationcrud.test;
 //import javaapplicationcrud.Role;
 
 import javaapplicationcrud.service.ServiceUser;
-import javaapplicationcrud.entity.Role;
-import javaapplicationcrud.entity.Sexe;
 import javaapplicationcrud.entity.User;
 
 
@@ -28,36 +26,23 @@ public class JavaApplicationCrud {
         // TODO code application logic here
         //public User(int id, String username, String mail, String mdp,Role role, String image,int age, String sexe)
        
-       
-          User  p1 = new User(40,"anis","fetoui@a.com","aaaa","client","aaa",50,"femme");
-         // User  p2 = new User("anis","ben mustfa","aaaa",Role.ADMIN,"aaa",00,Sexe.FEMME);
-          //  System.out.println(p1);
-      
-    
-       
-        
-       ServiceUser su = new ServiceUser();
-       
-      /* sp.supprimer(23);
-       sp.supprimer(21);
-       sp.supprimer(22);
-       sp.supprimer(25);
-       sp.supprimer(20);*/
-      // p1.setUsername("NewName");
-       su.modifier(p1);
-        
-//su.ajouter(p1);
-        //System.out.println(su.readByEmail("fetoui"));
-//        System.out.println(su.readById(38));
-//        System.out.println(su.authentification("fetoui","aaaa"));
-        
-       //  System.out.println(sp.chercherByEmail("ben mustfa"));
-       //System.out.println(sp.chercherByEmail("fetoui@@@"));
-       //System.out.println(sp.checkEmailExists("fetoui@@@"));
-              // System.out.println(su.afficher());
+ ServiceUser su = new ServiceUser();
+            User p1 = new User();
 
-            
-            //supprimer(1);
+          p1.setUsername("Grami aziz");
+            p1.setMail("gramiaziz@gmail.com");
+            p1.setAge(30);
+            p1.setMdp("azaza");
+            p1.setImage("vide");
+            p1.setRole("ADMIN");
+            p1.setSexe("homme");
+      
+       
+
+
+           su.ajouter(p1);
+           p1.setAge(0);
+           su.modifier(p1);
     }
     
 }

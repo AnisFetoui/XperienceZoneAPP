@@ -15,8 +15,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import javaapplicationcrud.entity.Sexe;
-//import javax.mail.Session;
 
 /**
  *
@@ -61,7 +59,34 @@ public class ServiceUser implements UService<User> {
             System.out.println(ex);
     }
     }
+    @Override
+    public void modifier(User u) {
+    try {
+        String req = "UPDATE utilisateur SET username = ?, mail = ?, mdp = ?, role = ?, image = ?, age = ?, sexe = ? WHERE id_user = ?";
+        PreparedStatement pre = con.prepareStatement(req);
+        
+        pre.setString(1, u.getUsername());
+        pre.setString(2, u.getMail());
+        pre.setString(3, u.getMdp());
+        pre.setString(4, u.getRole());
+        pre.setString(5, u.getImage());
+        pre.setInt(6, u.getAge());
+        pre.setString(7, u.getSexe());
+        pre.setInt(8, u.getId_user());
+        
+        int rowsUpdated = pre.executeUpdate();
 
+        if (rowsUpdated > 0) {
+            System.out.println("La mise à jour a réussi.");
+        } else {
+            System.out.println("Aucune ligne mise à jour.");
+        }
+
+    } catch (SQLException ex) {
+        //ex.printStackTrace();
+        System.out.println(ex.getMessage());
+    }
+}/*
     @Override
     public void modifier(User u) {
                 try {
@@ -81,7 +106,7 @@ public class ServiceUser implements UService<User> {
 
         }  
     }
-
+*/
     @Override
     public List<User> afficher() {
  List<User> utilisateurs = new ArrayList<>();
@@ -190,7 +215,8 @@ public int authentification(String email, String password) {
 
         int id = -1;
         User u = new User();
-        String req = "SELECT * from utilisateur WHERE mail = ? && mdp = ?"  ;
+        String req = "SELECT * from utilisateur WHERE mail = ? && mdp = ?";
+        
         try (PreparedStatement ps = con.prepareStatement(req)){
             ps.setString(1, email);
             ps.setString(2, password);

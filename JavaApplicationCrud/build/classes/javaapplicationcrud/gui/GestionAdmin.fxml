@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="620.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserGUI.GestionAdminUIController">
+   <children>
+      <TableView fx:id="tv_users" layoutX="66.0" layoutY="31.0" prefHeight="489.0" prefWidth="904.0">
+         <columns>
+            <TableColumn fx:id="col_username" prefWidth="137.0" text="Username" />
+            <TableColumn fx:id="col_email" prefWidth="179.0" text="Email" />
+            <TableColumn fx:id="col_mdp" prefWidth="151.0" text="Mot de Passe" />
+            <TableColumn fx:id="col_role" prefWidth="119.0" text="Role" />
+            <TableColumn fx:id="ColumnId" minWidth="0.0" prefWidth="0.0" text="Column X" visible="false" />
+            <TableColumn fx:id="col_age" prefWidth="69.0" text="Age" />
+            <TableColumn fx:id="col_sexe" prefWidth="123.0" text="Sexe" />
+            <TableColumn fx:id="col_img" prefWidth="123.0" text="Image" />
+         </columns>
+      </TableView>
+      <Button fx:id="btnDeconnecter" layoutX="1063.0" layoutY="560.0" mnemonicParsing="false" onAction="#btnDeconnecterAction" text="Se déconnecter" />
+      <Button fx:id="btnAjouter" layoutX="143.0" layoutY="529.0" mnemonicParsing="false" onAction="#btnAjouterAction" text="Ajouter" />
+      <Button fx:id="btnSupp" layoutX="229.0" layoutY="529.0" mnemonicParsing="false" onAction="#btnSuppAction" text="Supprimer" />
+      <Button fx:id="btnModif" layoutX="332.0" layoutY="529.0" mnemonicParsing="false" onAction="#btnModifAction" text="Modifier" />
+      <Button fx:id="btnActualiser" layoutX="32.0" layoutY="529.0" mnemonicParsing="false" onAction="#btnActualiserAction" text="Actualiser" />
+   </children>
+</AnchorPane>
