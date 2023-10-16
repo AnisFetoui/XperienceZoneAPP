@@ -118,7 +118,7 @@ public class HomeUserController implements Initializable {
         @FXML
     private void go_profile(MouseEvent event) {
     
-                showContent("InscriptionUserController.fxml");
+                showContent("ProfileUser.fxml");
                
     }
      @FXML

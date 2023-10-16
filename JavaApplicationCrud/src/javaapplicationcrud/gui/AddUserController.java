@@ -29,7 +29,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,28 +41,27 @@ import javafx.stage.Stage;
  *
  * @author ANIS
  */
-public class UserModifController implements Initializable {
-
-  @FXML
-    private TextField tf_modif_ident;
+public class AddUserController implements Initializable {
+@FXML
+    private TextField tf_ajout_ident;
     @FXML
-    private TextField tf_modif_email;
+    private TextField tf_ajout_email;
     @FXML
-    private TextField tf_modif_mdp;
+    private TextField tf_ajout_mdp;
     @FXML
-    private TextField tf_modif_cfrmmdp;
+    private TextField tf_ajout_cfrmmdp;
     @FXML
-    private TextField tf_modif_age;
+    private TextField tf_ajout_age;
     @FXML
-    private ComboBox<String> cb_modif_rl;
+    private ComboBox<String> cb_ajout_rl;
     @FXML
-    private ComboBox<String> cb_modif_sx;
+    private ComboBox<String> cb_ajout_sx;
     
     private String ImagePath;
      @FXML
-    private Button btn_modif_modif;
+    private Button btn_ajout_ajout;
       @FXML
-    private Button btn_modif_retour;
+    private Button btn_ajout_retour;
 
         @FXML
         private Label imageLabel;
@@ -83,12 +81,12 @@ public class UserModifController implements Initializable {
        
         // TODO
            ObservableList<String> list = FXCollections.observableArrayList("CLIENT","MANAGER");
-           cb_modif_rl.setItems(list);
-           cb_modif_rl.setValue("CLIENT");
+           cb_ajout_rl.setItems(list);
+           cb_ajout_rl.setValue("CLIENT");
            
            ObservableList<String> listS = FXCollections.observableArrayList("FEMME","HOMME");
-           cb_modif_sx.setItems(listS);
-           cb_modif_sx.setValue("HOMME");
+           cb_ajout_sx.setItems(listS);
+           cb_ajout_sx.setValue("HOMME");
            
         ImagePath = "C:\\Users\\ANIS\\Documents/profile.jpg";
         ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
@@ -99,14 +97,14 @@ public class UserModifController implements Initializable {
         User u = new User();
         ServiceUser su = new ServiceUser();
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-        String mdp1 = tf_modif_mdp.getText();
-        String mdp2 = tf_modif_cfrmmdp.getText();
-        String age1 = tf_modif_age.getText();
-        String role1 = cb_modif_rl.getSelectionModel().getSelectedItem();
-        String sexe = cb_modif_sx.getSelectionModel().getSelectedItem();
+        String mdp1 = tf_ajout_mdp.getText();
+        String mdp2 = tf_ajout_cfrmmdp.getText();
+        String age1 = tf_ajout_age.getText();
+        String role1 = cb_ajout_rl.getSelectionModel().getSelectedItem();
+        String sexe = cb_ajout_sx.getSelectionModel().getSelectedItem();
 
             
-        if (tf_modif_ident.getText().isEmpty() || tf_modif_email.getText().isEmpty() || mdp1.isEmpty() || 
+        if (tf_ajout_ident.getText().isEmpty() || tf_ajout_email.getText().isEmpty() || mdp1.isEmpty() || 
             mdp2.isEmpty()  || 
             age1.isEmpty()
          
@@ -117,14 +115,14 @@ public class UserModifController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText("Veuillez remplir tous les champs !");
         alert.showAndWait();
-    }else if (!tf_modif_email.getText().matches(emailRegex)) {
+    }else if (!tf_ajout_email.getText().matches(emailRegex)) {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Format email incorrect");
     alert.setHeaderText(null);
     alert.setContentText("Veuillez saisir un email valide !");
     alert.showAndWait();
     //return;
-}else if (su.checkEmailExists(tf_modif_email.getText())) {
+}else if (su.checkEmailExists(tf_ajout_email.getText())) {
     
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Email existe déjà");
@@ -170,17 +168,17 @@ public class UserModifController implements Initializable {
         alert.showAndWait();
     } else {
 
-            u.setUsername(tf_modif_ident.getText());
-            u.setMail(tf_modif_email.getText());
+            u.setUsername(tf_ajout_ident.getText());
+            u.setMail(tf_ajout_email.getText());
             u.setMdp(mdp1);
             u.setAge(Integer.parseInt(age1));
             u.setRole(role1);
             u.setSexe(sexe);
             u.setImage(ImagePath);
 
-            su.modifier(u);
+            su.ajouter(u);
      try {
-            Parent page1 = FXMLLoader.load(getClass().getResource("MessageModif.fxml"));
+            Parent page1 = FXMLLoader.load(getClass().getResource("MessageAjout.fxml"));
             
             Scene scene = new Scene(page1);
             

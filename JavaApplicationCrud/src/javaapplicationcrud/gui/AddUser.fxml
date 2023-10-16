@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaapplicationcrud.gui.UserModifController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaapplicationcrud.gui.AddUserController">
    <children>
       <AnchorPane prefHeight="406.0" prefWidth="215.0">
          <children>
@@ -25,7 +25,7 @@
                   <Font name="Arial Rounded MT Bold" size="32.0" />
                </font>
             </Label>
-            <Label layoutX="39.0" layoutY="355.0" prefHeight="43.0" prefWidth="177.0" text="Modifiez cette personne" textFill="#74da39" underline="true">
+            <Label layoutX="39.0" layoutY="355.0" prefHeight="43.0" prefWidth="177.0" text="ajoutez cette personne" textFill="#74da39" underline="true">
                <font>
                   <Font name="Arial Rounded MT Bold" size="15.0" />
                </font>
@@ -69,46 +69,46 @@
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
             </Label>
-            <TextField id="tf_inscri_mdp" fx:id="tf_modif_mdp" layoutX="139.0" layoutY="107.0" prefHeight="23.0" prefWidth="170.0">
+            <TextField id="tf_inscri_mdp" fx:id="tf_ajout_mdp" layoutX="139.0" layoutY="107.0" prefHeight="23.0" prefWidth="170.0">
                <font>
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
             </TextField>
-            <TextField id="tf_inscri_ident" fx:id="tf_modif_ident" layoutX="139.0" layoutY="25.0" prefHeight="23.0" prefWidth="170.0">
+            <TextField id="tf_inscri_ident" fx:id="tf_ajout_ident" layoutX="139.0" layoutY="25.0" prefHeight="23.0" prefWidth="170.0">
                <font>
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
             </TextField>
-            <TextField id="tf_inscri_email" fx:id="tf_modif_email" layoutX="139.0" layoutY="67.0" prefHeight="23.0" prefWidth="170.0">
+            <TextField id="tf_inscri_email" fx:id="tf_ajout_email" layoutX="139.0" layoutY="67.0" prefHeight="23.0" prefWidth="170.0">
                <font>
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
             </TextField>
-            <TextField id="tf_inscri_cfrmmdp" fx:id="tf_modif_cfrmmdp" layoutX="139.0" layoutY="146.0" prefHeight="23.0" prefWidth="170.0">
+            <TextField id="tf_inscri_cfrmmdp" fx:id="tf_ajout_cfrmmdp" layoutX="139.0" layoutY="146.0" prefHeight="23.0" prefWidth="170.0">
                <font>
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
             </TextField>
-            <Button id="btn_inscri_inscri" fx:id="btn_modif_modif" layoutX="61.0" layoutY="474.0" mnemonicParsing="false" onAction="#modif" prefHeight="22.0" prefWidth="124.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" text="Modifier">
+            <Button id="btn_inscri_inscri" fx:id="btn_ajout_ajout" layoutX="61.0" layoutY="474.0" mnemonicParsing="false" onAction="#modif" prefHeight="22.0" prefWidth="124.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" text="Ajouter">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Button>
             <Line endX="100.0" endY="267.0" layoutX="-100.0" layoutY="346.0" startX="100.0" startY="-346.0" />
-            <TextField id="tf_inscri_age" fx:id="tf_modif_age" layoutX="139.0" layoutY="191.0" prefHeight="23.0" prefWidth="170.0">
+            <TextField id="tf_inscri_age" fx:id="tf_ajout_age" layoutX="139.0" layoutY="191.0" prefHeight="23.0" prefWidth="170.0">
                <font>
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
             </TextField>
-            <ComboBox fx:id="cb_modif_rl" layoutX="139.0" layoutY="233.0" prefHeight="25.0" prefWidth="170.0" />
-            <ComboBox fx:id="cb_modif_sx" layoutX="139.0" layoutY="279.0" prefHeight="25.0" prefWidth="170.0" />
+            <ComboBox fx:id="cb_ajout_rl" layoutX="139.0" layoutY="233.0" prefHeight="25.0" prefWidth="170.0" />
+            <ComboBox fx:id="cb_ajout_sx" layoutX="139.0" layoutY="279.0" prefHeight="25.0" prefWidth="170.0" />
             <Button fx:id="Add_image_button" layoutX="14.0" layoutY="368.0" mnemonicParsing="false" onAction="#add_image_action" prefHeight="27.0" prefWidth="109.0" text="Ajouter Photo">
                <font>
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
             </Button>
             <ImageView fx:id="ImagePreviw" fitHeight="90.0" fitWidth="151.0" layoutX="158.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true" />
-            <Button id="btn_inscri_inscri" fx:id="btn_modif_retour" layoutX="234.0" layoutY="474.0" mnemonicParsing="false" onAction="#Retour" prefHeight="22.0" prefWidth="124.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" text="Retour">
+            <Button id="btn_inscri_inscri" fx:id="btn_ajout_retour" layoutX="234.0" layoutY="474.0" mnemonicParsing="false" onAction="#Retour" prefHeight="22.0" prefWidth="124.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" text="Retour">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>

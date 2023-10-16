@@ -76,19 +76,14 @@ public class GestionAdminController implements Initializable {
 
         List<User> lu = su.afficher();
         ObservableList<User> userList = FXCollections.observableArrayList(lu);
-
-        //col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
-       // col_prenom.setCellValueFactory(new PropertyValueFactory<>("LastName"));
-        
-        col_username.setCellValueFactory(new PropertyValueFactory<>("userName"));
-        col_email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
+        col_email.setCellValueFactory(new PropertyValueFactory<>("mail"));
         col_mdp.setCellValueFactory(new PropertyValueFactory<>("mdp"));
         col_role.setCellValueFactory(new PropertyValueFactory<>("role"));
         col_age.setCellValueFactory(new PropertyValueFactory<>("age"));
         col_sexe.setCellValueFactory(new PropertyValueFactory<>("Sexe"));
         col_img.setCellValueFactory(new PropertyValueFactory<>("image"));
         ColumnId.setCellValueFactory(new PropertyValueFactory<>("id_user"));
-       // ColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         tv_users.setItems(userList);
     }
@@ -104,9 +99,120 @@ public class GestionAdminController implements Initializable {
     }
     
     
+    @FXML
+    private void btnDeconnecterAction(ActionEvent event) {
+        SessionManager.getInstance().setCurrentUser(null);
+        try {
+
+            Parent page1 = FXMLLoader.load(getClass().getResource("ConnexionUser.fxml"));
+
+            Scene scene = new Scene(page1);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            stage.setScene(scene);
+
+            stage.show();
+
+        } catch (IOException ex) {
+
+            System.out.println(ex.getMessage());
+
+        }
+    }
     
+        @FXML
+    private void btnModifAction(ActionEvent event) {
+            
+        
+        int SelectedRowIndex = tv_users.getSelectionModel().getSelectedIndex();
+        
+        int ColumnIndex = tv_users.getColumns().indexOf(ColumnId);
+        
+        
+        Alert A = new Alert(Alert.AlertType.CONFIRMATION);
+        if (SelectedRowIndex == -1) {
+            A.setAlertType(Alert.AlertType.WARNING);
+            A.setContentText("Selectionnez une colonne ! ");
+            A.show();
+        } else {
+            String IdCell = tv_users.getColumns().get(ColumnIndex).getCellData(SelectedRowIndex).toString();
+            id_modif = Integer.parseInt(IdCell);
+        
+        try {
+
+            Parent page1 = FXMLLoader.load(getClass().getResource("UserModif.fxml"));
+
+            Scene scene = new Scene(page1);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            stage.setScene(scene);
+
+            stage.show();
+
+        } catch (IOException ex) {
+
+           System.out.println(ex.getMessage());
+
+        }
+        }
+
+    }
+
     
+     @FXML
+    private void btnSuppAction(ActionEvent event) {
+
+        int SelectedRowIndex = tv_users.getSelectionModel().getSelectedIndex();
+        
+        int ColumnIndex = tv_users.getColumns().indexOf(ColumnId);
+        
+        
+        Alert A = new Alert(Alert.AlertType.CONFIRMATION);
+        if (SelectedRowIndex == -1) {
+            A.setAlertType(Alert.AlertType.WARNING);
+            A.setContentText("Selectionnez une colonne ! ");
+            A.show();
+        } else {
+            String IdCell = tv_users.getColumns().get(ColumnIndex).getCellData(SelectedRowIndex).toString();
+            int id_supp = Integer.parseInt(IdCell);
+            ServiceUser su = new ServiceUser();
+            A.setAlertType(Alert.AlertType.CONFIRMATION);
+
+            A.setContentText("Voulez vous supprimer l'utilisateur dont l'ID : " + IdCell + " ?");
+            Optional<ButtonType> result = A.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                su.supprimer(id_supp);
+                A.setAlertType(Alert.AlertType.INFORMATION);
+                A.setContentText("Utilisateur Supprimé ! ");
+                A.show();
+                afficherUsers();
+            }
+
+        }
+    }
     
-    
-    
+    @FXML
+    private void btnAjouterAction(ActionEvent event) {
+        try {
+
+            Parent page1 = FXMLLoader.load(getClass().getResource("AddUser.fxml"));
+
+            Scene scene = new Scene(page1);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            stage.setScene(scene);
+
+            stage.show();
+
+        } catch (IOException ex) {
+
+            System.out.println(ex.getMessage());
+
+        }
+    }
+
 }

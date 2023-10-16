@@ -73,13 +73,6 @@ public class InscriptionUserController implements Initializable {
         private Button Add_image_button;
          @FXML
         private MediaView MediaView;
-      
-     
-    //private ToggleGroup role;
-//    private ToggleGroup sexe;
-
-    
-    
 
     /**
      * Initializes the controller class.

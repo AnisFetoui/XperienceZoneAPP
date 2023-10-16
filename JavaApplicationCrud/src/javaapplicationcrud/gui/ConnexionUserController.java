@@ -82,13 +82,38 @@ private void cnx(ActionEvent event) {
             alert.show();
         } else {
             sessionManager.setCurrentUser(su.readById(id));
+            role = su.readById(id).getRole();
+            switch (role) {
+            case "ADMIN":
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setContentText("Admin connecté");
+                alert.show();
+                page = "GestionAdmin.fxml" ;
+                break;
+           
+            case "CLIENT":
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setContentText("Client connecté");
+                alert.show();
+                page = "HomeUser.fxml" ;
+                
+                break;
+            case "MANAGER":
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setContentText("Manager connecté");
+                alert.show();
+                page = "HomeUser.fxml" ;
+                
+                break;
 
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("HomeUser.fxml"));
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
+            }
+            try {  
+            Parent page1 = FXMLLoader.load(getClass().getResource(page));
+            Scene scene = new Scene(page1);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+
             } catch (IOException ex) {
                 ex.printStackTrace();            }
         }

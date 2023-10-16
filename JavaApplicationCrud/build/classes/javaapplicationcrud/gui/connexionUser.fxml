@@ -58,11 +58,7 @@
             <Font name="Arial Rounded MT Bold" size="12.0" />
          </font>
       </Label>
-      <Button id="btn:connexion:inscri" fx:id="btn_connexion_inscri" layoutX="478.0" layoutY="261.0" mnemonicParsing="false" onAction="#inscri" prefHeight="25.0" prefWidth="38.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="UN" textFill="#317246" underline="true">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="13.0" />
-         </font>
-      </Button>
+
       <Button id="btn:connexion:mdpoub" fx:id="btn_connexion_mdpoub" layoutX="433.0" layoutY="237.0" mnemonicParsing="false" onAction="#oublier" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="oublié" textFill="RED" underline="true">
          <font>
             <Font name="Arial Rounded MT Bold" size="13.0" />
@@ -76,3 +72,4 @@
       <PasswordField fx:id="tf_connexion_mdp" layoutX="338.0" layoutY="200.0" prefHeight="25.0" prefWidth="170.0" promptText="mot de passe" />
    </children>
 </AnchorPane>
+

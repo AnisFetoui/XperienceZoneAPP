@@ -48,6 +48,12 @@ public class xperiencezone_main extends Application {
 
     /**
      * @param args the command line arguments
+   61       <Button id="btn:connexion:inscri" fx:id="btn_connexion_inscri" layoutX="478.0" layoutY="261.0" mnemonicParsing="false" onAction="#inscri" prefHeight="25.0" prefWidth="38.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="UN" textFill="#317246" underline="true">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Button> 
+    
      */
      @Override
     public void start(Stage primaryStage) {
@@ -55,7 +61,7 @@ public class xperiencezone_main extends Application {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().
-            getResource("ConnexionUser.fxml"));
+            getResource("HomeUser.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Home");
             primaryStage.setScene(scene);

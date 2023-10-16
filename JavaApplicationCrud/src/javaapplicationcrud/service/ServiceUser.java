@@ -5,7 +5,6 @@
  */
 package javaapplicationcrud.service;
 
-import javaapplicationcrud.entity.Role;
 import javaapplicationcrud.entity.User;
 import javaapplicationcrud.tools.MyDB;
 import java.sql.Connection;
@@ -166,12 +165,10 @@ public class ServiceUser implements UService<User> {
      
   //  @Override
     public User readById(int id) {
-    User u = new User();    
-    String req ="SELECT * from utilisateur WHERE id_user=?";
-    
-    try (PreparedStatement ps = con.prepareStatement(req)) {
-        ps.setInt(1, id);
-       // Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        User u = null;  
+    try  {
+        String req ="SELECT * from utilisateur WHERE id_user= '" + id +"'";
+        PreparedStatement ps = con.prepareStatement(req);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
 
