@@ -51,6 +51,9 @@ private void ajoutR(ActionEvent event) throws IOException {
 @FXML
 private ListView<Reclamation> list_rec;
 @FXML
+private Button supprimerRB;
+
+@FXML
 public void actualiserListViewR(ActionEvent event) {
     // Récupérez la liste de réclamations depuis le service
     ServiceReclamation serviceReclamation = new ServiceReclamation();
@@ -86,6 +89,26 @@ public void modifierReclamation(ActionEvent event) throws IOException {
         // Vous pouvez également mettre à jour la ListView après la modification.
     } else {
         // Afficher un message à l'utilisateur indiquant qu'aucune réclamation n'a été sélectionnée.
+    }
+}
+
+
+public void supprimerReclamation(ActionEvent event) {
+    
+    Reclamation reclamationSelectionnee = list_rec.getSelectionModel().getSelectedItem();
+
+    if (reclamationSelectionnee != null) {
+        
+        int idReclamation = reclamationSelectionnee.getIdR();
+
+        
+        ServiceReclamation serviceReclamation = new ServiceReclamation();
+        serviceReclamation.supprimerR(idReclamation);
+
+        
+        actualiserListViewR(event);
+    } else {
+       
     }
 }
 
