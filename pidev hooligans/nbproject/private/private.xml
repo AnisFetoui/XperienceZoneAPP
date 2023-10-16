@@ -5,13 +5,14 @@
         <group>
             <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/view/AjouterController.java</file>
             <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/view/NewFXMain.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/service/Produitservice.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/util/MYDB.java</file>
             <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/view/AjouterproduitController.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/service/CategorieService.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/pidev/hooligans/PidevHooligans.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/view/Ajouterproduit.fxml</file>
-            <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/classes/Categorie.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/view/ModifiercategorieController.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/view/GestionCategorie.fxml</file>
+            <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/view/CategorieController.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/classes/Produit.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/Interface/CrudInterface.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/view/HomeController.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/pidev%20hooligans/src/view/GestionCategorieController.java</file>
         </group>
     </open-files>
 </project-private>
