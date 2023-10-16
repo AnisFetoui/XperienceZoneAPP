@@ -106,6 +106,7 @@ public class Modif_recController implements Initializable {
 
         // Appeler la méthode modifierR pour mettre à jour la réclamation dans la base de données
         serviceReclamation.modifierR(reclamationSelectionnee);
+      
 
         // Afficher une confirmation à l'utilisateur
         Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
@@ -128,27 +129,25 @@ public class Modif_recController implements Initializable {
     
     
     public String convertirTypeReclamationInverse(int typeRec) {
-    // Tableau de correspondance entre les indices et les types de réclamation
+    
     String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements/activités", "Réclamation liés aux problèmes de communication"};
 
     if (typeRec >= 1 && typeRec <= types.length) {
-        return types[typeRec - 1]; // Soustrayez 1 car les indices commencent à 0
+        return types[typeRec - 1]; 
     } else {
-        return "Type de réclamation non valide"; // Gestion d'une valeur incorrecte ou inexistante
+        return "Type de réclamation non valide"; 
     }
 }
     
         public int convertirTypeReclamation(String typeRec) {
-        // Vous pouvez mettre en place une logique pour convertir la valeur du ComboBox en entier
-        // par exemple, en utilisant un tableau de correspondance ou une méthode de conversion.
-        // Ici, nous supposerons que vous avez un tableau de correspondance.
+     
         String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements/activités", "Réclamation liés aux problèmes de communication"}; // Correspondance des types
         for (int i = 0; i < types.length; i++) {
             if (types[i].equals(typeRec)) {
-                return i + 1; // Ajouter 1 car les indices commencent à 0
+                return i + 1; 
             }
         }
-        return 0; // Valeur par défaut si le type n'est pas trouvé
+        return 0; 
     }
 }
     

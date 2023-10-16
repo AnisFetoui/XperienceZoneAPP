@@ -58,7 +58,7 @@ public void actualiserListViewR(ActionEvent event) {
 
     // Créez une observable list à partir de la liste de réclamations
     ObservableList<Reclamation> observableReclamations = FXCollections.observableArrayList(reclamations);
-
+    list_rec.getItems().clear();
     // Remplissez la ListView avec les réclamations
     list_rec.setItems(observableReclamations);
 }
