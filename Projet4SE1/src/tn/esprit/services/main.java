@@ -13,8 +13,7 @@ import java.sql.Statement;
 import java.util.List;
 import tn.esprit.entities.Reclamation;
 import tn.esprit.entities.Traitement;
-import tn.esprit.entities.enumR;
-import tn.esprit.entities.enumR.STATUS;
+
 
 /**
  *
@@ -46,16 +45,16 @@ public class main {
 //         traitement.setIdrec(1); 
 //        traitement.setRefobj(2); 
 //        traitement.setDateR(new java.sql.Date(System.currentTimeMillis())); 
-//        traitement.setNomT("John");
+//        traitement.setNomT("modanger");
 //        traitement.setPrenomT("Doe");
 //        traitement.setEmailT("john.doe@example.com");
 //        traitement.setTypeR(3); 
 //        traitement.setResume("Résumé du traitement");
-//        traitement.setStat(STATUS.VALIDE);
-
+//        traitement.setStat("VALIDE");
+//
 //        service.ajouterT(traitement);
 //        System.out.println("traitement ajoutée : " + traitement.getIdT());
-//
+////
 //        
 //        traitement.setNomT("Jane");
 //        service.modifierT(traitement);

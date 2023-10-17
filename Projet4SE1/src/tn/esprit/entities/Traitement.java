@@ -6,7 +6,7 @@
 package tn.esprit.entities;
 
 import java.sql.Date;
-import tn.esprit.entities.enumR.STATUS;
+
 
 
 
@@ -20,7 +20,7 @@ public class Traitement {
     private String emailT;
     private int typeR;
     private String resume;
-    private STATUS stat ;
+    private String stat ;
     
 
 
@@ -60,7 +60,7 @@ public class Traitement {
         return resume;
     }
 
-    public STATUS getStat() {
+    public String getStat() {
         return stat;
     }
 
@@ -100,14 +100,14 @@ public class Traitement {
         this.resume = resume;
     }
 
-    public void setStat(STATUS stat) {
+    public void setStat(String stat) {
         this.stat = stat;
     }
 
     public Traitement() {
     }
 
-    public Traitement(int idT, int idrec, int refobj, Date dateR, String nomT, String prenomT, String emailT, int typeR, String resume, STATUS stat) {
+    public Traitement(int idT, int idrec, int refobj, Date dateR, String nomT, String prenomT, String emailT, int typeR, String resume, String stat) {
         this.idT = idT;
         this.idrec = idrec;
         this.refobj = refobj;
@@ -120,7 +120,7 @@ public class Traitement {
         this.stat = stat;
     }
 
-    public Traitement(int idrec, int refobj, Date dateR, String nomT, String prenomT, String emailT, int typeR, String resume, STATUS stat) {
+    public Traitement(int idrec, int refobj, Date dateR, String nomT, String prenomT, String emailT, int typeR, String resume, String stat) {
         this.idrec = idrec;
         this.refobj = refobj;
         this.dateR = dateR;

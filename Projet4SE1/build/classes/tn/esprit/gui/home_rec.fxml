@@ -40,7 +40,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button layoutX="671.0" layoutY="491.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" text="Traitement">
+      <Button fx:id="trait" layoutX="671.0" layoutY="491.0" mnemonicParsing="false" onAction="#trait_home" prefHeight="34.0" prefWidth="92.0" text="Traitement">
          <effect>
             <DropShadow />
          </effect>

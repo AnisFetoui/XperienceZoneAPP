@@ -33,7 +33,7 @@
       <Text layoutX="35.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type de réclamation :" />
       <Text layoutX="37.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Détails de la plainte :" wrappingWidth="75.46826171875" />
       <Text layoutX="450.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Référence de l'objet :" />
-      <Button layoutX="667.0" layoutY="478.0" mnemonicParsing="false" onAction="#validerAjout" prefHeight="40.0" prefWidth="84.0" text="Valider">
+      <Button fx:id="ajoutR" layoutX="667.0" layoutY="478.0" mnemonicParsing="false" onAction="#validerAjout" prefHeight="40.0" prefWidth="84.0" text="Valider">
          <effect>
             <DropShadow />
          </effect>

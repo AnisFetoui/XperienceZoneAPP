@@ -5,12 +5,17 @@
  */
 package tn.esprit.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -46,8 +51,10 @@ public class Modif_recController implements Initializable {
     @FXML
     private TextArea detM;
     
-        @FXML
+    @FXML
     private Button modifierButt;
+    @FXML
+    private Button annulerMR;
 
     ServiceReclamation serviceReclamation = new ServiceReclamation();
     private Reclamation reclamationSelectionnee;
@@ -88,12 +95,33 @@ public class Modif_recController implements Initializable {
         return;
     }
 
-    if (nomM.getText() == null || prenomM.getText() == null || emailM.getText() == null || refRM.getText() == null || typeRM.getValue() == null || dateincM.getValue() == null || dateM.getValue() == null || detM.getText() == null) {
-        // Gérer le cas où un des champs est null
-        System.out.println("Un ou plusieurs champs sont null.");
+if (nomM.getText().isEmpty() || prenomM.getText().isEmpty() || emailM.getText().isEmpty() || typeRM.getValue().isEmpty() || refRM.getText().isEmpty() || detM.getText().isEmpty() || dateincM.getValue() == null || dateM.getValue() == null) {
+    afficherAlerte("Tous les champs doivent être remplis");
+    return;
+}
+
+    
+    if (!isValidEmail(emailM.getText())) {
+        afficherAlerte("L'adresse email n'est pas valide");
         return;
     }
-        // Mettre à jour la réclamation avec les nouvelles valeurs
+   
+try {
+    int refObject1 = Integer.parseInt(refRM.getText());
+    java.sql.Date dateINC = Date.valueOf(dateincM.getValue());
+    java.sql.Date dateREC = Date.valueOf(dateM.getValue());
+    int yearINC = dateINC.toLocalDate().getYear();
+    int yearREC = dateREC.toLocalDate().getYear();
+
+    if (yearINC < 2022 || yearINC > 2023 || yearREC < 2022 || yearREC > 2023) {
+        afficherAlerte("Veuillez entrer des dates comprises entre 2022 et 2023.");
+        return;
+    }
+} catch (NumberFormatException e) {
+    afficherAlerte("La référence de l'objet doit être un nombre entier.");
+    return;
+}
+       
 
         reclamationSelectionnee.setNom(nomM.getText());
         reclamationSelectionnee.setPrenom(prenomM.getText());
@@ -104,18 +132,18 @@ public class Modif_recController implements Initializable {
         reclamationSelectionnee.setDateREC(Date.valueOf(dateM.getValue()));
         reclamationSelectionnee.setDetails(detM.getText());
 
-        // Appeler la méthode modifierR pour mettre à jour la réclamation dans la base de données
+       
         serviceReclamation.modifierR(reclamationSelectionnee);
       
 
-        // Afficher une confirmation à l'utilisateur
+        
         Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
         confirmation.setTitle("Modification réussie");
         confirmation.setHeaderText(null);
         confirmation.setContentText("La réclamation a été modifiée avec succès.");
         confirmation.showAndWait();
 
-        // Fermer la fenêtre de modification
+        
         Stage stage = (Stage) modifierButt.getScene().getWindow();
         stage.close();
     }
@@ -123,9 +151,12 @@ public class Modif_recController implements Initializable {
     @FXML
     private void annulerModification() {
         // Fermer la fenêtre de modification sans enregistrer les modifications
-        Stage stage = (Stage) modifierButt.getScene().getWindow();
+        Stage stage = (Stage) annulerMR.getScene().getWindow();
         stage.close();
     }
+    
+    
+
     
     
     public String convertirTypeReclamationInverse(int typeRec) {
@@ -149,6 +180,20 @@ public class Modif_recController implements Initializable {
         }
         return 0; 
     }
+        
+            private void afficherAlerte(String message) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Erreur");
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
+}
+    
+    private boolean isValidEmail(String email) {
+    // Vous pouvez ajouter votre propre validation de l'adresse email ici
+    // Cette vérification de base vérifie simplement la présence de "@" et "."
+    return email.contains("@") && email.contains(".");
+}
 }
     
 

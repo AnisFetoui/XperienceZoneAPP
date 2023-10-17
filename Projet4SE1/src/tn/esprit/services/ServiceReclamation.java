@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import tn.esprit.entities.Traitement;
-import tn.esprit.entities.enumR;
+
 
 
 /**
@@ -73,6 +73,7 @@ public class ServiceReclamation implements IService<Reclamation> {
         System.out.println(ex);
     }
 }
+   
 @Override
 public void modifierR(Reclamation r) {
     try {
@@ -137,7 +138,7 @@ public void modifierR(Reclamation r) {
             pre.setString(6, t.getEmailT());
             pre.setInt(7, t.getTypeR());
             pre.setString(8, t.getResume());
-            pre.setString(9, t.getStat().getValue());
+            pre.setString(9, t.getStat());
             pre.executeUpdate();
 
        
@@ -151,7 +152,36 @@ public void modifierR(Reclamation r) {
     } catch (SQLException ex) {
         System.out.println(ex);
     }
-    } 
+    }
+    
+    
+    public void modifierT(Traitement t) {
+    try {
+        if (t.getIdT() == 0) {
+            System.out.println("L'objet traitement n'a pas d'ID défini. Impossible de modifier.");
+            return;
+        }
+        
+        String req = "UPDATE traitements SET idrec=?, refobj=?, dateR=?, nomT=?, prenomT=?, emailT=?, typeR=?, resume=?, stat=? WHERE idT = ?";
+            pre = con.prepareStatement(req);
+            pre.setInt(1, t.getIdrec());
+            pre.setInt(2, t.getRefobj());
+            pre.setDate(3, t.getDateR());
+            pre.setString(4, t.getNomT());
+            pre.setString(5, t.getPrenomT());
+            pre.setString(6, t.getEmailT());
+            pre.setInt(7, t.getTypeR());
+            pre.setString(8, t.getResume());
+            pre.setString(9, t.getStat());
+            pre.setInt(10, t.getIdT());
+            
+        
+        
+        pre.executeUpdate();
+    } catch (SQLException ex) {
+        System.out.println(ex);
+    }
+}
     
         public void supprimerT(int idT) {
     try {
@@ -164,30 +194,7 @@ public void modifierR(Reclamation r) {
     }
 }
         
-            public void modifierT(Traitement t) {
-    try {
-        if (t.getIdT() == 0) {
-            System.out.println("L'objet traitement n'a pas d'ID défini. Impossible de modifier.");
-            return;
-        }
-        
-        String req = "UPDATE traitement SET idrec=?, refobj=?, dateR=?, nomT=?, prenomT=?, emailT=?, typeR=?, resume=?, stat=? WHERE idT = ?";
-            pre.setInt(1, t.getIdrec());
-            pre.setInt(2, t.getRefobj());
-            pre.setDate(3, t.getDateR());
-            pre.setString(4, t.getNomT());
-            pre.setString(5, t.getPrenomT());
-            pre.setString(6, t.getEmailT());
-            pre.setInt(7, t.getTypeR());
-            pre.setString(8, t.getResume());
-            pre.setString(9, t.getStat().getValue());
-        
-        
-        pre.executeUpdate();
-    } catch (SQLException ex) {
-        System.out.println(ex);
-    }
-}
+
 
   public List afficherT() {
          List<Traitement> traitement = new ArrayList<>();
@@ -206,17 +213,12 @@ public void modifierR(Reclamation r) {
                 t.setEmailT(rs.getString("emailT"));
                 t.setTypeR(rs.getInt("typeR"));
                 t.setResume(rs.getString("resume"));
-                String statString = rs.getString("stat");
-                enumR.STATUS statEnum = null;  // Initialisation à null par défaut
+                t.setStat(rs.getString("stat"));
 
-for (enumR.STATUS status : enumR.STATUS.values()) {
-    if (status.getValue().equals(statString)) {
-        statEnum = status;
-        break;
-    }
-}
 
-                t.setStat(statEnum);
+
+
+                
                 traitement.add(t);
             }
         } catch (SQLException ex) {

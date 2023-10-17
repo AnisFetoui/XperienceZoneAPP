@@ -13,7 +13,7 @@ import java.sql.Statement;
 
 public class Datasource {
        
-    String url = "jdbc:mysql://localhost:3306/pidev4se1";
+    String url = "jdbc:mysql://localhost:3306/pidev4secrud";
     String user = "root";
     String pwd = "";
     

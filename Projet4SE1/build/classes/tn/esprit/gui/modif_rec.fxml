@@ -41,7 +41,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button layoutX="562.0" layoutY="488.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="84.0" text="Annuler">
+      <Button fx:id="annulerMR" layoutX="562.0" layoutY="488.0" mnemonicParsing="false" onAction="#annulerModification" prefHeight="40.0" prefWidth="84.0" text="Annuler">
          <effect>
             <DropShadow />
          </effect>

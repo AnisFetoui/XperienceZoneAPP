@@ -52,6 +52,8 @@ private void ajoutR(ActionEvent event) throws IOException {
 private ListView<Reclamation> list_rec;
 @FXML
 private Button supprimerRB;
+@FXML
+private Button trait;
 
 @FXML
 public void actualiserListViewR(ActionEvent event) {
@@ -112,5 +114,12 @@ public void supprimerReclamation(ActionEvent event) {
     }
 }
 
-
+    @FXML
+    private void trait_home(ActionEvent event) throws IOException {
+         Parent root = FXMLLoader.load(getClass().getResource("home_trait.fxml"));
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();
+}
 }
