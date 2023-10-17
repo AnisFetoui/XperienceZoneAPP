@@ -83,7 +83,7 @@ private Button ajouT;
     private int selectedReclamationId;
     
      public void ouvrirAjoutTraitement(Reclamation reclamationSelectionnee ) {
-        // Remplir les champs de l'interface ajout_trait avec les informations de la réclamation
+        
 //        Reclamation R = sharedData.getSelectedReclamation();
         refT.setText(String.valueOf(reclamationSelectionnee.getRefObject()));
         dateT.setValue(reclamationSelectionnee.getDateREC().toLocalDate());
@@ -92,15 +92,12 @@ private Button ajouT;
         emailT.setText(reclamationSelectionnee.getEmail());
         typerecT.setValue(convertirTypeReclamationInverse(reclamationSelectionnee.getTypeRec()));
         selectedReclamationId = reclamationSelectionnee.getIdR();
-        // Vous pouvez également configurer le statT ComboBox avec les options de l'enumR.STATUS
-
-        // Afficher l'interface ajout_trait
-        // Utilisez une méthode ou une transition pour afficher l'interface ajout_trait
+        
     }
 
     @FXML
     public void ajouterTraitement( ) {
-        // Lire les valeurs des champs de l'interface ajout_trait
+       
 //        Reclamation reclamationSelectionnee = sharedData.getSelectedReclamation();
         int refObject = Integer.parseInt(refT.getText());
         Date dateRec = Date.valueOf(dateT.getValue());
@@ -114,11 +111,9 @@ private Button ajouT;
        
 
 
-        // Vous devez également lire la valeur du statT ComboBox
-
-        // Créer une instance de Traitement avec ces valeurs
+        
         Traitement traitement = new Traitement();
-        traitement.setIdrec(selectedReclamationId); // Utilisez l'idR de la réclamation sélectionnée
+        traitement.setIdrec(selectedReclamationId); 
         traitement.setRefobj(refObject);
         traitement.setDateR(dateRec);
         traitement.setNomT(nom);
@@ -146,16 +141,14 @@ private Button ajouT;
     
     
         public int convertirTypeReclamation(String typeRec) {
-        // Vous pouvez mettre en place une logique pour convertir la valeur du ComboBox en entier
-        // par exemple, en utilisant un tableau de correspondance ou une méthode de conversion.
-        // Ici, nous supposerons que vous avez un tableau de correspondance.
+        
         String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements/activités", "Réclamation liés aux problèmes de communication"}; // Correspondance des types
         for (int i = 0; i < types.length; i++) {
             if (types[i].equals(typeRec)) {
-                return i + 1; // Ajouter 1 car les indices commencent à 0
+                return i + 1; 
             }
         }
-        return 0; // Valeur par défaut si le type n'est pas trouvé
+        return 0; 
     }
         
         

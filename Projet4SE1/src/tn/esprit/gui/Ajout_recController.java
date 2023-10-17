@@ -134,7 +134,7 @@ try {
         ServiceReclamation service = new ServiceReclamation();
         service.ajouterR(reclamation);
         
-            Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
+        Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
         confirmation.setTitle("Ajout réussi");
         confirmation.setHeaderText(null);
         confirmation.setContentText("La réclamation a été ajoutée avec succès.");
@@ -143,6 +143,16 @@ try {
         
         Stage stage = (Stage) ajoutR.getScene().getWindow();
         stage.close();
+                try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("home_rec.fxml"));
+            Parent root = loader.load();
+            Stage nouvelleStage = new Stage();
+            nouvelleStage.setScene(new Scene(root));
+            nouvelleStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 
     
@@ -166,8 +176,7 @@ try {
 }
     
     private boolean isValidEmail(String email) {
-    // Vous pouvez ajouter votre propre validation de l'adresse email ici
-    // Cette vérification de base vérifie simplement la présence de "@" et "."
+    
     return email.contains("@") && email.contains(".");
 }
     

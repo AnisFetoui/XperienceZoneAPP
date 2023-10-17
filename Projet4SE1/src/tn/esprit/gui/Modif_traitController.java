@@ -77,7 +77,7 @@ public class Modif_traitController implements Initializable {
         
         
 
-        // Afficher les détails de la réclamation sélectionnée dans les champs de texte, ComboBox, etc.
+        
         refTM.setText(String.valueOf(traitementSelectionnee.getRefobj()));
         dateTM.setValue(traitementSelectionnee.getDateR().toLocalDate());
         nomTM.setText(traitementSelectionnee.getNomT());
@@ -89,7 +89,6 @@ public class Modif_traitController implements Initializable {
         selectedTraitementIdR = traitementSelectionnee.getIdrec();
         selectedTraitementIdT = traitementSelectionnee.getIdT();
         
-        // Vous pouvez également ajouter une logique pour initialiser le ComboBox avec des valeurs appropriées
     }
      
      
@@ -98,17 +97,17 @@ public class Modif_traitController implements Initializable {
     private void validerModificationT() {
         
             if (traitementSelectionnee == null) {
-        // Gérer le cas où l'objet reclamationSelectionnee est null
+        
         System.out.println("L'objet reclamationSelectionnee est null.");
         return;
     }
 
     if (nomTM.getText() == null || prenomTM.getText() == null || emailTM.getText() == null || typeRTM.getValue() == null || statTM.getValue() == null || refTM.getText() == null || dateTM.getValue() == null || resumeTM.getText() == null) {
-        // Gérer le cas où un des champs est null
+        
         System.out.println("Un ou plusieurs champs sont null.");
         return;
     }
-        // Mettre à jour la réclamation avec les nouvelles valeurs
+        
 
         traitementSelectionnee.setRefobj(Integer.parseInt(refTM.getText()));
         traitementSelectionnee.setDateR(Date.valueOf(dateTM.getValue()));
@@ -124,25 +123,25 @@ public class Modif_traitController implements Initializable {
         
 
 
-        // Appeler la méthode modifierR pour mettre à jour la réclamation dans la base de données
+        
         serviceReclamation.modifierT(traitementSelectionnee);
       
 
-        // Afficher une confirmation à l'utilisateur
+        
         Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
         confirmation.setTitle("Modification réussie");
         confirmation.setHeaderText(null);
         confirmation.setContentText("Le traitement a été modifiée avec succès.");
         confirmation.showAndWait();
 
-        // Fermer la fenêtre de modification
+        
         Stage stage = (Stage) modifMT.getScene().getWindow();
         stage.close();
     }
      
        @FXML
     private void annulerModification() {
-        // Fermer la fenêtre de modification sans enregistrer les modifications
+        
         Stage stage = (Stage) annulerMT.getScene().getWindow();
         stage.close();
     }  

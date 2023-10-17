@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
@@ -57,24 +58,24 @@ private Button trait;
 
 @FXML
 public void actualiserListViewR(ActionEvent event) {
-    // Récupérez la liste de réclamations depuis le service
+    
     ServiceReclamation serviceReclamation = new ServiceReclamation();
     List<Reclamation> reclamations = serviceReclamation.afficher();
 
-    // Créez une observable list à partir de la liste de réclamations
+    
     ObservableList<Reclamation> observableReclamations = FXCollections.observableArrayList(reclamations);
     list_rec.getItems().clear();
-    // Remplissez la ListView avec les réclamations
+    
     list_rec.setItems(observableReclamations);
 }
 
- //Lorsque l'utilisateur clique sur le bouton "Modifier"
+ 
 public void modifierReclamation(ActionEvent event) throws IOException {
-    // Récupérer la réclamation sélectionnée dans la ListView
+    
     Reclamation reclamationSelectionnee = list_rec.getSelectionModel().getSelectedItem();
 
     if (reclamationSelectionnee != null) {
-        // Ouvrir l'interface de modification (modif_rec.fxml) et passer la réclamation sélectionnée
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("modif_rec.fxml"));
         Parent root = loader.load();
         Modif_recController controller = loader.getController();
@@ -83,14 +84,11 @@ public void modifierReclamation(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(new Scene(root));
-        stage.showAndWait(); // Attendre que l'interface de modification se ferme
+        stage.showAndWait(); 
 
-        // La modification se fera dans le contrôleur de l'interface de modification.
-        // Lorsque l'utilisateur clique sur "Valider" dans l'interface de modification,
-        // les modifications seront enregistrées dans la base de données.
-        // Vous pouvez également mettre à jour la ListView après la modification.
+        
     } else {
-        // Afficher un message à l'utilisateur indiquant qu'aucune réclamation n'a été sélectionnée.
+       
     }
 }
 
@@ -106,6 +104,12 @@ public void supprimerReclamation(ActionEvent event) {
         
         ServiceReclamation serviceReclamation = new ServiceReclamation();
         serviceReclamation.supprimerR(idReclamation);
+        
+        Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
+        confirmation.setTitle("Suppression réussie");
+        confirmation.setHeaderText(null);
+        confirmation.setContentText("La réclamation a été suprimée avec succès.");
+        confirmation.showAndWait();
 
         
         actualiserListViewR(event);

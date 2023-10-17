@@ -15,11 +15,11 @@ public class MainFXML extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Charger le fichier FXML avec le contrôleur Home_recController
+       
         FXMLLoader loader = new FXMLLoader(getClass().getResource("home_rec.fxml"));
         Parent root = loader.load();
 
-        // Accéder au contrôleur
+        
         Home_recController controller = loader.getController();
 
         primaryStage.setTitle("Reclamation");

@@ -3,47 +3,74 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.Home_recController">
+<AnchorPane id="AnchorPane" prefHeight="661.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.Home_recController">
    <children>
-      <ListView fx:id="list_rec" layoutX="60.0" layoutY="148.0" prefHeight="270.0" prefWidth="681.0" />
-      <Button layoutX="649.0" layoutY="429.0" mnemonicParsing="false" onAction="#ajoutR" prefHeight="34.0" prefWidth="80.0" text="Ajouter">
+      <ListView fx:id="list_rec" layoutX="98.0" layoutY="223.0" prefHeight="270.0" prefWidth="681.0" />
+      <Button layoutX="700.0" layoutY="512.0" mnemonicParsing="false" onAction="#ajoutR" prefHeight="34.0" prefWidth="80.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" text="Ajouter">
          <effect>
             <DropShadow />
          </effect>
-      </Button>
-      <Button layoutX="37.0" layoutY="491.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="80.0" text="Retour">
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <Text layoutX="328.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réclamations" underline="true">
          <font>
-            <Font name="Berlin Sans FB" size="30.0" />
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="56.0" layoutY="592.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="80.0" style="-fx-background-color: #28282B;" text="Retour" textFill="#e8dddd">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="modifB" layoutX="599.0" layoutY="512.0" mnemonicParsing="false" onAction="#modifierReclamation" prefHeight="34.0" prefWidth="80.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" text="Modifier">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="supprimerRB" layoutX="470.0" layoutY="512.0" mnemonicParsing="false" onAction="#supprimerReclamation" prefHeight="34.0" prefWidth="108.0" style="-fx-background-color: #28282B; -fx-cursor: hand;" text="Supprimer" textFill="#e8dddd">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="actualiserR" layoutX="652.0" layoutY="178.0" mnemonicParsing="false" onAction="#actualiserListViewR" prefHeight="34.0" prefWidth="108.0" style="-fx-background-color: #C0C0C0;" text="Actualiser">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="trait" layoutX="730.0" layoutY="592.0" mnemonicParsing="false" onAction="#trait_home" prefHeight="34.0" prefWidth="108.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" text="Traitement">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#28282b" height="126.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="494.0" />
+      <Text fill="#fffdfd" layoutX="181.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RECLAMATIONS" wrappingWidth="257.1945676803589">
+         <font>
+            <Font name="Copperplate Gothic Light" size="29.0" />
          </font>
       </Text>
-      <Button fx:id="modifB" layoutX="556.0" layoutY="429.0" mnemonicParsing="false" onAction="#modifierReclamation" prefHeight="34.0" prefWidth="80.0" text="Modifier">
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <Button fx:id="supprimerRB" layoutX="450.0" layoutY="429.0" mnemonicParsing="false" onAction="#supprimerReclamation" prefHeight="34.0" prefWidth="92.0" text="Supprimer">
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <Button fx:id="actualiserR" layoutX="637.0" layoutY="106.0" mnemonicParsing="false" onAction="#actualiserListViewR" prefHeight="34.0" prefWidth="92.0" text="Actualiser">
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <Button fx:id="trait" layoutX="671.0" layoutY="491.0" mnemonicParsing="false" onAction="#trait_home" prefHeight="34.0" prefWidth="92.0" text="Traitement">
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
+      <ImageView fitHeight="142.0" fitWidth="190.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Downloads/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

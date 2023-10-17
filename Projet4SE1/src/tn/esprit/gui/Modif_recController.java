@@ -73,24 +73,23 @@ public class Modif_recController implements Initializable {
         
         
 
-        // Afficher les détails de la réclamation sélectionnée dans les champs de texte, ComboBox, etc.
+        
         nomM.setText(reclamation.getNom());
         prenomM.setText(reclamation.getPrenom());
         emailM.setText(reclamation.getEmail());
         refRM.setText(String.valueOf(reclamation.getRefObject()));
-        typeRM.setValue(convertirTypeReclamationInverse(reclamation.getTypeRec())); // Assurez-vous que le ComboBox est correctement configuré
-        dateincM.setValue(reclamation.getDateINC().toLocalDate()); // Conversion de java.util.Date à LocalDate
-        dateM.setValue(reclamation.getDateREC().toLocalDate()); // Conversion de java.util.Date à LocalDate
+        typeRM.setValue(convertirTypeReclamationInverse(reclamation.getTypeRec())); 
+        dateincM.setValue(reclamation.getDateINC().toLocalDate()); 
+        dateM.setValue(reclamation.getDateREC().toLocalDate()); 
         detM.setText(reclamation.getDetails());
         
-        // Vous pouvez également ajouter une logique pour initialiser le ComboBox avec des valeurs appropriées
     }
  
      @FXML
     private void validerModification() {
         
             if (reclamationSelectionnee == null) {
-        // Gérer le cas où l'objet reclamationSelectionnee est null
+        
         System.out.println("L'objet reclamationSelectionnee est null.");
         return;
     }
@@ -150,7 +149,7 @@ try {
 
     @FXML
     private void annulerModification() {
-        // Fermer la fenêtre de modification sans enregistrer les modifications
+        
         Stage stage = (Stage) annulerMR.getScene().getWindow();
         stage.close();
     }
@@ -190,8 +189,7 @@ try {
 }
     
     private boolean isValidEmail(String email) {
-    // Vous pouvez ajouter votre propre validation de l'adresse email ici
-    // Cette vérification de base vérifie simplement la présence de "@" et "."
+    
     return email.contains("@") && email.contains(".");
 }
 }

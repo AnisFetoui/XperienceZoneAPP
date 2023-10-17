@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -109,7 +110,7 @@ public void actualiserListViewNT(ActionEvent event) {
 //            sharedData.setSelectedReclamation(reclamationSelectionnee);
 
     if (reclamationSelectionnee != null) {
-        // Ouvrir l'interface de modification (modif_rec.fxml) et passer la réclamation sélectionnée
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ajout_trait.fxml"));
         Parent root = loader.load();
         Ajout_traitController controller = loader.getController();
@@ -127,11 +128,11 @@ public void actualiserListViewNT(ActionEvent event) {
     
     
     public void modifierTraitement(ActionEvent event) throws IOException {
-    // Récupérer la réclamation sélectionnée dans la ListView
+    
     Traitement traitementSelectionnee = listT.getSelectionModel().getSelectedItem();
 
     if (traitementSelectionnee != null) {
-        // Ouvrir l'interface de modification (modif_rec.fxml) et passer la réclamation sélectionnée
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("modif_trait.fxml"));
         Parent root = loader.load();
         Modif_traitController controller = loader.getController();
@@ -143,7 +144,7 @@ public void actualiserListViewNT(ActionEvent event) {
         stage.showAndWait(); 
 
     } else {
-        // Afficher un message à l'utilisateur indiquant qu'aucune réclamation n'a été sélectionnée.
+        
     }
 }
     
@@ -160,6 +161,12 @@ public void actualiserListViewNT(ActionEvent event) {
         
         ServiceReclamation serviceReclamation = new ServiceReclamation();
         serviceReclamation.supprimerT(idTrait);
+        
+                Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
+        confirmation.setTitle("Suppression réussie");
+        confirmation.setHeaderText(null);
+        confirmation.setContentText("Le traitement a été suprimée avec succès.");
+        confirmation.showAndWait();
 
         
         actualiserListViewT(event);
