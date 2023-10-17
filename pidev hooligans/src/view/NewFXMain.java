@@ -24,9 +24,9 @@ public class NewFXMain extends Application {
         Parent root;
        try {
             root = FXMLLoader.load(getClass().
-                    getResource("supprimercategorie.fxml"));
+                    getResource("gestion categorie.fxml"));
             Scene scene = new Scene(root);
-            primaryStage.setTitle("SupprimerController");
+            primaryStage.setTitle("gestion categorie");
             primaryStage.setScene(scene);
             primaryStage.show();
            

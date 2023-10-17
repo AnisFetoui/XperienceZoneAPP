@@ -95,7 +95,7 @@ public class ModifiercategorieController implements Initializable {
     private TextField modifdesc;
     @FXML
     private ChoiceBox<String> modifierchoix;
-    private String[] choix = {"sport", "Loisirs"};
+    private String[] choix = {"sport", "Loisirs","activité"};
 
     public ModifiercategorieController() {
         try {
@@ -117,14 +117,14 @@ public class ModifiercategorieController implements Initializable {
         modifierchoix.setValue(c.getType_categorie());
     }
 
-    @FXML
-    private void Modifiercat(ActionEvent event) {
-        if (modifnom.getText().isEmpty() || modifdesc.getText().isEmpty() || modifierchoix.getValue() == null) {
+  
+   // private void Modifiercat(ActionEvent event) {
+        /*if (modifnom.getText().isEmpty() || modifdesc.getText().isEmpty() || modifierchoix.getValue() == null) {
             showErrorAlert("Erreur de saisie !", "Veuillez remplir tous les champs.");
         } else if (modifnom.getText().matches("\\d*")) {
             showErrorAlert("Erreur de saisie !", "Le nom de catégorie doit être une chaîne.");
         } else {
-            c.setId_categorie(6);
+            //c.setId_categorie(6);
             c.setNom_categorie(modifnom.getText());
             c.setDescription_categorie(modifdesc.getText());
             c.setType_categorie(modifierchoix.getValue());
@@ -135,7 +135,49 @@ public class ModifiercategorieController implements Initializable {
                 ex.printStackTrace();
             }
         }
+    }*/
+       public void initializeData(Categorie categorie) {
+        if (categorie != null) {
+            modifnom.setText(categorie.getNom_categorie());
+            modifdesc.setText(categorie.getDescription_categorie());
+            modifierchoix.setValue(categorie.getType_categorie());
+        }
     }
+
+    @FXML
+    
+private void Modifiercat(ActionEvent event) {
+Categorie categorie = null;
+if (categorie != null) {
+    if (modifnom.getText().isEmpty() || modifdesc.getText().isEmpty() || modifierchoix.getValue() == null) {
+        showErrorAlert("Erreur de saisie !", "Veuillez remplir tous les champs.");
+    } else if (modifnom.getText().matches("\\d*")) {
+        showErrorAlert("Erreur de saisie !", "Le nom de catégorie doit être une chaîne.");
+    } else {
+        // Mettez à jour les propriétés de la catégorie avec les valeurs des champs de formulaire
+        
+        categorie.setNom_categorie(modifnom.getText());
+        categorie.setDescription_categorie(modifdesc.getText());
+        categorie.setType_categorie(modifierchoix.getValue());
+
+        try {
+            // Utilisez le service déjà existant
+            CategorieService categorieService = new CategorieService();
+            categorieService.modifier(categorie);
+
+            // Fermez la fenêtre de modification après la mise à jour
+            closeStage();
+        } catch (SQLException ex) {
+            // Gérez l'exception correctement, par exemple, affichez un message d'erreur
+            showErrorAlert("Erreur de modification", "Une erreur s'est produite lors de la modification de la catégorie.");
+        }
+    }
+} else {
+    // Si categorie est null, affichez un message d'erreur
+    showErrorAlert("Erreur", "Aucune catégorie sélectionnée pour la modification.");
+}
+}
+
 
     private void showErrorAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -146,7 +188,11 @@ public class ModifiercategorieController implements Initializable {
     }
 
     void setBorderPane(BorderPane borderPane) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+    }
+
+   
+    private void closeStage() {
+       
     }
 }
-

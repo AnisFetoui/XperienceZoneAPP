@@ -101,16 +101,16 @@ private Text image_label;
     }
 
     /*try*/ {
-        p.setNom_prod(nomprod.getText());
+       p.setNom_prod(nomprod.getText());
         p.setPrix_prod(Double.parseDouble(prixprod.getText()));
         p.setdescription_prod(descprod.getText());
         p.setquantite(Integer.parseInt(quantiteprod.getText()));
         Categorie c1 = catser.RetournerT((String) choixcp.getSelectionModel().getSelectedItem());
-        p.setCategorie(c1);
         p.setImage(image_label.getText());
-
-        // Copiez le fichier sélectionné vers le répertoire htdocsPath
-      String htdocsPath = "C:/xampp/htdocs/img/";
+        p.setCategorie(c1);
+        
+    
+      String htdocsPath = "C:/Utilisateur/ASUS/Bureau/";
 File destinationFile = new File(htdocsPath + image_label.getText().replaceAll("\\s+", ""));
 
 if (selectedFile != null) {
@@ -166,7 +166,7 @@ private void showErrorAlert(String message) {
 @FXML
 private void chooseImage(ActionEvent event) {
     FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Sélectionner un fichier image");
+    fileChooser.setTitle("\"C:/xampp/htdocs/img/\"");
     fileChooser.getExtensionFilters().addAll(
         new FileChooser.ExtensionFilter("Fichiers image", "*.png", "*.jpg", "*.gif")
     );
@@ -199,5 +199,7 @@ private void chooseImage(ActionEvent event) {
     }
 }
 }
+   
+
 
 
