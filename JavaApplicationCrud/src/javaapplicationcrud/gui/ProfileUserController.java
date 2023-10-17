@@ -13,25 +13,29 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
-import javaapplicationcrud.entity.SessionManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javaapplicationcrud.entity.User;
 import javaapplicationcrud.service.ServiceUser;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
+import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 /**
@@ -41,77 +45,180 @@ import javafx.stage.FileChooser;
  */
 public class ProfileUserController implements Initializable {
 
-   @FXML
-    private VBox VboxImage;
+      @FXML
+    private Label label_us;
+  @FXML
+    private TextField tf_modif_ident;
     @FXML
-    private ImageView ImageViewEnt;
+    private TextField tf_modif_email;
     @FXML
-    private VBox VboxImageModif;
+    private TextField tf_modif_mdp;
     @FXML
-    private ImageView ImageViewEntModif;
+    private TextField tf_modif_cfrmmdp;
     @FXML
-    private HBox HboxNom;
+    private TextField tf_modif_age;
     @FXML
-    private Label label_username;
+    private ComboBox<String> cb_modif_rl;
     @FXML
-    private HBox HboxNomModifier;
-    @FXML
-    private TextField tfUsernameModif;
-    @FXML
-    private HBox HboxAdress;
-    @FXML
-    private Label label_role;
-    @FXML
-    private Label label_sexe;
-    @FXML
-    private HBox HboxAgeModif;  
-    @FXML
-    private TextField tfAgeModif;
-   
-
-    /////////////////////////////////////////////////
-    private ServiceUser su = new ServiceUser();
-    private SessionManager s = SessionManager.getInstance();
-  
-    private Alert A = new Alert(Alert.AlertType.WARNING);
+    private ComboBox<String> cb_modif_sx;
+    
     private String ImagePath;
-    @FXML
-    private VBox VboxNotAdvanced;
-    @FXML
-    private VBox VboxAdvanced;
-    @FXML
-    private HBox HboxMail;
-    @FXML
-    private Label label_mail;
      @FXML
-    private Label label_age;
-    @FXML
-    private HBox HboxMailModifier;
-    @FXML
-    private TextField tfMailModif;
-    @FXML
-    private HBox HboxPwd;
-    @FXML
-    private Label label_pwd;
-    @FXML
-    private HBox HboxPwdModif;
-    @FXML
-    private PasswordField pwddModif;
-    @FXML
-    private PasswordField pwddconfirm;
-    @FXML
-    private Button btntRetourAdvanced;
+    private Button btn_modif_modif;
+      @FXML
+    private Button btn_modif_retour;
+
+        @FXML
+        private Label imageLabel;
+         @FXML
+        private ImageView ImagePreviw;
+         @FXML
+        private Button Add_image_button;
+         @FXML
+        private MediaView MediaView;
+      
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+       
         // TODO
-        afficherEntreprise();
-        ImagePath = "vide";
+           ObservableList<String> list = FXCollections.observableArrayList("CLIENT","MANAGER");
+           cb_modif_rl.setItems(list);
+           cb_modif_rl.setValue("CLIENT");
+           
+           ObservableList<String> listS = FXCollections.observableArrayList("FEMME","HOMME");
+           cb_modif_sx.setItems(listS);
+           cb_modif_sx.setValue("HOMME");
+           
+        
+        ServiceUser su = new ServiceUser();
+        User aold = su.readById(ConnexionUserController.id_modif);
+        ImagePath = aold.getImage();
+        ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
+        tf_modif_ident.setText(aold.getUsername());
+        label_us.setText("Mr "+aold.getUsername());
+        tf_modif_email.setText(aold.getMail());
+        tf_modif_mdp.setText(aold.getMdp());
+        tf_modif_cfrmmdp.setText(aold.getMdp());
+        tf_modif_age.setText(Integer.toString(aold.getAge()));
+        cb_modif_rl.setValue(aold.getRole());
+        cb_modif_sx.setValue(aold.getSexe());
+            }
+    
+    @FXML
+    private void enregistrer(ActionEvent event) throws IOException {
+        ServiceUser su = new ServiceUser();
+        User aold = su.readById(ConnexionUserController.id_modif);
+        User u = new User();
+        
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        String mdp1 = tf_modif_mdp.getText();
+        String mdp2 = tf_modif_cfrmmdp.getText();
+        String age1 = tf_modif_age.getText();
+        String role1 = cb_modif_rl.getSelectionModel().getSelectedItem();
+        String sexe = cb_modif_sx.getSelectionModel().getSelectedItem();
 
+            
+        if (tf_modif_ident.getText().isEmpty() || tf_modif_email.getText().isEmpty() || mdp1.isEmpty() || 
+            mdp2.isEmpty()  || 
+            age1.isEmpty() ) {
+        // Afficher un message d'alerte
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Champs manquants");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuillez remplir tous les champs !");
+        alert.showAndWait();
+    }else if (!tf_modif_email.getText().matches(emailRegex)) {
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle("Format email incorrect");
+    alert.setHeaderText(null);
+    alert.setContentText("Veuillez saisir un email valide !");
+    alert.showAndWait();
+    //return;
+}else if ( !aold.getMail().equals(tf_modif_email.getText()) ) {
+    if(su.checkEmailExists(tf_modif_email.getText())){
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle("Email existe déjà");
+    alert.setHeaderText(null);
+    alert.setContentText("Veuillez saisir un email différent !");
+    alert.showAndWait();}
+   // return;
+}else if (mdp1.length() < 8) {
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle("Attention");
+    alert.setHeaderText(null);
+    alert.setContentText("Le mot de passe doit avoir au moins 8 caractères.");
+    alert.showAndWait();
+    }   else if (!mdp1.matches(".*[A-Z].*") || !mdp1.matches(".*\\d.*")) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Attention");
+        alert.setHeaderText(null);
+        alert.setContentText("Le mot de passe doit contenir au moins une lettre majuscule et un chiffre.");
+        alert.showAndWait();
+      //  return;
+    } else if(!mdp1.matches(mdp2)){
+    
+     Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Attention");
+        alert.setHeaderText(null);
+        alert.setContentText("vous devez revoir votre mot de passe");
+        alert.showAndWait();
+    }else if(!age1.matches(".*\\d.*")){
+        // Afficher un message d'alerte
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Format d'age invalide");
+        alert.setHeaderText(null);
+        alert.setContentText("Format d'age invalide !");
+        alert.showAndWait();
+      //  return;
+    }else if (Integer.parseInt(age1) < 1 || Integer.parseInt(age1) > 150) {
+    
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Âge hors de la plage valide");
+        alert.setHeaderText(null);
+        alert.setContentText("L'âge doit être compris entre 1 et 150.");
+        alert.showAndWait();
+    } else {
+            u.setId_user(ConnexionUserController.id_modif);
+            u.setUsername(tf_modif_ident.getText());
+            u.setMail(tf_modif_email.getText());
+            u.setMdp(mdp1);
+            u.setAge(Integer.parseInt(age1));
+            u.setRole(role1);
+            u.setSexe(sexe);
+            u.setImage(ImagePath);
+            su.modifier(u);
+     try {
+            Parent page1 = FXMLLoader.load(getClass().getResource("Messageprofilmodif.fxml"));
+            
+            Scene scene = new Scene(page1);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            
+            stage.setScene(scene);
+            
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(InscriptionUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+  
+    }
+    @FXML
+    private void Retour(ActionEvent event) {
+    
+    try {
+    Parent root = FXMLLoader.load(getClass().getResource("HomeUser.fxml"));
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();} catch (IOException ex) {
+            Logger.getLogger(InscriptionUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void copyFileToDirectory(File sourceFile, File destDir) throws IOException {
@@ -119,253 +226,26 @@ public class ProfileUserController implements Initializable {
     Path destPath = destDir.toPath().resolve(sourceFile.getName());
     Files.copy(sourcePath, destPath, StandardCopyOption.REPLACE_EXISTING);
     }
-     
-    private String transformToStars(String input) {
-    StringBuilder output = new StringBuilder();
-    for (int i = 0; i < input.length(); i++) {
-        output.append("*");
-    }
-    return output.toString();
-}
-    private void afficherEntreprise() {
-        ServiceUser sa = new ServiceUser();
-        User f = sa.readById(SessionManager.getInstance().getCurrentUser().getId_user());
-        
-        
-        
-        String mdp = transformToStars(f.getMdp());
-        label_username.setText("Nom :    " + f.getUsername());
-        label_pwd.setText("Mot de passe :       " + mdp);
-        label_mail.setText("Email :        "+f.getMail());
-        label_sexe.setText("Prenom :    " + f.getSexe());
-        label_role.setText("Prenom :    " + f.getRole());
-        label_age.setText("Prenom :    " + f.getAge());
-        if (f.getImage() != null) {
-            File imagef = new File(f.getImage());
-            Image image = new Image(imagef.toURI().toString());
-
-            double minWidth = Math.min(image.getWidth(), image.getHeight());
-
-            WritableImage resizedImage = new WritableImage((int) minWidth, (int) minWidth);
-            PixelWriter pixelWriter = resizedImage.getPixelWriter();
-
-            for (int x = 0; x < minWidth; x++) {
-                for (int y = 0; y < minWidth; y++) {
-                    pixelWriter.setArgb(x, y, image.getPixelReader().getArgb(x, y));
-                }
-            }
-
-            ImageViewEnt.setImage(resizedImage);
-            ImageViewEnt.setFitWidth(300);
-            ImageViewEnt.setFitHeight(300);
-            ImageViewEnt.setPreserveRatio(true);
-            Circle clip = new Circle(300 / 2, 300 / 2, 300 / 2);
-            ImageViewEnt.setClip(clip);
-        }
-    }
-
     @FXML
-    private void HyperModifierNomAction(ActionEvent event) {
-        HboxNom.setVisible(false);
-        HboxNomModifier.setVisible(true);
-    }
-
-    @FXML
-    private void btnModifUsername(ActionEvent event) {
-
-        if (!label_username.getText().isEmpty() ) {
-            User u = s.getCurrentUser();
-            u.setUsername(label_username.getText()); // 
-            su.modifierUsername(u); // 
-            afficherEntreprise();
-            HboxNom.setVisible(true);
-            HboxNomModifier.setVisible(false);
-        } else {
-            A.setContentText("Nom non valide ! ");
-            A.show();
-        }
-
-    }
-
-    @FXML
-    private void btnAnuulerUsername(ActionEvent event) {
-        HboxNom.setVisible(true);
-        HboxNomModifier.setVisible(false);
-    }
-///////////////////////////////////////////////////////////////////// prenom 
-
-    @FXML
-    private void HperModifierAge(ActionEvent event) {
-        HboxAdress.setVisible(false);
-        HboxAgeModif.setVisible(true);
-    }
-
-    @FXML
-    private void btnModifAge(ActionEvent event) {
-        if (!label_age.getText().isEmpty() ) {
-            User u =  s.getCurrentUser();
-            u.setAge(Integer.parseInt(label_age.getText()));
-            su.modifierAge(u);
-            afficherEntreprise();
-            HboxAdress.setVisible(true);
-            HboxAgeModif.setVisible(false);
-        } else {
-            A.setContentText("Prenom non valide ! ");
-            A.show();
-        }
-    }
-
-    @FXML
-    private void btnAnnulerAdressModifAction(ActionEvent event) {
-        HboxAdress.setVisible(true);
-        HboxAgeModif.setVisible(false);
-    }
-
-  
-
-   
-
-   
-
-
-
-  
-
-   
-
-    
-  
-
-
-    ///////////////////////////////////////////////////////////////// modif image
-    @FXML
-    private void HyperModifierPhotoAction(ActionEvent event) {
-        VboxImage.setVisible(false);
-        VboxImageModif.setVisible(true);
-    }
-
-    @FXML
-    private void btnChoisirImage(ActionEvent event) throws IOException {
+    private void add_image_action(ActionEvent event) throws IOException {
         FileChooser fc = new FileChooser();
-        File defaultDir = new File("resources");
+        File defaultDir = new File("C:\\Users\\ANIS\\Documents");
         fc.setInitialDirectory(defaultDir);
         File SelectedFile = fc.showOpenDialog(null);
-        copyFileToDirectory(SelectedFile, defaultDir);
 
         if (SelectedFile != null) {
+            copyFileToDirectory(SelectedFile, defaultDir);
 
-            ImagePath = defaultDir.getName() + "/" + SelectedFile.getName();
-
-            ImageViewEntModif.setImage(new Image(new File(ImagePath).toURI().toString()));
-            ImageViewEntModif.setPreserveRatio(true);
-            ImageViewEntModif.setFitWidth(270);
-            ImageViewEntModif.setFitHeight(270);
+            ImagePath = defaultDir + "/" + SelectedFile.getName();
+            imageLabel.setText(ImagePath);
+            ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
         } else {
 
-            ImagePath = "vide";
+            ImagePath = "C:\\Users\\ANIS\\Documents/profile.jpg";
+            imageLabel.setText(ImagePath);
+            ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
 
         }
-    }
-
-    @FXML
-    private void btnModifierImage(ActionEvent event) {
-        if (ImagePath.equals("vide")) {
-            A.setContentText("pas d'image selectionée !");
-            A.show();
-        } else {
-             User u =  s.getCurrentUser();
-            u.setImage(ImagePath);
-            su.modifierImage(u);
-            afficherEntreprise();
-            VboxImage.setVisible(true);
-            VboxImageModif.setVisible(false);
-        }
-    }
-
-    @FXML
-    private void btnAnuulerImage(ActionEvent event) {
-        VboxImage.setVisible(true);
-        VboxImageModif.setVisible(false);
-    }
-/////////////////////////////////////////////////////////////////// email
-
-    @FXML
-    private void HyperModifierEmailAction(ActionEvent event) {
-        HboxMail.setVisible(false);
-        HboxMailModifier.setVisible(true);
-    }
-
-    @FXML
-    private void btnModifEmailAction(ActionEvent event) {
-        if (label_mail.getText().isEmpty() ) {
-            A.setContentText("Email non valide ! ");
-            A.show();
-        } else if (su.ChercherMail(tfMailModif.getText()) == 1) {
-            A.setContentText("Email Existant ! ");
-            A.show();
-        } else {
-
-             User u =  s.getCurrentUser();
-            u.setMail(tfMailModif.getText());
-            su.modifierEmail(u);
-            afficherEntreprise();
-            HboxMail.setVisible(true);
-            HboxMailModifier.setVisible(false);
-        }
-    }
-
-    @FXML
-    private void btnAnuulerEmailAcrion(ActionEvent event) {
-        HboxMail.setVisible(true);
-        HboxMailModifier.setVisible(false);
-    }
-//////////////////////////////////////////////////////////////////////////////// mdp 
-
-    @FXML
-    private void HperModifierMdpAction(ActionEvent event) {
-        HboxPwd.setVisible(false);
-        HboxPwdModif.setVisible(true);
-    }
-
-    @FXML
-    private void btnModifPasswordAction(ActionEvent event) {
-
-        if (pwddModif.getText().isEmpty() || pwddconfirm.getText().isEmpty() || pwddconfirm.getText().length() < 8) {
-            A.setContentText("mot de passe non valide 8 charachteres requis ! ");
-            A.show();
-        } else if (!pwddModif.getText().equals(pwddconfirm.getText())) {
-            A.setContentText("mots de passes non conformes ! ");
-            A.show();
-        } else {
-
-            User u =  s.getCurrentUser();
-            u.setMdp(pwddModif.getText());
-            su.modifierPassword(u);
-            afficherEntreprise();
-            HboxPwd.setVisible(true);
-            HboxPwdModif.setVisible(false);
-        }
-    }
-
-    @FXML
-    private void btnAnnulerPasswordModifAction(ActionEvent event) {
-        HboxPwd.setVisible(true);
-        HboxPwdModif.setVisible(false);
-    }
-
-    @FXML
-    private void btnAdvancedAction(ActionEvent event) {
-        VboxNotAdvanced.setVisible(false);
-        VboxAdvanced.setVisible(true);
-        btntRetourAdvanced.setVisible(true);
 
     }
-
-    @FXML
-    private void bntRetourAdvancedAction(ActionEvent event) {
-        VboxNotAdvanced.setVisible(true);
-        VboxAdvanced.setVisible(false);
-        btntRetourAdvanced.setVisible(false);
-    }
-    
 }

@@ -4,11 +4,19 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="620.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaapplicationcrud.gui.GestionAdminController">
    <children>
-      <TableView fx:id="tv_users" layoutX="66.0" layoutY="128.0" prefHeight="392.0" prefWidth="904.0">
+      <ImageView fitHeight="169.0" fitWidth="224.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@385496021_292791893519238_8577172701520959440_n.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tv_users" layoutX="252.0" layoutY="137.0" prefHeight="392.0" prefWidth="904.0">
          <columns>
             <TableColumn fx:id="col_username" prefWidth="137.0" text="Username" />
             <TableColumn fx:id="col_email" prefWidth="179.0" text="Email" />
@@ -20,12 +28,30 @@
             <TableColumn fx:id="col_img" prefWidth="123.0" text="Image" />
          </columns>
       </TableView>
-      <Button fx:id="btnDeconnecter" layoutX="1051.0" layoutY="47.0" mnemonicParsing="false" onAction="#btnDeconnecterAction" text="Se déconnecter" />
-      <Button fx:id="btnAjouter" layoutX="143.0" layoutY="529.0" mnemonicParsing="false" onAction="#btnAjouterAction" text="Ajouter" />
-      <Button fx:id="btnSupp" layoutX="229.0" layoutY="529.0" mnemonicParsing="false" onAction="#btnSuppAction" text="Supprimer" />
-      <Button fx:id="btnModif" layoutX="332.0" layoutY="529.0" mnemonicParsing="false" onAction="#btnModifAction" text="Modifier" />
-      <Button fx:id="btnActualiser" layoutX="32.0" layoutY="529.0" mnemonicParsing="false" onAction="#btnActualiserAction" text="Actualiser" />
-      <TextField fx:id="tf_adm_rech" layoutX="324.0" layoutY="47.0" prefHeight="25.0" prefWidth="251.0" promptText="mail d'utilisateur" />
-      <Button fx:id="btnRech" layoutX="608.0" layoutY="47.0" mnemonicParsing="false" onAction="#search" text="Rechercher" />
+      <Button fx:id="btnDeconnecter" layoutX="1040.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnDeconnecterAction" prefHeight="31.0" prefWidth="137.0" style="-fx-background-color: #354230;" text="Se déconnecter" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font></Button>
+      <Button fx:id="btnAjouter" layoutX="73.0" layoutY="279.0" mnemonicParsing="false" onAction="#btnAjouterAction" prefHeight="31.0" prefWidth="121.0" style="-fx-background-color: #354230;" text="Ajouter" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font></Button>
+      <Button fx:id="btnSupp" layoutX="73.0" layoutY="444.0" mnemonicParsing="false" onAction="#btnSuppAction" prefHeight="27.0" prefWidth="121.0" style="-fx-background-color: #354230;" text="Supprimer" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font></Button>
+      <Button fx:id="btnModif" layoutX="73.0" layoutY="368.0" mnemonicParsing="false" onAction="#btnModifAction" prefHeight="27.0" prefWidth="121.0" style="-fx-background-color: #354230;" text="Modifier" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font></Button>
+      <Button fx:id="btnActualiser" layoutX="73.0" layoutY="187.0" mnemonicParsing="false" onAction="#btnActualiserAction" prefHeight="31.0" prefWidth="121.0" style="-fx-background-color: #354230;" text="Actualiser" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font></Button>
+      <TextField fx:id="tf_adm_rech" layoutX="654.0" layoutY="66.0" prefHeight="31.0" prefWidth="251.0" promptText="mail d'un utilisateur" />
+      <Button fx:id="btnRech" layoutX="467.0" layoutY="69.0" mnemonicParsing="false" onAction="#search" prefHeight="31.0" prefWidth="121.0" style="-fx-background-color: #354230;" text="Rechercher" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font></Button>
    </children>
 </AnchorPane>

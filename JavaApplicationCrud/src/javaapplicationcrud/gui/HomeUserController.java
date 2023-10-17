@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javaapplicationcrud.entity.SessionManager;
 import javaapplicationcrud.entity.User;
 import javaapplicationcrud.service.ServiceUser;
@@ -32,7 +34,7 @@ import javafx.stage.Stage;
  */
 public class HomeUserController implements Initializable {
     
-    
+      public static int id_modif ;  
     @FXML
     private HBox navbar;
     @FXML
@@ -85,9 +87,7 @@ public void initialize(URL url, ResourceBundle rb) {
         ex.printStackTrace();
     }
 }
-   
-    
-    
+
         public void showContent(String pathfxml) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(pathfxml));
@@ -138,7 +138,15 @@ public void initialize(URL url, ResourceBundle rb) {
         @FXML
     private void go_profile(MouseEvent event) {
     
-                showContent("ProfileUser.fxml");
+               // showContent("ProfileUser.fxml");
+                try {
+    Parent root = FXMLLoader.load(getClass().getResource("ProfileUser.fxml"));
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();} catch (IOException ex) {
+            Logger.getLogger(InscriptionUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
                
     }
      @FXML

@@ -35,12 +35,12 @@
       </Label>
       <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="81.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@facebook.jpg" />
+            <Image url="@fb_ic.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="81.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@mail.jpg" />
+            <Image url="@mail_ico.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="44.0" fitWidth="46.0" layoutX="81.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">

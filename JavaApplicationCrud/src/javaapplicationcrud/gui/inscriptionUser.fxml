@@ -15,12 +15,12 @@
    <children>
       <AnchorPane prefHeight="406.0" prefWidth="215.0">
          <children>
-            <ImageView fitHeight="202.0" fitWidth="291.0" layoutX="3.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="218.0" fitWidth="272.0" layoutX="3.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@385496021_292791893519238_8577172701520959440_n.png" />
                </image>
             </ImageView>
-            <Label layoutX="31.0" layoutY="269.0" prefHeight="43.0" prefWidth="210.0" text="Bienvenue !!" textFill="#74da39" underline="true">
+            <Label layoutX="31.0" layoutY="269.0" prefHeight="43.0" prefWidth="210.0" text="Bienvenue !!" textFill="#2f8000" underline="true">
                <font>
                   <Font name="Arial Rounded MT Bold" size="32.0" />
                </font>
@@ -107,9 +107,9 @@
             </TextField>
             <ComboBox fx:id="cb_inscri_rl" layoutX="139.0" layoutY="233.0" prefHeight="25.0" prefWidth="170.0" />
             <ComboBox fx:id="cb_inscri_sx" layoutX="139.0" layoutY="279.0" prefHeight="25.0" prefWidth="170.0" />
-            <Button fx:id="Add_image_button" layoutX="14.0" layoutY="368.0" mnemonicParsing="false" onAction="#add_image_action" prefHeight="27.0" prefWidth="109.0" text="Ajouter Photo">
+            <Button fx:id="Add_image_button" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#add_image_action" prefHeight="34.0" prefWidth="115.0" style="-fx-background-color: #354230;" text="Ajouter Photo" textFill="WHITE">
                <font>
-                  <Font name="Arial Rounded MT Bold" size="12.0" />
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
             </Button>
             <ImageView fx:id="ImagePreviw" fitHeight="90.0" fitWidth="151.0" layoutX="158.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true" />

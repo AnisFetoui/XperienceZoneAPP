@@ -128,19 +128,20 @@ public class UserModifController implements Initializable {
         alert.setContentText("Veuillez remplir tous les champs !");
         alert.showAndWait();
     }else if (!tf_modif_email.getText().matches(emailRegex)) {
+        
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Format email incorrect");
     alert.setHeaderText(null);
     alert.setContentText("Veuillez saisir un email valide !");
     alert.showAndWait();
     //return;
-}else if (su.checkEmailExists(tf_modif_email.getText())) {
-    
+}else if ( !aold.getMail().equals(tf_modif_email.getText()) ) {
+    if(su.checkEmailExists(tf_modif_email.getText())){
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Email existe déjà");
     alert.setHeaderText(null);
     alert.setContentText("Veuillez saisir un email différent !");
-    alert.showAndWait();
+    alert.showAndWait();}
    // return;
 }else if (mdp1.length() < 8) {
     Alert alert = new Alert(Alert.AlertType.WARNING);
