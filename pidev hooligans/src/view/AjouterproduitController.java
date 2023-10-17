@@ -55,7 +55,7 @@ public class AjouterproduitController implements Initializable {
     private TextField quantiteprod;
     @FXML
     private ChoiceBox<String> choixcp;
-     private String ImagePath;
+     private File selectedFile;
   
 
     /**
@@ -68,7 +68,7 @@ public class AjouterproduitController implements Initializable {
     private ImageView image_view;
 @FXML
 private Text image_label;
-    File selectedFile;
+  
     private BorderPane borderPane;
 
     @Override
@@ -109,9 +109,9 @@ private Text image_label;
         p.setImage(image_label.getText());
         p.setCategorie(c1);
         
-    
-      String htdocsPath = "C:/Utilisateur/ASUS/Bureau/";
-File destinationFile = new File(htdocsPath + image_label.getText().replaceAll("\\s+", ""));
+    String htdocsPath = "C:/Users/ASUS/Desktop/"; // Utilisez le répertoire Desktop au lieu de Bureau
+File destinationFile = new File(htdocsPath + selectedFile.getName());
+      
 
 if (selectedFile != null) {
     try (InputStream in = new FileInputStream(selectedFile);
@@ -164,42 +164,42 @@ private void showErrorAlert(String message) {
 }
 
 @FXML
-private void chooseImage(ActionEvent event) {
-    FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("\"C:/xampp/htdocs/img/\"");
-    fileChooser.getExtensionFilters().addAll(
-        new FileChooser.ExtensionFilter("Fichiers image", "*.png", "*.jpg", "*.gif")
-    );
-    fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-    
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    File selectedFile = fileChooser.showOpenDialog(stage);
-    
-    if (selectedFile != null) {
-        String imageName = selectedFile.getName().replaceAll("\\s+", "");
-        image_label.setText(imageName);
-        
-        try {
-            Image image = new Image(selectedFile.toURI().toURL().toString());
-            if (!image.isError()) {
-                image_view.setImage(image);
-                System.out.println("Image chargée depuis : " + selectedFile.getPath());
-            } else {
-                // L'image n'a pas pu être chargée, afficher un message d'erreur.
-                showErrorAlert("Impossible de charger l'image sélectionnée.");
-            }
-        } catch (Exception ex) {
-            // Gérer les exceptions, par exemple, afficher un message d'erreur.
-            showErrorAlert("Une erreur s'est produite lors du chargement de l'image.");
-            System.out.println(ex);
-        }
-    } else {
-        // Aucun fichier n'a été sélectionné, vous pouvez afficher un message si nécessaire.
-        System.out.println("Aucun fichier sélectionné.");
-    }
-}
-}
-   
+    private void chooseImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+            new FileChooser.ExtensionFilter("Fichiers image", "*.png", "*.jpg", "*.gif")
+        );
+        File defaultDir = new File(System.getProperty("user.home"));
+        fileChooser.setInitialDirectory(defaultDir);
 
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        selectedFile = fileChooser.showOpenDialog(stage); // Stocker le fichier sélectionné
+
+        if (selectedFile != null) {
+            String imageName = selectedFile.getName().replaceAll("\\s+", "");
+            image_label.setText(imageName);
+
+            try {
+                Image image = new Image(selectedFile.toURI().toURL().toString());
+                if (!image.isError()) {
+                    image_view.setImage(image);
+                    System.out.println("Image chargée depuis : " + selectedFile.getPath());
+                } else {
+                    // L'image n'a pas pu être chargée, afficher un message d'erreur.
+                    showErrorAlert("Impossible de charger l'image sélectionnée.");
+                }
+            } catch (Exception ex) {
+                // Gérer les exceptions, par exemple, afficher un message d'erreur.
+                showErrorAlert("Une erreur s'est produite lors du chargement de l'image.");
+                System.out.println(ex);
+            }
+        } else {
+            // Aucun fichier n'a été sélectionné, vous pouvez afficher un message si nécessaire.
+            showErrorAlert("Aucun fichier sélectionné.");
+            System.out.println("Aucun fichier sélectionné.");
+        }
+    }
+
+}
 
 

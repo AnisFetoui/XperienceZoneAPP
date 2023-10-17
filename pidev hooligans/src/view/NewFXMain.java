@@ -24,9 +24,9 @@ public class NewFXMain extends Application {
         Parent root;
        try {
             root = FXMLLoader.load(getClass().
-                    getResource("gestion categorie.fxml"));
+                    getResource("Ajouterproduit.fxml"));
             Scene scene = new Scene(root);
-            primaryStage.setTitle("gestion categorie");
+            primaryStage.setTitle("ajouterproduit");
             primaryStage.setScene(scene);
             primaryStage.show();
            
