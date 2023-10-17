@@ -61,7 +61,7 @@ public class xperiencezone_main extends Application {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().
-            getResource("HomeUser.fxml"));
+            getResource("ConnexionUser.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Home");
             primaryStage.setScene(scene);

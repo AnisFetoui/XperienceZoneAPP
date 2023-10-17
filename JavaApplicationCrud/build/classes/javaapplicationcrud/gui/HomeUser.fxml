@@ -13,7 +13,7 @@
          <children>
             <ImageView fx:id="home_btn" fitHeight="108.0" fitWidth="122.0" nodeOrientation="RIGHT_TO_LEFT" onMousePressed="#go_home" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Desktop/Downloads/385496021_292791893519238_8577172701520959440_n.png" />
+                  <Image url="@385496021_292791893519238_8577172701520959440_n.png" />
                </image>
             </ImageView>
             <Label fx:id="produit_btn" onMousePressed="#go_produits" text="Produits" textAlignment="CENTER" textFill="WHITE">
@@ -53,14 +53,11 @@
             </Label>
          </children>
       </HBox>
-      <HBox fx:id="content" layoutX="-4.0" layoutY="139.0" prefHeight="551.0" prefWidth="1137.0">
-         <children>
-            <ImageView fitHeight="546.0" fitWidth="956.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../Desktop/Downloads/393342472_3691122814453716_1484167798747288473_n.jpg" />
-               </image>
-            </ImageView>
-         </children></HBox>
       <HBox fx:id="bottom_content" layoutY="725.0" prefHeight="80.0" prefWidth="1200.0" />
+      <ImageView fitHeight="553.0" fitWidth="751.0" layoutX="247.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@385496021_292791893519238_8577172701520959440_n.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

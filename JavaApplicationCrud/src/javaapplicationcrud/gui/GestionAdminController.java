@@ -27,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -51,6 +52,12 @@ public class GestionAdminController implements Initializable {
     private Button btnDeconnecter;
     @FXML
     private Button btnAjouter;
+    
+    @FXML
+    private Button btnRech;
+    @FXML
+    private TextField tf_adm_rech;
+    
     @FXML
     private Button btnSupp;
     @FXML
@@ -214,5 +221,30 @@ public class GestionAdminController implements Initializable {
 
         }
     }
+    
+@FXML
+private void search(ActionEvent event) {
+    // Retrieve search criteria from UI elements
+    String searchKeyword = tf_adm_rech.getText();
+    ServiceUser su = new ServiceUser();
+
+    // Perform the search in your service or DAO
+    List<User> searchResults = su.chercherByEmailTV(searchKeyword);
+
+    // Convert the list of search results into an ObservableList
+    ObservableList<User> observableResults = FXCollections.observableArrayList(searchResults);
+
+    col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
+    col_email.setCellValueFactory(new PropertyValueFactory<>("mail"));
+    col_mdp.setCellValueFactory(new PropertyValueFactory<>("mdp"));
+    col_role.setCellValueFactory(new PropertyValueFactory<>("role"));
+    col_age.setCellValueFactory(new PropertyValueFactory<>("age"));
+    col_sexe.setCellValueFactory(new PropertyValueFactory<>("sexe"));
+    col_img.setCellValueFactory(new PropertyValueFactory<>("image"));
+    ColumnId.setCellValueFactory(new PropertyValueFactory<>("id_user"));
+
+    // Set the ObservableList as the data source for the TableView
+    tv_users.setItems(observableResults);
+}
 
 }

@@ -322,7 +322,100 @@ public int authentification(String email, String password) {
    
 
 
+public List<User> chercherByEmailTV(String email) {
+    String sql = "SELECT * FROM utilisateur WHERE mail = ?";
+    List<User> userList = new ArrayList<>();
 
+    try {
+        PreparedStatement st = con.prepareStatement(sql);
+        st.setString(1, email);
+        ResultSet rs = st.executeQuery();
 
+        while (rs.next()) {
+            User u = new User(
+                rs.getInt("id_user"),
+                rs.getString("username"),
+                rs.getString("mail"),
+                rs.getString("mdp"),
+                rs.getString("role"),
+                rs.getString("image"),
+                rs.getInt("age"),
+                rs.getString("sexe")
+            );
+            userList.add(u);
+        }
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+    }
+
+    return userList;
+}
+
+   /* 
+    public List<User> chercherByEmailTV(String email, String nom, String role) {
+    String sql = "SELECT * FROM utilisateur WHERE ";
+    boolean hasConditions = false;
+
+    if (email != null && !email.isEmpty()) {
+        sql += "mail = ? ";
+        hasConditions = true;
+    }
+    if (nom != null && !nom.isEmpty()) {
+        if (hasConditions) {
+            sql += "OR ";
+        }
+        sql += "username = ? ";
+        hasConditions = true;
+    }
+    if (role != null && !role.isEmpty()) {
+        if (hasConditions) {
+            sql += "OR ";
+        }
+        sql += "role = ? ";
+    }
+
+    if (!hasConditions) {
+        // No search criteria provided, return an empty list or handle it as needed
+        return new ArrayList<>();
+    }
+
+    List<User> userList = new ArrayList<>();
+
+    try {
+        PreparedStatement st = con.prepareStatement(sql);
+        int parameterIndex = 1; // To keep track of parameter index in the PreparedStatement
+
+        if (email != null && !email.isEmpty()) {
+            st.setString(parameterIndex++, email);
+        }
+        if (nom != null && !nom.isEmpty()) {
+            st.setString(parameterIndex++, nom);
+        }
+        if (role != null && !role.isEmpty()) {
+            st.setString(parameterIndex, role);
+        }
+
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            User u = new User(
+                rs.getInt("id_user"),
+                rs.getString("username"),
+                rs.getString("mail"),
+                rs.getString("mdp"),
+                rs.getString("role"),
+                rs.getString("image"),
+                rs.getInt("age"),
+                rs.getString("sexe")
+            );
+            userList.add(u);
+        }
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+    }
+
+    return userList;
+}
+*/
     }
      

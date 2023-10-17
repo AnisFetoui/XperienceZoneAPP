@@ -89,8 +89,6 @@ public class UserModifController implements Initializable {
            cb_modif_sx.setItems(listS);
            cb_modif_sx.setValue("HOMME");
            
-       // ImagePath = "C:\\Users\\ANIS\\Documents/profile.jpg";
-        
         
         ServiceUser su = new ServiceUser();
         User aold = su.readById(GestionAdminController.id_modif);

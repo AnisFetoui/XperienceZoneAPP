@@ -5,10 +5,13 @@
  */
 package javaapplicationcrud.gui;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javaapplicationcrud.entity.SessionManager;
+import javaapplicationcrud.entity.User;
+import javaapplicationcrud.service.ServiceUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -27,6 +31,7 @@ import javafx.stage.Stage;
  * @author ANIS
  */
 public class HomeUserController implements Initializable {
+    
     
     @FXML
     private HBox navbar;
@@ -50,7 +55,7 @@ public class HomeUserController implements Initializable {
     private Label Reclamation_btn;
       @FXML
     private Label Channel_btn;
- 
+       private String ImagePath;
 
     SessionManager sessionManager = SessionManager.getInstance();
     String offre_path = "";
@@ -61,10 +66,26 @@ public class HomeUserController implements Initializable {
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+public void initialize(URL url, ResourceBundle rb) {
+    // TODO
+    ServiceUser su = new ServiceUser();
+    User aold = su.readById(ConnexionUserController.id_modif);
 
-    }    
+    try {
+        ImagePath = aold.getImage();
+        File imageFile = new File(ImagePath);
+        if (imageFile.exists()) {
+            profile_btn.setImage(new Image(imageFile.toURI().toString()));
+        } else { 
+        ImagePath = "C:\\Users\\ANIS\\Documents/profile.jpg";
+        profile_btn.setImage(new Image(new File(ImagePath).toURI().toString()));
+        }
+    } catch (Exception ex) {
+        // Handle any exceptions that may occur, such as invalid file paths
+        ex.printStackTrace();
+    }
+}
+   
     
     
         public void showContent(String pathfxml) {
@@ -82,9 +103,8 @@ public class HomeUserController implements Initializable {
 
            @FXML
     private void go_home(MouseEvent event) {
-        if (event.isPrimaryButtonDown()) {
-            showContent("HomeUser.fxml");
-        }
+      //  if (event.isPrimaryButtonDown()) {}
+         showContent("HomeUser.fxml");
     }
     
     @FXML

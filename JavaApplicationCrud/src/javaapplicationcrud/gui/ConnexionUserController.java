@@ -31,7 +31,7 @@ import javafx.stage.Stage;
  * @author ANIS
  */
 public class ConnexionUserController implements Initializable {
-
+    public static int id_modif ;  
     @FXML
     private Button btn_connexion_inscri;
      @FXML
@@ -82,6 +82,7 @@ private void cnx(ActionEvent event) {
             alert.show();
         } else {
             sessionManager.setCurrentUser(su.readById(id));
+            id_modif=id;
             role = su.readById(id).getRole();
             switch (role) {
             case "ADMIN":
