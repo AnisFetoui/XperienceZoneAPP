@@ -19,10 +19,17 @@ and open the template in the editor.
 */
 
 
-/*.page{-fx-background-color:  LIGHTBLUE;
+/*
+.midside{
+    -fx-background-color:purple  ; 
 }*/
-
-/*.page{
-    -fx-background-color:  ; 
-}*/
+.midsideside{
+    
+    -fx-background-image:url('bbg.png');
+    
+    
+}
+.leftside{
+    -fx-background-color:yellow ; 
+}
 

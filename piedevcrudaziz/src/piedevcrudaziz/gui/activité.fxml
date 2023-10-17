@@ -6,27 +6,52 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="544.0" prefWidth="739.0" style="-fx-background-color: lightgrey;" styleClass="page" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="piedevcrudaziz.gui.ActivitéController">
+<AnchorPane id="AnchorPane" prefHeight="588.0" prefWidth="929.0" styleClass="main" stylesheets="@style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="piedevcrudaziz.gui.ActivitéController">
    <children>
-      <ScrollPane fx:id="sc" fitToHeight="true" fitToWidth="true" layoutX="52.0" layoutY="109.0" prefHeight="12.0" prefWidth="152.0">
-         <content>
-            <ComboBox fx:id="combobox" editable="true" prefHeight="39.0" prefWidth="150.0" promptText="Activité" />
-         </content>
-      </ScrollPane>
-      <ScrollPane fx:id="sc1" fitToHeight="true" fitToWidth="true" layoutX="52.0" layoutY="184.0" prefHeight="36.0" prefWidth="152.0">
-         <content>
-            <ComboBox fx:id="combobox1" editable="true" prefHeight="70.0" prefWidth="150.0" promptText="Gouvernorat" />
-         </content>
-         <effect>
-            <ColorAdjust />
-         </effect>
-      </ScrollPane>
-      <Label layoutX="52.0" layoutY="80.0" prefHeight="18.0" prefWidth="152.0" text="Activité" />
-      <Label layoutX="52.0" layoutY="156.0" prefHeight="18.0" prefWidth="152.0" text="Gouvernorat" />
-      <Label layoutX="52.0" layoutY="228.0" prefHeight="18.0" prefWidth="152.0" text="Prix" />
-      <Slider layoutX="46.0" layoutY="272.0" max="10000.0" prefHeight="24.0" prefWidth="174.0" />
-      <Label layoutX="52.0" layoutY="253.0" prefHeight="18.0" prefWidth="10.0" text="0" />
-      <Label layoutX="179.0" layoutY="253.0" prefHeight="18.0" prefWidth="152.0" text="10000" />
+      <BorderPane prefHeight="200.0" prefWidth="755.0" styleClass="pagemain" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <AnchorPane prefHeight="420.0" prefWidth="740.0" styleClass="midside" stylesheets="@style.css" BorderPane.alignment="CENTER" />
+         </center>
+         <left>
+            <AnchorPane prefHeight="448.0" prefWidth="176.0" styleClass="leftside" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox layoutX="7.0" layoutY="105.0" prefHeight="210.0" prefWidth="167.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="152.0" text="Activité" />
+                        <ScrollPane fx:id="sc" fitToHeight="true" fitToWidth="true" prefHeight="12.0" prefWidth="152.0">
+                           <content>
+                              <ComboBox fx:id="combobox" editable="true" prefHeight="39.0" prefWidth="150.0" promptText="Activité" />
+                           </content>
+                        </ScrollPane>
+                        <Label prefHeight="18.0" prefWidth="155.0" text="Gouvernorat" />
+                        <ScrollPane fx:id="sc1" fitToHeight="true" fitToWidth="true" prefHeight="36.0" prefWidth="152.0">
+                           <content>
+                              <ComboBox fx:id="combobox1" editable="true" prefHeight="70.0" prefWidth="150.0" promptText="Gouvernorat" />
+                           </content>
+                           <effect>
+                              <ColorAdjust />
+                           </effect>
+                        </ScrollPane>
+                        <Label prefHeight="18.0" prefWidth="152.0" text="Prix" />
+                        <Slider max="10000.0" prefHeight="24.0" prefWidth="174.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </left>
+         <top>
+            <AnchorPane id="topside" prefHeight="168.0" prefWidth="929.0" styleClass="topside" stylesheets="@style.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #1f1f1f;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <HBox prefHeight="46.0" prefWidth="604.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="97.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
+               </children>
+            </AnchorPane>
+         </top>
+      </BorderPane>
    </children>
 </AnchorPane>
