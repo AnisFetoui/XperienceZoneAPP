@@ -31,7 +31,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button id="btn_mdpoub_env" fx:id="btn_mdpoub_env" layoutX="243.0" layoutY="223.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="124.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" text="Envoyer">
+      <Button id="btn_mdpoub_env" fx:id="btn_mdpoub_env" layoutX="225.0" layoutY="223.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="160.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" text="Envoyer code">
          <font>
             <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>

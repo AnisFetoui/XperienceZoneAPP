@@ -58,38 +58,31 @@ public class ServiceUser implements UService<User> {
             System.out.println(ex);
     }
     }
-    @Override
-    public void modifier(User u) {
-    try {
-        String req = "UPDATE utilisateur SET username = ?, mail = ?, mdp = ?, role = ?, image = ?, age = ?, sexe = ? WHERE id_user = ?";
-        PreparedStatement pre = con.prepareStatement(req);
-        
-        pre.setString(1, u.getUsername());
-        pre.setString(2, u.getMail());
-        pre.setString(3, u.getMdp());
-        pre.setString(4, u.getRole());
-        pre.setString(5, u.getImage());
-        pre.setInt(6, u.getAge());
-        pre.setString(7, u.getSexe());
-        pre.setInt(8, u.getId_user());
-        
-        int rowsUpdated = pre.executeUpdate();
+   // String req = "INSERT INTO utilisateur(username,mail,mdp,role,image,age,sexe)values(?,?,?,?,?,?,?)";
 
-        if (rowsUpdated > 0) {
-            System.out.println("La mise à jour a réussi.");
-        } else {
-            System.out.println("Aucune ligne mise à jour.");
-        }
+/*
+      
+ @Override
+    public void modifier(Categorie c) {
+   try {
+            String req ="UPDATE categorie SET `nom_categorie`= ? , `description_categorie`= ? ,`type_categorie`= ?  WHERE id_categorie = ?";
+            PreparedStatement ps = con.prepareStatement(req);
+            ps.setString(1,c.getNom_categorie());
+            ps.setString(2, c.getDescription_categorie());
+             ps.setString(3, c.getType_categorie());
+            ps.setInt(4, c.getId_categorie());
+            ps.executeUpdate();
+            System.out.println("categorie updated successfully!");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }    }
+     
+    */
 
-    } catch (SQLException ex) {
-        //ex.printStackTrace();
-        System.out.println(ex.getMessage());
-    }
-}/*
     @Override
     public void modifier(User u) {
                 try {
-            String req="UPDATE utilisateur SET username = ?, mail = ? ,mdp = ?,role = ? ,image = ?,age = ?,sexe = ? WHERE id_user = ?";
+            String req="UPDATE `utilisateur` SET `username` =?,`mail`=? ,`mdp` =?,`role` =? ,`image` =?,`age` =?,`sexe` =? WHERE id_user =?";
             PreparedStatement pre = con.prepareStatement(req); 
             pre.setString(1,u.getUsername() );
             pre.setString(2,u.getMail() );
@@ -97,15 +90,15 @@ public class ServiceUser implements UService<User> {
             pre.setString(4,u.getRole());
             pre.setString(5,u.getImage() );
             pre.setInt(6,u.getAge() );
-            pre.setString(7,u.getSexe() );
-                            
+            pre.setString(7,u.getSexe() );    
+            pre.setInt(8, u.getId_user());
             pre.executeUpdate();
+            System.out.println("user updated successfully!");
         } catch (SQLException ex) {
             System.out.println(ex);
-
         }  
     }
-*/
+
     @Override
     public List<User> afficher() {
  List<User> utilisateurs = new ArrayList<>();
@@ -114,8 +107,6 @@ public class ServiceUser implements UService<User> {
           ste= con.createStatement();
             ResultSet rs = ste.executeQuery(sql);
             while(rs.next()){
-//                Sexe sexe = Sexe.valueOf(rs.getString("sexe"));
-         //       Role role = Role.valueOf(rs.getString("role"));
               User u = new User(rs.getInt("id_user"),
                       rs.getString("username"), rs.getString("mail"),rs.getString("mdp"), rs.getString("role"),rs.getString("image"), rs.getInt("age"), rs.getString("sexe")); 
                 utilisateurs.add(u);
@@ -134,8 +125,6 @@ public class ServiceUser implements UService<User> {
             ResultSet rs = ste.executeQuery(sql);
         while (rs.next()) {
             
-             //Sexe sexe = Sexe.valueOf(rs.getString("sexe"));
-            // Role role = Role.valueOf(rs.getString("role"));
             u = new User(rs.getInt("id_user"),
                       rs.getString("username"), rs.getString("mail"),rs.getString("mdp"), rs.getString("role"),rs.getString("image"), rs.getInt("age"), rs.getString("sexe"));
         }
@@ -161,9 +150,7 @@ public class ServiceUser implements UService<User> {
 
     return result;
 }
-     
-     
-  //  @Override
+
     public User readById(int id) {
         User u = null;  
     try  {
@@ -181,7 +168,6 @@ public class ServiceUser implements UService<User> {
     return u;
 }   
     
- //   @Override
    public User readByEmail(String email) {
     User u = new User();
     String req = "SELECT * from utilisateur WHERE mail=?";
@@ -226,9 +212,117 @@ public int authentification(String email, String password) {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
         return id;
-
     }
+
+    public int ChercherMail(String email) {
+
+        try {
+            String req = "SELECT * from utilisateur WHERE mail =" + email + "'  ";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                if (rs.getString("mail").equals(email)) {
+                    System.out.println("mail trouvé ! ");
+                    return 1;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return -1;
+    }
+///////////////////////////////////////////////////////////////// Common user attributes modif  
+
+    public void modifierUsername(User p) {
+
+        try {
+
+            String req = "UPDATE utilisateur SET username = ? WHERE id_user = ?";
+            PreparedStatement ps = con.prepareStatement(req);
+            ps.setString(1, p.getUsername());
+            ps.setInt(2, p.getId_user());
+
+            ps.executeUpdate();
+            System.out.println("Username updated !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void modifierAge(User p) {
+
+        try {
+
+            String req = "UPDATE utilisateur SET age = ? WHERE id_user = ?";
+
+            PreparedStatement ps = con.prepareStatement(req);
+            ps.setInt(1, p.getAge());
+            ps.setInt(2, p.getId_user());
+
+            ps.executeUpdate();
+            System.out.println("prenom updated !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void modifierEmail(User p) {
+
+        if (ChercherMail(p.getMail()) == -1) {
+            try {
+
+                String req = "UPDATE utilisateur SET mail = ? WHERE id_user = ?";
+                PreparedStatement ps = con.prepareStatement(req);
+                ps.setString(1, p.getMail());
+                ps.setInt(2, p.getId_user());
+
+                ps.executeUpdate();
+                System.out.println("Nom updated !");
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        } else {
+            System.out.println("Mail existant ! ");
+        }
+    }
+
+    public void modifierPassword(User p) {
+
+        try {
+
+            String req = "UPDATE utilisateur SET mdp = ? WHERE id_user = ?";
+
+            PreparedStatement ps = con.prepareStatement(req);
+            ps.setString(1, p.getMdp());
+            ps.setInt(2, p.getId_user());
+
+            ps.executeUpdate();
+            System.out.println("password updated !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void modifierImage(User p) {
+
+        try {
+
+            String req = "UPDATE utilisateur SET image = ? WHERE id_user = ?";
+            PreparedStatement ps = con.prepareStatement(req);
+            ps.setString(1, p.getImage());
+            ps.setInt(2, p.getId_user());
+
+            ps.executeUpdate();
+            System.out.println("Image updated !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+   
+
+
+
+
     }
      

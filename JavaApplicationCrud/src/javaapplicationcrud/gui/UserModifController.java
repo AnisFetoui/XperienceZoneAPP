@@ -29,7 +29,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -90,14 +89,27 @@ public class UserModifController implements Initializable {
            cb_modif_sx.setItems(listS);
            cb_modif_sx.setValue("HOMME");
            
-        ImagePath = "C:\\Users\\ANIS\\Documents/profile.jpg";
+       // ImagePath = "C:\\Users\\ANIS\\Documents/profile.jpg";
+        
+        
+        ServiceUser su = new ServiceUser();
+        User aold = su.readById(GestionAdminController.id_modif);
+        ImagePath = aold.getImage();
         ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
-
+        tf_modif_ident.setText(aold.getUsername());
+        tf_modif_email.setText(aold.getMail());
+        tf_modif_mdp.setText(aold.getMdp());
+        tf_modif_cfrmmdp.setText(aold.getMdp());
+        tf_modif_age.setText(Integer.toString(aold.getAge()));
+        cb_modif_rl.setValue(aold.getRole());
+        cb_modif_sx.setValue(aold.getSexe());
             }
     @FXML
     private void modif(ActionEvent event) throws IOException {
-        User u = new User();
         ServiceUser su = new ServiceUser();
+        User aold = su.readById(GestionAdminController.id_modif);
+        User u = new User();
+        
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
         String mdp1 = tf_modif_mdp.getText();
         String mdp2 = tf_modif_cfrmmdp.getText();
@@ -169,7 +181,7 @@ public class UserModifController implements Initializable {
         alert.setContentText("L'âge doit être compris entre 1 et 150.");
         alert.showAndWait();
     } else {
-
+            u.setId_user(GestionAdminController.id_modif);
             u.setUsername(tf_modif_ident.getText());
             u.setMail(tf_modif_email.getText());
             u.setMdp(mdp1);
@@ -177,7 +189,6 @@ public class UserModifController implements Initializable {
             u.setRole(role1);
             u.setSexe(sexe);
             u.setImage(ImagePath);
-
             su.modifier(u);
      try {
             Parent page1 = FXMLLoader.load(getClass().getResource("MessageModif.fxml"));

@@ -6,6 +6,7 @@
 package javaapplicationcrud.test;
 //import javaapplicationcrud.Role;
 
+import static java.lang.System.console;
 import javaapplicationcrud.service.ServiceUser;
 import javaapplicationcrud.entity.User;
 
@@ -26,23 +27,22 @@ public class JavaApplicationCrud {
         // TODO code application logic here
         //public User(int id, String username, String mail, String mdp,Role role, String image,int age, String sexe)
        
- ServiceUser su = new ServiceUser();
-            User p1 = new User();
+          User updatedUser = new User();
+    updatedUser.setId_user(1); // Set the ID of the user you want to update
+    updatedUser.setUsername("aa");
+    updatedUser.setMail("a@a.com");
+    updatedUser.setMdp("Aa000000");
+    updatedUser.setRole("ADMIN");
+    updatedUser.setImage("newImageURL");
+    updatedUser.setAge(25);
+    updatedUser.setSexe("Homme");
 
-          p1.setUsername("Grami aziz");
-            p1.setMail("gramiaziz@gmail.com");
-            p1.setAge(30);
-            p1.setMdp("azaza");
-            p1.setImage("vide");
-            p1.setRole("ADMIN");
-            p1.setSexe("homme");
-      
-       
+    // Assuming 'modifier' method is part of a class (e.g., UserDAO)
+    ServiceUser su = new ServiceUser();
 
-
-           su.ajouter(p1);
-           p1.setAge(0);
-           su.modifier(p1);
-    }
+    // Call the 'modifier' method to update the user
+    su.modifier(updatedUser);
     
-}
+    
+    }
+    }
