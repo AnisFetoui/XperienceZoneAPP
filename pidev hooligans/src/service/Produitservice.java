@@ -7,6 +7,7 @@ package service;
 
 import util.MYDB;
 import Interface.CrudInterface;
+import classes.Categorie;
 import classes.Produit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -127,6 +128,13 @@ public ArrayList<Produit> affihcer() {
            
      
          try {
+        CategorieService catService = new CategorieService();
+        Categorie existingCategory = catService.readById(p.getCategorie().getId_categorie());
+        
+        if (existingCategory == null) {
+            // La catégorie n'existe pas, vous pouvez l'ajouter ici
+            catService.ajout(p.getCategorie());
+        }
             String req ="UPDATE produit SET `nom_prod`= ? ,`prix_prod`= ? ,`description_prod`= ? ,`quantite`= ? ,`image`= ?,`id_categorie`= ? WHERE id_prod = ?";
             PreparedStatement ps = con.prepareStatement(req);
             ps.setString(1,p.getNom_prod());
@@ -141,6 +149,9 @@ public ArrayList<Produit> affihcer() {
         } catch (SQLException ex) {
              System.out.println(ex.getMessage());
         }
+       
+        
+        
     }
        
 
@@ -206,7 +217,12 @@ public ArrayList<Produit> affihcer() {
     public ArrayList<Produit> sortBy(String nom_column, String Asc_Dsc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    Produit readProduitFromPanierById(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+  
 
     }
 

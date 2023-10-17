@@ -34,6 +34,10 @@ public class Categorie {
         this.type_categorie = type_categorie;
     }
 
+    public Categorie(String nouveauType) {
+      
+    }
+
   
 
    

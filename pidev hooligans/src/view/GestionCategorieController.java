@@ -24,9 +24,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.SortEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import service.CategorieService;
@@ -46,6 +46,10 @@ public class GestionCategorieController implements Initializable {
     private Button modifier;
     @FXML
     private Button supprimer;
+     @FXML
+    private Button cherchercat;
+       @FXML
+    private TextField  chercher_categ;
     @FXML
     private TableView<Categorie> tableview;
     @FXML
@@ -140,7 +144,7 @@ public class GestionCategorieController implements Initializable {
 
     @FXML
 
-private void modifierCategorie(ActionEvent event) {
+private void modifierCategorie(ActionEvent event) throws SQLException {
     int SelectedRowIndex = tableview.getSelectionModel().getSelectedIndex();
     int ColumnIndex = tableview.getColumns().indexOf(id_categ);
     
@@ -173,7 +177,32 @@ private void modifierCategorie(ActionEvent event) {
             stage.show();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-        }
+        }}}
+    private boolean isSearchInputValid(String valeur) {
+    if (valeur.isEmpty()) {
+        showErrorAlert("Le champ de recherche est vide. Veuillez saisir une valeur.");
+        return false;
     }
-}}
+    return true;
+}
+
+    @FXML
+private void chercherCategorie(ActionEvent event) throws SQLException {
+    String colonne = "nom_categorie";
+    String valeur = chercher_categ.getText(); // La valeur saisie par l'utilisateur
+
+    if (isSearchInputValid(valeur)) {
+        CategorieService categorieService = new CategorieService();
+        List<Categorie> categoriesCherches = categorieService.chercher(colonne, valeur);
+
+        ObservableList<Categorie> categoriesCherchesList = FXCollections.observableArrayList(categoriesCherches);
+        tableview.setItems(categoriesCherchesList);
+    }
+}
+
+    private void showErrorAlert(String le_champ_de_recherche_est_vide_Veuillez_s) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+}
 

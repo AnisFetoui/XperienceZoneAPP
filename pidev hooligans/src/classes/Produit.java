@@ -15,9 +15,7 @@ import java.util.ArrayList;
  */
 public class Produit {
 
-    public static boolean chercher(String string, String desc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
     private int id_prod;
     private String nom_prod;
     private Double prix_prod;
@@ -123,6 +121,10 @@ public class Produit {
     @Override
     public String toString() {
         return "Produit{" + "id_prod=" + id_prod + ", nom_prod=" + nom_prod + ", prix_prod=" + prix_prod + ", description_prod=" + description_prod + ", quantite=" + quantite + ", categorie=" + categorie + "}";
+    }
+
+    public int getId_Categorie() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
    

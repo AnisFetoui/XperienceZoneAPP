@@ -12,6 +12,9 @@ package classes;
 public class panier {
      private int id_panier; 
      private User u;
+     private int quantite_panier;
+     private Produit p;
+     
 
     public panier(int id_panier, User u) {
         this.id_panier = id_panier;
@@ -19,9 +22,8 @@ public class panier {
     }
 
     public panier() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
-     
 
     public int getId_panier() {
         return id_panier;
@@ -31,6 +33,22 @@ public class panier {
         this.id_panier = id_panier;
     }
 
+    public int getQuantite_panier() {
+        return quantite_panier;
+    }
+
+    public void setQuantite_panier(int quantite_panier) {
+        this.quantite_panier = quantite_panier;
+    }
+
+    public Produit getP() {
+        return p;
+    }
+
+    public void setP(Produit p) {
+        this.p = p;
+    }
+
     public User getU() {
         return u;
     }
@@ -38,11 +56,7 @@ public class panier {
     public void setU(User u) {
         this.u = u;
     }
-   
-    
- 
-
-    
+     
 
     @Override
     public String toString() {
@@ -50,7 +64,7 @@ public class panier {
     }
 
     public void setUtilisateur(User readById) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
     }
     
     
