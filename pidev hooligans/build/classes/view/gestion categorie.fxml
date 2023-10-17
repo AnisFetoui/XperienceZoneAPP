@@ -28,7 +28,7 @@
                         <Button fx:id="afficher" mnemonicParsing="false" onAction="#afficherAction" text="actualiser" />
                         <Button fx:id="ajouter" mnemonicParsing="false" onAction="#ajouterCategorie" text="ajouter" />
                         <Button fx:id="modifier" mnemonicParsing="false" onAction="#modifierCategorie" text="modifier" />
-                        <Button fx:id="supprimer" mnemonicParsing="false" text="supprimer" />
+                        <Button fx:id="supprimer" mnemonicParsing="false" onAction="#supprimerCategorie" text="supprimer" />
                      </children>
                   </VBox>
                </left>

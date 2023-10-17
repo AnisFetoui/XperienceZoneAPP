@@ -114,6 +114,29 @@ public class GestionCategorieController implements Initializable {
         
     
     }
+    @FXML
+    private void supprimerCategorie(ActionEvent event) {
+        try {
+
+            Parent page1 = FXMLLoader.load(getClass().getResource("supprimercategorie.fxml"));
+
+            Scene scene = new Scene(page1);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            stage.setScene(scene);
+
+            stage.show();
+
+        } catch (IOException ex) {
+
+            System.out.println(ex.getMessage());
+
+        }
+        
+    
+    }
+
 
     @FXML
 
