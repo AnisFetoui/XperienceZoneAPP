@@ -55,6 +55,7 @@ public class AjouterproduitController implements Initializable {
     private TextField quantiteprod;
     @FXML
     private ChoiceBox<String> choixcp;
+     private String ImagePath;
   
 
     /**
@@ -162,7 +163,7 @@ private void showErrorAlert(String message) {
     alert.showAndWait();
 }
 
- @FXML
+@FXML
 private void chooseImage(ActionEvent event) {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Sélectionner un fichier image");
@@ -192,107 +193,11 @@ private void chooseImage(ActionEvent event) {
             showErrorAlert("Une erreur s'est produite lors du chargement de l'image.");
             System.out.println(ex);
         }
-    }}}
-
-  
-
-
-/*public class AjouterproduitController implements Initializable {
-    @FXML
-    private TextField nomprod;
-    @FXML
-    private TextField prixprod;
-    @FXML
-    private TextArea descprod;
-    @FXML
-    private TextField quantiteprod;
-    @FXML
-    private ChoiceBox<Categorie> choixcp;
-    // Assurez-vous que vous avez importé les classes nécessaires
-
-     private  CategorieService catser;
-
-    private Produitservice prodser = new Produitservice();
-
-    public AjouterproduitController() throws SQLException {
-        this.catser = new CategorieService();
+    } else {
+        // Aucun fichier n'a été sélectionné, vous pouvez afficher un message si nécessaire.
+        System.out.println("Aucun fichier sélectionné.");
     }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // Initialisation de la ChoiceBox avec les catégories
-        ObservableList<Categorie> categories = FXCollections.observableArrayList(catser.afficher());
-        choixcp.setItems(categories);
-    }
-
-    @FXML
-    private void ajoutproduit(ActionEvent event) {
-        try {
-            String nom = nomprod.getText();
-            String prixText = prixprod.getText();
-            String description = descprod.getText();
-            String quantiteText = quantiteprod.getText();
-            Categorie categorie = choixcp.getValue();
-
-            if (nom.isEmpty() || prixText.isEmpty() || description.isEmpty() || quantiteText.isEmpty() || categorie == null) {
-                afficherAlerte("Erreur de saisie !", "Veuillez remplir tous les champs.");
-                return;
-            }
-
-            if (!nom.matches("^[a-zA-Z]+$")) {
-                afficherAlerte("Erreur de saisie !", "Le nom du produit doit être une chaîne de caractères.");
-                return;
-            }
-
-            int quantite;
-            try {
-                quantite = Integer.parseInt(quantiteText);
-                if (quantite <= 0) {
-                    afficherAlerte("Erreur de saisie !", "La quantité doit être un nombre positif.");
-                    return;
-                }
-            } catch (NumberFormatException e) {
-                afficherAlerte("Erreur de saisie !", "La quantité doit être un nombre entier positif.");
-                return;
-            }
-
-            double prix;
-            try {
-                prix = Double.parseDouble(prixText);
-                if (prix <= 0) {
-                    afficherAlerte("Erreur de saisie !", "Le prix doit être un nombre positif.");
-                    return;
-                }
-            } catch (NumberFormatException e) {
-                afficherAlerte("Erreur de saisie !", "Le prix doit être un nombre décimal.");
-                return;
-            }
-
-            // Toutes les vérifications réussissent, créons le produit
-            Produit produit = new Produit();
-            produit.setNom_prod(nom);
-            produit.setPrix_prod(prix);
-            produit.setdescription_prod(description);
-            produit.setquantite(quantite);
-            produit.setCategorie(categorie);
-
-            // Enregistrement du produit (à faire dans la classe ProduitService)
-            prodser.ajout(produit);
-
-            // Vous pouvez ajouter le code pour la gestion de l'image ici
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            afficherAlerte("Erreur", "Une erreur s'est produite lors de l'ajout du produit.");
-        }
-    }
-
-    private void afficherAlerte(String titre, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(titre);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }*/
+}
+}
 
 

@@ -75,7 +75,6 @@ public class CategorieService implements CrudInterface<Categorie> {
         
         return  categories;
     }
-     @Override
     public void supprimer(int id) {
 try {
              String req = "Delete FROM `categorie` WHERE id_categorie='"+id+"';" ;
@@ -84,8 +83,8 @@ try {
               st.executeUpdate(req);
               System.out.println("Categorie  supprimé avec succes");
           } catch (SQLException ex) {
-}
-    }
+          }}
+
 
        @Override
     public Categorie readById(int id) {
@@ -194,7 +193,9 @@ try {
     public ArrayList<Categorie> chercher() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    }
+
+   
+}
 
   
    

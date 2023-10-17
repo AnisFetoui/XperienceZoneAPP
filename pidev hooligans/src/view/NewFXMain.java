@@ -22,21 +22,17 @@ public class NewFXMain extends Application {
     public void start(Stage primaryStage) {
 
         Parent root;
-        try {
+       try {
             root = FXMLLoader.load(getClass().
-                    getResource("Ajouterproduit.fxml"));
+                    getResource("supprimercategorie.fxml"));
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Ajouter produit");
+            primaryStage.setTitle("SupprimerController");
             primaryStage.setScene(scene);
             primaryStage.show();
            
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-
-    
-    
-    
     }
 
 
