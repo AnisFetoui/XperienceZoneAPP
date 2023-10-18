@@ -167,7 +167,7 @@ combobox.setItems(lista);
         
             } else if (!sa.isValidPeriode(Periode)) {
                 
-                alert.setText("Periode invalide. Veuillez saisir une période valide");
+                alert.setText("Periode invalide. Veuillez saisir une période de format jj/mm/yyyy - jj/mm/yyyy");
         } else {
            
            

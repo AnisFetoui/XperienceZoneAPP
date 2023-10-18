@@ -27,7 +27,7 @@ public class gactivite extends Application {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().
-                    getResource("modifieractivite.fxml"));
+                    getResource("activité.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("modifier activite");
             primaryStage.setScene(scene);
