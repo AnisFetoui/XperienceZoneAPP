@@ -121,7 +121,6 @@ public class UserModifController implements Initializable {
             age1.isEmpty()
          
             ) {
-        // Afficher un message d'alerte
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Champs manquants");
         alert.setHeaderText(null);
@@ -134,7 +133,7 @@ public class UserModifController implements Initializable {
     alert.setHeaderText(null);
     alert.setContentText("Veuillez saisir un email valide !");
     alert.showAndWait();
-    //return;
+
 }else if ( !aold.getMail().equals(tf_modif_email.getText()) ) {
     if(su.checkEmailExists(tf_modif_email.getText())){
     Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -142,7 +141,7 @@ public class UserModifController implements Initializable {
     alert.setHeaderText(null);
     alert.setContentText("Veuillez saisir un email différent !");
     alert.showAndWait();}
-   // return;
+
 }else if (mdp1.length() < 8) {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Attention");
@@ -164,7 +163,6 @@ public class UserModifController implements Initializable {
         alert.setContentText("vous devez revoir votre mot de passe");
         alert.showAndWait();
     }else if(!age1.matches(".*\\d.*")){
-        // Afficher un message d'alerte
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Format d'age invalide");
         alert.setHeaderText(null);
@@ -244,6 +242,5 @@ public class UserModifController implements Initializable {
             ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
 
         }
-
     }
 }

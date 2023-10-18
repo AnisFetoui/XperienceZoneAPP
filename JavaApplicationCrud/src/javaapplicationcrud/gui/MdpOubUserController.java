@@ -64,48 +64,6 @@ public class MdpOubUserController implements Initializable {
     stage.show();
            
     }
-  /*  @FXML
-    
-    private void btnCodeAction(ActionEvent event) {
-        code = generateVerificationCode();
-        Alert A = new Alert(Alert.AlertType.WARNING);
-        ServiceUser su = new ServiceUser();
-
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-        boolean verifMail = tf_mdpoub_email.getText().matches(emailRegex);
-
-        if (!tf_mdpoub_email.getText().equals("") && verifMail) {
-            if (su.ChercherMail(tf_mdpoub_email.getText()) == 1) {
-                EmailReset = tf_mdpoub_email.getText();
-                EmailSender.sendEmail("anis.fetoui@esprit.tn", "223JMT3915", tf_mdpoub_email.getText(), "Verification code", "Votre code est : " + code);
-
-                try {
-
-                    Parent page1 = FXMLLoader.load(getClass().getResource("/UserGUI/VerifCode.fxml"));
-
-                    Scene scene = new Scene(page1);
-
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-                    stage.setScene(scene);
-
-                    stage.show();
-
-                } catch (IOException ex) {
-
-                    System.out.println(ex.getMessage());
-
-                }
-
-            } else {
-                A.setContentText("pas de compte lié avec cette adresse ! ");
-                A.show();
-            }
-        } else {
-            A.setContentText("Veuillez saisir une adresse mail valide ! ");
-            A.show();
-        }
-    }
-    */
+ 
 }
     

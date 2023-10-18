@@ -12,6 +12,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -44,8 +46,9 @@ import javafx.stage.Stage;
  * @author ANIS
  */
 public class ProfileUserController implements Initializable {
-
-      @FXML
+    @FXML
+    private Button btn_profile_desc;
+    @FXML
     private Label label_us;
   @FXML
     private TextField tf_modif_ident;
@@ -248,4 +251,43 @@ public class ProfileUserController implements Initializable {
         }
 
     }
+    
+    
+      @FXML
+    private void desactiver(ActionEvent event) {
+            ServiceUser su = new ServiceUser();
+            User aold = su.readById(ConnexionUserController.id_modif);
+            
+            Alert A = new Alert(Alert.AlertType.CONFIRMATION);
+            A.setAlertType(Alert.AlertType.CONFIRMATION);
+
+            A.setContentText("Voulez vous vraiment desactiver votre compte ?");
+            Optional<ButtonType> result = A.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                su.supprimer(aold.getId_user());
+                A.setAlertType(Alert.AlertType.INFORMATION);
+                A.setContentText("on espere que vous reternez trés vite ! ");
+                A.show();
+            try {
+
+            Parent page1 = FXMLLoader.load(getClass().getResource("ConnexionUser.fxml"));
+
+            Scene scene = new Scene(page1);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            stage.setScene(scene);
+
+            stage.show();
+
+        } catch (IOException ex) {
+
+            System.out.println(ex.getMessage());
+
+        }
+            }
+
+        }
+    
 }

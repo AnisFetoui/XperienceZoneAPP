@@ -212,6 +212,7 @@ public class AddUserController implements Initializable {
     Path destPath = destDir.toPath().resolve(sourceFile.getName());
     Files.copy(sourcePath, destPath, StandardCopyOption.REPLACE_EXISTING);
     }
+    
     @FXML
     private void add_image_action(ActionEvent event) throws IOException {
         FileChooser fc = new FileChooser();
@@ -232,6 +233,5 @@ public class AddUserController implements Initializable {
             ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
 
         }
-
     }
 }

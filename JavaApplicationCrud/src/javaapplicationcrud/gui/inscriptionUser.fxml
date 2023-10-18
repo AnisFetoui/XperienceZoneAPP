@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaapplicationcrud.gui.InscriptionUserController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="744.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaapplicationcrud.gui.InscriptionUserController">
    <children>
       <AnchorPane prefHeight="406.0" prefWidth="215.0">
          <children>
@@ -69,7 +69,7 @@
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
             </TextField>
-            <TextField id="tf_inscri_ident" fx:id="tf_inscri_ident" layoutX="139.0" layoutY="25.0" prefHeight="23.0" prefWidth="170.0">
+            <TextField id="tf_inscri_ident" fx:id="tf_inscri_ident" layoutX="139.0" layoutY="25.0" prefHeight="23.0" prefWidth="170.0" stylesheets="@style.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
@@ -84,7 +84,7 @@
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
             </TextField>
-            <Button id="btn_inscri_inscri" fx:id="btn_inscri_inscri" layoutX="147.0" layoutY="474.0" mnemonicParsing="false" onAction="#insc" prefHeight="22.0" prefWidth="124.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" text="S'inscrire">
+            <Button id="btn_inscri_inscri" fx:id="btn_inscri_inscri" layoutX="147.0" layoutY="474.0" mnemonicParsing="false" onAction="#insc" prefHeight="22.0" prefWidth="124.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" styleClass="add-btn" stylesheets="@style.css" text="S'inscrire">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
@@ -107,7 +107,7 @@
             </TextField>
             <ComboBox fx:id="cb_inscri_rl" layoutX="139.0" layoutY="233.0" prefHeight="25.0" prefWidth="170.0" />
             <ComboBox fx:id="cb_inscri_sx" layoutX="139.0" layoutY="279.0" prefHeight="25.0" prefWidth="170.0" />
-            <Button fx:id="Add_image_button" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#add_image_action" prefHeight="34.0" prefWidth="115.0" style="-fx-background-color: #354230;" text="Ajouter Photo" textFill="WHITE">
+            <Button fx:id="Add_image_button" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#add_image_action" prefHeight="34.0" prefWidth="115.0" style="-fx-background-color: #354230;" styleClass="add-btn" text="Ajouter Photo" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>

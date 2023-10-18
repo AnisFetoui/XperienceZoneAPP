@@ -53,7 +53,7 @@ public class ConnexionUserController implements Initializable {
 private void cnx(ActionEvent event) {
     String page = "";
     String email = tf_connexion_email.getText();
-    String password = tf_connexion_mdp.getText(); // Get the password from the PasswordField
+    String password = tf_connexion_mdp.getText();
     int id = -1;
     String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
 
@@ -74,7 +74,7 @@ private void cnx(ActionEvent event) {
         ServiceUser su = new ServiceUser();
         Alert alert = new Alert(Alert.AlertType.NONE);
         SessionManager sessionManager = SessionManager.getInstance();
-        id = su.authentification(email, password); // Use the password directly
+        id = su.authentification(email, password);
         String role = "";
         if (id == -1) {
             alert.setAlertType(Alert.AlertType.WARNING);

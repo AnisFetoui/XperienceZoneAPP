@@ -111,7 +111,7 @@ public class InscriptionUserController implements Initializable {
             age1.isEmpty()
          
             ) {
-        // Afficher un message d'alerte
+      
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Champs manquants");
         alert.setHeaderText(null);
@@ -123,7 +123,7 @@ public class InscriptionUserController implements Initializable {
     alert.setHeaderText(null);
     alert.setContentText("Veuillez saisir un email valide !");
     alert.showAndWait();
-    //return;
+   
 }else if (su.checkEmailExists(tf_inscri_email.getText())) {
     
     Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -131,7 +131,7 @@ public class InscriptionUserController implements Initializable {
     alert.setHeaderText(null);
     alert.setContentText("Veuillez saisir un email différent !");
     alert.showAndWait();
-   // return;
+ 
 }else if (mdp1.length() < 8) {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Attention");
@@ -144,7 +144,7 @@ public class InscriptionUserController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText("Le mot de passe doit contenir au moins une lettre majuscule et un chiffre.");
         alert.showAndWait();
-      //  return;
+
     } else if(!mdp1.matches(mdp2)){
     
      Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -153,7 +153,7 @@ public class InscriptionUserController implements Initializable {
         alert.setContentText("vous devez revoir votre mot de passe");
         alert.showAndWait();
     }else if(!age1.matches(".*\\d.*")){
-        // Afficher un message d'alerte
+     
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Format d'age invalide");
         alert.setHeaderText(null);
@@ -233,9 +233,7 @@ public class InscriptionUserController implements Initializable {
             ImagePath = "C:\\Users\\ANIS\\Documents/profile.jpg";
             imageLabel.setText(ImagePath);
             ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
-
         }
-
     }
 }
 

@@ -102,10 +102,11 @@ public class GestionAdminController implements Initializable {
   
     @FXML
     private void btnActualiserAction(ActionEvent event) {
+
        afficherUsers();
+         
     }
-    
-    
+
     @FXML
     private void btnDeconnecterAction(ActionEvent event) {
         SessionManager.getInstance().setCurrentUser(null);
@@ -224,14 +225,22 @@ public class GestionAdminController implements Initializable {
     
 @FXML
 private void search(ActionEvent event) {
-    // Retrieve search criteria from UI elements
-    String searchKeyword = tf_adm_rech.getText();
-    ServiceUser su = new ServiceUser();
+    
+            String searchKeyword = tf_adm_rech.getText();
+            ServiceUser su = new ServiceUser();
 
-    // Perform the search in your service or DAO
+        if (searchKeyword.isEmpty()) {
+       
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Champs manquants");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuillez remplir votre champs !");
+        alert.showAndWait();
+    }else{
+   
+   
     List<User> searchResults = su.chercherByEmailTV(searchKeyword);
 
-    // Convert the list of search results into an ObservableList
     ObservableList<User> observableResults = FXCollections.observableArrayList(searchResults);
 
     col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -243,8 +252,8 @@ private void search(ActionEvent event) {
     col_img.setCellValueFactory(new PropertyValueFactory<>("image"));
     ColumnId.setCellValueFactory(new PropertyValueFactory<>("id_user"));
 
-    // Set the ObservableList as the data source for the TableView
     tv_users.setItems(observableResults);
+        }
 }
 
 }

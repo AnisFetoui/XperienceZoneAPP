@@ -20,7 +20,7 @@
                   <Image url="@385496021_292791893519238_8577172701520959440_n.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImagePreviw" fitHeight="212.0" fitWidth="187.0" layoutX="33.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ImagePreviw" fitHeight="212.0" fitWidth="187.0" layoutX="38.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="Add_image_button" layoutX="54.0" layoutY="279.0" mnemonicParsing="false" onAction="#add_image_action" prefHeight="27.0" prefWidth="153.0" style="-fx-background-color: #354230;" text="Ajouter Photo" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
@@ -85,7 +85,7 @@
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
             </TextField>
-            <Button id="btn_inscri_inscri" fx:id="btn_modif_modif" layoutX="70.0" layoutY="539.0" mnemonicParsing="false" onAction="#enregistrer" prefHeight="34.0" prefWidth="153.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" text="Enregistrer">
+            <Button id="btn_inscri_inscri" fx:id="btn_modif_modif" layoutX="69.0" layoutY="487.0" mnemonicParsing="false" onAction="#enregistrer" prefHeight="34.0" prefWidth="153.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" text="Enregistrer">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
@@ -98,7 +98,7 @@
             </TextField>
             <ComboBox fx:id="cb_modif_rl" layoutX="138.0" layoutY="365.0" prefHeight="25.0" prefWidth="170.0" />
             <ComboBox fx:id="cb_modif_sx" layoutX="138.0" layoutY="405.0" prefHeight="25.0" prefWidth="170.0" />
-            <Button id="btn_inscri_inscri" fx:id="btn_modif_retour" layoutX="257.0" layoutY="539.0" mnemonicParsing="false" onAction="#Retour" prefHeight="34.0" prefWidth="153.0" style="-fx-background-color: #354230; -fx-cursor: hand;" styleClass="add-btn" stylesheets="@../../../../../Desktop/Downloads/style.css" text="Retour" textFill="WHITE">
+            <Button id="btn_inscri_inscri" fx:id="btn_modif_retour" layoutX="258.0" layoutY="487.0" mnemonicParsing="false" onAction="#Retour" prefHeight="34.0" prefWidth="153.0" style="-fx-background-color: #354230; -fx-cursor: hand;" styleClass="add-btn" stylesheets="@../../../../../Desktop/Downloads/style.css" text="Retour" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
@@ -108,6 +108,11 @@
                   <Font name="Arial Rounded MT Bold" size="47.0" />
                </font>
             </Label>
+            <Button id="btn:connexion:mdpoub" fx:id="btn_profile_desc" layoutX="246.0" layoutY="597.0" mnemonicParsing="false" onAction="#desactiver" prefHeight="25.0" prefWidth="198.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Desactiver votre compte ?" textFill="RED" underline="true">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <Label fx:id="imageLabel" prefHeight="34.0" prefWidth="71.0" visible="false" />
