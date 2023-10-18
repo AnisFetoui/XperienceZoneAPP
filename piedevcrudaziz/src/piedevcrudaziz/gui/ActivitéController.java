@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,6 +37,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -43,6 +45,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import piedevcrudaziz.entity.activites;
 import piedevcrudaziz.service.serviceactivites;
 import piedevcrudaziz.tools.MyDB;
@@ -65,8 +68,19 @@ public class ActivitéController implements Initializable {
     private ComboBox combo;
     @FXML
     private ComboBox combo2;
-    @FXML
     private Label alert;
+     int column = 0;
+        int row = 1;
+    @FXML
+    private AnchorPane slider;
+    @FXML
+    private Label menu;
+    @FXML
+    private Button pageajouter;
+    @FXML
+    private Button pagemodifier;
+    @FXML
+    private Button pagesupprimer;
 
     
     /**
@@ -82,32 +96,10 @@ public class ActivitéController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        int column = 0;
-        int row = 1;
-        
-        activitestrouveé = new ArrayList<>(activitestrouveé());
+        slider.setTranslateX(0);
+        menu.setVisible(true);
+        activitestrouveé = new ArrayList<>();
 
-
-                try{
-                        for(activites card :activitestrouveé){
-                        FXMLLoader fxmlloader = new FXMLLoader();                       
-                        fxmlloader.setLocation(getClass().getResource("card.fxml"));   
-                        VBox cardBox = fxmlloader.load();                       
-                        CardController cardcontroller = fxmlloader.getController();                      
-                       cardcontroller.setData(card);     
-                       if(column == 4){
-                           column = 0;
-                           ++row;
-                       }cardLayout.add(cardBox,column++,row);
-                       GridPane.setMargin(cardBox,new Insets(10) );
-                       
-                        
-                        
-                        } 
-                }catch(IOException e){
-                //e.printStackTrace();
-                    
-                }
 ObservableList<String> lista = FXCollections.observableArrayList(
     "Nabeul",
     "Zaghouan",
@@ -145,7 +137,10 @@ ObservableList<String> lista = FXCollections.observableArrayList(
                 while (resultSet.next()) {
                     
                     String nomActivite = resultSet.getString("nom_act");
-                     combo2.getItems().add(nomActivite);
+                  
+                     if (!combo2.getItems().contains(nomActivite)) {
+                    combo2.getItems().add(nomActivite);
+            }
                      }}
         } catch (SQLException ex) {
         }
@@ -153,54 +148,160 @@ ObservableList<String> lista = FXCollections.observableArrayList(
 
     }
 
-    private List<activites> activitestrouveé(){
-    List<activites> ls = new ArrayList<>(); 
-    activites activite = new activites();
-    
-    activite.setImages("/images/parachute.jpg");
-    activite.setNom_act("parachute");
-    activite.setOrganisateur("aziz grami");
-    activite.setPrix_act("25.00");
-    ls.add(activite);
-    
-    activite = new activites();
-    activite.setImages("/images/paddle.jpg");
-    activite.setNom_act("padlle");
-    activite.setOrganisateur("Mohamed aziz grami");
-    activite.setPrix_act("15.00");
-    ls.add(activite);
-
-    return ls;
-    }
     
     @FXML
     private void selectN(ActionEvent event) {
-        String sd = combo2.getSelectionModel().getSelectedItem().toString();
-        //chercherActivites(sd) ;
+            activitestrouveé.clear();
     
-    serviceactivites sa = new serviceactivites();
-   ArrayList<activites> activitesTrouvees = sa.chercherActivites(sd);
-    
-     
-    for (activites activite : activitesTrouvees) {
         
-        System.out.println("Nom : " + activite.getNom_act());
-        System.out.println("Description : " + activite.getDescription());
-        System.out.println("Lieu : " + activite.getLieu_act());
-        System.out.println("Places disponibles : " + activite.getPlace_dispo());
-        System.out.println("Prix : " + activite.getPrix_act());
-        System.out.println("------------------------");}
-    }
+        String name = combo2.getSelectionModel().getSelectedItem().toString();
+        serviceactivites sa = new serviceactivites();
+         List<activites> ls = new ArrayList<>(); 
+         ArrayList<activites> foundActivities = sa.chercherActivites(name);
+         
+   
+    for (activites foundActivity : foundActivities) {
+        String foundName = foundActivity.getNom_act();
+        String foundOrganisateur = foundActivity.getOrganisateur();
+        String foundPrix = foundActivity.getPrix_act();
+        
+     
+        activites newActivite = new activites();
+        newActivite.setNom_act(foundName);
+        newActivite.setOrganisateur(foundOrganisateur);
+        newActivite.setPrix_act(foundPrix);
+        newActivite.setImages("/images/parachute.jpg");
+        
        
+        activitestrouveé.add(newActivite);
+    }
+    updateUIWithNewActivities();
+  }
+    private void updateUIWithNewActivities() {
     
+    cardLayout.getChildren().clear();
+    column = 0;
+    row = 1;
+    
+    for (activites card : activitestrouveé) {
+        try {
+            FXMLLoader fxmlloader = new FXMLLoader();
+            fxmlloader.setLocation(getClass().getResource("card.fxml"));
+            VBox cardBox = fxmlloader.load();
+            CardController cardcontroller = fxmlloader.getController();
+            cardcontroller.setData(card);
 
+            if (column == 4) {
+                column = 0;
+                ++row;
+            }
+            cardLayout.add(cardBox, column++, row);
+            GridPane.setMargin(cardBox, new Insets(10));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+    
     @FXML
     private void selectG(ActionEvent event) {
         String s = combo.getSelectionModel().getSelectedItem().toString();
         alert.setText(s);
     }
 
- }
+ 
+
+
+    @FXML
+    private void onmenuclicked(MouseEvent event) {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.4));
+        slide.setNode(slider);
+        if( slider.getTranslateX()== 0){
+        slide.setToX(-210);
+        slide.play();
+        }else{
+            slide.setToX(0);
+        slide.play();
+        }
+        }
+       
+          @FXML
+ void openSupprimerPage(ActionEvent event) {
+        try {
+            // Load the FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("supprimer.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setTitle("Supprimer Page");
+            stage.setScene(new Scene(root));
+
+            // Show the new stage
+            stage.show();
+
+            // Close the current stage (if needed)
+            Stage currentStage = (Stage) pagesupprimer.getScene().getWindow();
+            currentStage.close();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle any exceptions here
+        }
+    }
+
+ 
+
+    @FXML
+    private void openAjouterPage(ActionEvent event) {
+         try {
+            // Load the FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ajouter.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setTitle(" Page Ajouter");
+            stage.setScene(new Scene(root));
+
+            // Show the new stage
+            stage.show();
+
+            // Close the current stage (if needed)
+            Stage currentStage = (Stage) pageajouter.getScene().getWindow();
+            currentStage.close();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle any exceptions here
+        }
+    }
+
+    @FXML
+    private void openModifierPage(ActionEvent event) {
+         try {
+            // Load the FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("modifieractivite.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setTitle("Page Modifier");
+            stage.setScene(new Scene(root));
+
+            // Show the new stage
+            stage.show();
+
+            // Close the current stage (if needed)
+            Stage currentStage = (Stage) pagemodifier.getScene().getWindow();
+            currentStage.close();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle any exceptions here
+        }
+    }
+        
+        
+    }
+    
+
+ 
     
     
 

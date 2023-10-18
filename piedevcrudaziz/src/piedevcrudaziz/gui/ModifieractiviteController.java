@@ -14,6 +14,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,18 +49,14 @@ public class ModifieractiviteController implements Initializable {
             Connection con; 
         Statement ste;
     @FXML
-    private ImageView exit;
-    @FXML
     private Label menu;
     @FXML
     private Label menuclose;
     @FXML
     private AnchorPane slider;
+
     @FXML
-    private ScrollPane sc;
-    ComboBox<String> CB = new ComboBox<>();
-    @FXML
-    private ComboBox<?> combobox;
+    private ComboBox combobox;
     @FXML
     private Button btnmodifier;
     @FXML
@@ -85,8 +83,12 @@ public class ModifieractiviteController implements Initializable {
     private Button pagemodifier;
     @FXML
     private Button pagesupprimer;
+    
     @FXML
-    private Label alert;
+    private Label msg;
+            
+    
+
     
         public ModifieractiviteController() {
          con = MyDB.getinstance().getCon();
@@ -101,7 +103,7 @@ public class ModifieractiviteController implements Initializable {
         slider.setTranslateX(0);
         menuclose.setVisible(true);
         menu.setVisible(false);
-        CB.getItems().addAll(
+        ObservableList<String> lista = FXCollections.observableArrayList(
                 "Nabeul",
                 "Zaghouan",
                 "Bizerte",
@@ -127,10 +129,7 @@ public class ModifieractiviteController implements Initializable {
                 "Kébili",
                 "Manouba"
         );
-        sc.setPrefHeight(50); //hedi fiha mockl l bluer
-        CB.setPrefWidth(150);
-        sc.setStyle("-fx-background-color: transparent;");
-        sc.setContent(CB);
+  combobox.setItems(lista); 
         
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0);
         nbrplacemod.setValueFactory(valueFactory);
@@ -176,7 +175,8 @@ public class ModifieractiviteController implements Initializable {
                     int nbrplace = activite.getPlace_dispo();
                     SpinnerValueFactory<Integer> nbrplaceValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 72, nbrplace);
                     nbrplacemod.setValueFactory(nbrplaceValueFactory);
-                    
+                   combobox.getEditor().setText(activite.getLieu_act());
+
                     
                     
                     
@@ -209,23 +209,29 @@ public class ModifieractiviteController implements Initializable {
 
         int Durée = duréemod.getValue();
         int Placedispo = nbrplacemod.getValue();
-        // ...
-        String Gouvernorat = CB.getValue();
+        
+         String selectedGouvernorat = selectG(null);
+        String Gouvernorat = selectedGouvernorat;
+       
+        
         
         serviceactivites sa = new serviceactivites();
        if (!sa.isValidPrice(Prix)) {
-            alert.setText("Prix invalide. Veuillez saisir une période valide");
+            msg.setText("Prix invalide. Veuillez saisir une prix valide");
+            msg.setVisible(true);
         
             } else if (!sa.isValidPeriode(Periode)) {
                 
-                alert.setText("Periode invalide. Veuillez saisir une période valide");
+                msg.setText("Periode invalide. Veuillez saisir une période valide");
+                msg.setVisible(true);
         } else {
         
-        activites activite1 = new activites(Nom,Description,Organisateur,Gouvernorat,image,Adresse,Placedispo,Prix,Durée,Periode);
+        activites activite1 = new activites(Nom,Description,Organisateur,Gouvernorat,Adresse,image,Placedispo,Prix,Durée,Periode);
          activite1.setId_act(1); //neqsa fonction qui recupere lid
         sa.mettreAJourActivite(activite1);
 
-         alert.setText("Activité ajouté avec succée!");
+         msg.setText("Modification Enregistrer!");
+         msg.setVisible(true);
         }}catch(Exception e){
             System.out.println("Error occurred: " + e.getMessage());
             e.printStackTrace(); 
@@ -367,6 +373,13 @@ public class ModifieractiviteController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace(); // Handle any exceptions here
         }
+    }
+
+    @FXML
+    private String selectG(ActionEvent event) {
+        
+        String namec = combobox.getSelectionModel().getSelectedItem().toString();
+        return namec;
     }
     
 }

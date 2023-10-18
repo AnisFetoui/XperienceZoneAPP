@@ -4,51 +4,129 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="588.0" prefWidth="929.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="piedevcrudaziz.gui.AjouterController">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="755.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <center>
-            <AnchorPane id="AnchorPane" prefHeight="420.0" prefWidth="740.0" styleClass="page" stylesheets="@style.css">
+      <BorderPane prefHeight="200.0" prefWidth="976.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <bottom>
+            <AnchorPane prefHeight="67.0" prefWidth="929.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="descriptionaj" alignment="TOP_LEFT" layoutX="105.0" layoutY="340.0" prefHeight="105.0" prefWidth="587.0" promptText="Description" />
-                  <Label fx:id="alert" layoutX="262.0" layoutY="39.0" prefHeight="17.0" prefWidth="414.0">
+                  <Button fx:id="btnajouter" alignment="CENTER" cache="true" cacheHint="QUALITY" layoutX="430.0" layoutY="19.0" mnemonicParsing="false" onAction="#AddActivity" pickOnBounds="false" prefHeight="35.0" prefWidth="162.0" styleClass="btn1" stylesheets="@../../css/style.css" text="Ajouter" textFill="WHITE" textOverrun="CLIP">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
+                     </font></Button>
+               </children>
+            </AnchorPane>
+         </bottom>
+         <top>
+            <AnchorPane prefHeight="104.0" prefWidth="929.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane id="topside" prefHeight="104.0" prefWidth="929.0" style="-fx-background-color: #354230;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox alignment="CENTER" layoutX="242.0" layoutY="11.0" prefHeight="83.0" prefWidth="675.0" stylesheets="@../../css/style.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="11.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="99.0" style="-fx-background-color: #354230;" text="Produit" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="123.0" style="-fx-background-color: #354230;" stylesheets="@../../css/style.css" text="Evenements" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="111.0" style="-fx-background-color: #354230;" text="Activités" textFill="#4be42c">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial Narrow" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="123.0" style="-fx-background-color: #354230;" text="Reclamation" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="108.0" style="-fx-background-color: #354230;" text="Channel" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <Label fx:id="menu" layoutX="44.0" layoutY="52.0" onMouseClicked="#onmenuclicked" prefHeight="27.0" prefWidth="80.0" text="MENU" textFill="#4be42c">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="menuclose" layoutX="51.0" layoutY="54.0" onMouseClicked="#onmenuclickedclose" prefHeight="27.0" prefWidth="74.0" text="ME..." textFill="#4de42c">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="descriptionaj" alignment="TOP_LEFT" layoutX="65.0" layoutY="399.0" prefHeight="123.0" prefWidth="584.0" promptText="Description" styleClass="shadow" stylesheets="@../../css/style.css" />
+                  <Label fx:id="alert" alignment="CENTER" prefHeight="40.0" prefWidth="750.0" text="veuiller remplir tous les champs" textFill="#c32c2c">
+                     <font>
+                        <Font name="Bodoni MT" size="18.0" />
                      </font>
                   </Label>
-                  <VBox layoutX="150.0" layoutY="39.0" prefHeight="248.0" prefWidth="181.0">
+                  <VBox layoutX="35.0" layoutY="44.0" prefHeight="310.0" prefWidth="277.0">
                      <children>
-                        <TextField fx:id="nomaj" promptText="Nom Activité" style="-fx-border-radius: 12 px;" styleClass="az" />
-                        <TextField fx:id="organisateur" prefHeight="25.0" prefWidth="182.0" promptText="Organisateur" styleClass="field">
+                        <TextField fx:id="nomaj" prefHeight="50.0" prefWidth="221.0" promptText="Nom Activité" styleClass="shadow" stylesheets="@../../css/style.css">
                            <VBox.margin>
-                              <Insets top="20.0" />
+                              <Insets left="20.0" right="20.0" />
                            </VBox.margin>
                         </TextField>
-                        
-                        <TextField fx:id="prixaj" promptText="Prix (20.00)" styleClass="field">
+                        <TextField fx:id="organisateur" prefHeight="50.0" prefWidth="0.0" promptText="Organisateur" styleClass="shadow" stylesheets="@../../css/style.css">
                            <VBox.margin>
-                              <Insets top="20.0" />
+                              <Insets left="20.0" right="20.0" top="20.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField fx:id="periode" promptText="Periode 12/7/23 -13/8/23" styleClass="field">
+                        <TextField fx:id="prixaj" prefHeight="50.0" prefWidth="0.0" promptText="Prix (20.00)" styleClass="shadow" stylesheets="@../../css/style.css">
                            <VBox.margin>
-                              <Insets top="20.0" />
+                              <Insets left="20.0" right="20.0" top="20.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField fx:id="adresse" promptText="Adresse &quot;localisation&quot;" styleClass="field">
+                        <TextField fx:id="periode" prefHeight="50.0" prefWidth="0.0" promptText="Periode 12/7/23 -13/8/23" styleClass="shadow" stylesheets="@../../css/style.css">
                            <VBox.margin>
-                              <Insets top="20.0" />
+                              <Insets left="20.0" right="20.0" top="20.0" />
                            </VBox.margin>
                         </TextField>
                      </children>
@@ -56,69 +134,71 @@
                         <Insets left="10.0" right="10.0" top="20.0" />
                      </padding>
                   </VBox>
-                  <VBox layoutX="437.0" layoutY="59.0" prefHeight="200.0" prefWidth="173.0">
+                  <Label layoutX="68.0" layoutY="373.0" prefHeight="20.0" prefWidth="231.0" text="Description de l'activité" textFill="#436137">
+                     <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                     </font>
+                  </Label>
+                  <Separator orientation="VERTICAL" prefHeight="536.0" prefWidth="3.0" />
+                  <VBox layoutX="392.0" layoutY="43.0" prefHeight="279.0" prefWidth="277.0">
                      <children>
                         <HBox prefHeight="53.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="20.0" prefWidth="102.0" text="Min Participant">
+                              <Label prefHeight="44.0" prefWidth="126.0" text="Min Participant" textFill="#436137">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Berlin Sans FB" size="18.0" />
                                  </font>
                               </Label>
-                              
-                              <Spinner fx:id="nbrplaceaj" editable="true" prefHeight="25.0" prefWidth="58.0" />
+                              <Spinner fx:id="nbrplaceaj" editable="true" prefHeight="37.0" prefWidth="70.0">
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </Spinner>
                            </children>
                         </HBox>
                         <HBox prefHeight="41.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="20.0" prefWidth="116.0" text="Durée(en heure)">
+                              <Label prefHeight="41.0" prefWidth="125.0" text="Durée(en heure)" textFill="#436137">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Berlin Sans FB" size="18.0" />
                                  </font>
                               </Label>
-                              <Spinner fx:id="durée" editable="true" prefHeight="25.0" prefWidth="58.0" />
+                              <Spinner fx:id="durée" editable="true" prefHeight="37.0" prefWidth="70.0">
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </Spinner>
                            </children>
                         </HBox>
-                        <Label prefHeight="17.0" prefWidth="192.0" text="gouvernorat" />
-                        <ScrollPane fx:id="sc" fitToHeight="true" fitToWidth="true" prefHeight="39.0" prefWidth="200.0">
-                           <content>
-                              <ComboBox fx:id="combobox" prefWidth="150.0" />
-                           </content>
-                        </ScrollPane>
+                        <Label prefHeight="48.0" prefWidth="192.0" text="Gouvernorat" textFill="#436137">
+                           <font>
+                              <Font name="Berlin Sans FB" size="18.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="combobox" onAction="#selectG" prefHeight="48.0" prefWidth="234.0">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </ComboBox>
+                        <TextField fx:id="adresse" prefHeight="48.0" prefWidth="217.0" promptText="Adresse &quot;localisation&quot;" styleClass="shadow" stylesheets="@../../css/style.css">
+                           <VBox.margin>
+                              <Insets right="20.0" top="20.0" />
+                           </VBox.margin>
+                        </TextField>
                      </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" top="20.0" />
+                     </padding>
                   </VBox>
-                  <Label layoutX="202.0" layoutY="294.0" prefHeight="20.0" prefWidth="231.0" text="Description de l'activité">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
                </children>
             </AnchorPane>
          </center>
-         <top>
-            <AnchorPane id="topside" prefHeight="65.0" prefWidth="200.0" styleClass="topside" stylesheets="@style.css" BorderPane.alignment="CENTER">
-               <children>
-                  <Pane prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #1f1f1f;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <HBox prefHeight="46.0" prefWidth="604.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
-                  <Label fx:id="menu" layoutX="24.0" layoutY="34.0" onMouseClicked="#onmenuclicked" prefHeight="20.0" prefWidth="53.0" text="MENU" textFill="#c3baba">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="menuclose" layoutX="29.0" layoutY="33.0" onMouseClicked="#onmenuclickedclose" text="ME..." textFill="#c3baba">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </top>
          <left>
-            <AnchorPane fx:id="slider" prefHeight="362.0" prefWidth="176.0" style="-fx-background-color: #4B527E;" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="slider" prefHeight="313.0" prefWidth="181.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="524.0" prefWidth="176.0" style="-fx-background-color: #4B527E;">
+                  <VBox layoutX="-3.0" layoutY="2.0" prefHeight="345.0" prefWidth="181.0" spacing="10.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button fx:id="pagechercher" mnemonicParsing="false" onAction="#openChercherPage" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Chercher" textFill="WHITE">
+                        <Button fx:id="pagechercher" mnemonicParsing="false" onAction="#openChercherPage" prefHeight="40.0" prefWidth="141.0" styleClass="btn" stylesheets="@../../css/style.css" text="Chercher" textFill="WHITE">
                            <VBox.margin>
                               <Insets top="40.0" />
                            </VBox.margin>
@@ -126,57 +206,66 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/cher.png" />
+                                 </image>
+                              </ImageView>
                            </graphic>
                            <padding>
                               <Insets right="8.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="pageajouter" mnemonicParsing="false" onAction="#openAjouterPage" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Ajouter" textFill="WHITE">
+                        <Button fx:id="pageajouter" mnemonicParsing="false" onAction="#openAjouterPage" prefHeight="40.0" prefWidth="143.0" styleClass="btn" stylesheets="@../../css/style.css" text="Ajouter" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/aj.png" />
+                                 </image>
+                              </ImageView>
                            </graphic>
                            <padding>
                               <Insets right="16.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="pagemodifier" defaultButton="true" mnemonicParsing="false" onAction="#openModifierPage" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Modifier" textFill="WHITE">
+                        <Button fx:id="pagemodifier" defaultButton="true" mnemonicParsing="false" onAction="#openModifierPage" prefHeight="40.0" prefWidth="144.0" styleClass="btn" stylesheets="@../../css/style.css" text="Modifier" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/mod.png" />
+                                 </image>
+                              </ImageView>
                            </graphic>
                            <padding>
                               <Insets right="10.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="pagesupprimer" mnemonicParsing="false" onAction="#openSupprimerPage" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Supprimer" textFill="WHITE">
+                        <Button fx:id="pagesupprimer" mnemonicParsing="false" onAction="#openSupprimerPage" prefHeight="40.0" prefWidth="145.0" styleClass="btn" stylesheets="@../../css/style.css" text="Supprimer" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/supp.png" />
+                                 </image>
+                              </ImageView>
                            </graphic>
                         </Button>
                      </children>
                   </VBox>
                </children>
+               <BorderPane.margin>
+                  <Insets bottom="250.0" />
+               </BorderPane.margin>
             </AnchorPane>
          </left>
-         <bottom>
-            <AnchorPane prefHeight="40.0" prefWidth="929.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="btnajouter" cache="true" cacheHint="QUALITY" layoutX="431.0" layoutY="7.0" mnemonicParsing="false" onAction="#AddActivity" pickOnBounds="false" prefHeight="27.0" prefWidth="127.0" style="-fx-border-radius: 10; -fx-border-color: black;" text="Ajouter" textOverrun="CLIP">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets></Button>
-               </children>
-            </AnchorPane>
-         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>

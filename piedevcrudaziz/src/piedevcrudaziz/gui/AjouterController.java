@@ -62,10 +62,8 @@ public class AjouterController implements Initializable {
     @FXML
     private TextField periode;
     @FXML
-    private ScrollPane sc;
-    ComboBox<String> CB = new ComboBox<>();
-    @FXML
-    private ComboBox<?> combobox;
+    
+    private ComboBox combobox;
     @FXML
     private Label alert;
     @FXML
@@ -95,7 +93,7 @@ public class AjouterController implements Initializable {
         slider.setTranslateX(0);
         menuclose.setVisible(true);
         menu.setVisible(false);
-        CB.getItems().addAll(
+        ObservableList<String> lista = FXCollections.observableArrayList(
     "Nabeul",
     "Zaghouan",
     "Bizerte",
@@ -122,12 +120,7 @@ public class AjouterController implements Initializable {
     "Manouba"
         );
 
-        sc.setPrefHeight(20); //hedi fiha mockl l bluer
-        CB.setPrefWidth(150);
-        CB.setPrefHeight(70);
-        sc.setStyle("-fx-background-color: transparent;");
-        sc.setContent(CB);
-        
+combobox.setItems(lista); 
         
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0);
         nbrplaceaj.setValueFactory(valueFactory);
@@ -135,6 +128,12 @@ public class AjouterController implements Initializable {
         SpinnerValueFactory<Integer> A;
             A = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 72, 0);
         durée.setValueFactory(A);
+    }
+      @FXML
+    private String selectG(ActionEvent event) {
+        
+        String namec = combobox.getSelectionModel().getSelectedItem().toString();
+        return namec;
     }
     
     @FXML
@@ -155,7 +154,9 @@ public class AjouterController implements Initializable {
         int Durée = durée.getValue();
         int Placedispo = nbrplaceaj.getValue();
         // ...
-        String Gouvernorat = CB.getValue();
+        String selectedGouvernorat = selectG(null);
+
+        String Gouvernorat = selectedGouvernorat;
          serviceactivites sa = new serviceactivites();
          if (Nom.isEmpty() || Description.isEmpty() || Prix.isEmpty() || Organisateur.isEmpty() || Adresse.isEmpty() ||
             Periode.isEmpty() || Gouvernorat == null) {
@@ -170,7 +171,7 @@ public class AjouterController implements Initializable {
         } else {
            
            
-            activites activite1 = new activites(Nom, Description, Organisateur, Gouvernorat, image, Adresse, Placedispo, Prix, Durée, Periode);
+            activites activite1 = new activites(Nom, Description, Organisateur, Gouvernorat,Adresse, image,  Placedispo, Prix, Durée, Periode);
             sa.ajouterActivite(activite1);
             alert.setText("Activité ajouté avec succée!");}
         
@@ -305,5 +306,7 @@ public class AjouterController implements Initializable {
             e.printStackTrace(); // Handle any exceptions here
         }
     }
+
+  
     
 }

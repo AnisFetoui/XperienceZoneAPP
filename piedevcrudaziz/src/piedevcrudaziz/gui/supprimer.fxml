@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -18,60 +17,78 @@
    <children>
       <BorderPane layoutX="367.0" layoutY="57.0" prefHeight="200.0" prefWidth="755.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <AnchorPane prefHeight="65.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="104.0" prefWidth="929.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="63.0" layoutY="-56.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #4B527E;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane id="topside" prefHeight="104.0" prefWidth="929.0" style="-fx-background-color: #354230;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <ImageView fx:id="exit" fitHeight="20.0" fitWidth="13.0" layoutX="909.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../Downloads/x_icon_png_1542641_17795.png" />
-                           </image>
-                        </ImageView>
+                        <HBox alignment="CENTER" layoutX="242.0" layoutY="11.0" prefHeight="94.0" prefWidth="682.0" stylesheets="@../../css/style.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="11.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="99.0" style="-fx-background-color: #354230;" text="Produit" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="123.0" style="-fx-background-color: #354230;" stylesheets="@../../css/style.css" text="Evenements" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="111.0" style="-fx-background-color: #354230;" text="Activités" textFill="#4be42c">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial Narrow" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="123.0" style="-fx-background-color: #354230;" text="Reclamation" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="108.0" style="-fx-background-color: #354230;" text="Channel" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <Label fx:id="menu" layoutX="44.0" layoutY="52.0" onMouseClicked="#onmenuclicked" prefHeight="27.0" prefWidth="80.0" text="MENU" textFill="#4be42c">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="menuclose" layoutX="51.0" layoutY="54.0" onMouseClicked="#onmenuclickedclose" prefHeight="27.0" prefWidth="74.0" text="ME..." textFill="#4de42c">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
                      </children>
-                  </Pane>
-                  <HBox layoutX="250.0" layoutY="25.0" prefHeight="40.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" style="-fx-background-color: white;" text="Button" textAlignment="JUSTIFY">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" style="-fx-background-color: white;" text="Button">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" style="-fx-background-color: white;" text="Button">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" style="-fx-background-color: white;" text="Button">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <Label fx:id="menu" layoutX="32.0" layoutY="35.0" onMouseClicked="#onmenuclicked" prefHeight="20.0" prefWidth="53.0" text="MENU" textFill="#c3baba">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="menuclose" layoutX="32.0" layoutY="35.0" onMouseClicked="#onmenuclickedclose" text="ME..." textFill="#c3baba">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
+                  </AnchorPane>
                </children>
             </AnchorPane>
          </top>
          <left>
-            <AnchorPane fx:id="slider" prefHeight="362.0" prefWidth="176.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="slider" prefHeight="356.0" prefWidth="176.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox layoutX="31.0" prefHeight="524.0" prefWidth="176.0" style="-fx-background-color: #4B527E;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox layoutY="-1.0" prefHeight="369.0" prefWidth="176.0" spacing="10.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
                      <children>
-                        <Button fx:id="pagechercher" mnemonicParsing="false" onAction="#openChercherPage" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Chercher" textFill="WHITE">
+                        <Button fx:id="pagechercher" mnemonicParsing="false" onAction="#openChercherPage" prefHeight="40.0" prefWidth="141.0" styleClass="btn" stylesheets="@../../css/style.css" text="Chercher" textFill="WHITE">
                            <VBox.margin>
                               <Insets top="40.0" />
                            </VBox.margin>
@@ -79,49 +96,64 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/cher.png" />
+                                 </image></ImageView>
                            </graphic>
                            <padding>
                               <Insets right="8.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="pageajouter" mnemonicParsing="false" onAction="#openAjouterPage" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Ajouter" textFill="WHITE">
+                        <Button fx:id="pageajouter" mnemonicParsing="false" onAction="#openAjouterPage" prefHeight="40.0" prefWidth="143.0" styleClass="btn" stylesheets="@../../css/style.css" text="Ajouter" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/aj.png" />
+                                 </image></ImageView>
                            </graphic>
                            <padding>
                               <Insets right="16.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="pagemodifier" defaultButton="true" mnemonicParsing="false" onAction="#openModifierPage" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Modifier" textFill="WHITE">
+                        <Button fx:id="pagemodifier" defaultButton="true" mnemonicParsing="false" onAction="#openModifierPage" prefHeight="40.0" prefWidth="144.0" styleClass="btn" stylesheets="@../../css/style.css" text="Modifier" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/mod.png" />
+                                 </image></ImageView>
                            </graphic>
                            <padding>
                               <Insets right="10.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="pagesupprimer" mnemonicParsing="false" onAction="#openSupprimerPage" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Supprimer" textFill="WHITE">
+                        <Button fx:id="pagesupprimer" mnemonicParsing="false" onAction="#openSupprimerPage" prefHeight="40.0" prefWidth="145.0" styleClass="btn" stylesheets="@../../css/style.css" text="Supprimer" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/supp.png" />
+                                 </image></ImageView>
                            </graphic>
                         </Button>
                      </children>
                   </VBox>
                </children>
+               <BorderPane.margin>
+                  <Insets bottom="50.0" />
+               </BorderPane.margin>
             </AnchorPane>
          </left>
          <center>
-            <TableView fx:id="tableview" prefHeight="522.0" prefWidth="735.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableview" prefHeight="355.0" prefWidth="753.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="act_col" prefWidth="120.0" text="Nom de l'activite" />
                   <TableColumn fx:id="des_col" prefWidth="86.0" text="Description" />
@@ -142,11 +174,14 @@
             </TableView>
          </center>
          <bottom>
-            <AnchorPane prefHeight="44.0" prefWidth="929.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="supp" layoutX="416.0" layoutY="9.0" mnemonicParsing="false" onAction="#deleteselectedact" prefHeight="25.0" prefWidth="156.0" text="Button" />
-               </children>
-            </AnchorPane>
+            <Button fx:id="supp" mnemonicParsing="false" onAction="#deleteselectedact" prefHeight="41.0" prefWidth="156.0" styleClass="btn1" stylesheets="@../../css/style.css" text="Supprimer" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="10.0" />
+               </BorderPane.margin>
+            </Button>
          </bottom>
       </BorderPane>
    </children>

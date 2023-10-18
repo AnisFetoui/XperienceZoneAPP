@@ -36,7 +36,7 @@ public class Piedevcrudaziz {
       /*serviceactivites  sa = new serviceactivites();
        
        
-        activites activite1 = new activites("parashute", "experience inoubliable","xperiencezone", "Tabarka","zone touristique rue 15+ 2358","00",2, "26.00",2,"20/10/2023 - 13/11/2023");
+        activites activite1 = new activites("parachute", "joindre nous","xperiencezone", "Tabarka","zone touristique rue 15+ 2358","00",2, "26.00",2,"20/10/2023 - 13/11/2023");
         sa.ajouterActivite(activite1);
        // System.out.println(sa.afficherActivite());*/
 
@@ -48,7 +48,7 @@ public class Piedevcrudaziz {
     
 
     //recherche 
-    String nomActivite = "padel";
+    /*String nomActivite = "padel";
     
     serviceactivites sa = new serviceactivites();
    ArrayList<activites> activitesTrouvees = sa.chercherActivites(nomActivite);

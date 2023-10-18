@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import piedevcrudaziz.entity.activites;
 
 /**
@@ -30,6 +31,9 @@ public class CardController implements Initializable {
     private Label price;
     @FXML
     private ImageView cardimage;
+    @FXML
+    private VBox box;
+    private String[] colors = {"B9E5FF","BDB2FE","FB9AA8","EF5056"};
 
     /**
      * Initializes the controller class.
@@ -44,6 +48,7 @@ public class CardController implements Initializable {
         actname.setText(card.getNom_act());
         orgname.setText(card.getOrganisateur());
         price.setText(card.getPrix_act());
+        box.setStyle("-fx-background-color: #"+ colors[(int)(Math.random()*colors.length)]);
     }
   
 }
