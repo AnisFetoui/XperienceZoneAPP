@@ -21,6 +21,8 @@ interface Iserviceactivites<T > {
     void ajouterActivite(activites activite);
     void mettreAJourActivite(activites activite);
     void supprimerActivite(String nom);
+    boolean isValidPrice(String input);
+    boolean isValidPeriode(String input);
      //List<T> afficherActivite();
     
 }

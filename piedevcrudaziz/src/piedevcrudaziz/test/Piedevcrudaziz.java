@@ -33,10 +33,10 @@ public class Piedevcrudaziz {
             User p1;
             p1 = new User("ibtihel","ben mustfa","aaaa",Role.ADMIN,"aaa",18,"female");
              su.ajouter(p1);*/
-      serviceactivites  sa = new serviceactivites();
+      /*serviceactivites  sa = new serviceactivites();
        
        
-        activites activite1 = new activites("parashute", "experience inoubliable","xperiencezone", "Tabarka","zone touristique rue 15+ 2358","00",2, "26 DT",2,"de 20/10/23 a 13/11/23");
+        activites activite1 = new activites("parashute", "experience inoubliable","xperiencezone", "Tabarka","zone touristique rue 15+ 2358","00",2, "26.00",2,"20/10/2023 - 13/11/2023");
         sa.ajouterActivite(activite1);
        // System.out.println(sa.afficherActivite());*/
 
@@ -47,22 +47,21 @@ public class Piedevcrudaziz {
     
     
 
-    //recherche yekhdem ps:hata date fihech act yaffichilk act b nafs lesm
-    //String nomActivite = "camping";
-    //LocalDate dateActivite = LocalDate.of(2023, 10, 15);
-   /* ArrayList<activites> activitesTrouvees = sa.chercherActivites(nomActivite,null);
+    //recherche 
+    String nomActivite = "padel";
+    
+    serviceactivites sa = new serviceactivites();
+   ArrayList<activites> activitesTrouvees = sa.chercherActivites(nomActivite);
     
      
     for (activites activite : activitesTrouvees) {
         
         System.out.println("Nom : " + activite.getNom_act());
         System.out.println("Description : " + activite.getDescription());
-        System.out.println("Date : " + activite.getDate_act());
-        System.out.println("Heure : " + activite.getHeure_act());
         System.out.println("Lieu : " + activite.getLieu_act());
         System.out.println("Places disponibles : " + activite.getPlace_dispo());
         System.out.println("Prix : " + activite.getPrix_act());
-        System.out.println("------------------------");}*/
+        System.out.println("------------------------");}
     
    
         //serviceinscription si = new serviceinscription();
@@ -75,15 +74,16 @@ public class Piedevcrudaziz {
 
 
 
-/*               modif activite
-
+             //modif activite
+          /* serviceactivites  sa = new serviceactivites();
         activites activite = new activites();
-        activite.setId_act(6); 
+        activite.setId_act(1); 
         activite.setNom_act("padel");
         activite.setDescription("c'est magnifique");
+        activite.setPrix_act("14.14");
         sa.mettreAJourActivite(activite);
 
-  ***************************************************  */    
+ /* ***************************************************  */    
     
 }
 

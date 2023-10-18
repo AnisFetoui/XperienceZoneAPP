@@ -15,6 +15,8 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import piedevcrudaziz.entity.activites;
 
 /**
@@ -214,6 +216,24 @@ public ArrayList<activites> chercherpariduser(Integer id_user) {
 
     return resultats;
 }
+
+
+    @Override
+    public boolean isValidPrice(String input) {
+        
+        String regex = "^[0-9]+(\\.[0-9]{2})?$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
+    }
+    @Override
+     public  boolean isValidPeriode(String input) {
+       
+        String regex = "\\d{2}/\\d{2}/\\d{4}\\s-\\s\\d{2}/\\d{2}/\\d{4}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
+    }
 //chercher par  "price range"
 /*public ArrayList<activites> chercherparprix(String pricerange) {
     ArrayList<activites> resultats = new ArrayList<>();

@@ -71,7 +71,7 @@
                <children>
                   <VBox layoutX="31.0" prefHeight="524.0" prefWidth="176.0" style="-fx-background-color: #4B527E;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Chercher" textFill="WHITE">
+                        <Button fx:id="pagechercher" mnemonicParsing="false" onAction="#openChercherPage" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Chercher" textFill="WHITE">
                            <VBox.margin>
                               <Insets top="40.0" />
                            </VBox.margin>
@@ -85,7 +85,7 @@
                               <Insets right="8.0" />
                            </padding>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Ajouter" textFill="WHITE">
+                        <Button fx:id="pageajouter" mnemonicParsing="false" onAction="#openAjouterPage" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Ajouter" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -96,7 +96,7 @@
                               <Insets right="16.0" />
                            </padding>
                         </Button>
-                        <Button defaultButton="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Modifier" textFill="WHITE">
+                        <Button fx:id="pagemodifier" defaultButton="true" mnemonicParsing="false" onAction="#openModifierPage" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Modifier" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -107,7 +107,7 @@
                               <Insets right="10.0" />
                            </padding>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Supprimer" textFill="WHITE">
+                        <Button fx:id="pagesupprimer" mnemonicParsing="false" onAction="#openSupprimerPage" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #4B527E;" text="Supprimer" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -142,7 +142,11 @@
             </TableView>
          </center>
          <bottom>
-            <Button fx:id="supp" mnemonicParsing="false" onAction="#deleteselectedact" prefHeight="25.0" prefWidth="170.0" text="Supprimer" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="44.0" prefWidth="929.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="supp" layoutX="416.0" layoutY="9.0" mnemonicParsing="false" onAction="#deleteselectedact" prefHeight="25.0" prefWidth="156.0" text="Button" />
+               </children>
+            </AnchorPane>
          </bottom>
       </BorderPane>
    </children>

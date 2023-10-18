@@ -20,10 +20,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import piedevcrudaziz.entity.activites;
 import piedevcrudaziz.service.serviceactivites;
 import piedevcrudaziz.tools.MyDB;
@@ -43,8 +47,6 @@ public class ModifierController implements Initializable {
     @FXML
     private TextField adressemod;
     @FXML
-    private Button btnmodifier;
-    @FXML
     private Spinner<Integer> nbrplacemod;
     @FXML
     private TextField prixmod;
@@ -59,6 +61,8 @@ public class ModifierController implements Initializable {
     ComboBox<String> CB = new ComboBox<>();
     @FXML
     private ComboBox<?> combobox;
+    @FXML
+    private Button btnmodifier;
 
     public ModifierController() {
         con = MyDB.getinstance().getCon();
@@ -206,5 +210,7 @@ public class ModifierController implements Initializable {
     
     
     }
+
+
     
 }

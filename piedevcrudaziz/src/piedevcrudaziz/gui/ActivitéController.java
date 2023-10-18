@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package piedevcrudaziz.gui;
-
+import javafx.geometry.Insets; 
+//import java.awt.Insets;
 import java.io.IOException;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,9 +15,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +37,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -50,16 +57,17 @@ public class ActivitéController implements Initializable {
     private TextField recname;
         Connection con; 
         Statement ste;
+
+    private List<activites> activitestrouveé;
     @FXML
-    private ScrollPane sc;
-    ComboBox<String> CB = new ComboBox<>();
+    private GridPane cardLayout;
     @FXML
-    private ScrollPane sc1;
-    ComboBox<String> CB1 = new ComboBox<>();
+    private ComboBox combo;
     @FXML
-    private ComboBox<?> combobox;
+    private ComboBox combo2;
     @FXML
-    private ComboBox<?> combobox1;
+    private Label alert;
+
     
     /**
      * Initializes the controller class.
@@ -74,7 +82,33 @@ public class ActivitéController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        CB1.getItems().addAll(
+        int column = 0;
+        int row = 1;
+        
+        activitestrouveé = new ArrayList<>(activitestrouveé());
+
+
+                try{
+                        for(activites card :activitestrouveé){
+                        FXMLLoader fxmlloader = new FXMLLoader();                       
+                        fxmlloader.setLocation(getClass().getResource("card.fxml"));   
+                        VBox cardBox = fxmlloader.load();                       
+                        CardController cardcontroller = fxmlloader.getController();                      
+                       cardcontroller.setData(card);     
+                       if(column == 4){
+                           column = 0;
+                           ++row;
+                       }cardLayout.add(cardBox,column++,row);
+                       GridPane.setMargin(cardBox,new Insets(10) );
+                       
+                        
+                        
+                        } 
+                }catch(IOException e){
+                //e.printStackTrace();
+                    
+                }
+ObservableList<String> lista = FXCollections.observableArrayList(
     "Nabeul",
     "Zaghouan",
     "Bizerte",
@@ -98,8 +132,10 @@ public class ActivitéController implements Initializable {
     "Ariana",
     "BEN Arous",
     "Kébili",
-    "Manouba"
-        );
+    "Manouba");
+               combo.setItems(lista); 
+       
+
         try {
         String req = "SELECT nom_act FROM activites";
         PreparedStatement pre = con.prepareStatement(req);
@@ -109,95 +145,82 @@ public class ActivitéController implements Initializable {
                 while (resultSet.next()) {
                     
                     String nomActivite = resultSet.getString("nom_act");
-                     CB.getItems().add(nomActivite);
+                     combo2.getItems().add(nomActivite);
                      }}
         } catch (SQLException ex) {
         }
-        sc.setPrefHeight(20); 
-        CB.setPrefHeight(50); 
-        CB.setPrefWidth(150);
-        sc.setStyle("-fx-background-color: transparent;");
-        sc.setContent(CB);
-        sc1.setPrefHeight(20);
-        CB1.setPrefHeight(50); 
-        CB1.setPrefWidth(150);
-        sc1.setStyle("-fx-background-color: transparent;");
-        sc1.setContent(CB1);
+
+
     }
 
-   
+    private List<activites> activitestrouveé(){
+    List<activites> ls = new ArrayList<>(); 
+    activites activite = new activites();
+    
+    activite.setImages("/images/parachute.jpg");
+    activite.setNom_act("parachute");
+    activite.setOrganisateur("aziz grami");
+    activite.setPrix_act("25.00");
+    ls.add(activite);
+    
+    activite = new activites();
+    activite.setImages("/images/paddle.jpg");
+    activite.setNom_act("padlle");
+    activite.setOrganisateur("Mohamed aziz grami");
+    activite.setPrix_act("15.00");
+    ls.add(activite);
 
-    private void handleSearchButtonAction(ActionEvent event) {
-       /* String searchedname = searchbar.getText();
+    return ls;
+    }
+    
+    @FXML
+    private void selectN(ActionEvent event) {
+        String sd = combo2.getSelectionModel().getSelectedItem().toString();
+        //chercherActivites(sd) ;
+    
+    serviceactivites sa = new serviceactivites();
+   ArrayList<activites> activitesTrouvees = sa.chercherActivites(sd);
+    
+     
+    for (activites activite : activitesTrouvees) {
         
-        //view.setText("Search Result: " + searchedname);
-         
-         serviceactivites sa = new serviceactivites();
-
-    // Appelez la méthode chercherActivites avec le nom de l'activité recherché
-    ArrayList<activites> searchResults = sa.chercherActivites(searchedname);
-    StringBuilder htmlContentBuilder = new StringBuilder("<html><body>");
-    buttonContainer.getChildren().clear();
-    for (activites activite : searchResults) {
-        Button button = new Button("Voir Plus");
-        button.setOnAction(e -> {
-            openDescriptionPage(activite);
-        });
-        buttonContainer.getChildren().addAll(createActivityDetailsNode(activite), button);
-        htmlContentBuilder.append("<span class='titre'>Activité:</span> ")
-                .append(activite.getNom_act()).append("<br>")
-                //.append("<span class='details'>Date :</span> ").append(activite.getDate_act().toString()).append("<br>")
-                .append("<span class='details'>Lieu :</span> ").append(activite.getLieu_act()).append("<br><br>");
-                //.append("<span class='details'>- Nombre de places disponibles :</span> ").append(activite.getPlace_dispo()).append("<br>")
-                //.append("<span class='details'>- Prix :</span> ").append(activite.getPrix_act()).append("<br><br>");
+        System.out.println("Nom : " + activite.getNom_act());
+        System.out.println("Description : " + activite.getDescription());
+        System.out.println("Lieu : " + activite.getLieu_act());
+        System.out.println("Places disponibles : " + activite.getPlace_dispo());
+        System.out.println("Prix : " + activite.getPrix_act());
+        System.out.println("------------------------");}
     }
+       
     
 
-}
-    private Node createActivityDetailsNode(activites activite) {
-    // Create a custom Node (like VBox) containing activity details (e.g., labels)
-    VBox activityDetailsNode = new VBox();
-    Label nameLabel = new Label("Activité: " + activite.getNom_act());
-    //Label dateLabel = new Label("Date: " + activite.getDate_act().toString());
-    Label lieuLabel = new Label("Lieu: " + activite.getLieu_act());
-    
-    // Add labels to the custom Node
-    activityDetailsNode.getChildren().addAll(nameLabel,  lieuLabel);
-    return activityDetailsNode;
-}
-    
-private void openDescriptionPage(activites activite) {
-            
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("activiteDescription.fxml"));
-            Parent root = loader.load();
-            ActiviteDescriptionController ac = loader.getController();
-            //controller.initData(activite);
-            ac.setNameLabel(activite.getNom_act());
-            ac.setLieuLabel(activite.getLieu_act());
-             Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Description de l'activité");
-
-        // Show the new stage
-        stage.showAndWait(); 
-            
-            
-        } catch (IOException e) {
-            
-        }*/
+    @FXML
+    private void selectG(ActionEvent event) {
+        String s = combo.getSelectionModel().getSelectedItem().toString();
+        alert.setText(s);
     }
-}
 
-
-
-
-
-
+ }
+    
     
 
     
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+     
     
     
     
