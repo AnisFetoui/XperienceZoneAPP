@@ -96,7 +96,7 @@ public class ActivitéController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        slider.setTranslateX(0);
+        slider.setTranslateX(-210);
         menu.setVisible(true);
         activitestrouveé = new ArrayList<>();
 

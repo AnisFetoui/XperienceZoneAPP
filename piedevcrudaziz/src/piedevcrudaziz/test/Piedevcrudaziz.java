@@ -63,12 +63,36 @@ public class Piedevcrudaziz {
         System.out.println("Prix : " + activite.getPrix_act());
         System.out.println("------------------------");}
     
-   
-        //serviceinscription si = new serviceinscription();
-        /*inscription ins1 =new inscription(LocalDate.of(2023, 10, 2),LocalTime.of(10,30),2,80.00,1,1);
-        si.Inscrire(ins1);
-        si.SupprimerAbonnement(1);*/
-        
+   */
+    //LocalDate.of(2023, 10, 2),LocalTime.of(10,30),2,80.00,1,1
+        serviceinscription si = new serviceinscription();
+        inscription ins1 =new inscription();
+       // si.Inscrire(ins1);
+        //si.SupprimerAbonnement(1);
+        ins1.setId_ins(7);
+        ins1.setDate_ins(LocalDate.now());
+        ins1.setHeure_ins(LocalTime.now());
+        ins1.setFrait_abonnement(10.00);
+        ins1.setNbr_tickes(5);
+        ins1.setActivite_id(1);
+        ins1.setUser_id(1);
+        si.modifierins(ins1);
+        /*serviceuser su = new serviceuser();
+            User p1 = new User();
+            p1.setId_user(2);
+            
+            p1.setUsername("Grami aziz");
+            p1.setMail("gramiaziz@gmail.com");
+            p1.setAge(30);
+            p1.setMdp("azaza");
+            p1.setImage("vide");
+            p1.setRole(Role.ADMIN);
+            p1.setSexe("homme");
+      
+       
+
+
+            su.modifier(p1);*/
         //si.Modifier_NbrTickets( 4 , 5);
         
 

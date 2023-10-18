@@ -67,7 +67,35 @@ public class serviceinscription implements Iserviceinscription<inscription>{
         System.out.println(ex);
     }
 }
+@Override
+    public void modifierins(inscription i) {
+    try {
+        String req = "UPDATE inscription SET date_ins = ?, heure_ins = ?, nbr_tickes = ?, frait_abonnement = ?, activite_id = ?, user_id = ? WHERE id_ins = ?";
+        PreparedStatement pre = con.prepareStatement(req);
+        
+        
+        pre.setDate(1, java.sql.Date.valueOf(i.getDate_ins()));
+        pre.setTime(2, java.sql.Time.valueOf(i.getHeure_ins()));
+        pre.setInt(3, i.getNbr_tickes());
+        pre.setDouble(4, i.getFrait_abonnement());
+        pre.setInt(5, i.getActivite_id());
+        pre.setInt(6, i.getUser_id());
+        pre.setInt(7, i.getId_ins());
+        
+        
+        int rowsUpdated = pre.executeUpdate();
 
+        if (rowsUpdated > 0) {
+            System.out.println("La mise à jour a réussi.");
+        } else {
+            System.out.println("Aucune ligne mise à jour.");
+        }
+
+    } catch (SQLException ex) {
+        //ex.printStackTrace();
+        System.out.println(ex.getMessage());
+    }
+}
 
 
 

@@ -15,5 +15,6 @@ interface Iserviceinscription<I> {
      void Inscrire(inscription ins);
      void SupprimerAbonnement(int id);
      void Modifier_NbrTickets(int id , int nbr_tickes);
+     void modifierins(inscription i);
     
 }
