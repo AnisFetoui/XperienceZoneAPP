@@ -6,18 +6,26 @@
 package view;
 
 import classes.Categorie;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import service.CategorieService;
 
 /**
@@ -114,38 +122,24 @@ public class AjouterController implements Initializable {
 
   
 
-  
+  @FXML
+    private void Retour(ActionEvent event) {
+    
+    try {
+    Parent root = FXMLLoader.load(getClass().getResource("Gestion categorie.fxml"));
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();} catch (IOException ex) {
+            Logger.getLogger(GestionProduitController.class.getName()).log(Level.SEVERE, null, ex);
+        }}}
 
-}
+   
+
+
 
     
-   /*if (NomCat.getText().isEmpty() || DescCat.getText().isEmpty() || choicefx.getValue() == null) {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("Erreur");
-    alert.setHeaderText("Erreur de saisie !");
-    alert.setContentText("Veuillez remplir tous les champs.");
-    alert.show();
-} else if (NomCat.getText().matches("\\d*")) {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("Erreur");
-    alert.setHeaderText("Erreur de saisie !");
-    alert.setContentText("Le nom de catégorie doit être une chaîne.");
-    alert.show();
-} else {
-    try {
-        CategorieService ca = new CategorieService();
-        Categorie categorie1 = new Categorie(NomCat.getText(), DescCat.getText(), (String) choicefx.getValue());
-        ca.ajout(categorie1);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Succès");
-        alert.setHeaderText("Catégorie ajoutée avec succès");
-        alert.setContentText("Une nouvelle catégorie a été ajoutée.");
-        alert.show();
-    } catch (SQLException ex) {
-        Logger.getLogger(AjouterController.class.getName()).log(Level.SEVERE, null, ex);
-    }
-}*/
-
+   
    
 
 

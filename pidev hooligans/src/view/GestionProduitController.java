@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,6 +32,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import service.CategorieService;
 import service.Produitservice;
 import util.MYDB;
 
@@ -83,28 +86,29 @@ public class GestionProduitController implements Initializable {
   @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Initialisation
-      
+      afficher();
     }
-
+    @FXML
+private void afficheraction(ActionEvent event)throws SQLException{
+    afficher();
+}
     
-       @FXML
-private void afficher(ActionEvent event) {
+    @FXML   
+private void afficher() {
+    
     Produitservice produitService = new Produitservice();
-
     List<Produit> produits = produitService.affihcer();
     ObservableList<Produit> produitList = FXCollections.observableArrayList(produits);
-
     idprod_col.setCellValueFactory(new PropertyValueFactory<>("id_prod"));
     nomprod_col.setCellValueFactory(new PropertyValueFactory<>("nom_prod"));
     prixprod_col.setCellValueFactory(new PropertyValueFactory<>("prix_prod"));
-    desprod_col.setCellValueFactory(new PropertyValueFactory<>("description_prod"));
-    quantiteprod_col.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+    desprod_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+    quantiteprod_col.setCellValueFactory(new PropertyValueFactory<>("quantite produit"));
     imageprod_col.setCellValueFactory(new PropertyValueFactory<>("image"));
-    idcateg_col.setCellValueFactory(new PropertyValueFactory<>("id_categorie"));
-
-
+    idcateg_col.setCellValueFactory(new PropertyValueFactory<>("id categorie"));
     tableview.setItems(produitList);
 }
+      
 
 
 
@@ -190,9 +194,19 @@ private void chercherProduits(ActionEvent event) throws SQLException {
 
 
    
+@FXML
+    private void Retour(ActionEvent event) {
+    
+    try {
+    Parent root = FXMLLoader.load(getClass().getResource("Gestion categorie.fxml"));
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();} catch (IOException ex) {
+            Logger.getLogger(GestionProduitController.class.getName()).log(Level.SEVERE, null, ex);
+        }}}
 
 
-}
 
 
 

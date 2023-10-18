@@ -65,7 +65,7 @@ import java.util.List;
      */
     
 public ArrayList<Produit> affihcer() {
-    List<Produit> produits = new ArrayList<>();
+    ArrayList<Produit> produits = new ArrayList<>();
     try {
         String req = "SELECT * FROM produit";
         Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);

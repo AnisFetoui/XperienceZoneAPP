@@ -203,6 +203,18 @@ private void chercherCategorie(ActionEvent event) throws SQLException {
     private void showErrorAlert(String le_champ_de_recherche_est_vide_Veuillez_s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+@FXML
+    private void Retour(ActionEvent event) {
+    
+    try {
+    Parent root = FXMLLoader.load(getClass().getResource("Gestion produit.fxml"));
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();} catch (IOException ex) {
+            Logger.getLogger(GestionProduitController.class.getName()).log(Level.SEVERE, null, ex);
+        }}}
 
-}
+   
+
 
