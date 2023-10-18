@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" onMouseClicked="#onclick" prefHeight="427.0" prefWidth="297.0" stylesheets="@../utils/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.devapps.Controller.oneticketviewController">
+   <children>
+      <ImageView fx:id="photo" fitHeight="118.0" fitWidth="148.0" layoutX="94.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../utils/ticket.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="num_ticket" layoutX="141.0" layoutY="191.0" prefHeight="26.0" prefWidth="83.0" text="num_ticket">
+         <font>
+            <Font name="Cambria" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="categorie" layoutX="135.0" layoutY="234.0" prefHeight="26.0" prefWidth="132.0" text="categorie">
+         <font>
+            <Font name="Cambria" size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="193.0" prefHeight="21.0" prefWidth="83.0" text="num_ticket:" />
+      <Label layoutX="19.0" layoutY="237.0" text="categorie:" />
+      <Label layoutX="24.0" layoutY="353.0" prefHeight="21.0" prefWidth="70.0" text="id_event :" />
+      <Label fx:id="prix" layoutX="139.0" layoutY="273.0" prefHeight="26.0" prefWidth="125.0" text="prix">
+         <font>
+            <Font name="Cambria" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="id_user" layoutX="143.0" layoutY="315.0" prefHeight="26.0" prefWidth="118.0" text="id_user ">
+         <font>
+            <Font name="Cambria" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="id_event" layoutX="141.0" layoutY="350.0" prefHeight="26.0" prefWidth="108.0" text="id_event ">
+         <font>
+            <Font name="Cambria" size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="317.0" prefHeight="21.0" prefWidth="70.0" text="id_user :" />
+      <Label layoutX="23.0" layoutY="275.0" prefHeight="21.0" prefWidth="83.0" text="prix:" />
+   </children>
+   <styleClass>
+      <String fx:value="fruit-item" />
+      <String fx:value="shadow" />
+   </styleClass>
+</AnchorPane>
