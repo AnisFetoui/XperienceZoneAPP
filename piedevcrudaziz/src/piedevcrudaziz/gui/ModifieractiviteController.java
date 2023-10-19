@@ -34,6 +34,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import piedevcrudaziz.entity.activites;
@@ -53,7 +54,7 @@ public class ModifieractiviteController implements Initializable {
     @FXML
     private Label menuclose;
     @FXML
-    private AnchorPane slider;
+    private VBox slider;
 
     @FXML
     private ComboBox combobox;
