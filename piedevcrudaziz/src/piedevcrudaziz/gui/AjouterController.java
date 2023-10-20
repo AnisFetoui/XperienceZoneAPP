@@ -18,7 +18,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -27,6 +30,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -51,7 +56,6 @@ public class AjouterController implements Initializable {
     private Spinner<Integer> nbrplaceaj;
     @FXML
     private TextField prixaj;
-    @FXML
     private TextField descriptionaj;
     @FXML
     private TextField organisateur;
@@ -59,12 +63,10 @@ public class AjouterController implements Initializable {
     private TextField adresse;
     @FXML
     private Spinner<Integer> durée;
-    @FXML
     private TextField periode;
     @FXML
     
     private ComboBox combobox;
-    @FXML
     private Label alert;
     @FXML
     private Label menu;
@@ -79,7 +81,13 @@ public class AjouterController implements Initializable {
     @FXML
     private Button pagesupprimer;
     @FXML
-    private AnchorPane slider;
+    private VBox slider;
+    @FXML
+    private DatePicker datedebut;
+    @FXML
+    private DatePicker datefin;
+    @FXML
+    private TextField descriptionmod;
 
 
     /**
@@ -89,7 +97,8 @@ public class AjouterController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         
+         datedebut.setValue(LocalDate.of(1999, 01, 01));
+        datefin.setValue(LocalDate.of(1999, 01, 01));
         slider.setTranslateX(0);
         menuclose.setVisible(true);
         menu.setVisible(false);
@@ -129,6 +138,7 @@ combobox.setItems(lista);
             A = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 72, 0);
         durée.setValueFactory(A);
     }
+    
       @FXML
     private String selectG(ActionEvent event) {
         
@@ -141,39 +151,79 @@ combobox.setItems(lista);
         try {
         String Nom = nomaj.getText();//nom
         
-        String Description = descriptionaj.getText();//disc
+        String Description = descriptionmod.getText();//disc
         String Prix = prixaj.getText();//prix
         
         // ..
         String Organisateur = organisateur.getText();
         String Adresse = adresse.getText();
-        String Periode = periode.getText();
+        
         String image = "image";
+        
+        LocalDate selectedDatedebut = datedebut.getValue();
+        LocalDate selectedDatefin = datefin.getValue();
+
+        
+        String debutdate = selectedDatedebut.toString();
+        String findate = selectedDatefin.toString();
+
+        String Periode = debutdate + " - " + findate;
         // ..
+        
 
         int Durée = durée.getValue();
         int Placedispo = nbrplaceaj.getValue();
         // ...
-        String selectedGouvernorat = selectG(null);
+        //String selectedGouvernorat = selectG(null);
+        String selectedGouvernorat = combobox.getValue() != null ? combobox.getValue().toString() : "";
 
         String Gouvernorat = selectedGouvernorat;
          serviceactivites sa = new serviceactivites();
-         if (Nom.isEmpty() || Description.isEmpty() || Prix.isEmpty() || Organisateur.isEmpty() || Adresse.isEmpty() ||
-            Periode.isEmpty() || Gouvernorat == null) {
-           
-            alert.setText("Veuillez remplir tous les champs requis.");
-        } else if (!sa.isValidPrice(Prix)) {
-            alert.setText("Prix invalide. Veuillez saisir une période valide");
         
-            } else if (!sa.isValidPeriode(Periode)) {
+        if (Nom.isEmpty() || Description.isEmpty() || Prix.isEmpty() || Organisateur.isEmpty() || Adresse.isEmpty() ||
+        Durée <= 0 || Placedispo <= 0 ||  selectedGouvernorat.isEmpty() 
+                || datedebut.getValue().equals(LocalDate.of(1999, 01, 01))
+                || datefin.getValue().equals(LocalDate.of(1999, 01, 01))
                 
-                alert.setText("Periode invalide. Veuillez saisir une période de format jj/mm/yyyy - jj/mm/yyyy");
+                
+                ) {
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Alert");
+        alert.setHeaderText("Veuillez remplir tous les champs requis.");
+
+        ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButton);
+        alert.showAndWait();
+
+            
+        } else if (!sa.isValidPrice(Prix)) {
+            
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Alert");
+            alert.setHeaderText("Prix invalide. Veuillez saisir une période valide");
+            ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+            alert.getButtonTypes().setAll(okButton);
+            alert.showAndWait();
+       
         } else {
            
            
             activites activite1 = new activites(Nom, Description, Organisateur, Gouvernorat,Adresse, image,  Placedispo, Prix, Durée, Periode);
             sa.ajouterActivite(activite1);
-            alert.setText("Activité ajouté avec succée!");}
+            
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("confirmation d'ajout de "+ Nom);
+            alert.setHeaderText("Activité ajouter avec succée!");
+            ImageView customIcon = new ImageView(new Image("/images/tick.png"));
+            customIcon.setFitHeight(45); 
+            customIcon.setFitWidth(45);  
+            alert.setGraphic(customIcon);
+            ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+            alert.getButtonTypes().setAll(okButton);
+
+            alert.showAndWait();
+        }
         
         }catch(Exception e){
             System.out.println("Error occurred: " + e.getMessage());

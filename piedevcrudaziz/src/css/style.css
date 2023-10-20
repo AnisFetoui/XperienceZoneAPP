@@ -57,3 +57,7 @@
 .slider-back{
     -fx-background-color:#e9e8e8;
 }
+.left-border-mid{
+    -fx-border-left-color: black;
+
+}

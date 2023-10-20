@@ -54,6 +54,10 @@
 .miniar{
      -fx-background-radius: 15;
 }
-slider-back{
-    -fx-background-color:#358751;
+.slider-back{
+    -fx-background-color:#e9e8e8;
+}
+.left-border-mid{
+    -fx-border-left-color: black;
+
 }

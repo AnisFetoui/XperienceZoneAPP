@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
@@ -24,13 +25,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -87,6 +91,10 @@ public class ModifieractiviteController implements Initializable {
     
     @FXML
     private Label msg;
+    @FXML
+    private DatePicker datedebut;
+    @FXML
+    private DatePicker datefin;
             
     
 
@@ -141,7 +149,7 @@ public class ModifieractiviteController implements Initializable {
         ////////////////////////////////////////////////
 
         serviceactivites sa = new serviceactivites();
-        String searchedname = "padel";// hedhi lezm tetbadel
+        String searchedname = "khal3a";// hedhi lezm tetbadel
         ArrayList<activites> resultas = sa.chercherActivites(searchedname);
         try {
             String req = "SELECT * FROM activites WHERE nom_act = ?";
@@ -169,7 +177,7 @@ public class ModifieractiviteController implements Initializable {
                     adressemod.setText(activite.getAdresse());
                     prixmod.setText(activite.getPrix_act());
                     descriptionmod.setText(activite.getDescription());
-                    periodemod.setText(activite.getPeriode());
+                    //periodemod.setText(activite.getPeriode());
                     int duree = activite.getDurée();
                     SpinnerValueFactory<Integer> dureeValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 72, duree);
                     duréemod.setValueFactory(dureeValueFactory);
@@ -177,8 +185,19 @@ public class ModifieractiviteController implements Initializable {
                     SpinnerValueFactory<Integer> nbrplaceValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 72, nbrplace);
                     nbrplacemod.setValueFactory(nbrplaceValueFactory);
                    combobox.getEditor().setText(activite.getLieu_act());
+                    //recupuration de date periode
+                   String dbperiode;
+                   dbperiode = activite.getPeriode();
+                   String[] dateParts = dbperiode.split(" - ");
+                   String debutdate = dateParts[0];
+                   String findate = dateParts[1];
 
-                    
+                   LocalDate startDate = LocalDate.parse(debutdate);
+                   LocalDate endDate = LocalDate.parse(findate);
+
+                   datedebut.setValue(startDate);
+                   datefin.setValue(endDate);
+
                     
                     
                 }
@@ -204,10 +223,20 @@ public class ModifieractiviteController implements Initializable {
         // ..
         String Organisateur = organisateurmod.getText();
         String Adresse = adressemod.getText();
-        String Periode = periodemod.getText();
+       
         String image = "image";
         // ..
+//
+LocalDate selectedDatedebut = datedebut.getValue();
+String debutdate = selectedDatedebut.toString();
 
+LocalDate selectedDatefin = datefin.getValue();
+String findate = selectedDatefin.toString();
+
+
+String Periode = debutdate + " - " + findate;
+
+//
         int Durée = duréemod.getValue();
         int Placedispo = nbrplacemod.getValue();
         
@@ -218,21 +247,28 @@ public class ModifieractiviteController implements Initializable {
         
         serviceactivites sa = new serviceactivites();
        if (!sa.isValidPrice(Prix)) {
-            msg.setText("Prix invalide. Veuillez saisir une prix valide");
-            msg.setVisible(true);
-        
-            } else if (!sa.isValidPeriode(Periode)) {
-                
-                msg.setText("Periode invalide. Veuillez saisir une période valide");
-                msg.setVisible(true);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Alert ");
+            alert.setHeaderText("Veuiller respecter la forme de prix 99.99 !");
+            alert.showAndWait();
+     
         } else {
         
         activites activite1 = new activites(Nom,Description,Organisateur,Gouvernorat,Adresse,image,Placedispo,Prix,Durée,Periode);
-         activite1.setId_act(1); //neqsa fonction qui recupere lid
+         activite1.setId_act(14); //neqsa fonction qui recupere lid
         sa.mettreAJourActivite(activite1);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("confirmation de modification de "+ Nom);
+            alert.setHeaderText("Modification Enregistrer!");
+            ImageView customIcon = new ImageView(new Image("/images/tick.png"));
+            customIcon.setFitHeight(45); 
+            customIcon.setFitWidth(45);  
+            alert.setGraphic(customIcon);
+            ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+            alert.getButtonTypes().setAll(okButton);
 
-         msg.setText("Modification Enregistrer!");
-         msg.setVisible(true);
+            alert.showAndWait();
+         
         }}catch(Exception e){
             System.out.println("Error occurred: " + e.getMessage());
             e.printStackTrace(); 

@@ -151,28 +151,18 @@ tableview.setItems(activitesList);
     }
     @FXML
     private void deleteselectedact(ActionEvent event){
-            //tableview.getItems().removeAll(tableview.getSelectionModel().getSelectedItem())  ;
-    
-    
     activites selectedItem = tableview.getSelectionModel().getSelectedItem();
-    
     if (selectedItem != null) {
-        // Get the ID of the selected item from your data model
+        
         String nom = selectedItem.getNom_act();
-        /*System.out.println("nom de activité est ="+nom);
-         serviceactivites  sa = new serviceactivites();
-                sa.supprimerActivite(nom);
-                System.out.println("supprimer avec succés");*/
-                
-        // Show a confirmation dialog
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Delete Confirmation");
-        alert.setHeaderText("Are you sure you want to delete this item?");
+        alert.setTitle("Confirmation ");
+        alert.setHeaderText("Etes vous sur de vouloir supprimer cet activité?");
         alert.setContentText(selectedItem.getNom_act());
 
-        // Add OK and Cancel buttons
+        
         ButtonType buttonTypeOK = new ButtonType("OK");
-        ButtonType buttonTypeCancel = new ButtonType("Cancel");
+        ButtonType buttonTypeCancel = new ButtonType("Annuler");
 
         alert.getButtonTypes().setAll(buttonTypeOK, buttonTypeCancel);
 
@@ -181,9 +171,7 @@ tableview.setItems(activitesList);
             if (response == buttonTypeOK) {
                 serviceactivites  sa = new serviceactivites();
                 sa.supprimerActivite(nom);
-                System.out.println("supprimer avec succés");
-
-                
+               
                 tableview.getItems().remove(selectedItem);
             }
         });
