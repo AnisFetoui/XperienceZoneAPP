@@ -29,11 +29,6 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="123.0" style="-fx-background-color: #354230;" stylesheets="@../../../../../../pi%20%20aziz/XperienceZoneAPP-gestion_activit-/XperienceZoneAPP-gestion_activit-/piedevcrudaziz/src/css/style.css" text="Evenements" textFill="WHITE">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
                         <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="111.0" style="-fx-background-color: #354230;" text="Activités" textFill="#f7fcf6">
                            <font>
                               <Font name="Arial Narrow" size="14.0" />
