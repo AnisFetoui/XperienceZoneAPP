@@ -39,7 +39,7 @@ and open the template in the editor.
 }
 
 .nav-form{
-    -fx-background-color:linear-gradient(to bottom right, #2d658c, #2ca772);
+    -fx-background-color:#ffff;//linear-gradient(to bottom right, #2d658c, #2ca772);
 }
 
 .nav-btn{
@@ -49,6 +49,10 @@ and open the template in the editor.
     -fx-font-size:15px;
     -fx-font-family:"Arial";
     -fx-alignment:CENTER-LEFT;
+     -fx-background-color:#87cb28;  
+      -fx-background-radius: 0 30 30 0;
+       -fx-text-fill:#fff;
+    -fx-font-size:15px;
 }
 
 .logout{
