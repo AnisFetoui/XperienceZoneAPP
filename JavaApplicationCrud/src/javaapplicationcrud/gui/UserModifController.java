@@ -29,6 +29,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -48,9 +49,9 @@ public class UserModifController implements Initializable {
     @FXML
     private TextField tf_modif_email;
     @FXML
-    private TextField tf_modif_mdp;
+    private PasswordField tf_modif_mdp;
     @FXML
-    private TextField tf_modif_cfrmmdp;
+    private PasswordField tf_modif_cfrmmdp;
     @FXML
     private TextField tf_modif_age;
     @FXML
@@ -187,8 +188,12 @@ public class UserModifController implements Initializable {
             u.setSexe(sexe);
             u.setImage(ImagePath);
             su.modifier(u);
+                        Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+           alert.setContentText("Utilisateur modifié");
+            alert.show();
      try {
-            Parent page1 = FXMLLoader.load(getClass().getResource("MessageModif.fxml"));
+            Parent page1 = FXMLLoader.load(getClass().getResource("GestionAdmin.fxml"));
             
             Scene scene = new Scene(page1);
             
@@ -197,6 +202,7 @@ public class UserModifController implements Initializable {
             stage.setScene(scene);
             
             stage.show();
+
         } catch (IOException ex) {
             Logger.getLogger(InscriptionUserController.class.getName()).log(Level.SEVERE, null, ex);
         }

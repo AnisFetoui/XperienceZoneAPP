@@ -29,6 +29,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -47,9 +48,9 @@ public class AddUserController implements Initializable {
     @FXML
     private TextField tf_ajout_email;
     @FXML
-    private TextField tf_ajout_mdp;
+    private PasswordField tf_ajout_mdp;
     @FXML
-    private TextField tf_ajout_cfrmmdp;
+    private PasswordField tf_ajout_cfrmmdp;
     @FXML
     private TextField tf_ajout_age;
     @FXML
@@ -93,10 +94,11 @@ public class AddUserController implements Initializable {
 
             }
     @FXML
-    private void modif(ActionEvent event) throws IOException {
+    private void ajout(ActionEvent event) throws IOException {
         User u = new User();
         ServiceUser su = new ServiceUser();
-        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        //String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.(com|tn)$";
         String mdp1 = tf_ajout_mdp.getText();
         String mdp2 = tf_ajout_cfrmmdp.getText();
         String age1 = tf_ajout_age.getText();
@@ -177,8 +179,12 @@ public class AddUserController implements Initializable {
             u.setImage(ImagePath);
 
             su.ajouter(u);
+             Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+           alert.setContentText("Utilisateur ajouté");
+            alert.show();
      try {
-            Parent page1 = FXMLLoader.load(getClass().getResource("MessageAjout.fxml"));
+            Parent page1 = FXMLLoader.load(getClass().getResource("GestionAdmin.fxml"));
             
             Scene scene = new Scene(page1);
             

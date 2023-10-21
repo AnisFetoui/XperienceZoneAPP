@@ -8,6 +8,8 @@ package javaapplicationcrud.gui;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javaapplicationcrud.entity.User;
+import javaapplicationcrud.service.ServiceUser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,11 +38,17 @@ public class xperiencezone_main extends Application {
             Logger.getLogger(InscriptionUserController.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+     
+     
+ 
+     
+     
     }
 
     public static void main(String[] args) {
        launch(args);
-       
+     
     }
+     
     
 }

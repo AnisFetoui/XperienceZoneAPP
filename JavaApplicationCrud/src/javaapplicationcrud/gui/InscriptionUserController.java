@@ -31,6 +31,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.MediaView;
@@ -47,9 +48,9 @@ public class InscriptionUserController implements Initializable {
     @FXML
     private TextField tf_inscri_email;
     @FXML
-    private TextField tf_inscri_mdp;
+    private PasswordField tf_inscri_mdp;
     @FXML
-    private TextField tf_inscri_cfrmmdp;
+    private PasswordField tf_inscri_cfrmmdp;
     @FXML
     private TextField tf_inscri_age;
     @FXML
@@ -64,6 +65,7 @@ public class InscriptionUserController implements Initializable {
     private Button btn_inscri_inscri;
       @FXML
     private Button btn_inscri_cnx;
+      
 
         @FXML
         private Label imageLabel;
@@ -179,8 +181,12 @@ public class InscriptionUserController implements Initializable {
             u.setImage(ImagePath);
 
             su.ajouter(u);
+             Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+           alert.setContentText("Inscription avec success");
+            alert.show();
      try {
-            Parent page1 = FXMLLoader.load(getClass().getResource("MessageInscri.fxml"));
+            Parent page1 = FXMLLoader.load(getClass().getResource("ConnexionUser.fxml"));
             
             Scene scene = new Scene(page1);
             

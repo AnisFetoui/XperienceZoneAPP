@@ -42,6 +42,7 @@ public class ServiceUser implements UService<User> {
                 pre.setString(7,u.getSexe());
                 
                 pre.executeUpdate();
+                 System.out.println("user ajouter successfully!");
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
@@ -58,26 +59,23 @@ public class ServiceUser implements UService<User> {
             System.out.println(ex);
     }
     }
-   // String req = "INSERT INTO utilisateur(username,mail,mdp,role,image,age,sexe)values(?,?,?,?,?,?,?)";
 
-/*
-      
- @Override
-    public void modifier(Categorie c) {
-   try {
-            String req ="UPDATE categorie SET `nom_categorie`= ? , `description_categorie`= ? ,`type_categorie`= ?  WHERE id_categorie = ?";
+     public void ResetPassword(String email, String password) {
+        try {
+
+            String req = "UPDATE utilisateur SET mdp = ? WHERE mail = ?";
             PreparedStatement ps = con.prepareStatement(req);
-            ps.setString(1,c.getNom_categorie());
-            ps.setString(2, c.getDescription_categorie());
-             ps.setString(3, c.getType_categorie());
-            ps.setInt(4, c.getId_categorie());
+
+            ps.setString(1, password);
+            ps.setString(2, email);
+
             ps.executeUpdate();
-            System.out.println("categorie updated successfully!");
+            System.out.println("Password updated !");
         } catch (SQLException ex) {
-            ex.printStackTrace();
-        }    }
-     
-    */
+            System.out.println(ex.getMessage());
+        }
+
+    }
 
     @Override
     public void modifier(User u) {
@@ -232,7 +230,7 @@ public int authentification(String email, String password) {
         }
         return -1;
     }
-///////////////////////////////////////////////////////////////// Common user attributes modif  
+ 
 
     public void modifierUsername(User p) {
 
@@ -351,71 +349,5 @@ public List<User> chercherByEmailTV(String email) {
     return userList;
 }
 
-   /* 
-    public List<User> chercherByEmailTV(String email, String nom, String role) {
-    String sql = "SELECT * FROM utilisateur WHERE ";
-    boolean hasConditions = false;
-
-    if (email != null && !email.isEmpty()) {
-        sql += "mail = ? ";
-        hasConditions = true;
-    }
-    if (nom != null && !nom.isEmpty()) {
-        if (hasConditions) {
-            sql += "OR ";
-        }
-        sql += "username = ? ";
-        hasConditions = true;
-    }
-    if (role != null && !role.isEmpty()) {
-        if (hasConditions) {
-            sql += "OR ";
-        }
-        sql += "role = ? ";
-    }
-
-    if (!hasConditions) {
-        // No search criteria provided, return an empty list or handle it as needed
-        return new ArrayList<>();
-    }
-
-    List<User> userList = new ArrayList<>();
-
-    try {
-        PreparedStatement st = con.prepareStatement(sql);
-        int parameterIndex = 1; // To keep track of parameter index in the PreparedStatement
-
-        if (email != null && !email.isEmpty()) {
-            st.setString(parameterIndex++, email);
-        }
-        if (nom != null && !nom.isEmpty()) {
-            st.setString(parameterIndex++, nom);
-        }
-        if (role != null && !role.isEmpty()) {
-            st.setString(parameterIndex, role);
-        }
-
-        ResultSet rs = st.executeQuery();
-
-        while (rs.next()) {
-            User u = new User(
-                rs.getInt("id_user"),
-                rs.getString("username"),
-                rs.getString("mail"),
-                rs.getString("mdp"),
-                rs.getString("role"),
-                rs.getString("image"),
-                rs.getInt("age"),
-                rs.getString("sexe")
-            );
-            userList.add(u);
-        }
-    } catch (SQLException ex) {
-        System.err.println(ex.getMessage());
-    }
-
-    return userList;
-}
-*/
     }
      

@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javaapplicationcrud.entity.SessionManager;
 import javaapplicationcrud.entity.User;
 import javaapplicationcrud.service.ServiceUser;
@@ -25,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -47,6 +49,15 @@ public class GestionAdminController implements Initializable {
     private TableColumn<User, String> col_role;
     @FXML
     private TableColumn<User, String> col_img;
+      @FXML
+    private Button btnSort;
+      @FXML
+    private Button btnFiltre;
+    
+    @FXML
+    private ChoiceBox cb_sortButton;
+    @FXML
+    private ChoiceBox cb_btnFiltre;
     
     @FXML
     private Button btnDeconnecter;
@@ -76,7 +87,8 @@ public class GestionAdminController implements Initializable {
     /**
      * Initializes the controller class.
      */
-      
+     
+
      public void afficherUsers()
     {
          ServiceUser su = new ServiceUser();
@@ -97,7 +109,14 @@ public class GestionAdminController implements Initializable {
      @Override
     public void initialize(URL url, ResourceBundle rb) {
         afficherUsers();
+          ObservableList<String> list = FXCollections.observableArrayList("username","email","age");
+           cb_sortButton.setItems(list);
+           
+           ObservableList<String> list1 = FXCollections.observableArrayList("femme","homme","admin","manager","client");
+           cb_btnFiltre.setItems(list1);
+       
         // TODO
+        
     }  
   
     @FXML
@@ -136,8 +155,7 @@ public class GestionAdminController implements Initializable {
         int SelectedRowIndex = tv_users.getSelectionModel().getSelectedIndex();
         
         int ColumnIndex = tv_users.getColumns().indexOf(ColumnId);
-        
-        
+
         Alert A = new Alert(Alert.AlertType.CONFIRMATION);
         if (SelectedRowIndex == -1) {
             A.setAlertType(Alert.AlertType.WARNING);
@@ -165,7 +183,6 @@ public class GestionAdminController implements Initializable {
 
         }
         }
-
     }
 
     
@@ -255,5 +272,129 @@ private void search(ActionEvent event) {
     tv_users.setItems(observableResults);
         }
 }
+
+
+/*
+
+ int itemsPerPage = 10; // Nombre d'éléments par page
+      int currentPage = 0;   // Page actuelle
+      List<User> allUsers;/* Récupérez vos données depuis la source ;
+      List<User> currentPageData = allUsers.subList(currentPage * itemsPerPage, Math.min((currentPage + 1) * itemsPerPage, allUsers.size()));
+
+private void updateTableView() {
+    // Calculez la plage d'éléments à afficher pour la page actuelle
+    int startIndex = currentPage * itemsPerPage;
+    int endIndex = Math.min((currentPage + 1) * itemsPerPage, allUsers.size());
+
+    // Extrait les données de la page actuelle
+    List<User> currentPageData = allUsers.subList(startIndex, endIndex);
+
+    // Mettez à jour le TableView avec les données de la page actuelle
+    // Cela dépend de la manière dont votre TableView est configuré, mais voici un exemple générique :
+    ObservableList<User> observableData = FXCollections.observableArrayList(currentPageData);
+    tv_users.setItems(observableData);
+
+    // Mettez à jour le numéro de la page actuelle (par exemple, en affichant le numéro dans un champ de texte ou une étiquette)
+    currentPageLabel.setText("Page " + (currentPage + 1));
+}
+
+@FXML
+private void goToPreviousPage(ActionEvent event) {
+    if (currentPage > 0) {
+        currentPage--;
+        updateTableView();
+    }
+}
+
+@FXML
+private void goToNextPage(ActionEvent event) {
+    int maxPage = (allUsers.size() - 1) / itemsPerPage;
+    if (currentPage < maxPage) {
+        currentPage++;
+        updateTableView();
+    }
+}
+
+
+*/
+
+@FXML
+private void sortData(ActionEvent event) {
+    Object selectedItem = cb_sortButton.getSelectionModel().getSelectedItem();
+
+    if (selectedItem != null && selectedItem instanceof String) {
+        String selectedSortOption = (String) selectedItem;
+
+        if ("username".equals(selectedSortOption)) {
+            col_username.setSortType(TableColumn.SortType.ASCENDING);
+            tv_users.getSortOrder().setAll(col_username);
+        } else if ("age".equals(selectedSortOption)) {
+            col_age.setSortType(TableColumn.SortType.ASCENDING);
+            tv_users.getSortOrder().setAll(col_age);
+        } else if ("email".equals(selectedSortOption)) {
+            col_email.setSortType(TableColumn.SortType.ASCENDING);
+            tv_users.getSortOrder().setAll(col_email);
+        } else {
+     
+            afficherUsers();
+        }
+    } else {
+        
+        afficherUsers();
+    }
+}
+        private void updateTableView(List<User> data) {
+    ObservableList<User> observableData = FXCollections.observableArrayList(data);
+    tv_users.setItems(observableData);
+}
+        
+@FXML
+private void filtreData(ActionEvent event) {
+    ServiceUser su = new ServiceUser();
+
+    List<User> lu = su.afficher();
+    ObservableList<User> userList = FXCollections.observableArrayList(lu);
+
+    Object selectedItem = cb_btnFiltre.getSelectionModel().getSelectedItem();
+
+    if (selectedItem != null && selectedItem instanceof String) {
+        String selectedFilterOption = (String) selectedItem;
+
+        if ("femme".equals(selectedFilterOption)) {
+            List<User> filteredData = userList.stream()
+                    .filter(user -> "FEMME".equals(user.getSexe()))
+                    .collect(Collectors.toList());
+
+            updateTableView(filteredData);
+        } else if ("homme".equals(selectedFilterOption)) {
+            List<User> filteredData = userList.stream()
+                    .filter(user -> "HOMME".equals(user.getSexe())) 
+                    .collect(Collectors.toList());
+                    updateTableView(filteredData);
+        }else if ("admin".equals(selectedFilterOption)) {
+            List<User> filteredData = userList.stream()
+                    .filter(user -> "ADMIN".equals(user.getRole())) 
+                    .collect(Collectors.toList());
+                    updateTableView(filteredData);
+        }else if ("manager".equals(selectedFilterOption)) {
+            List<User> filteredData = userList.stream()
+                    .filter(user -> "MANAGER".equals(user.getRole())) 
+                    .collect(Collectors.toList());
+                    updateTableView(filteredData);
+        }else if ("client".equals(selectedFilterOption)) {
+            List<User> filteredData = userList.stream()
+                    .filter(user -> "CLIENT".equals(user.getRole())) 
+                    .collect(Collectors.toList());
+                    updateTableView(filteredData);
+        }
+        else {
+     
+            afficherUsers();
+        }
+    } else {
+        afficherUsers();
+    }
+}
+
 
 }
