@@ -49,6 +49,16 @@ private void ajoutR(ActionEvent event) throws IOException {
     stage.setScene(scene);
     stage.show();
 }
+
+
+    @FXML
+private void retourHome(ActionEvent event) throws IOException {
+    Parent root = FXMLLoader.load(getClass().getResource("homeAdmin.fxml"));
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();
+}
 @FXML
 private ListView<Reclamation> list_rec;
 @FXML

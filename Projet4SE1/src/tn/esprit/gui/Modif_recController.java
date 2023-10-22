@@ -58,6 +58,8 @@ public class Modif_recController implements Initializable {
 
     ServiceReclamation serviceReclamation = new ServiceReclamation();
     private Reclamation reclamationSelectionnee;
+    private int idUM ;
+    private int idRM;
 
     /**
      * Initializes the controller class.
@@ -65,7 +67,7 @@ public class Modif_recController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     typeRM.getItems().removeAll(typeRM.getItems());
-    typeRM.getItems().addAll("Réclamation liés aux produits", "Réclamation liés aux évènements/activités", "Réclamation liés aux problèmes de communication");
+    typeRM.getItems().addAll("Réclamation liés aux produits", "Réclamation liés aux évènements", "Réclamation liés aux activités");
     }    
 
  public void initData(Reclamation reclamation) {
@@ -73,16 +75,13 @@ public class Modif_recController implements Initializable {
         
         
 
-        
-        nomM.setText(reclamation.getNom());
-        prenomM.setText(reclamation.getPrenom());
-        emailM.setText(reclamation.getEmail());
+       
         refRM.setText(String.valueOf(reclamation.getRefObject()));
         typeRM.setValue(convertirTypeReclamationInverse(reclamation.getTypeRec())); 
-        dateincM.setValue(reclamation.getDateINC().toLocalDate()); 
         dateM.setValue(reclamation.getDateREC().toLocalDate()); 
         detM.setText(reclamation.getDetails());
-        
+        idUM = reclamation.getIdU();
+        idRM = reclamation.getIdR();
     }
  
      @FXML
@@ -94,25 +93,19 @@ public class Modif_recController implements Initializable {
         return;
     }
 
-if (nomM.getText().isEmpty() || prenomM.getText().isEmpty() || emailM.getText().isEmpty() || typeRM.getValue().isEmpty() || refRM.getText().isEmpty() || detM.getText().isEmpty() || dateincM.getValue() == null || dateM.getValue() == null) {
+if ( typeRM.getValue().isEmpty() || refRM.getText().isEmpty() || detM.getText().isEmpty()  || dateM.getValue() == null) {
     afficherAlerte("Tous les champs doivent être remplis");
     return;
 }
 
     
-    if (!isValidEmail(emailM.getText())) {
-        afficherAlerte("L'adresse email n'est pas valide");
-        return;
-    }
    
 try {
-    int refObject1 = Integer.parseInt(refRM.getText());
-    java.sql.Date dateINC = Date.valueOf(dateincM.getValue());
+    int refObject1 = Integer.parseInt(refRM.getText());   
     java.sql.Date dateREC = Date.valueOf(dateM.getValue());
-    int yearINC = dateINC.toLocalDate().getYear();
     int yearREC = dateREC.toLocalDate().getYear();
 
-    if (yearINC < 2022 || yearINC > 2023 || yearREC < 2022 || yearREC > 2023) {
+    if ( yearREC < 2022 || yearREC > 2023) {
         afficherAlerte("Veuillez entrer des dates comprises entre 2022 et 2023.");
         return;
     }
@@ -121,13 +114,10 @@ try {
     return;
 }
        
-
-        reclamationSelectionnee.setNom(nomM.getText());
-        reclamationSelectionnee.setPrenom(prenomM.getText());
-        reclamationSelectionnee.setEmail(emailM.getText());
+        reclamationSelectionnee.setIdR(idRM);
+        reclamationSelectionnee.setIdU(idUM);
         reclamationSelectionnee.setRefObject(Integer.parseInt(refRM.getText()));
         reclamationSelectionnee.setTypeRec(convertirTypeReclamation(typeRM.getValue()));
-        reclamationSelectionnee.setDateINC(Date.valueOf(dateincM.getValue()));
         reclamationSelectionnee.setDateREC(Date.valueOf(dateM.getValue()));
         reclamationSelectionnee.setDetails(detM.getText());
 
@@ -160,7 +150,7 @@ try {
     
     public String convertirTypeReclamationInverse(int typeRec) {
     
-    String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements/activités", "Réclamation liés aux problèmes de communication"};
+    String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements", "Réclamation liés aux activités"};
 
     if (typeRec >= 1 && typeRec <= types.length) {
         return types[typeRec - 1]; 
@@ -171,7 +161,7 @@ try {
     
         public int convertirTypeReclamation(String typeRec) {
      
-        String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements/activités", "Réclamation liés aux problèmes de communication"}; // Correspondance des types
+        String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements", "Réclamation liés aux activités"}; // Correspondance des types
         for (int i = 0; i < types.length; i++) {
             if (types[i].equals(typeRec)) {
                 return i + 1; 
@@ -180,7 +170,7 @@ try {
         return 0; 
     }
         
-            private void afficherAlerte(String message) {
+            public void afficherAlerte(String message) {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Erreur");
     alert.setHeaderText(null);
@@ -188,7 +178,7 @@ try {
     alert.showAndWait();
 }
     
-    private boolean isValidEmail(String email) {
+    public boolean isValidEmail(String email) {
     
     return email.contains("@") && email.contains(".");
 }

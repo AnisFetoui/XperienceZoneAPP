@@ -9,7 +9,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,11 +25,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import tn.esprit.entities.Evenement;
+import tn.esprit.entities.Produit;
 import tn.esprit.entities.Reclamation;
+import tn.esprit.entities.User;
+import tn.esprit.entities.activites;
 import tn.esprit.services.ServiceReclamation;
+import  tn.esprit.gui.CustomListCell;
 
 /**
  * FXML Controller class
@@ -40,13 +50,32 @@ public class Ajout_recController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     typeR.getItems().removeAll(typeR.getItems());
-    typeR.getItems().addAll("Réclamation liés aux produits", "Réclamation liés aux évènements/activités", "Réclamation liés aux problèmes de communication");
-//    typeR.getSelectionModel().select("Option B");
+    typeR.getItems().addAll("Réclamation liés aux produits", "Réclamation liés aux évènements", "Réclamation liés aux activités");
+       typeR.setOnAction(event -> {
+        String selectedType = typeR.getValue();
+        
+        if (selectedType.equals("Réclamation liés aux produits")) {
+            listEVE.setDisable(true);
+            listACT.setDisable(true);
+            listPROD.setDisable(false);
+        } else if (selectedType.equals("Réclamation liés aux évènements")) {
+            listEVE.setDisable(false);
+            listACT.setDisable(true);
+            listPROD.setDisable(true);
+        } else if (selectedType.equals("Réclamation liés aux activités")) {
+            listEVE.setDisable(true);
+            listACT.setDisable(false);
+            listPROD.setDisable(true);
+        }
+    });
+    listEVE.setCellFactory((ListView<Evenement> param) -> new CustomListCell<Evenement>());
+    listPROD.setCellFactory((ListView<Produit> param) -> new CustomListCell<Produit>());
+    listACT.setCellFactory((ListView<activites> param) -> new CustomListCell<activites>());
     }    
 
     @FXML
     private void annulerR(ActionEvent event) throws IOException {
-         Parent root = FXMLLoader.load(getClass().getResource("home_rec.fxml"));
+         Parent root = FXMLLoader.load(getClass().getResource("homeUser.fxml"));
     Scene scene = new Scene(root);
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
@@ -60,29 +89,36 @@ public class Ajout_recController implements Initializable {
     
     
     @FXML
-    private TextField nomR; 
-    @FXML
-    private TextField prenomR; 
-    @FXML
     private TextField emailR; 
-    @FXML
-    private DatePicker dateincR; 
     @FXML
     private DatePicker dateR; 
     @FXML
     private ComboBox<String> typeR; 
     @FXML
-    private TextField refR; 
-    @FXML
     private TextArea detR; 
     @FXML
+    private TextField refR; 
+    @FXML
     private Button ajoutR;
+    @FXML
+    private ListView<Evenement> listEVE;
+    @FXML
+    private ListView<activites> listACT;
+    @FXML
+    private ListView<Produit> listPROD;
+    @FXML
+    private Button choixref;
+    
+
+
+    
+
     
     private void ajouterReclamation() {
         
 
         
-if (nomR.getText().isEmpty() || prenomR.getText().isEmpty() || emailR.getText().isEmpty() || typeR.getValue().isEmpty() || refR.getText().isEmpty() || detR.getText().isEmpty() || dateincR.getValue() == null || dateR.getValue() == null) {
+if ( emailR.getText().isEmpty() || typeR.getValue().isEmpty() || refR.getText().isEmpty() || detR.getText().isEmpty()  || dateR.getValue() == null) {
     afficherAlerte("Tous les champs doivent être remplis");
     return;
 }
@@ -95,12 +131,10 @@ if (nomR.getText().isEmpty() || prenomR.getText().isEmpty() || emailR.getText().
    
 try {
     int refObject1 = Integer.parseInt(refR.getText());
-    java.sql.Date dateINC = Date.valueOf(dateincR.getValue());
     java.sql.Date dateREC = Date.valueOf(dateR.getValue());
-    int yearINC = dateINC.toLocalDate().getYear();
     int yearREC = dateREC.toLocalDate().getYear();
 
-    if (yearINC < 2022 || yearINC > 2023 || yearREC < 2022 || yearREC > 2023) {
+    if ( yearREC < 2022 || yearREC > 2023) {
         afficherAlerte("Veuillez entrer des dates comprises entre 2022 et 2023.");
         return;
     }
@@ -109,29 +143,27 @@ try {
     return;
 }
 
-
+        ServiceReclamation service = new ServiceReclamation();
         
-           String nom = nomR.getText();
-        String prenom = prenomR.getText();
         String email = emailR.getText();
-        Date dateINC = Date.valueOf(dateincR.getValue()); 
         Date dateREC = Date.valueOf(dateR.getValue()); 
         String typeRec = typeR.getValue(); 
         int refObject = Integer.parseInt(refR.getText()); 
         String details = detR.getText(); 
         
+        User user = new User() ;
+        user = service.chercherByEmail(email);
+        int idU = user.getId_user();
+        
         Reclamation reclamation = new Reclamation();
-        reclamation.setNom(nom);
-        reclamation.setPrenom(prenom);
-        reclamation.setEmail(email);
-        reclamation.setDateINC(dateINC);
+        reclamation.setIdU(idU);
         reclamation.setDateREC(dateREC);
         reclamation.setTypeRec(convertirTypeReclamation(typeRec));
         reclamation.setRefObject(refObject);
         reclamation.setDetails(details);
 
         
-        ServiceReclamation service = new ServiceReclamation();
+
         service.ajouterR(reclamation);
         
         Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
@@ -144,7 +176,7 @@ try {
         Stage stage = (Stage) ajoutR.getScene().getWindow();
         stage.close();
                 try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("home_rec.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("homeUser.fxml"));
             Parent root = loader.load();
             Stage nouvelleStage = new Stage();
             nouvelleStage.setScene(new Scene(root));
@@ -154,11 +186,47 @@ try {
         }
         
     }
+    
+    public void actualiserListViewE(ActionEvent event) {
+    
+    ServiceReclamation serviceReclamation = new ServiceReclamation();
+    List<Evenement> evenement = serviceReclamation.afficherevent();
+
+    
+    ObservableList<Evenement> observableEVE = FXCollections.observableArrayList(evenement);
+    listEVE.getItems().clear();
+    
+    listEVE.setItems(observableEVE);
+}
+    
+        public void actualiserListViewA(ActionEvent event) {
+    
+    ServiceReclamation serviceReclamation = new ServiceReclamation();
+    List<activites> activite = serviceReclamation.afficherA();
+
+    
+    ObservableList<activites> observableACT = FXCollections.observableArrayList(activite);
+    listACT.getItems().clear();
+    
+    listACT.setItems(observableACT);
+}
+        
+            public void actualiserListViewP(ActionEvent event) {
+    
+    ServiceReclamation serviceReclamation = new ServiceReclamation();
+    List<Produit> prod = serviceReclamation.affihcer();
+
+    
+    ObservableList<Produit> observablePROD = FXCollections.observableArrayList(prod);
+    listPROD.getItems().clear();
+    
+    listPROD.setItems(observablePROD);
+}
 
     
     public int convertirTypeReclamation(String typeRec) {
        
-        String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements/activités", "Réclamation liés aux problèmes de communication"}; // Correspondance des types
+        String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements", "Réclamation liés aux activités"}; // Correspondance des types
         for (int i = 0; i < types.length; i++) {
             if (types[i].equals(typeRec)) {
                 return i + 1; 
@@ -180,6 +248,35 @@ try {
     return email.contains("@") && email.contains(".");
 }
     
+    
+@FXML
+private void handleChoisirButton(ActionEvent event) {
+    Evenement evenementSelectionne = listEVE.getSelectionModel().getSelectedItem();
+    Produit produitSelectionne = listPROD.getSelectionModel().getSelectedItem();
+    activites activiteSelectionne = listACT.getSelectionModel().getSelectedItem();
+
+    if (evenementSelectionne != null) {
+        int idEvenementSelectionne = evenementSelectionne.getId_event();
+           refR.setText(String.valueOf(idEvenementSelectionne));
+           listEVE.getSelectionModel().clearSelection();
+        
+    } else if (produitSelectionne != null) {
+        int idProduitSelectionne = produitSelectionne.getId_prod();
+           refR.setText(String.valueOf(idProduitSelectionne));
+           listPROD.getSelectionModel().clearSelection();
+        
+    } else if (activiteSelectionne != null) {
+        int idActiviteSelectionne = activiteSelectionne.getId_act();
+           refR.setText(String.valueOf(idActiviteSelectionne));
+           listACT.getSelectionModel().clearSelection();
+        
+    } else {
+        // Aucun élément sélectionné
+    }
+    
+
+    
+}
     }
     
 

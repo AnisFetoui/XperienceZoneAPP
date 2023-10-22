@@ -60,12 +60,6 @@ public class Ajout_traitController implements Initializable {
     @FXML
     private DatePicker dateT; 
     @FXML
-    private TextField nomT; 
-    @FXML
-    private TextField prenomT; 
-    @FXML
-    private TextField emailT; 
-    @FXML
     private ComboBox<String> typerecT; 
     @FXML
     private ComboBox<String> statT; 
@@ -75,35 +69,49 @@ public class Ajout_traitController implements Initializable {
     
    @FXML
 private Button ajouT; 
-//    private SharedData sharedData;
-//
-//    public void setSharedData(SharedData sharedData) {
-//        this.sharedData = sharedData;
-//    }
+
     private int selectedReclamationId;
+    private int selectedReclamationIdU;
     
      public void ouvrirAjoutTraitement(Reclamation reclamationSelectionnee ) {
         
 //        Reclamation R = sharedData.getSelectedReclamation();
         refT.setText(String.valueOf(reclamationSelectionnee.getRefObject()));
         dateT.setValue(reclamationSelectionnee.getDateREC().toLocalDate());
-        nomT.setText(reclamationSelectionnee.getNom());
-        prenomT.setText(reclamationSelectionnee.getPrenom());
-        emailT.setText(reclamationSelectionnee.getEmail());
         typerecT.setValue(convertirTypeReclamationInverse(reclamationSelectionnee.getTypeRec()));
         selectedReclamationId = reclamationSelectionnee.getIdR();
-        
+        selectedReclamationIdU = reclamationSelectionnee.getIdU();
     }
 
     @FXML
     public void ajouterTraitement( ) {
        
-//        Reclamation reclamationSelectionnee = sharedData.getSelectedReclamation();
+     
+        
+        if (statT.getValue().isEmpty()  || typerecT.getValue().isEmpty() || refT.getText().isEmpty() || resumeT.getText().isEmpty() ||  dateT.getValue() == null) {
+    afficherAlerte("Tous les champs doivent être remplis");
+    return;
+}
+
+    
+
+   
+try {
+    int refObject1 = Integer.parseInt(refT.getText());
+    java.sql.Date dateREC = Date.valueOf(dateT.getValue());
+    int yearREC = dateREC.toLocalDate().getYear();
+
+    if ( yearREC < 2022 || yearREC > 2023) {
+        afficherAlerte("Veuillez entrer des dates comprises entre 2022 et 2023.");
+        return;
+    }
+} catch (NumberFormatException e) {
+    afficherAlerte("La référence de l'objet doit être un nombre entier.");
+    return;
+}
+
         int refObject = Integer.parseInt(refT.getText());
         Date dateRec = Date.valueOf(dateT.getValue());
-        String nom = nomT.getText();
-        String prenom = prenomT.getText();
-        String email = emailT.getText();
         int typeRec = convertirTypeReclamation(typerecT.getValue());
         String resume = resumeT.getText();
         String stat = statT.getValue();
@@ -114,11 +122,9 @@ private Button ajouT;
         
         Traitement traitement = new Traitement();
         traitement.setIdrec(selectedReclamationId); 
+        traitement.setIdU(selectedReclamationIdU); 
         traitement.setRefobj(refObject);
         traitement.setDateR(dateRec);
-        traitement.setNomT(nom);
-        traitement.setPrenomT(prenom);
-        traitement.setEmailT(email);
         traitement.setTypeR(typeRec);
         traitement.setResume(resume);
         traitement.setStat(stat);
@@ -126,23 +132,25 @@ private Button ajouT;
         service.ajouterT(traitement);
         
         
-               
+        
+    
         Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
         confirmation.setTitle("Ajout réussi");
         confirmation.setHeaderText(null);
         confirmation.setContentText("Le traitement a été ajouté avec succès.");
         confirmation.showAndWait();
+          
+
 
         
         Stage stage = (Stage) ajouT.getScene().getWindow();
         stage.close();
-
     }
     
     
         public int convertirTypeReclamation(String typeRec) {
         
-        String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements/activités", "Réclamation liés aux problèmes de communication"}; // Correspondance des types
+        String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements", "Réclamation liés aux activités"}; 
         for (int i = 0; i < types.length; i++) {
             if (types[i].equals(typeRec)) {
                 return i + 1; 
@@ -154,7 +162,7 @@ private Button ajouT;
         
             public String convertirTypeReclamationInverse(int typeRec) {
     
-    String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements/activités", "Réclamation liés aux problèmes de communication"};
+    String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements", "Réclamation liés aux activités"};
 
     if (typeRec >= 1 && typeRec <= types.length) {
         return types[typeRec - 1]; 
@@ -162,6 +170,17 @@ private Button ajouT;
         return "Type de réclamation non valide"; 
     }
 }
+            
+            
+    private void afficherAlerte(String message) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Erreur");
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
+}
+    
+
 }
 
 

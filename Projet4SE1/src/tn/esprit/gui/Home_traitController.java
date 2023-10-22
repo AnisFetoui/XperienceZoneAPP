@@ -68,14 +68,14 @@ private ListView<Traitement> listT;
     
     @FXML
 public void actualiserListViewT(ActionEvent event) {
-    // Récupérez la liste de réclamations depuis le service
+    
     ServiceReclamation serviceReclamation = new ServiceReclamation();
     List<Traitement> traitement = serviceReclamation.afficherT();
 
-    // Créez une observable list à partir de la liste de réclamations
+    
     ObservableList<Traitement> observableTraitement = FXCollections.observableArrayList(traitement);
     listT.getItems().clear();
-    // Remplissez la ListView avec les réclamations
+    
     listT.setItems(observableTraitement);
 }
 
@@ -83,14 +83,14 @@ public void actualiserListViewT(ActionEvent event) {
 
 @FXML
 public void actualiserListViewNT(ActionEvent event) {
-    // Récupérez la liste de réclamations depuis le service
+    
     ServiceReclamation serviceReclamation = new ServiceReclamation();
     List<Reclamation> reclamations = serviceReclamation.afficher();
 
-    // Créez une observable list à partir de la liste de réclamations
+    
     ObservableList<Reclamation> observableReclamations = FXCollections.observableArrayList(reclamations);
     listNT.getItems().clear();
-    // Remplissez la ListView avec les réclamations
+    
     listNT.setItems(observableReclamations);
 }
     
@@ -173,5 +173,14 @@ public void actualiserListViewNT(ActionEvent event) {
     } else {
        
     }
+}
+    
+        @FXML
+    private void vers_confSP(ActionEvent event) throws IOException {
+         Parent root = FXMLLoader.load(getClass().getResource("conf_suppT.fxml"));
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();
 }
 }

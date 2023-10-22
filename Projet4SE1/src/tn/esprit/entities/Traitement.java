@@ -13,11 +13,10 @@ import java.sql.Date;
 
 public class Traitement {
     private int idT;
+    private int idU;
     private int idrec;
     private int refobj;
     private Date dateR;
-    private String nomT,prenomT;
-    private String emailT;
     private int typeR;
     private String resume;
     private String stat ;
@@ -40,16 +39,8 @@ public class Traitement {
         return dateR;
     }
 
-    public String getNomT() {
-        return nomT;
-    }
-
-    public String getPrenomT() {
-        return prenomT;
-    }
-
-    public String getEmailT() {
-        return emailT;
+    public int getIdU() {
+        return idU;
     }
 
     public int getTypeR() {
@@ -80,17 +71,11 @@ public class Traitement {
         this.dateR = dateR;
     }
 
-    public void setNomT(String nomT) {
-        this.nomT = nomT;
+    public void setIdU(int idU) {
+        this.idU = idU;
     }
 
-    public void setPrenomT(String prenomT) {
-        this.prenomT = prenomT;
-    }
 
-    public void setEmailT(String emailT) {
-        this.emailT = emailT;
-    }
 
     public void setTypeR(int typeR) {
         this.typeR = typeR;
@@ -107,26 +92,22 @@ public class Traitement {
     public Traitement() {
     }
 
-    public Traitement(int idT, int idrec, int refobj, Date dateR, String nomT, String prenomT, String emailT, int typeR, String resume, String stat) {
+    public Traitement(int idT, int idU, int idrec, int refobj, Date dateR, int typeR, String resume, String stat) {
         this.idT = idT;
+        this.idU = idU;
         this.idrec = idrec;
         this.refobj = refobj;
         this.dateR = dateR;
-        this.nomT = nomT;
-        this.prenomT = prenomT;
-        this.emailT = emailT;
         this.typeR = typeR;
         this.resume = resume;
         this.stat = stat;
     }
 
-    public Traitement(int idrec, int refobj, Date dateR, String nomT, String prenomT, String emailT, int typeR, String resume, String stat) {
+    public Traitement(int idU, int idrec, int refobj, Date dateR, int typeR, String resume, String stat) {
+        this.idU = idU;
         this.idrec = idrec;
         this.refobj = refobj;
         this.dateR = dateR;
-        this.nomT = nomT;
-        this.prenomT = prenomT;
-        this.emailT = emailT;
         this.typeR = typeR;
         this.resume = resume;
         this.stat = stat;
@@ -134,8 +115,12 @@ public class Traitement {
 
     @Override
     public String toString() {
-        return "Traitement{" + "idT=" + idT + ", idrec=" + idrec + ", refobj=" + refobj + ", dateR=" + dateR + ", nomT=" + nomT + ", prenomT=" + prenomT + ", emailT=" + emailT + ", typeR=" + typeR + ", resume=" + resume + ", stat=" + stat + '}';
+        return "Traitement{" + "idT=" + idT + ", idU=" + idU + ", idrec=" + idrec + ", refobj=" + refobj + ", dateR=" + dateR + ", typeR=" + typeR + ", resume=" + resume + ", stat=" + stat + '}';
     }
+
+
+
+
 
 
 

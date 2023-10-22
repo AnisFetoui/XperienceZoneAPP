@@ -39,12 +39,6 @@ public class Modif_traitController implements Initializable {
     @FXML
     private DatePicker dateTM; 
     @FXML
-    private TextField nomTM; 
-    @FXML
-    private TextField prenomTM; 
-    @FXML
-    private TextField emailTM; 
-    @FXML
     private ComboBox<String> typeRTM; 
     @FXML
     private ComboBox<String> statTM; 
@@ -60,7 +54,7 @@ public class Modif_traitController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     typeRTM.getItems().removeAll(typeRTM.getItems());
-    typeRTM.getItems().addAll("Réclamation liés aux produits", "Réclamation liés aux évènements/activités", "Réclamation liés aux problèmes de communication");
+    typeRTM.getItems().addAll("Réclamation liés aux produits", "Réclamation liés aux évènements", "Réclamation liés aux activités");
     statTM.getItems().removeAll(statTM.getItems());
     statTM.getItems().addAll("VALIDE",  "INVALIDE");
     }    
@@ -69,9 +63,9 @@ public class Modif_traitController implements Initializable {
      private Traitement traitementSelectionnee;
      private int selectedTraitementIdR;
      private int selectedTraitementIdT;
+     private int selectedTraitementIdU;
      
-
-    
+         
      public void initData(Traitement traitement) {
         traitementSelectionnee = traitement;
         
@@ -80,14 +74,12 @@ public class Modif_traitController implements Initializable {
         
         refTM.setText(String.valueOf(traitementSelectionnee.getRefobj()));
         dateTM.setValue(traitementSelectionnee.getDateR().toLocalDate());
-        nomTM.setText(traitementSelectionnee.getNomT());
-        prenomTM.setText(traitementSelectionnee.getPrenomT());
-        emailTM.setText(traitementSelectionnee.getEmailT());
         typeRTM.setValue(convertirTypeReclamationInverse(traitementSelectionnee.getTypeR()));
         statTM.setValue(traitementSelectionnee.getStat());
         resumeTM.setText(traitementSelectionnee.getResume());
         selectedTraitementIdR = traitementSelectionnee.getIdrec();
         selectedTraitementIdT = traitementSelectionnee.getIdT();
+        selectedTraitementIdU = traitementSelectionnee.getIdU();
         
     }
      
@@ -102,23 +94,35 @@ public class Modif_traitController implements Initializable {
         return;
     }
 
-    if (nomTM.getText() == null || prenomTM.getText() == null || emailTM.getText() == null || typeRTM.getValue() == null || statTM.getValue() == null || refTM.getText() == null || dateTM.getValue() == null || resumeTM.getText() == null) {
-        
-        System.out.println("Un ou plusieurs champs sont null.");
+       if (statTM.getValue().isEmpty() || typeRTM.getValue().isEmpty() || refTM.getText().isEmpty() || resumeTM.getText().isEmpty() ||  dateTM.getValue() == null) {
+    afficherAlerte("Tous les champs doivent être remplis");
+    return;
+}
+
+   
+   
+try {
+    int refObject1 = Integer.parseInt(refTM.getText());
+    java.sql.Date dateREC = Date.valueOf(dateTM.getValue());
+    int yearREC = dateREC.toLocalDate().getYear();
+
+    if ( yearREC < 2022 || yearREC > 2023) {
+        afficherAlerte("Veuillez entrer des dates comprises entre 2022 et 2023.");
         return;
     }
-        
+} catch (NumberFormatException e) {
+    afficherAlerte("La référence de l'objet doit être un nombre entier.");
+    return;
+}  
 
         traitementSelectionnee.setRefobj(Integer.parseInt(refTM.getText()));
         traitementSelectionnee.setDateR(Date.valueOf(dateTM.getValue()));
-        traitementSelectionnee.setNomT(nomTM.getText());
-        traitementSelectionnee.setPrenomT(prenomTM.getText());
-        traitementSelectionnee.setEmailT(emailTM.getText());
         traitementSelectionnee.setTypeR(convertirTypeReclamation(typeRTM.getValue()));
         traitementSelectionnee.setStat(statTM.getValue());
         traitementSelectionnee.setResume(resumeTM.getText());
         traitementSelectionnee.setIdT(selectedTraitementIdT);
         traitementSelectionnee.setIdrec(selectedTraitementIdR);
+        traitementSelectionnee.setIdU(selectedTraitementIdU);
         
         
 
@@ -159,7 +163,7 @@ public class Modif_traitController implements Initializable {
      
     public String convertirTypeReclamationInverse(int typeRec) {
     
-    String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements/activités", "Réclamation liés aux problèmes de communication"};
+    String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements", "Réclamation liés aux activités"};
 
     if (typeRec >= 1 && typeRec <= types.length) {
         return types[typeRec - 1]; 
@@ -170,7 +174,7 @@ public class Modif_traitController implements Initializable {
     
             public int convertirTypeReclamation(String typeRec) {
      
-        String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements/activités", "Réclamation liés aux problèmes de communication"}; // Correspondance des types
+        String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements", "Réclamation liés aux activités"}; // Correspondance des types
         for (int i = 0; i < types.length; i++) {
             if (types[i].equals(typeRec)) {
                 return i + 1; 
@@ -178,5 +182,15 @@ public class Modif_traitController implements Initializable {
         }
         return 0; 
     }
+            
+    public void afficherAlerte(String message) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Erreur");
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
+}
+    
+
             
 }
