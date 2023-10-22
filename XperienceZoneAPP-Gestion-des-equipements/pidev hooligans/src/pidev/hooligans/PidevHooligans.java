@@ -36,7 +36,7 @@ public class PidevHooligans {
 
    
       User user = new User();
-    user.setId_user(15); // Assurez-vous que l'ID de l'utilisateur est correct.
+    user.setId_user(20); // Assurez-vous que l'ID de l'utilisateur est correct.
 
     // Créez une instance de la classe Produit
     Produit produit = new Produit();
@@ -44,7 +44,7 @@ public class PidevHooligans {
  
     // Créez une instance de la classe panier
     panier Panier = new panier();
-    Panier.setQuantite_panier(6); // Par exemple, 3 unités du produit.
+    Panier.setQuantite_panier(1); // Par exemple, 3 unités du produit.
 
     // Appelez la méthode ajout en passant les instances que vous avez créées
      PanierService sp = new PanierService();
@@ -52,9 +52,9 @@ public class PidevHooligans {
             sp.ajout(Panier, produit,user);
             
     
-    int id_user = 15; // Remplacez par l'ID de l'utilisateur dont vous souhaitez afficher le panier
+    int id_user = 20; // Remplacez par l'ID de l'utilisateur dont vous souhaitez afficher le panier
     sp.afficher(id_user);
-   
+   sp.sommePrixParUtilisateur();
     //System.out.println("Quantité mise à jour avec succès.");
 }
    

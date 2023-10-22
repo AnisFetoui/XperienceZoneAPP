@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,12 +28,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import service.CategorieService;
+import javafx.util.Duration;
 import service.Produitservice;
 import util.MYDB;
 
@@ -42,7 +46,12 @@ import util.MYDB;
  * @author ASUS
  */
 public class GestionProduitController implements Initializable {
-
+ @FXML
+    private AnchorPane slider;
+    @FXML
+    private Label menu;
+    @FXML
+    private Label menuclose;
     @FXML
     private Button actualiser;
     @FXML
@@ -87,6 +96,37 @@ public class GestionProduitController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // Initialisation
       afficher();
+      slider.setTranslateX(0);
+        menuclose.setVisible(true);
+        menu.setVisible(false);
+      
+
+    }
+     @FXML
+    private void onmenuclicked(MouseEvent event) {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.4));
+        slide.setNode(slider);
+        slide.setToX(0);
+        slide.play();
+        slider.setTranslateX(-176);
+        
+        menu.setVisible(false);
+        menuclose.setVisible(true);
+        
+    }
+    @FXML
+    private void onmenuclickedclose(MouseEvent event) {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.4));
+        slide.setNode(slider);
+        slide.setToX(-176);
+        slide.play();
+        slider.setTranslateX(0);
+        
+        menuclose.setVisible(false);
+        menu.setVisible(true);
+        
     }
     @FXML
 private void afficheraction(ActionEvent event)throws SQLException{

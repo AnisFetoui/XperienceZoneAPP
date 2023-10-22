@@ -47,8 +47,15 @@ public class PanierService implements CrudInterface<panier> {
     
  
 
-  public void ajout(panier P, Produit p, User u) {
+ 
+   public void ajout(panier P, Produit p, User u) {
     try {
+        // Vérifiez si la quantité du panier est positive
+        if (P.getQuantite_panier() <= 0) {
+            System.out.println("La quantité du panier doit être supérieure à zéro.");
+            return; // Sortez de la méthode si la quantité n'est pas valide
+        }
+
         // Utilisez une requête SQL pour obtenir le prix du produit à partir de la table "Produit"
         String prixProduitQuery = "SELECT prix_prod FROM Produit WHERE id_prod = ?";
         PreparedStatement prixProduitStatement = con.prepareStatement(prixProduitQuery);
@@ -68,6 +75,12 @@ public class PanierService implements CrudInterface<panier> {
         // Calculez le total en multipliant le prix du produit par la quantité du panier
         double total = prixProduit * P.getQuantite_panier();
 
+        // Vérifiez si le total est positif
+        if (total <= 0.0) {
+            System.out.println("Le total du panier doit être supérieur à zéro.");
+            return; // Sortez de la méthode si le total n'est pas valide
+        }
+
         // Insérez les données dans la table "panier"
         String req = "INSERT INTO panier (id_user, total, id_prod, quantite_panier) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = con.prepareStatement(req);
@@ -80,7 +93,9 @@ public class PanierService implements CrudInterface<panier> {
         System.out.println("Panier ajouté avec succès !");
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
-    }}
+    }
+}
+
      @Override
     public void supprimer(int id) {
  
@@ -110,44 +125,7 @@ public class PanierService implements CrudInterface<panier> {
     return somme;}
 
    
-    /*public void afficher(int id_user) {
-    try {
-        // Sélectionnez les produits du panier de l'utilisateur par son ID
-        String selectPanierQuery = "SELECT P.id_prod, P.nom_prod, P.prix_prod, P.description_prod, P.quantite, P.image " +
-                                   "FROM panier AS PA " +
-                                   "INNER JOIN produit AS P ON PA.id_prod = P.id_prod " +
-                                   "WHERE PA.id_user = ?";
-        
-        PreparedStatement preparedStatement = con.prepareStatement(selectPanierQuery);
-        preparedStatement.setInt(1, id_user);
-        
-        ResultSet resultSet = preparedStatement.executeQuery();
-        
-        if (!resultSet.isBeforeFirst()) {
-            System.out.println("Le panier de l'utilisateur est vide.");
-        } else {
-            System.out.println("Contenu du panier pour l'utilisateur avec ID " + id_user + ":");
-            while (resultSet.next()) {
-                int idProduit = resultSet.getInt("id_prod");
-                String nomProduit = resultSet.getString("nom_prod");
-                double prixProduit = resultSet.getDouble("prix_prod");
-                String descriptionProduit = resultSet.getString("description_prod");
-                int quantite = resultSet.getInt("quantite");
-                String image = resultSet.getString("image");
-                
-                // Affichez les détails du produit
-                System.out.println("ID du produit : " + idProduit);
-                System.out.println("Nom du produit : " + nomProduit);
-                System.out.println("Prix du produit : " + prixProduit);
-                System.out.println("Description du produit : " + descriptionProduit);
-                System.out.println("Quantité : " + quantite);
-                System.out.println("Image : " + image);
-                System.out.println("------------------------------");
-            }
-        }
-    } catch (SQLException ex) {
-        System.out.println("Erreur lors de la récupération du panier : " + ex.getMessage());
-    }*/
+    
   public void afficher(int idUtilisateur) {
     try {
         // Sélectionnez le panier de l'utilisateur par son ID
@@ -186,6 +164,27 @@ public class PanierService implements CrudInterface<panier> {
     } catch (SQLException ex) {
         System.out.println("Erreur lors de la récupération du panier : " + ex.getMessage());
    }}
+ public void sommePrixParUtilisateur() {
+    try {
+        String sql = "SELECT id_user, SUM(prix_prod * quantite_panier) AS somme_prix FROM panier " +
+                     "JOIN produit ON panier.id_prod = produit.id_prod " +
+                     "GROUP BY id_user";
+        
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+
+        while (rs.next()) {
+            int id_user = rs.getInt("id_user");
+            double sommePrix = rs.getDouble("somme_prix");
+            System.out.println("Utilisateur avec ID " + id_user + " a une somme de prix totale de : " + sommePrix);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+
+
 
 
 
