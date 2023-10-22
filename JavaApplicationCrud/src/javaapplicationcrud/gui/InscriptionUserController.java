@@ -1,10 +1,13 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package javaapplicationcrud.gui;
 
+import com.github.sarxos.webcam.Webcam;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -16,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javaapplicationcrud.entity.User;
 import javaapplicationcrud.service.ServiceUser;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,12 +34,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -75,7 +81,15 @@ public class InscriptionUserController implements Initializable {
         private Button Add_image_button;
          @FXML
         private MediaView MediaView;
-
+         @FXML
+        private Button prd_photo;
+        private Webcam webcam = null;
+        Thread webcamThread;
+        @FXML
+        private Button btnSnap;
+            @FXML
+        private Button btnCancel;
+      
     /**
      * Initializes the controller class.
      */
@@ -93,7 +107,7 @@ public class InscriptionUserController implements Initializable {
         ImagePath = "C:\\Users\\ANIS\\Documents/profile.jpg";
         ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
            
-
+          webcam = Webcam.getDefault();
     }          
 
  @FXML
@@ -239,6 +253,80 @@ public class InscriptionUserController implements Initializable {
             ImagePath = "C:\\Users\\ANIS\\Documents/profile.jpg";
             imageLabel.setText(ImagePath);
             ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
+        }
+    }
+    
+       @FXML
+private void cancelCameraOpening(ActionEvent event) {
+   
+    if (webcam != null && webcam.isOpen()) {
+        webcam.close(); 
+        imageLabel.setText(ImagePath);
+        ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
+    }
+}
+    
+@FXML
+private void TakePhotoAction(ActionEvent event) {
+    if (tf_inscri_email.getText().isEmpty()) {
+        Alert test = new Alert(Alert.AlertType.ERROR);
+        test.setContentText("Remplir tout les champs pour prendre une photo ! ");
+        test.show();
+    } else {
+        if (webcam != null && !webcam.isOpen()) {
+            try {
+                webcam.close();
+                webcam.setViewSize(new Dimension(640, 480));
+                webcam.open();
+            } catch (Exception ex) {
+                
+                System.err.println("Failed to open the webcam: " + ex.getMessage());
+                return; 
+            }
+        }
+        
+        webcamThread = new Thread(() -> {
+            while (webcam != null && webcam.isOpen()) {
+                try {
+                    Image image2 = SwingFXUtils.toFXImage(webcam.getImage(), null);
+                    Platform.runLater(() -> {
+                        ImagePreviw.setImage(image2);
+                    });
+                    Thread.sleep(50); 
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            btnCancel.setVisible(false);
+            btnSnap.setVisible(false);
+        });
+        webcamThread.setDaemon(true);
+        webcamThread.start();
+        btnSnap.setVisible(true);
+        btnCancel.setVisible(true);
+    }
+}
+
+ @FXML
+    private void btnSnapAction(ActionEvent event) {
+        if (webcam.isOpen()) {
+            BufferedImage image = webcam.getImage();
+            ImagePreviw.setImage(SwingFXUtils.toFXImage(image, null));
+            webcam.close();
+            saveImage(image);
+            btnSnap.setVisible(false);
+        }
+
+    }
+    
+     private void saveImage(BufferedImage image) {
+        try {
+            ImagePath = "C:\\Users\\ANIS\\Documents/" + tf_inscri_email.getText() + ".png";
+            File outputfile = new File(ImagePath);
+            imageLabel.setText(ImagePath);
+            ImageIO.write(image, "png", outputfile);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

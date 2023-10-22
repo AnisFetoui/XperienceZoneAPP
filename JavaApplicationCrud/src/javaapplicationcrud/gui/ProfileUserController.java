@@ -6,6 +6,9 @@
 package javaapplicationcrud.gui;
 
 
+import com.github.sarxos.webcam.Webcam;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -18,8 +21,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javaapplicationcrud.entity.User;
 import javaapplicationcrud.service.ServiceUser;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +44,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
 
 /**
@@ -47,6 +53,7 @@ import javafx.stage.Stage;
  * @author ANIS
  */
 public class ProfileUserController implements Initializable {
+    private BufferedImage originalImage;
     @FXML
     private Button btn_profile_desc;
     @FXML
@@ -80,6 +87,15 @@ public class ProfileUserController implements Initializable {
         private Button Add_image_button;
          @FXML
         private MediaView MediaView;
+        @FXML
+        private Button prd_photo;
+        private Webcam webcam = null;
+        Thread webcamThread;
+        @FXML
+        private Button btnSnap;
+        
+       @FXML
+        private Button btnCancel;
       
 
     /**
@@ -101,6 +117,7 @@ public class ProfileUserController implements Initializable {
         ServiceUser su = new ServiceUser();
         User aold = su.readById(ConnexionUserController.id_modif);
         ImagePath = aold.getImage();
+        
         ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
         tf_modif_ident.setText(aold.getUsername());
         label_us.setText("Mr "+aold.getUsername());
@@ -110,6 +127,8 @@ public class ProfileUserController implements Initializable {
         tf_modif_age.setText(Integer.toString(aold.getAge()));
         cb_modif_rl.setValue(aold.getRole());
         cb_modif_sx.setValue(aold.getSexe());
+        
+        webcam = Webcam.getDefault();
             }
     
     @FXML
@@ -214,7 +233,6 @@ public class ProfileUserController implements Initializable {
             Logger.getLogger(InscriptionUserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-  
     }
     @FXML
     private void Retour(ActionEvent event) {
@@ -254,10 +272,8 @@ public class ProfileUserController implements Initializable {
             ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
 
         }
-
     }
-    
-    
+
       @FXML
     private void desactiver(ActionEvent event) {
             ServiceUser su = new ServiceUser();
@@ -295,4 +311,82 @@ public class ProfileUserController implements Initializable {
 
         }
     
+    @FXML
+private void cancelCameraOpening(ActionEvent event) {
+   
+    if (webcam != null && webcam.isOpen()) {
+        webcam.close(); // Close the camera
+      
+     //ServiceUser su = new ServiceUser();
+     //  User aold = su.readById(ConnexionUserController.id_modif);
+       // ImagePreviw.setImage(new Image(new File(aold.getImage()).toURI().toString()));
+       ImagePreviw.setImage(SwingFXUtils.toFXImage(originalImage, null));
+    btnCancel.setVisible(false);
+    btnSnap.setVisible(false);
+    }
+
+}
+    
+    @FXML
+private void TakePhotoAction(ActionEvent event) {
+    if (tf_modif_email.getText().isEmpty()) {
+        Alert test = new Alert(Alert.AlertType.ERROR);
+        test.setContentText("Remplir tout les champs pour prendre une photo ! ");
+        test.show();
+    } else {
+        if (webcam != null && !webcam.isOpen()) {
+            try {
+                webcam.close();
+                webcam.setViewSize(new Dimension(640, 480));
+                webcam.open();
+                originalImage = webcam.getImage();
+            } catch (Exception ex) {
+                System.err.println("Failed to open the webcam: " + ex.getMessage());
+                return; 
+            }
+        }
+    
+        webcamThread = new Thread(() -> {
+            while (webcam != null && webcam.isOpen()) {
+                try {
+                    Image image2 = SwingFXUtils.toFXImage(webcam.getImage(), null);
+                    Platform.runLater(() -> {
+                        ImagePreviw.setImage(image2);
+                    });
+                    Thread.sleep(50); 
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            btnCancel.setVisible(false);
+            btnSnap.setVisible(false);
+        });
+        webcamThread.setDaemon(true);
+        webcamThread.start();
+        btnSnap.setVisible(true);
+        btnCancel.setVisible(true);
+    }
+}
+
+    @FXML
+    private void btnSnapAction(ActionEvent event) {
+       if (webcam.isOpen()) {
+            BufferedImage image = webcam.getImage();
+            ImagePreviw.setImage(SwingFXUtils.toFXImage(image, null));
+            webcam.close();
+            saveImage(image);
+            btnSnap.setVisible(false);
+        }
+    }
+    
+     private void saveImage(BufferedImage image) {
+       try {
+            ImagePath = "C:\\Users\\ANIS\\Documents/" + tf_modif_email.getText() + ".png";
+            File outputfile = new File(ImagePath);
+            imageLabel.setText(ImagePath);
+            ImageIO.write(image, "png", outputfile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

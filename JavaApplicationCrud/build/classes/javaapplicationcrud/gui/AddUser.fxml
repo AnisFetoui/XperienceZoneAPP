@@ -93,7 +93,7 @@
             </TextField>
             <ComboBox fx:id="cb_ajout_rl" layoutX="139.0" layoutY="233.0" prefHeight="25.0" prefWidth="170.0" />
             <ComboBox fx:id="cb_ajout_sx" layoutX="139.0" layoutY="279.0" prefHeight="25.0" prefWidth="170.0" />
-            <Button fx:id="Add_image_button" layoutX="23.0" layoutY="374.0" mnemonicParsing="false" onAction="#add_image_action" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: #354230;" styleClass="add-btn" stylesheets="@style.css" text="Ajouter Photo" textFill="WHITE">
+            <Button fx:id="Add_image_button" layoutX="23.0" layoutY="374.0" mnemonicParsing="false" onAction="#add_image_action" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: #354230; -fx-cursor: hand;" styleClass="add-btn" stylesheets="@style.css" text="Ajouter Photo" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>

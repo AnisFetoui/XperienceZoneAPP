@@ -30,7 +30,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="614.0" prefWidth="485.0">
          <children>
-            <Label layoutX="19.0" layoutY="25.0" prefHeight="22.0" prefWidth="66.0" text="Identifiant">
+            <Label layoutX="19.0" layoutY="25.0" prefHeight="22.0" prefWidth="94.0" text="Nom utilisateur">
                <font>
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
@@ -75,17 +75,17 @@
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
             </TextField>
-            <Button id="btn_inscri_inscri" fx:id="btn_inscri_inscri" layoutX="147.0" layoutY="474.0" mnemonicParsing="false" onAction="#insc" prefHeight="22.0" prefWidth="124.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" styleClass="add-btn" stylesheets="@style.css" text="S'inscrire">
+            <Button id="btn_inscri_inscri" fx:id="btn_inscri_inscri" layoutX="159.0" layoutY="539.0" mnemonicParsing="false" onAction="#insc" prefHeight="22.0" prefWidth="124.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" styleClass="add-btn" stylesheets="@style.css" text="S'inscrire">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Button>
-            <Label layoutX="177.0" layoutY="520.0" prefHeight="22.0" prefWidth="94.0" text="Déja client ?">
+            <Label layoutX="205.0" layoutY="576.0" prefHeight="22.0" prefWidth="94.0" text="Déja client ?">
                <font>
                   <Font name="Arial Rounded MT Bold" size="15.0" />
                </font>
             </Label>
-            <Button id="btn_inscri_cnx" fx:id="btn_inscri_cnx" layoutX="274.0" layoutY="518.0" mnemonicParsing="false" onAction="#Retour" prefHeight="27.0" prefWidth="115.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Connecter !!" textFill="#317246" underline="true">
+            <Button id="btn_inscri_cnx" fx:id="btn_inscri_cnx" layoutX="294.0" layoutY="573.0" mnemonicParsing="false" onAction="#Retour" prefHeight="27.0" prefWidth="115.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Connecter !!" textFill="#317246" underline="true">
                <font>
                   <Font name="Arial Rounded MT Bold" size="15.0" />
                </font>
@@ -98,14 +98,29 @@
             </TextField>
             <ComboBox fx:id="cb_inscri_rl" layoutX="139.0" layoutY="233.0" prefHeight="25.0" prefWidth="170.0" />
             <ComboBox fx:id="cb_inscri_sx" layoutX="139.0" layoutY="279.0" prefHeight="25.0" prefWidth="170.0" />
-            <Button fx:id="Add_image_button" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#add_image_action" prefHeight="34.0" prefWidth="115.0" style="-fx-background-color: #354230;" styleClass="add-btn" text="Ajouter Photo" textFill="WHITE">
+            <Button fx:id="Add_image_button" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#add_image_action" prefHeight="34.0" prefWidth="115.0" style="-fx-background-color: #354230; -fx-cursor: hand;" styleClass="add-btn" text="Ajouter Photo" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
             </Button>
-            <ImageView fx:id="ImagePreviw" fitHeight="90.0" fitWidth="151.0" layoutX="158.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ImagePreviw" fitHeight="115.0" fitWidth="222.0" layoutX="158.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true" />
             <PasswordField fx:id="tf_inscri_mdp" layoutX="139.0" layoutY="107.0" prefHeight="25.0" prefWidth="170.0" />
             <PasswordField fx:id="tf_inscri_cfrmmdp" layoutX="139.0" layoutY="145.0" prefHeight="25.0" prefWidth="170.0" />
+            <Button fx:id="prd_photo" layoutX="14.0" layoutY="424.0" mnemonicParsing="false" onAction="#TakePhotoAction" prefHeight="34.0" prefWidth="115.0" style="-fx-background-color: #354230; -fx-cursor: hand;" styleClass="add-btn" stylesheets="@style.css" text="Prendre Photo" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnSnap" layoutX="145.0" layoutY="475.0" mnemonicParsing="false" onAction="#btnSnapAction" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: #354230; -fx-cursor: hand;" styleClass="add-btn" stylesheets="@style.css" text="Capture !" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCancel" layoutX="290.0" layoutY="475.0" mnemonicParsing="false" onAction="#cancelCameraOpening" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: #354230; -fx-cursor: hand;" styleClass="add-btn" stylesheets="@style.css" text="Annuler" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="16.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <Label fx:id="imageLabel" prefHeight="34.0" prefWidth="71.0" visible="false" />
