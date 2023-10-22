@@ -5,10 +5,19 @@
  */
 package piedevcrudaziz.gui;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Base64;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +25,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -35,6 +45,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import piedevcrudaziz.entity.activites;
@@ -51,8 +62,6 @@ public class AjouterController implements Initializable {
     private TextField nomaj;
     
     @FXML
-    private Button btnajouter;
-    @FXML
     private Spinner<Integer> nbrplaceaj;
     @FXML
     private TextField prixaj;
@@ -65,7 +74,6 @@ public class AjouterController implements Initializable {
     private Spinner<Integer> durée;
     private TextField periode;
     @FXML
-    
     private ComboBox combobox;
     private Label alert;
     @FXML
@@ -88,6 +96,34 @@ public class AjouterController implements Initializable {
     private DatePicker datefin;
     @FXML
     private TextField descriptionmod;
+    @FXML
+    private Button btnajouter;
+    @FXML
+    private Button uploadimages;
+    @FXML
+    private AnchorPane imagesslider;
+      @FXML
+    private Button upload;
+    @FXML
+    private ImageView ImagePreviw;
+    @FXML
+    private ImageView ImagePreviw2;
+    @FXML
+    private ImageView ImagePreviw3;
+    @FXML
+    private ImageView ImagePreviw4;
+    @FXML
+    private ImageView ImagePreviw5;
+    @FXML
+    private ImageView ImagePreviw6;
+    @FXML
+    private Button savedb;
+    
+    //private String selectedImagePath = null;
+    private String[] selectedImagePaths = new String[4];
+    private ImageView[] imageViews;
+   
+    
 
 
     /**
@@ -97,9 +133,13 @@ public class AjouterController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         imageViews = new ImageView[]{ImagePreviw, ImagePreviw2, ImagePreviw3, ImagePreviw4};
+
          datedebut.setValue(LocalDate.of(1999, 01, 01));
         datefin.setValue(LocalDate.of(1999, 01, 01));
         slider.setTranslateX(0);
+        imagesslider.setTranslateX(-1203);
+        
         menuclose.setVisible(true);
         menu.setVisible(false);
         ObservableList<String> lista = FXCollections.observableArrayList(
@@ -139,7 +179,7 @@ combobox.setItems(lista);
         durée.setValueFactory(A);
     }
     
-      @FXML
+    @FXML
     private String selectG(ActionEvent event) {
         
         String namec = combobox.getSelectionModel().getSelectedItem().toString();
@@ -158,7 +198,9 @@ combobox.setItems(lista);
         String Organisateur = organisateur.getText();
         String Adresse = adresse.getText();
         
-        String image = "image";
+          //String image = selectedImagePath;
+           String image = String.join(",", selectedImagePaths);
+            System.out.println("image");
         
         LocalDate selectedDatedebut = datedebut.getValue();
         LocalDate selectedDatefin = datefin.getValue();
@@ -266,7 +308,7 @@ combobox.setItems(lista);
     }   
     
     @FXML
- void openSupprimerPage(ActionEvent event) {
+    void openSupprimerPage(ActionEvent event) {
         try {
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("supprimer.fxml"));
@@ -356,6 +398,62 @@ combobox.setItems(lista);
             e.printStackTrace(); // Handle any exceptions here
         }
     }
+
+    @FXML
+    private void ajouterimages(ActionEvent event) {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.4));
+        slide.setNode(imagesslider);
+        if( imagesslider.getTranslateX()== -1203){
+        slide.setToX(0);
+        slide.play();
+        }else{
+            slide.setToX(-1203);
+        slide.play();
+        }
+        
+    }
+
+    @FXML
+    private void selectimage(ActionEvent event) throws MalformedURLException{
+        FileChooser  fileChooser = new FileChooser();
+        fileChooser.setTitle("open a file");
+        fileChooser.setInitialDirectory(new File("C:\\"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPEG image", "*jpg"),
+                new FileChooser.ExtensionFilter("PNG image", "*png"));
+         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+         for (int i = 0; i < 6; i++) {
+        if (selectedImagePaths[i] == null) { // Vérifiez si un emplacement est disponible
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            if (selectedFile != null) {
+                selectedImagePaths[i] = selectedFile.toURI().toURL().toExternalForm();
+                Image image = new Image(selectedImagePaths[i]);
+                imageViews[i].setImage(image);
+            } else {
+                System.out.println("Aucun fichier n'a été sélectionné");
+            }
+            break; // Sortez de la boucle après avoir ajouté une image
+        }
+    }
+           
+           
+    }
+
+    @FXML
+    private void savetodb(ActionEvent event) {
+         TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.4));
+        slide.setNode(imagesslider);
+        if( imagesslider.getTranslateX()== -1203){
+        slide.setToX(0);
+        slide.play();
+        }else{
+            slide.setToX(-1203);
+        slide.play();
+        }
+      
+    }
+
 
   
     

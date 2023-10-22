@@ -39,7 +39,7 @@
 }
 .btn1{
        -fx-background-color:#60941a;  
-    -fx-background-radius: 5;
+    -fx-background-radius: 50;
 }
 .btn1:hover{
     -fx-background-color:#66892f;  
@@ -60,4 +60,16 @@
 .left-border-mid{
     -fx-border-left-color: black;
 
+}
+.boxreservation{
+    -fx-border-color:#60941a;
+}
+.imagetaille{
+    -fx-pref-height: 20px;
+    -fx-pref-width: 20px;
+    -fx-max-width: 20px;
+    -fx-max-height: 20px;
+    -fx-min-width: 20px;
+    -fx-min-height: 20px;
+    
 }

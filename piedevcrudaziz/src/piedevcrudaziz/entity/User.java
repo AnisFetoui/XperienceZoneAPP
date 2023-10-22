@@ -5,18 +5,18 @@
  */
 package piedevcrudaziz.entity;
 
-
-
 /**
  *
- * @author Med Aziz
+ * @author ANIS
  */
+
 public class User {
     private int id_user,age;
-    private String username,mail,mdp,image,sexe;
-    private Role role; 
+    private String username,mail,mdp,image;
+    private String role;
+    private String sexe;
 
-    public User(int id_user, String username, String mail, String mdp, Role role, String image,int age, String sexe) {
+    public User(int id_user, String username, String mail, String mdp, String role, String image,int age, String sexe) {
         this.id_user = id_user;
         this.age = age;
         this.username = username;
@@ -27,7 +27,7 @@ public class User {
         this.role = role;
     }
 
-    public User( String username, String mail, String mdp, Role role, String image,int age, String sexe) {
+    public User( String username, String mail, String mdp, String role, String image,int age, String sexe) {
         this.age = age;
         this.username = username;
         this.mail = mail;
@@ -96,20 +96,20 @@ public class User {
         this.sexe = sexe;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    /*@Override
+    @Override
     public String toString() {
-        return "User{" + "username=" + username + ", mail=" + mail + ", role=" + role + '}';
-    }*/
+        return "User{" + "username=" + username + ", mail=" + mail + ", role=" + role +  ", age=" + age + '}';
+    }
+
 
 
   
 }
-

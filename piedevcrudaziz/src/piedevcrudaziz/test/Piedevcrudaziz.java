@@ -15,7 +15,7 @@ import piedevcrudaziz.entity.activites;
 import piedevcrudaziz.entity.inscription;
 import piedevcrudaziz.service.serviceactivites;
 import piedevcrudaziz.service.serviceinscription;
-import piedevcrudaziz.service.serviceuser;
+
 
 
 /**

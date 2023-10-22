@@ -157,6 +157,10 @@ public class activites {
     public void setPrix_act(String prix_act) {
         this.prix_act = prix_act;
     }
+
+    public int getId_user() {
+        return id_user;
+    }
     
 
 
