@@ -114,9 +114,8 @@ public class ServiceUser implements UService<User> {
         }
         return utilisateurs;
     }
-    
-    
-     public boolean checkEmailExists(String email) {
+
+    public boolean checkEmailExists(String email) {
 
     boolean result = false;
 
@@ -157,8 +156,7 @@ public class ServiceUser implements UService<User> {
         ps.setString(1, email);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-         //   Sexe sexe = Sexe.valueOf(rs.getString("sexe"));
-           // Role role = Role.valueOf(rs.getString("role"));
+
             u = new User(
                 rs.getInt("id_user"),
                 rs.getString("username"),
@@ -186,7 +184,6 @@ public int authentification(String email, String password) {
             ps.setString(1, email);
             ps.setString(2, password);
             
-            //Statement st = con.createStatement();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 id = rs.getInt("id_user");
@@ -231,7 +228,35 @@ public int authentification(String email, String password) {
     }
     return u;
     }
+public List<User> searchUsersByEmailStartingWithLetter(String searchAttribute,String startingLetter) {
+    List<User> matchingUsers = new ArrayList<>();
     
+    String sql = "SELECT * FROM `utilisateur` WHERE " + searchAttribute + " LIKE ?";
+    
+    try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+        preparedStatement.setString(1, startingLetter + "%");
+        ResultSet rs = preparedStatement.executeQuery();
+
+        while (rs.next()) {
+            User user = new User(
+                rs.getInt("id_user"),
+                rs.getString("username"),
+                rs.getString("mail"),
+                rs.getString("mdp"),
+                rs.getString("role"),
+                rs.getString("image"),
+                rs.getInt("age"),
+                rs.getString("sexe")
+            );
+            matchingUsers.add(user);
+        }
+    } catch (SQLException ex) {
+        System.out.println("Error while searching for users by email: " + ex.getMessage());
+    }
+    
+    return matchingUsers;
+    }
+ 
     public void modifierUsername(User p) {
 
         try {

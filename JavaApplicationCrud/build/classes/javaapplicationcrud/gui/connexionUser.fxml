@@ -7,72 +7,55 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="396.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaapplicationcrud.gui.ConnexionUserController">
+<AnchorPane prefHeight="476.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaapplicationcrud.gui.ConnexionUserController">
    <children>
-      <Circle fill="#fbfdff" layoutX="243.0" layoutY="212.0" radius="22.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label layoutX="111.0" layoutY="70.0" prefHeight="22.0" prefWidth="309.0" text="Choisir une methode de connexion">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="18.0" />
-         </font>
-      </Label>
-      <TextField id="tf:connexion:email" fx:id="tf_connexion_email" layoutX="338.0" layoutY="164.0" prefHeight="23.0" prefWidth="170.0" promptText="email">
+      <TextField id="tf:connexion:email" fx:id="tf_connexion_email" layoutX="355.0" layoutY="227.0" prefHeight="23.0" prefWidth="200.0" promptText="email">
          <font>
             <Font name="Arial Rounded MT Bold" size="12.0" />
          </font>
       </TextField>
-      <Button id="btn:connexion:connecter" fx:id="btn_connexion_inscri" layoutX="268.0" layoutY="309.0" mnemonicParsing="false" onAction="#cnx" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: A8DF8E; -fx-cursor: hand;" text="Connecter">
+      <Button id="btn:connexion:connecter" fx:id="btn_connexion_inscri" layoutX="348.0" layoutY="340.0" mnemonicParsing="false" onAction="#cnx" prefHeight="23.0" prefWidth="214.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" styleClass="add-btn" stylesheets="@style.css" text="Connecter">
          <font>
             <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>
       </Button>
-      <Label layoutX="228.0" layoutY="201.0" prefHeight="22.0" prefWidth="38.0" text="OU">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="18.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="81.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@fb_ic.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="81.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@mail_ico.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="44.0" fitWidth="46.0" layoutX="81.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@twitter-icone-1.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="365.0" layoutY="238.0" prefHeight="22.0" prefWidth="80.0" text="Mot de passe">
+      <Label layoutX="415.0" layoutY="298.0" prefHeight="22.0" prefWidth="80.0" text="Mot de passe">
          <font>
             <Font name="Arial Rounded MT Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="275.0" layoutY="262.0" prefHeight="22.0" prefWidth="214.0" text="Je n'ai pas un compte, Je m'en crée">
+      <Label layoutX="235.0" layoutY="411.0" prefHeight="22.0" prefWidth="214.0" text="Je n'ai pas un compte, Je m'en crée">
          <font>
             <Font name="Arial Rounded MT Bold" size="12.0" />
          </font>
       </Label>
-      <Button id="btn:connexion:inscri" fx:id="btn_connexion_inscri" layoutX="478.0" layoutY="261.0" mnemonicParsing="false" onAction="#inscri" prefHeight="25.0" prefWidth="38.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="UN" textFill="#317246" underline="true">
+      <Button id="btn:connexion:inscri" fx:id="btn_connexion_inscri" layoutX="449.0" layoutY="409.0" mnemonicParsing="false" onAction="#inscri" prefHeight="25.0" prefWidth="38.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="UN" textFill="#317246" underline="true">
          <font>
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
       </Button>
-      <Button id="btn:connexion:mdpoub" fx:id="btn_connexion_mdpoub" layoutX="433.0" layoutY="237.0" mnemonicParsing="false" onAction="#oublier" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="oublié" textFill="RED" underline="true">
+      <Button id="btn:connexion:mdpoub" fx:id="btn_connexion_mdpoub" layoutX="483.0" layoutY="296.0" mnemonicParsing="false" onAction="#oublier" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="oublié" textFill="RED" underline="true">
          <font>
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
       </Button>
-      <Label layoutX="489.0" layoutY="238.0" prefHeight="22.0" prefWidth="17.0" text="?">
+      <Label layoutX="547.0" layoutY="298.0" prefHeight="22.0" prefWidth="17.0" text="?">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <PasswordField fx:id="tf_connexion_mdp" layoutX="338.0" layoutY="200.0" prefHeight="25.0" prefWidth="170.0" promptText="mot de passe" />
+      <PasswordField fx:id="tf_connexion_mdp" layoutX="355.0" layoutY="258.0" prefHeight="25.0" prefWidth="200.0" promptText="mot de passe" />
+      <ImageView fitHeight="174.0" fitWidth="228.0" layoutX="362.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@profile.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="289.0" fitWidth="368.0" layoutX="-40.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@385496021_292791893519238_8577172701520959440_n.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

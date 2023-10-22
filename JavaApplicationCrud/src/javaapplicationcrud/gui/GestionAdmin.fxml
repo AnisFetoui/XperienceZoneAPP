@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -49,11 +51,7 @@
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font></Button>
-      <TextField fx:id="tf_adm_rech" layoutX="482.0" layoutY="69.0" prefHeight="31.0" prefWidth="251.0" promptText="mail d'un utilisateur" />
-      <Button fx:id="btnRech" layoutX="336.0" layoutY="69.0" mnemonicParsing="false" onAction="#search" prefHeight="31.0" prefWidth="121.0" style="-fx-background-color: #354230; -fx-cursor: hand;" styleClass="add-btn" stylesheets="@style.css" text="Rechercher" textFill="WHITE">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="14.0" />
-         </font></Button>
+      <TextField fx:id="tf_adm_rech" layoutX="579.0" layoutY="82.0" onAction="#searchauto" prefHeight="31.0" prefWidth="251.0" promptText="Choisir d'abord le critére" />
       <ChoiceBox fx:id="cb_sortButton" layoutX="59.0" layoutY="210.0" prefWidth="150.0" />
       <Button fx:id="btnSort" layoutX="73.0" layoutY="163.0" mnemonicParsing="false" onAction="#sortData" prefHeight="31.0" prefWidth="121.0" style="-fx-background-color: #354230; -fx-cursor: hand;" styleClass="add-btn" stylesheets="@style.css" text="Trier avec" textFill="WHITE">
          <font>
@@ -66,5 +64,11 @@
          </font>
       </Button>
       <ChoiceBox fx:id="cb_btnFiltre" layoutX="59.0" layoutY="321.0" prefWidth="150.0" />
+      <ComboBox fx:id="searchAttributeComboBox" layoutX="579.0" layoutY="44.0" prefWidth="150.0" />
+      <Label layoutX="280.0" layoutY="54.0" prefHeight="31.0" prefWidth="270.0" text="Faite vos recherche :" textFill="#2f8000">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

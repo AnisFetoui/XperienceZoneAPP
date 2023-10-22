@@ -42,6 +42,7 @@ public class ConnexionUserController implements Initializable {
     private TextField tf_connexion_email;
         @FXML
     private PasswordField tf_connexion_mdp;
+     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -145,5 +146,8 @@ private void cnx(ActionEvent event) {
             Logger.getLogger(InscriptionUserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+ 
 }
+
+

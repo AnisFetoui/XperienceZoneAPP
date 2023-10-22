@@ -37,12 +37,7 @@ public class xperiencezone_main extends Application {
             System.out.println(ex.getMessage());
             Logger.getLogger(InscriptionUserController.class.getName()).log(Level.SEVERE, null, ex);
 
-        }
-     
-     
- 
-     
-     
+        } 
     }
 
     public static void main(String[] args) {

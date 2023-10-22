@@ -376,6 +376,7 @@ private void TakePhotoAction(ActionEvent event) {
             webcam.close();
             saveImage(image);
             btnSnap.setVisible(false);
+            btnCancel.setVisible(true);
         }
     }
     

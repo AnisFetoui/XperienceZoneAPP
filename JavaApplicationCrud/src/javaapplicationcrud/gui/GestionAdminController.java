@@ -27,6 +27,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -87,8 +88,9 @@ public class GestionAdminController implements Initializable {
     /**
      * Initializes the controller class.
      */
-     
 
+    @FXML
+    private ComboBox<String> searchAttributeComboBox;
      public void afficherUsers()
     {
          ServiceUser su = new ServiceUser();
@@ -114,9 +116,15 @@ public class GestionAdminController implements Initializable {
            
            ObservableList<String> list1 = FXCollections.observableArrayList("femme","homme","admin","manager","client");
            cb_btnFiltre.setItems(list1);
+           
+            ObservableList<String> searchAttributes = FXCollections.observableArrayList("mail", "username");
+            searchAttributeComboBox.setItems(searchAttributes);
+            searchAttributeComboBox.setValue("username");
        
         // TODO
-        
+            tf_adm_rech.textProperty().addListener((observable, oldValue, newValue) -> {
+                     searchauto();
+    });
     }  
   
     @FXML
@@ -185,7 +193,6 @@ public class GestionAdminController implements Initializable {
         }
     }
 
-    
      @FXML
     private void btnSuppAction(ActionEvent event) {
 
@@ -215,7 +222,6 @@ public class GestionAdminController implements Initializable {
                 A.show();
                 afficherUsers();
             }
-
         }
     }
     
@@ -236,28 +242,22 @@ public class GestionAdminController implements Initializable {
         } catch (IOException ex) {
 
             System.out.println(ex.getMessage());
-
         }
     }
-    
+
 @FXML
-private void search(ActionEvent event) {
-    
+private void searchauto() {
+            
+            String searchAttribute = searchAttributeComboBox.getValue();
             String searchKeyword = tf_adm_rech.getText();
             ServiceUser su = new ServiceUser();
 
-        if (searchKeyword.isEmpty()) {
-       
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Champs manquants");
-        alert.setHeaderText(null);
-        alert.setContentText("Veuillez remplir votre champs !");
-        alert.showAndWait();
-    }else{
+      if (searchKeyword.isEmpty()) {
+      afficherUsers();
+         
+    }
    
-   
-    List<User> searchResults = su.chercherByEmailTV(searchKeyword);
-
+    List<User> searchResults = su.searchUsersByEmailStartingWithLetter(searchAttribute,searchKeyword);
     ObservableList<User> observableResults = FXCollections.observableArrayList(searchResults);
 
     col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -270,54 +270,8 @@ private void search(ActionEvent event) {
     ColumnId.setCellValueFactory(new PropertyValueFactory<>("id_user"));
 
     tv_users.setItems(observableResults);
-        }
+       
 }
-
-
-/*
-
- int itemsPerPage = 10; // Nombre d'éléments par page
-      int currentPage = 0;   // Page actuelle
-      List<User> allUsers;/* Récupérez vos données depuis la source ;
-      List<User> currentPageData = allUsers.subList(currentPage * itemsPerPage, Math.min((currentPage + 1) * itemsPerPage, allUsers.size()));
-
-private void updateTableView() {
-    // Calculez la plage d'éléments à afficher pour la page actuelle
-    int startIndex = currentPage * itemsPerPage;
-    int endIndex = Math.min((currentPage + 1) * itemsPerPage, allUsers.size());
-
-    // Extrait les données de la page actuelle
-    List<User> currentPageData = allUsers.subList(startIndex, endIndex);
-
-    // Mettez à jour le TableView avec les données de la page actuelle
-    // Cela dépend de la manière dont votre TableView est configuré, mais voici un exemple générique :
-    ObservableList<User> observableData = FXCollections.observableArrayList(currentPageData);
-    tv_users.setItems(observableData);
-
-    // Mettez à jour le numéro de la page actuelle (par exemple, en affichant le numéro dans un champ de texte ou une étiquette)
-    currentPageLabel.setText("Page " + (currentPage + 1));
-}
-
-@FXML
-private void goToPreviousPage(ActionEvent event) {
-    if (currentPage > 0) {
-        currentPage--;
-        updateTableView();
-    }
-}
-
-@FXML
-private void goToNextPage(ActionEvent event) {
-    int maxPage = (allUsers.size() - 1) / itemsPerPage;
-    if (currentPage < maxPage) {
-        currentPage++;
-        updateTableView();
-    }
-}
-
-
-*/
-
 @FXML
 private void sortData(ActionEvent event) {
     Object selectedItem = cb_sortButton.getSelectionModel().getSelectedItem();
@@ -325,18 +279,22 @@ private void sortData(ActionEvent event) {
     if (selectedItem != null && selectedItem instanceof String) {
         String selectedSortOption = (String) selectedItem;
 
-        if ("username".equals(selectedSortOption)) {
-            col_username.setSortType(TableColumn.SortType.ASCENDING);
-            tv_users.getSortOrder().setAll(col_username);
-        } else if ("age".equals(selectedSortOption)) {
-            col_age.setSortType(TableColumn.SortType.ASCENDING);
-            tv_users.getSortOrder().setAll(col_age);
-        } else if ("email".equals(selectedSortOption)) {
-            col_email.setSortType(TableColumn.SortType.ASCENDING);
-            tv_users.getSortOrder().setAll(col_email);
-        } else {
-     
-            afficherUsers();
+        switch (selectedSortOption) {
+            case "username":
+                col_username.setSortType(TableColumn.SortType.ASCENDING);
+                tv_users.getSortOrder().setAll(col_username);
+                break;
+            case "age":
+                col_age.setSortType(TableColumn.SortType.ASCENDING);
+                tv_users.getSortOrder().setAll(col_age);
+                break;
+            case "email":
+                col_email.setSortType(TableColumn.SortType.ASCENDING);
+                tv_users.getSortOrder().setAll(col_email);
+                break;
+            default:
+                afficherUsers();
+                break;
         }
     } else {
         
@@ -360,36 +318,50 @@ private void filtreData(ActionEvent event) {
     if (selectedItem != null && selectedItem instanceof String) {
         String selectedFilterOption = (String) selectedItem;
 
-        if ("femme".equals(selectedFilterOption)) {
-            List<User> filteredData = userList.stream()
-                    .filter(user -> "FEMME".equals(user.getSexe()))
-                    .collect(Collectors.toList());
-
-            updateTableView(filteredData);
-        } else if ("homme".equals(selectedFilterOption)) {
-            List<User> filteredData = userList.stream()
-                    .filter(user -> "HOMME".equals(user.getSexe())) 
-                    .collect(Collectors.toList());
+        switch (selectedFilterOption) {
+            case "femme":
+                {
+                    List<User> filteredData = userList.stream()
+                            .filter(user -> "FEMME".equals(user.getSexe()))
+                            .collect(Collectors.toList());
                     updateTableView(filteredData);
-        }else if ("admin".equals(selectedFilterOption)) {
-            List<User> filteredData = userList.stream()
-                    .filter(user -> "ADMIN".equals(user.getRole())) 
-                    .collect(Collectors.toList());
+                    break;
+                }
+            case "homme":
+                {
+                    List<User> filteredData = userList.stream()
+                            .filter(user -> "HOMME".equals(user.getSexe()))
+                            .collect(Collectors.toList());
                     updateTableView(filteredData);
-        }else if ("manager".equals(selectedFilterOption)) {
-            List<User> filteredData = userList.stream()
-                    .filter(user -> "MANAGER".equals(user.getRole())) 
-                    .collect(Collectors.toList());
+                    break;
+                }
+            case "admin":
+                {
+                    List<User> filteredData = userList.stream()
+                            .filter(user -> "ADMIN".equals(user.getRole()))
+                            .collect(Collectors.toList());
                     updateTableView(filteredData);
-        }else if ("client".equals(selectedFilterOption)) {
-            List<User> filteredData = userList.stream()
-                    .filter(user -> "CLIENT".equals(user.getRole())) 
-                    .collect(Collectors.toList());
+                    break;
+                }
+            case "manager":
+                {
+                    List<User> filteredData = userList.stream()
+                            .filter(user -> "MANAGER".equals(user.getRole()))
+                            .collect(Collectors.toList());
                     updateTableView(filteredData);
-        }
-        else {
-     
-            afficherUsers();
+                    break;
+                }
+            case "client":
+                {
+                    List<User> filteredData = userList.stream()
+                            .filter(user -> "CLIENT".equals(user.getRole()))
+                            .collect(Collectors.toList());
+                    updateTableView(filteredData);
+                    break;
+                }
+            default:
+                afficherUsers();
+                break;
         }
     } else {
         afficherUsers();
