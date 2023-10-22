@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,9 +24,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import service.CategorieService;
 
 /**
@@ -34,7 +39,12 @@ import service.CategorieService;
  * @author ASUS
  */
 public class AjouterController implements Initializable {
-
+@FXML
+    private VBox slider;
+    @FXML
+    private Label menu;
+    @FXML
+    private Label menuclose;
     @FXML
     private TextField NomCat;
     @FXML
@@ -56,6 +66,9 @@ public class AjouterController implements Initializable {
     // private String[] choix ={"sport","loisir"} ;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        slider.setTranslateX(0);
+        menuclose.setVisible(true);
+        menu.setVisible(false);
         choicefx.getItems().addAll(choix);
     }    
    
@@ -132,7 +145,34 @@ public class AjouterController implements Initializable {
     stage.setScene(scene);
     stage.show();} catch (IOException ex) {
             Logger.getLogger(GestionProduitController.class.getName()).log(Level.SEVERE, null, ex);
-        }}}
+        }}
+ @FXML
+    private void onmenuclicked(MouseEvent event) {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.4));
+        slide.setNode(slider);
+        slide.setToX(0);
+        slide.play();
+        slider.setTranslateX(-176);
+        
+        menu.setVisible(false);
+        menuclose.setVisible(true);
+        
+    }
+    @FXML
+    private void onmenuclickedclose(MouseEvent event) {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.4));
+        slide.setNode(slider);
+        slide.setToX(-176);
+        slide.play();
+        slider.setTranslateX(0);
+        
+        menuclose.setVisible(false);
+        menu.setVisible(true);
+        
+    } 
+}
 
    
 

@@ -48,7 +48,7 @@ public class PanierService implements CrudInterface<panier> {
  
 
  
-   public void ajout(panier P, Produit p, User u) {
+ /* public void ajout(panier P, Produit p, User u) {
     try {
         // Vérifiez si la quantité du panier est positive
         if (P.getQuantite_panier() <= 0) {
@@ -93,8 +93,58 @@ public class PanierService implements CrudInterface<panier> {
         System.out.println("Panier ajouté avec succès !");
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
+    }*/
+   public void ajout(Produit produit, User user, int quantite_panier) {
+    try {
+        System.out.println("Début de la méthode ajout."); // Message de débogage
+
+        if (quantite_panier <= 0) {
+            System.out.println("La quantité du panier doit être supérieure à zéro.");
+            return;
+        }
+
+        // Utilisez une requête SQL pour obtenir le prix du produit à partir de la table "Produit"
+        String prixProduitQuery = "SELECT prix_prod FROM Produit WHERE id_prod = ?";
+        PreparedStatement prixProduitStatement = con.prepareStatement(prixProduitQuery);
+        prixProduitStatement.setInt(1, produit.getId_prod());
+        ResultSet prixProduitResult = prixProduitStatement.executeQuery();
+
+        double prixProduit = 0.0;
+
+        if (prixProduitResult.next()) {
+            prixProduit = prixProduitResult.getDouble("prix_prod");
+        } else {
+            System.out.println("Le produit avec l'ID spécifié n'existe pas.");
+            return;
+        }
+
+        double total = prixProduit * quantite_panier;
+
+        if (total <= 0.0) {
+            System.out.println("Le total du panier doit être supérieur à zéro.");
+            return;
+        }
+
+        // Insérez les données dans la table "panier"
+        String req = "INSERT INTO panier (id_user, total, id_prod, quantite_panier) VALUES (?, ?, ?, ?)";
+        PreparedStatement ps = con.prepareStatement(req);
+        ps.setInt(1, user.getId_user());
+        ps.setDouble(2, total);
+        ps.setInt(3, produit.getId_prod());
+        ps.setInt(4, quantite_panier);
+        ps.executeUpdate();
+
+        System.out.println("Panier ajouté avec succès !");
+
+        System.out.println("Fin de la méthode ajout."); // Message de débogage
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
     }
 }
+
+
+
+
 
      @Override
     public void supprimer(int id) {
@@ -234,7 +284,10 @@ public class PanierService implements CrudInterface<panier> {
     @Override
     public ArrayList<panier> sortBy(String nom_column, String Asc_Dsc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }}
+    }
+
+  
+}
 
        
     

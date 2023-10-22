@@ -37,6 +37,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import service.Produitservice;
 import util.MYDB;
 
@@ -62,6 +63,8 @@ public class GestionProduitController implements Initializable {
     private Button supprimer;
      @FXML
     private Button chercher;
+      @FXML
+    private Button inspecter;
       @FXML
     private TextField  chercher_prod;
     @FXML
@@ -139,13 +142,13 @@ private void afficher() {
     Produitservice produitService = new Produitservice();
     List<Produit> produits = produitService.affihcer();
     ObservableList<Produit> produitList = FXCollections.observableArrayList(produits);
-    idprod_col.setCellValueFactory(new PropertyValueFactory<>("id_prod"));
+    //idprod_col.setCellValueFactory(new PropertyValueFactory<>("id_prod"));
     nomprod_col.setCellValueFactory(new PropertyValueFactory<>("nom_prod"));
     prixprod_col.setCellValueFactory(new PropertyValueFactory<>("prix_prod"));
     desprod_col.setCellValueFactory(new PropertyValueFactory<>("description"));
     quantiteprod_col.setCellValueFactory(new PropertyValueFactory<>("quantite produit"));
     imageprod_col.setCellValueFactory(new PropertyValueFactory<>("image"));
-    idcateg_col.setCellValueFactory(new PropertyValueFactory<>("id categorie"));
+    idcateg_col.setCellValueFactory(new PropertyValueFactory<>("categorie"));
     tableview.setItems(produitList);
 }
       
@@ -244,8 +247,24 @@ private void chercherProduits(ActionEvent event) throws SQLException {
     stage.setScene(scene);
     stage.show();} catch (IOException ex) {
             Logger.getLogger(GestionProduitController.class.getName()).log(Level.SEVERE, null, ex);
-        }}}
-
+        }}
+    @FXML
+private void setOnMouseClicked(ActionEvent event) {
+            
+    Produit produitSelectionne = tableview.getSelectionModel().getSelectedItem();
+                if (produitSelectionne != null) {
+                    int quantiteProduit = produitSelectionne.getquantite();
+                    if (quantiteProduit < 40) {
+                        System.out.println("La quantité de produit est faible.");
+                        // Affichez la notification ici
+                        Notifications.create()
+                            .title("Quantité faible")
+                            .text("Le produit risque d'être épuisé.")
+                            .showWarning();
+                    }
+                }
+}}
+        
 
 
 

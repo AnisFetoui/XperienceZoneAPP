@@ -48,26 +48,29 @@ public class PidevHooligans {
 
     // Appelez la méthode ajout en passant les instances que vous avez créées
      PanierService sp = new PanierService();
+       int quantite_panier = 2;
        
-            sp.ajout(Panier, produit,user);
+           // sp.ajout(Panier, produit,user);
+ sp.ajout(produit,  user,  quantite_panier) ;
             
     
     int id_user = 20; // Remplacez par l'ID de l'utilisateur dont vous souhaitez afficher le panier
     sp.afficher(id_user);
    sp.sommePrixParUtilisateur();
     //System.out.println("Quantité mise à jour avec succès.");
-}
+
    
 
     // Remplacez l'ID de l'utilisateur par celui que vous souhaitez tester
    // int id_user = 15;
+   
 
     // Appelez la méthode totalmontantPanier pour obtenir le montant total du panier
     double  totalMontant;
        totalMontant = Panier.totalmontantPanier(id_user);
 
 }
-
+}
  
   
     

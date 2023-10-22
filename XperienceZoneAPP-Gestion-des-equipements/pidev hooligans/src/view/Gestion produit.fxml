@@ -19,17 +19,17 @@
    <children>
       <BorderPane layoutX="6.0" layoutY="99.0" prefHeight="592.0" prefWidth="1011.0">
          <left>
-            <AnchorPane fx:id="slider" prefHeight="588.0" prefWidth="235.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="slider" prefHeight="592.0" prefWidth="251.0" BorderPane.alignment="CENTER">
                <children>
                   <VBox layoutX="5.0" layoutY="202.0" prefHeight="249.0" prefWidth="225.0">
                      <children>
-                        <Button fx:id="actualiser" mnemonicParsing="false" onAction="#afficheraction" prefHeight="31.0" prefWidth="187.0" style="-fx-background-color: #74da39;" styleClass="btn" stylesheets="@style.css" text="Actualiser" />
-                        <Button fx:id="ajouter" mnemonicParsing="false" onAction="#ajouterproduit" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: #74da39;" styleClass="btn" stylesheets="@style.css" text="ajouter">
+                        <Button fx:id="actualiser" mnemonicParsing="false" onAction="#afficheraction" prefHeight="31.0" prefWidth="147.0" style="-fx-background-color: #74da39;" styleClass="btn" stylesheets="@style.css" text="Actualiser" />
+                        <Button fx:id="ajouter" mnemonicParsing="false" onAction="#ajouterproduit" prefHeight="31.0" prefWidth="148.0" style="-fx-background-color: #74da39;" styleClass="btn" stylesheets="@style.css" text="ajouter">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="modifier" mnemonicParsing="false" onAction="#modifierProduit" prefHeight="31.0" prefWidth="187.0" style="-fx-background-color: #74da39;" styleClass="btn" stylesheets="@style.css" text="modifier">
+                        <Button fx:id="modifier" mnemonicParsing="false" onAction="#modifierProduit" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #74da39;" styleClass="btn" stylesheets="@style.css" text="modifier">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -37,37 +37,37 @@
                               <Insets top="10.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="supprimer" mnemonicParsing="false" onAction="#supprimerLigne" prefHeight="31.0" prefWidth="185.0" style="-fx-background-color: #74da39;" styleClass="btn" stylesheets="@style.css" text="supprimer">
+                        <Button fx:id="supprimer" mnemonicParsing="false" onAction="#supprimerLigne" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #74da39;" styleClass="btn" stylesheets="@style.css" text="supprimer">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#Retour" prefHeight="31.0" prefWidth="184.0" style="-fx-background-color: #74da39;" styleClass="btn" stylesheets="@style.css" text="Retour">
+                        <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#Retour" prefHeight="31.0" prefWidth="152.0" style="-fx-background-color: #74da39;" styleClass="btn" stylesheets="@style.css" text="Retour">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Button>
                      </children>
                   </VBox>
-                  <Button fx:id="chercher" layoutX="135.0" layoutY="116.0" mnemonicParsing="false" onAction="#chercherProduits" style="-fx-background-color: #74da39;" styleClass="btn" stylesheets="@style.css" text="chercher" />
-                  <TextField fx:id="chercher_prod" layoutX="24.0" layoutY="75.0" promptText="chercher ici" styleClass="field_text">
+                  <Button fx:id="chercher" layoutX="98.0" layoutY="119.0" mnemonicParsing="false" onAction="#chercherProduits" style="-fx-background-color: #74da39;" styleClass="btn" stylesheets="@style.css" text="chercher" />
+                  <TextField fx:id="chercher_prod" layoutX="14.0" layoutY="75.0" prefHeight="31.0" prefWidth="161.0" promptText="chercher ici" styleClass="field_text">
                      <stylesheets>
                         <URL value="@../../build/classes/view/style.css" />
                         <URL value="@style.css" />
                      </stylesheets></TextField>
+                  <Button fx:id="inspecter" layoutX="14.0" layoutY="436.0" mnemonicParsing="false" onAction="#setOnMouseClicked" text="Button" />
                </children>
             </AnchorPane>
          </left>
          <center>
-            <TableView fx:id="tableview" prefHeight="592.0" prefWidth="875.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableview" prefHeight="592.0" prefWidth="795.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="idprod_col" prefWidth="95.0" text="id produit" />
                 <TableColumn fx:id="nomprod_col" prefWidth="134.0" text="nom produit" />
                   <TableColumn fx:id="prixprod_col" prefWidth="132.0" text="prix produit" />
                   <TableColumn fx:id="desprod_col" prefWidth="114.0" text="description" />
                   <TableColumn fx:id="quantiteprod_col" prefWidth="129.0" text="quantite produit" />
-                  <TableColumn fx:id="imageprod_col" text="image" />
-                  <TableColumn fx:id="idcateg_col" prefWidth="91.0" text="id categorie" />
+                  <TableColumn fx:id="imageprod_col" prefWidth="138.0" text="image" />
+                  <TableColumn fx:id="idcateg_col" prefWidth="112.0" text="id categorie" />
               </columns>
                <BorderPane.margin>
                   <Insets />
@@ -75,9 +75,12 @@
             </TableView>
          </center>
       </BorderPane>
-      <HBox layoutX="-6.0" prefHeight="101.0" prefWidth="1117.0" style="-fx-background-color: #354230;">
+      <HBox prefHeight="101.0" prefWidth="1111.0" style="-fx-background-color: #354230;">
          <children>
-            <Label fx:id="menuclose" onDragDetected="#onmenuclickedclose" onMouseClicked="#onmenuclickedclose" text="ME..." textFill="WHITE" />
+            <Label fx:id="menuclose" onMouseClicked="#onmenuclickedclose" text="ME..." textFill="WHITE">
+               <HBox.margin>
+                  <Insets top="50.0" />
+               </HBox.margin></Label>
             <Label fx:id="menu" onMouseClicked="#onmenuclicked" prefHeight="21.0" prefWidth="69.0" text="MENU" textFill="#4be42c">
                <font>
                   <Font size="20.0" />

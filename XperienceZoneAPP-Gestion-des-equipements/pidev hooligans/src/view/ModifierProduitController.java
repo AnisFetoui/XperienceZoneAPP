@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,8 +33,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import service.CategorieService;
 import service.Produitservice;
 
@@ -43,7 +47,12 @@ import service.Produitservice;
  * @author ASUS
  */
 public class ModifierProduitController implements Initializable {
-
+@FXML
+    private VBox slider;
+    @FXML
+    private Label menu;
+    @FXML
+    private Label menuclose;
     @FXML
     private TextField nomprodmodif;
     @FXML
@@ -185,7 +194,33 @@ public class ModifierProduitController implements Initializable {
     stage.setScene(scene);
     stage.show();} catch (IOException ex) {
             Logger.getLogger(GestionProduitController.class.getName()).log(Level.SEVERE, null, ex);
-        }}}
+        }}
+ @FXML
+    private void onmenuclicked(MouseEvent event) {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.4));
+        slide.setNode(slider);
+        slide.setToX(0);
+        slide.play();
+        slider.setTranslateX(-176);
+        
+        menu.setVisible(false);
+        menuclose.setVisible(true);
+        
+    }
+    @FXML
+    private void onmenuclickedclose(MouseEvent event) {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.4));
+        slide.setNode(slider);
+        slide.setToX(-176);
+        slide.play();
+        slider.setTranslateX(0);
+        
+        menuclose.setVisible(false);
+        menu.setVisible(true);
+        
+    } }
 
    
 

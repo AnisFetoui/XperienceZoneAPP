@@ -27,6 +27,7 @@ public class Produit {
     private int quantite;
     private String image;
     private Categorie categorie ;
+    public int getId_prod;
     
 
 

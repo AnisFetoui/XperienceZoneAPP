@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,11 +27,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import service.CategorieService;
 import util.MYDB;
 
@@ -40,6 +46,7 @@ import util.MYDB;
  * @author ASUS
  */
 public class SupprimercategorieController implements Initializable {
+ 
  @FXML
  private TableView<Categorie> tableview;
     @FXML
@@ -54,6 +61,12 @@ public class SupprimercategorieController implements Initializable {
     private Button supp;
      @FXML
     private Button actualiser;
+     @FXML
+    private VBox slider;
+    @FXML
+    private Label menu;
+    @FXML
+    private Label menuclose;
 
     /**
      * Initializes the controller class.
@@ -88,7 +101,10 @@ public SupprimercategorieController() {
      } catch (SQLException ex) {
          Logger.getLogger(SupprimercategorieController.class.getName()).log(Level.SEVERE, null, ex);
      }
-   
+     slider.setTranslateX(0);
+        menuclose.setVisible(true);
+        menu.setVisible(false);
+     
     }
     private void actualiserAction(ActionEvent event) throws SQLException {
        afficher();
@@ -139,7 +155,35 @@ public SupprimercategorieController() {
     stage.setScene(scene);
     stage.show();} catch (IOException ex) {
             Logger.getLogger(GestionProduitController.class.getName()).log(Level.SEVERE, null, ex);
-        }}}
+    
+    }}
+    @FXML
+    private void onmenuclicked(MouseEvent event) {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.4));
+        slide.setNode(slider);
+        slide.setToX(0);
+        slide.play();
+        slider.setTranslateX(-176);
+        
+        menu.setVisible(false);
+        menuclose.setVisible(true);
+        
+    }
+    @FXML
+    private void onmenuclickedclose(MouseEvent event) {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.4));
+        slide.setNode(slider);
+        slide.setToX(-176);
+        slide.play();
+        slider.setTranslateX(0);
+        
+        menuclose.setVisible(false);
+        menu.setVisible(true);
+        
+    }
+ }
 
    
     
