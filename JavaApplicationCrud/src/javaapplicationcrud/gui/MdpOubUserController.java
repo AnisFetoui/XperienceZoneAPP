@@ -79,7 +79,7 @@ public class MdpOubUserController implements Initializable {
         if (!tf_mdpoub_email.getText().equals("") && verifMail) {
             if (su.ChercherMail(tf_mdpoub_email.getText()) == 1) {
                 EmailReset = tf_mdpoub_email.getText();
-            //    EmailSender.sendEmail("anis.fetoui@esprit.tn", "223JMT3915", tf_mdpoub_email.getText(), "Verification code", "Votre code est : " + code);
+                EmailSender.sendEmail("anisfetoui2000@gmail.com", "iucw kjxs otpi fsas", tf_mdpoub_email.getText(), "Verification code", "Votre code est : " + code);
 
                 try {
 

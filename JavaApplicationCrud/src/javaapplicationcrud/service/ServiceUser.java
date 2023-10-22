@@ -115,22 +115,6 @@ public class ServiceUser implements UService<User> {
         return utilisateurs;
     }
     
-    public User chercherByEmail(String email) {
-    String sql ="SELECT * from utilisateur WHERE mail='"+email+"'";
-    User u = new User();
-    try {
-            ste= con.createStatement();
-            ResultSet rs = ste.executeQuery(sql);
-        while (rs.next()) {
-            
-            u = new User(rs.getInt("id_user"),
-                      rs.getString("username"), rs.getString("mail"),rs.getString("mdp"), rs.getString("role"),rs.getString("image"), rs.getInt("age"), rs.getString("sexe"));
-        }
-    } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-    }
-    return u;
-    }
     
      public boolean checkEmailExists(String email) {
 
@@ -216,7 +200,7 @@ public int authentification(String email, String password) {
     public int ChercherMail(String email) {
 
         try {
-            String req = "SELECT * from utilisateur WHERE mail =" + email + "'  ";
+            String req = "SELECT * from utilisateur WHERE mail ='" + email + "'  ";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
@@ -231,7 +215,23 @@ public int authentification(String email, String password) {
         return -1;
     }
  
-
+    public User chercherByEmail(String email) {
+    String sql ="SELECT * from utilisateur WHERE mail='"+email+"'";
+    User u = new User();
+    try {
+            ste= con.createStatement();
+            ResultSet rs = ste.executeQuery(sql);
+        while (rs.next()) {
+            
+            u = new User(rs.getInt("id_user"),
+                      rs.getString("username"), rs.getString("mail"),rs.getString("mdp"), rs.getString("role"),rs.getString("image"), rs.getInt("age"), rs.getString("sexe"));
+        }
+    } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+    }
+    return u;
+    }
+    
     public void modifierUsername(User p) {
 
         try {
