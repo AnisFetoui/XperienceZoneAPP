@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="676.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.Ajout_traitController">
+   <children>
+      <TextField fx:id="refT" disable="true" editable="false" layoutX="274.0" layoutY="216.0" />
+      <DatePicker fx:id="dateT" layoutX="275.0" layoutY="269.0" />
+      <ComboBox fx:id="typerecT" disable="true" layoutX="274.0" layoutY="326.0" prefHeight="31.0" prefWidth="286.0" />
+      <ComboBox fx:id="statT" layoutX="272.0" layoutY="390.0" prefHeight="31.0" prefWidth="187.0" />
+      <TextArea fx:id="resumeT" layoutX="272.0" layoutY="465.0" prefHeight="80.0" prefWidth="345.0" />
+      <Text layoutX="96.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Référence de l'objet :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font></Text>
+      <Text layoutX="95.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de réclamation :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font></Text>
+      <Text layoutX="94.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type de réclamation :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font></Text>
+      <Text layoutX="146.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font></Text>
+      <Text layoutX="94.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Résumé de la plainte :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font></Text>
+      <Button fx:id="ajouT" layoutX="739.0" layoutY="606.0" mnemonicParsing="false" onAction="#ajouterTraitement" prefHeight="38.0" prefWidth="84.0" style="-fx-background-color: #74da39; -fx-cursor: hand;" styleClass="add-btn" stylesheets="file:/C:/Users/LENOVO%20GAMING/Downloads/style.css" text="Ajouter">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <Button layoutX="627.0" layoutY="606.0" mnemonicParsing="false" onAction="#annulerT" prefHeight="38.0" prefWidth="84.0" style="-fx-background-color: #28282B; -fx-cursor: hand;" styleClass="add-btn" stylesheets="file:/C:/Users/LENOVO%20GAMING/Downloads/style.css" text="Annuler" textFill="#e8dddd">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#28282b" height="126.0" layoutX="-33.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="896.0" />
+      <Text fill="#fff9f9" layoutX="260.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un traitement" underline="true">
+         <font>
+            <Font name="Copperplate Gothic Light" size="31.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="142.0" fitWidth="190.0" layoutX="3.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:/C:/Users/LENOVO%20GAMING/OneDrive/Desktop/proj/Projet4SE1/logo1.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
