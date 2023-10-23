@@ -20,7 +20,7 @@ interface Iserviceactivites<T > {
      List<activites> chercherpariduser(Integer iduser);
     void ajouterActivite(activites activite);
     void mettreAJourActivite(activites activite);
-    void supprimerActivite(String nom);
+    void supprimerActivite(int id);
     boolean isValidPrice(String input);
     boolean isValidPeriode(String input);
      //List<T> afficherActivite();

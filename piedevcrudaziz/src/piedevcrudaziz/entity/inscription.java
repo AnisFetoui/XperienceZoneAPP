@@ -75,6 +75,7 @@ public class inscription {
         return nbr_tickes;
     }
 
+
     public double getFrait_abonnement() {
         return frait_abonnement;
     }
@@ -120,5 +121,7 @@ public class inscription {
     public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
+
+  
     
 }

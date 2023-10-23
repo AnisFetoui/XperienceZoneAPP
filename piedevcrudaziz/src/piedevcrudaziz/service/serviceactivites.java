@@ -59,11 +59,11 @@ public class serviceactivites implements Iserviceactivites<activites>{
        
     }
     @Override
-public void supprimerActivite(String nom) {
+public void supprimerActivite(int id) {
     try {
-        String req = "DELETE FROM activites WHERE nom_act=?";
+        String req = "DELETE FROM activites WHERE Id_act=?";
         PreparedStatement pre = con.prepareStatement(req);
-        pre.setString(1, nom);
+        pre.setInt(1, id);
         pre.executeUpdate();
     } catch (SQLException ex) {
         System.out.println(ex);
@@ -124,7 +124,7 @@ public ArrayList<activites> chercherActivites(String nomActivite) {
         
 
         PreparedStatement pre = con.prepareStatement(req);
-        pre.setString(1, nomActivite);
+        pre.setString(1,nomActivite);
         try (ResultSet rs = pre.executeQuery()) {
             while (rs.next()) {
                 activites activite = new activites();
@@ -153,12 +153,13 @@ public ArrayList<activites> chercherparlieu(String Gouvernorat) {
     ArrayList<activites> resultats = new ArrayList<>();
 
     try {
-        String req = "SELECT * FROM activites WHERE lieu_act = ?";
+        String req = "SELECT * FROM activites WHERE lieu_act = ? ";
         
         
 
         PreparedStatement pre = con.prepareStatement(req);
         pre.setString(1, Gouvernorat);
+        
         try (ResultSet rs = pre.executeQuery()) {
             while (rs.next()) {
                 activites activite = new activites();

@@ -5,6 +5,9 @@
  */
 package piedevcrudaziz.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import piedevcrudaziz.entity.activites;
 import piedevcrudaziz.entity.inscription;
 
 /**
@@ -16,5 +19,6 @@ interface Iserviceinscription<I> {
      void SupprimerAbonnement(int id);
      void Modifier_NbrTickets(int id , int nbr_tickes);
      void modifierins(inscription i);
+     List<inscription> chercherpariduser(Integer id_user);
     
 }

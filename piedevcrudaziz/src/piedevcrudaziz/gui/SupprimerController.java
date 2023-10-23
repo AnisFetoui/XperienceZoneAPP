@@ -48,8 +48,6 @@ public class SupprimerController implements Initializable {
         Statement ste;
 
     @FXML
-    private ImageView exit;
-    @FXML
     private AnchorPane slider;
     @FXML
     private Label menu;
@@ -107,7 +105,7 @@ public class SupprimerController implements Initializable {
         serviceactivites sa = new serviceactivites();
         ArrayList<activites> activitesTrouvees = sa.chercherpariduser(1);
         ObservableList<activites> activitesList = FXCollections.observableArrayList(sa.chercherpariduser(1));
-tableview.setItems(activitesList);
+        tableview.setItems(activitesList);
 
         act_col.setCellValueFactory(new PropertyValueFactory<>("nom_act"));
         des_col.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -154,7 +152,7 @@ tableview.setItems(activitesList);
     activites selectedItem = tableview.getSelectionModel().getSelectedItem();
     if (selectedItem != null) {
         
-        String nom = selectedItem.getNom_act();
+        int id = selectedItem.getId_act();
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmation ");
         alert.setHeaderText("Etes vous sur de vouloir supprimer cet activité?");
@@ -170,7 +168,7 @@ tableview.setItems(activitesList);
         alert.showAndWait().ifPresent(response -> {
             if (response == buttonTypeOK) {
                 serviceactivites  sa = new serviceactivites();
-                sa.supprimerActivite(nom);
+                sa.supprimerActivite(id);
                
                 tableview.getItems().remove(selectedItem);
             }
@@ -178,8 +176,8 @@ tableview.setItems(activitesList);
     }
 }
 
-      @FXML
- void openSupprimerPage(ActionEvent event) {
+    @FXML
+      void openSupprimerPage(ActionEvent event) {
         try {
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("supprimer.fxml"));
@@ -188,6 +186,7 @@ tableview.setItems(activitesList);
             // Create a new stage
             Stage stage = new Stage();
             stage.setTitle("Supprimer Page");
+             stage.setFullScreen(true);
             stage.setScene(new Scene(root));
 
             // Show the new stage
@@ -211,6 +210,7 @@ tableview.setItems(activitesList);
             // Create a new stage
             Stage stage = new Stage();
             stage.setTitle("Page d'acceuil ");
+             stage.setFullScreen(true);
             stage.setScene(new Scene(root));
 
             // Show the new stage
@@ -234,6 +234,7 @@ tableview.setItems(activitesList);
             // Create a new stage
             Stage stage = new Stage();
             stage.setTitle(" Page Ajouter");
+             stage.setFullScreen(true);
             stage.setScene(new Scene(root));
 
             // Show the new stage
@@ -257,6 +258,7 @@ tableview.setItems(activitesList);
             // Create a new stage
             Stage stage = new Stage();
             stage.setTitle("Page Modifier");
+             stage.setFullScreen(true);
             stage.setScene(new Scene(root));
 
             // Show the new stage

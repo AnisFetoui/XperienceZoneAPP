@@ -8,8 +8,12 @@ package piedevcrudaziz.service;
 import piedevcrudaziz.tools.MyDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import piedevcrudaziz.entity.activites;
 import piedevcrudaziz.entity.inscription;
 
@@ -97,7 +101,36 @@ public class serviceinscription implements Iserviceinscription<inscription>{
     }
 }
 
+@Override
+public ArrayList<inscription> chercherpariduser(Integer id_user) {
+    ArrayList<inscription> resultats = new ArrayList<>();
 
+    try {
+        String req = "SELECT * FROM inscription WHERE user_id = ?";
+        PreparedStatement pre = con.prepareStatement(req);
+        pre.setInt(1, id_user);
+        try (ResultSet rs = pre.executeQuery()) {
+            while (rs.next()) {
+                inscription a = new inscription();
+                a.setId_ins(rs.getInt("Id_ins"));
+                a.setActivite_id(rs.getInt("activite_id"));
+                java.sql.Date dateSql = rs.getDate("date_ins");
+                LocalDate date = dateSql.toLocalDate();
+                a.setDate_ins(date);
+                java.sql.Time timeSql = rs.getTime("heure_ins");
+                LocalTime time = timeSql.toLocalTime();
+                a.setHeure_ins(time);
+                a.setFrait_abonnement(rs.getDouble("frait_abonnement"));
+                a.setNbr_tickes(rs.getInt("nbr_tickes"));
+                resultats.add(a);
+            }
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex);
+    }
+
+    return resultats;
+}
 
 
 

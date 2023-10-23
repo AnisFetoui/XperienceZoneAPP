@@ -330,6 +330,7 @@ String Periode = debutdate + " - " + findate;
             // Create a new stage
             Stage stage = new Stage();
             stage.setTitle("Supprimer Page");
+             stage.setFullScreen(true);
             stage.setScene(new Scene(root));
 
             // Show the new stage
@@ -353,6 +354,7 @@ String Periode = debutdate + " - " + findate;
             // Create a new stage
             Stage stage = new Stage();
             stage.setTitle("Page d'acceuil ");
+             stage.setFullScreen(true);
             stage.setScene(new Scene(root));
 
             // Show the new stage
@@ -376,6 +378,7 @@ String Periode = debutdate + " - " + findate;
             // Create a new stage
             Stage stage = new Stage();
             stage.setTitle(" Page Ajouter");
+             stage.setFullScreen(true);
             stage.setScene(new Scene(root));
 
             // Show the new stage
@@ -399,6 +402,7 @@ String Periode = debutdate + " - " + findate;
             // Create a new stage
             Stage stage = new Stage();
             stage.setTitle("Page Modifier");
+             stage.setFullScreen(true);
             stage.setScene(new Scene(root));
 
             // Show the new stage

@@ -45,7 +45,7 @@ import piedevcrudaziz.tools.MyDB;
  * @author Med Aziz
  */
 public class AbonneractController implements Initializable {
-    Connection con; 
+        Connection con; 
          Statement ste;
 
     @FXML
@@ -82,20 +82,81 @@ public class AbonneractController implements Initializable {
     private Button btnreserver;
     String prixabonnement ;
     float resultat;
+     public int idAct;
+    @FXML
+    private ImageView loglog;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        updateUIBasedOnIdAct();
          SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,20, 0);
         spinnerticket.setValueFactory(valueFactory);
         
-                        int id_activite = 1;
-        try {
+                        
+       
+
+        WebEngine webEngine = mapView.getEngine();
+       //changer plus code avec address depuis database
+        String plusCode = "https://www.google.com/maps/place/Brown+Sugar+Coffee+Ariana+Soghra/@36.9022435,10.1854159,16z/data=!4m6!3m5!1s0x12e2cbd5ed9fcf5f:0xfa883b4dec99361c!8m2!3d36.9019827!4d10.1856296!16s%2Fg%2F11hfpbdmvq?entry=ttu";  
+        webEngine.load(plusCode);
+    
+      
+    }    
+
+    public AbonneractController() {
+        con = MyDB.getinstance().getCon();
+        
+    }
+
+       public void setIdAct(int code) {
+        idAct = code;
+           System.out.println(idAct);
+           updateUIBasedOnIdAct();
+       
+    }
+    
+    @FXML
+    private void Reserveact(ActionEvent event) throws IOException {
+        int id=idAct;
+        int nbrticket = spinnerticket.getValue();
+        String nom = nomactrev.getText();
+        String org = organisateurname.getText();
+        String dateac = dateperiode.getText();
+        String dateres = (LocalDate.now()).toString();
+        String heureres = (LocalTime.now()).toString();
+        String nbrdepersonne = Integer.toString(nbrticket);
+        
+        float numeric = Float.parseFloat(prixabonnement);
+        resultat = (float) (numeric * nbrticket);
+        String freeab = Float.toString(resultat);
+        
+        
+        
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("ticket.fxml"));
+        Parent targetPage = loader.load();
+        TicketController ticketController = loader.getController();
+        
+      ticketController.setData(nom, org, dateac, dateres, heureres, nbrdepersonne, freeab,id);
+    Scene scene = new Scene(targetPage);
+    Stage stage = new Stage();
+     stage.setFullScreen(true);
+    stage.setScene(scene);
+   
+    stage.show();
+     Stage currentStage = (Stage) btnreserver.getScene().getWindow();
+            currentStage.close();
+    }
+ 
+
+private void updateUIBasedOnIdAct() {
+        System.out.println(idAct); 
+         try {
         String req = "SELECT * FROM activites WHERE Id_act = ?";        
         PreparedStatement pre = con.prepareStatement(req);
-        pre.setInt(1, id_activite);
+        pre.setInt(1, idAct);
         try (ResultSet rs = pre.executeQuery()) {
             while (rs.next()) {
                 activites activite = new activites();
@@ -118,45 +179,37 @@ public class AbonneractController implements Initializable {
     } catch (SQLException ex) {
         System.out.println(ex);
     }
-
-        WebEngine webEngine = mapView.getEngine();
-       //changer plus code avec address depuis database
-        String plusCode = "https://www.google.com/maps/place/Brown+Sugar+Coffee+Ariana+Soghra/@36.9022435,10.1854159,16z/data=!4m6!3m5!1s0x12e2cbd5ed9fcf5f:0xfa883b4dec99361c!8m2!3d36.9019827!4d10.1856296!16s%2Fg%2F11hfpbdmvq?entry=ttu";  
-        webEngine.load(plusCode);
-    
-      
-    }    
-
-    public AbonneractController() {
-        con = MyDB.getinstance().getCon();
-    }
-
+        
+       
+}
 
     @FXML
-    private void Reserveact(ActionEvent event) throws IOException {
-        int nbrticket = spinnerticket.getValue();
-        String nom = nomactrev.getText();
-        String org = organisateurname.getText();
-        String dateac = dateperiode.getText();
-        String dateres = (LocalDate.now()).toString();
-        String heureres = (LocalTime.now()).toString();
-        String nbrdepersonne = Integer.toString(nbrticket);
+    private void backhom(MouseEvent event) {
         
-        float numeric = Float.parseFloat(prixabonnement);
-        resultat = (float) (numeric * nbrticket);
-        String freeab = Float.toString(resultat);
+          try {
+            // Load the FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("activité.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setTitle("Page d'acceuil ");
+             stage.setFullScreen(true);
+            stage.setScene(new Scene(root));
+
+            // Show the new stage
+            stage.show();
+
+            // Close the current stage (if needed)
+            Stage currentStage = (Stage) loglog.getScene().getWindow();
+            currentStage.close();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle any exceptions here
+        }
         
         
-        
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("ticket.fxml"));
-        Parent targetPage = loader.load();
-        TicketController ticketController = loader.getController();
-        
-      ticketController.setData(nom, org, dateac, dateres, heureres, nbrdepersonne, freeab);
-    Scene scene = new Scene(targetPage);
-    Stage stage = new Stage();
-    stage.setScene(scene);
-    stage.show();
     }
-    
+
+
+
 }

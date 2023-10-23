@@ -173,16 +173,22 @@ ObservableList<String> lista = FXCollections.observableArrayList(
          
    
     for (activites foundActivity : foundActivities) {
+        int codeact = foundActivity.getId_act();
         String foundName = foundActivity.getNom_act();
         String foundOrganisateur = foundActivity.getOrganisateur();
         String foundPrix = foundActivity.getPrix_act();
+        int nbrparticipant = foundActivity.getPlace_dispo();
+        String villeactivite = foundActivity.getLieu_act();
         
      
         activites newActivite = new activites();
+        newActivite.setId_act(codeact);
         newActivite.setNom_act(foundName);
         newActivite.setOrganisateur(foundOrganisateur);
         newActivite.setPrix_act(foundPrix);
         newActivite.setImages("/images/parachute.jpg");
+        newActivite.setLieu_act(villeactivite);
+        newActivite.setPlace_dispo(nbrparticipant);
         
        
         activitestrouveé.add(newActivite);
@@ -203,7 +209,7 @@ ObservableList<String> lista = FXCollections.observableArrayList(
             CardController cardcontroller = fxmlloader.getController();
             cardcontroller.setData(card);
 
-            if (column == 4) {
+            if (column == 2) {
                 column = 0;
                 ++row;
             }
@@ -217,8 +223,39 @@ ObservableList<String> lista = FXCollections.observableArrayList(
     
     @FXML
     private void selectG(ActionEvent event) {
-        String s = combo.getSelectionModel().getSelectedItem().toString();
-        alert.setText(s);
+       
+         activitestrouveé.clear();
+    
+        
+         String name = combo.getSelectionModel().getSelectedItem().toString();
+        serviceactivites sa = new serviceactivites();
+         List<activites> ls = new ArrayList<>(); 
+         ArrayList<activites> foundActivities = sa.chercherparlieu(name);
+         
+   
+    for (activites foundActivity : foundActivities) {
+        int codeact = foundActivity.getId_act();
+        String foundName = foundActivity.getNom_act();
+        String foundOrganisateur = foundActivity.getOrganisateur();
+        String foundPrix = foundActivity.getPrix_act();
+        int nbrparticipant = foundActivity.getPlace_dispo();
+        String villeactivite = foundActivity.getLieu_act();
+        
+     
+        activites newActivite = new activites();
+        newActivite.setId_act(codeact);
+        newActivite.setNom_act(foundName);
+        newActivite.setOrganisateur(foundOrganisateur);
+        newActivite.setPrix_act(foundPrix);
+        newActivite.setImages("/images/parachute.jpg");
+        newActivite.setLieu_act(villeactivite);
+        newActivite.setPlace_dispo(nbrparticipant);
+        
+       
+        activitestrouveé.add(newActivite);
+    }
+    updateUIWithNewActivities();
+       
     }
 
  
@@ -248,6 +285,7 @@ ObservableList<String> lista = FXCollections.observableArrayList(
             // Create a new stage
             Stage stage = new Stage();
             stage.setTitle("Supprimer Page");
+             stage.setFullScreen(true);
             stage.setScene(new Scene(root));
 
             // Show the new stage
@@ -273,6 +311,7 @@ ObservableList<String> lista = FXCollections.observableArrayList(
             // Create a new stage
             Stage stage = new Stage();
             stage.setTitle(" Page Ajouter");
+             stage.setFullScreen(true);
             stage.setScene(new Scene(root));
 
             // Show the new stage
@@ -296,6 +335,7 @@ ObservableList<String> lista = FXCollections.observableArrayList(
             // Create a new stage
             Stage stage = new Stage();
             stage.setTitle("Page Modifier");
+             stage.setFullScreen(true);
             stage.setScene(new Scene(root));
 
             // Show the new stage

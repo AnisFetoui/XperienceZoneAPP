@@ -27,9 +27,11 @@ public class gactivite extends Application {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().
-                    getResource("activité.fxml"));
+                    getResource("mesinscription.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("ajouter activite");
+            primaryStage.setFullScreen(true);
+            primaryStage.setFullScreenExitHint("Press ESC to exit full screen");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {
