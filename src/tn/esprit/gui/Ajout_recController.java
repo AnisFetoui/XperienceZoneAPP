@@ -37,6 +37,13 @@ import tn.esprit.entities.User;
 import tn.esprit.entities.activites;
 import tn.esprit.services.ServiceReclamation;
 import  tn.esprit.gui.CustomListCell;
+import com.mewebstudio.captcha.Captcha;
+import com.mewebstudio.captcha.GeneratedCaptcha;
+import java.awt.image.BufferedImage;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -48,8 +55,16 @@ public class Ajout_recController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    String expectedCaptchaAnswer ;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        captcha = new Captcha();
+    GeneratedCaptcha generatedcaptcha = captcha.generate();
+     expectedCaptchaAnswer = generatedcaptcha.getCode();
+    BufferedImage bufferedImage = generatedcaptcha.getImage();
+    Image captchaImage = SwingFXUtils.toFXImage(bufferedImage, null);
+    captchaImageView.setImage(captchaImage);
     typeR.getItems().removeAll(typeR.getItems());
     typeR.getItems().addAll("Réclamation liés aux produits", "Réclamation liés aux évènements", "Réclamation liés aux activités");
        typeR.setOnAction(event -> {
@@ -73,7 +88,7 @@ public class Ajout_recController implements Initializable {
     listPROD.setCellFactory((ListView<Produit> param) -> new CustomListCell<Produit>());
     listACT.setCellFactory((ListView<activites> param) -> new CustomListCell<activites>());
     }    
-
+private Captcha captcha;
     @FXML
     private void annulerR(ActionEvent event) throws IOException {
          Parent root = FXMLLoader.load(getClass().getResource("homeUser.fxml"));
@@ -82,10 +97,29 @@ public class Ajout_recController implements Initializable {
     stage.setScene(scene);
     stage.show();
 }
-    
+    GeneratedCaptcha generatedCaptcha;
         @FXML
     private void validerAjout(ActionEvent event) throws IOException {
-       ajouterReclamation();
+        
+  String userCaptchaResponse = captchaTextField.getText(); // Obtenez la réponse de l'utilisateur
+
+    if (userCaptchaResponse.isEmpty()) {
+        captchaErrorLabel.setText("Veuillez entrer la réponse CAPTCHA.");
+        return;
+    }
+
+    // Obtenez la réponse du CAPTCHA généré précédemment
+     // Assurez-vous que cette variable est accessible
+
+    if (userCaptchaResponse.equals(expectedCaptchaAnswer)) {
+        // La réponse CAPTCHA est correcte, continuez à ajouter la réclamation
+        captchaErrorLabel.setText(""); // Effacez tout message d'erreur
+         ajouterReclamation();
+    } else {
+        // Réponse CAPTCHA incorrecte, affichez un message d'erreur
+        captchaErrorLabel.setText("Réponse CAPTCHA incorrecte. Veuillez réessayer.");
+    }
+      
 }
     
     
@@ -109,6 +143,12 @@ public class Ajout_recController implements Initializable {
     private ListView<Produit> listPROD;
     @FXML
     private Button choixref;
+    @FXML
+    private ImageView captchaImageView;
+    @FXML
+    private TextField captchaTextField;
+    @FXML
+    private Label captchaErrorLabel;
     
 
 

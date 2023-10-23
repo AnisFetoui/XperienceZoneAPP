@@ -102,6 +102,9 @@ public class mainR {
 //        service.supprimerT(16);
 //        System.out.println("traitement supprimée : " + traitement.getIdT());
 
+//           Traitement trait =  service.getTraitementParIdReclamation(12);
+//           System.out.println("traitement  : " + trait.getIdT());
+
         
 //        List<Traitement> traitement1 = service.afficherT();
 //        System.out.println("Liste des traitements :");

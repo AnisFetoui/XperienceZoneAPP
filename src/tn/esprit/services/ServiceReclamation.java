@@ -15,7 +15,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import tn.esprit.entities.Categorie;
@@ -417,4 +419,89 @@ public void ajouterevenement(Evenement r) {
       }
        
  } 
+       
+
+
+    // Méthode pour obtenir les statistiques de réclamations par type
+    public Map<Integer, Integer> getReclamationStatistics() {
+        // Créer une connexion à la base de données
+        
+
+        // Map pour stocker les statistiques
+        Map<Integer, Integer> statistics = new HashMap<>();
+
+        // Requête SQL pour compter les réclamations par type
+        String query = "SELECT typeRec, COUNT(*) AS count FROM réclamations GROUP BY typeRec";
+
+        try (PreparedStatement statement = con.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                int typeRec = resultSet.getInt("typeRec");
+                int count = resultSet.getInt("count");
+                statistics.put(typeRec, count);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+      
+
+        return statistics;
+    }
+public Traitement getTraitementParIdReclamation(int idReclamation) throws SQLException {
+    Traitement traitement = null;
+
+    try {
+        String query = "SELECT * FROM traitements WHERE idrec = ?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idReclamation);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    traitement = new Traitement();
+                    traitement.setIdT(resultSet.getInt("idT"));
+                    traitement.setIdrec(resultSet.getInt("idrec"));
+                    traitement.setIdU(resultSet.getInt("idU"));
+                    traitement.setRefobj(resultSet.getInt("refobj"));
+                    traitement.setDateR(resultSet.getDate("dateR"));
+                    traitement.setTypeR(resultSet.getInt("typeR"));
+                    traitement.setResume(resultSet.getString("resume"));
+                    traitement.setStat(resultSet.getString("stat"));
+                }
+            }
+        }
+    } catch (SQLException ex) {
+        // Gérez l'exception appropriée ici, par exemple, journalisez ou renvoyez null
+        ex.printStackTrace(); // Journalisation de l'exception
+        throw ex; // Vous pouvez également lancer l'exception à l'appelant si nécessaire
+    }
+
+    return traitement;
 }
+  
+
+  public Map<String, Integer> getTraitementStatistics() {
+        // Créer une connexion à la base de données
+        
+
+        // Map pour stocker les statistiques
+        Map<String, Integer> statisticsT = new HashMap<>();
+
+        // Requête SQL pour compter les réclamations par type
+        String query = "SELECT stat, COUNT(*) AS count FROM traitements GROUP BY stat";
+
+        try (PreparedStatement statement = con.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                String stat = resultSet.getString("stat");
+                int count = resultSet.getInt("count");
+                statisticsT.put(stat, count);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return statisticsT;
+}
+}
+

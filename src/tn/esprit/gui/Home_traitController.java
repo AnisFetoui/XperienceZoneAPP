@@ -7,7 +7,11 @@ package tn.esprit.gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +24,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tn.esprit.entities.Reclamation;
@@ -45,6 +51,7 @@ public class Home_traitController implements Initializable {
 private ListView<Reclamation> listNT;
         @FXML
 private ListView<Traitement> listT;
+ 
 
     @FXML
     private void rec_home(ActionEvent event) throws IOException {
@@ -183,4 +190,87 @@ public void actualiserListViewNT(ActionEvent event) {
     stage.setScene(scene);
     stage.show();
 }
+    
+  public void afficher_trait_select(MouseEvent event) throws IOException, SQLException {
+        Reclamation reclamationSelectionnee = listNT.getSelectionModel().getSelectedItem();
+
+    if (reclamationSelectionnee != null) {
+        
+        int idReclamation = reclamationSelectionnee.getIdR();
+        chargerTraitements(idReclamation); 
+    }
+  }
+    
+    private void chargerTraitements(int idReclamation) throws SQLException {
+    ServiceReclamation service = new ServiceReclamation();
+    List<Traitement> traitementsReclamation = new ArrayList<>();
+    Traitement traitement = service.getTraitementParIdReclamation(idReclamation);
+
+    if (traitement != null && traitement instanceof Traitement) {
+        traitementsReclamation.add(traitement);
+      
+    }
+
+    ObservableList<Traitement> traitements = FXCollections.observableArrayList(traitementsReclamation);
+    listT.setItems(traitements);
+}
+
+    
+ @FXML
+private void handleVoirStatistiquesButtonT(ActionEvent event) throws IOException {
+    // Chargez la nouvelle interface des statistiques
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("statT.fxml"));
+    Parent root = loader.load();
+
+    // Obtenez le contrôleur de la nouvelle interface
+    StatTController StatsTController = loader.getController();
+
+    // Calculez les statistiques et mettez-les à jour dans le contrôleur de statistiques
+    ServiceReclamation stats = new ServiceReclamation();
+    Map<String, Integer> statistics = stats.getTraitementStatistics();
+
+    // Transformez les statistiques en un format compatible avec la PieChart
+    Map<String, Integer> pieChartData = new HashMap<>();
+
+    for (Map.Entry<String, Integer> entry : statistics.entrySet()) {
+        String stat = entry.getKey();
+        int count = entry.getValue();
+
+        pieChartData.put(stat, count);
+    }
+
+    // Mettez à jour la PieChart dans le contrôleur de statistiques
+
+    StatsTController.updatePieChart(pieChartData);
+    
+       
+
+    // Mettez à jour le texte dans l'espace de texte
+    StringBuilder resultText = new StringBuilder("Statistiques des traitements :\n\n");
+    for (Map.Entry<String, Integer> entry : statistics.entrySet()) {
+        String stat = entry.getKey();
+        int count = entry.getValue();
+        resultText.append("Traitement ").append(stat).append("  : ").append(count).append(" traitements\n");
+    }
+    StatsTController.setStatisticsTextT(resultText.toString());
+    
+
+    // Affichez la nouvelle interface des statistiques dans une nouvelle fenêtre
+    Stage statisticsStage = new Stage();
+    statisticsStage.setScene(new Scene(root));
+    statisticsStage.setTitle("Statistiques des traitements");
+    statisticsStage.show();
+}
+
+
+
+
+
+
+
+
+
+
+
+
 }

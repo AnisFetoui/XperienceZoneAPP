@@ -8,6 +8,7 @@ package tn.esprit.gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -135,5 +137,48 @@ public void supprimerReclamation(ActionEvent event) throws IOException {
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
     stage.show();
+}
+    
+    
+     @FXML
+    private Hyperlink voirStatistiquesButton;
+
+    @FXML
+    private void handleVoirStatistiquesButton(ActionEvent event) throws IOException {
+        // Chargez la nouvelle interface des statistiques
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("stats.fxml"));
+        Parent root = loader.load();
+
+        // Obtenez le contrôleur de la nouvelle interface
+        StatsController StatsController = loader.getController();
+
+        // Calculez les statistiques et mettez-les à jour dans le contrôleur de statistiques
+        ServiceReclamation stats = new ServiceReclamation();
+        Map<Integer, Integer> statistics = stats.getReclamationStatistics();
+        StringBuilder resultText = new StringBuilder("Statistiques des réclamations :\n\n");
+        for (Map.Entry<Integer, Integer> entry : statistics.entrySet()) {
+            int typeRec = entry.getKey();
+            int count = entry.getValue();
+            resultText.append(convertirTypeReclamationInverse(typeRec)).append(": ").append(count).append(" réclamations\n");
+        }
+        StatsController.setStatisticsText(resultText.toString());
+        StatsController.updateChart(statistics);
+
+        // Affichez la nouvelle interface des statistiques dans une nouvelle fenêtre
+        Stage statisticsStage = new Stage();
+        statisticsStage.setScene(new Scene(root));
+        statisticsStage.setTitle("Statistiques des réclamations");
+        statisticsStage.show();
+    }
+    
+        public String convertirTypeReclamationInverse(int typeRec) {
+    
+    String[] types = {"Réclamation liés aux produits", "Réclamation liés aux évènements", "Réclamation liés aux activités"};
+
+    if (typeRec >= 1 && typeRec <= types.length) {
+        return types[typeRec - 1]; 
+    } else {
+        return "Type de réclamation non valide"; 
+    }
 }
 }
