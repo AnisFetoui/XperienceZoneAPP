@@ -38,6 +38,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -82,6 +83,14 @@ public class ActivitéController implements Initializable {
     private Button pagemodifier;
     @FXML
     private Button pagesupprimer;
+    @FXML
+    private Button meteo;
+    @FXML
+    private AnchorPane meteopane;
+    @FXML
+    private ImageView i1;
+    @FXML
+    private ImageView i2;
 
     
     /**
@@ -98,6 +107,8 @@ public class ActivitéController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         slider.setTranslateX(-210);
+        meteopane.setTranslateX(400);
+        
         menu.setVisible(true);
         activitestrouveé = new ArrayList<>();
 
@@ -295,6 +306,32 @@ ObservableList<String> lista = FXCollections.observableArrayList(
             currentStage.close();
         } catch (Exception e) {
             e.printStackTrace(); // Handle any exceptions here
+        }
+    }
+
+    @FXML
+    private void loadmeteo(ActionEvent event) {
+         TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.4));
+        slide.setNode(meteopane);
+        if( meteopane.getTranslateX()== 0){
+        i1.setVisible(true);
+        i2.setVisible(true);
+        slide.setToX(400);
+       
+        slide.play();
+        }else{
+             i1.setVisible(false);
+        i2.setVisible(false);
+            slide.setToX(0);
+        slide.play();
+        }
+         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("weather.fxml"));
+            Parent cardContent = loader.load();
+            meteopane.getChildren().setAll(cardContent);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
         

@@ -11,14 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="piedevcrudaziz.gui.WeatherController">
+<VBox styleClass="ancho" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="piedevcrudaziz.gui.WeatherController">
    <children>
-      <AnchorPane id="AnchorPane" prefHeight="380.0" prefWidth="400.0" styleClass="ancho" stylesheets="@../../css/style.css">
+      <AnchorPane id="AnchorPane" prefHeight="380.0" prefWidth="400.0" style="-fx-background-color: #ECF2FF;" stylesheets="@../../css/style.css">
          <children>
             <Pane layoutY="180.0" prefHeight="100.0" prefWidth="400.0" style="-fx-background-color: #2E3335;" styleClass="ancho-pane" stylesheets="@../../css/style.css" AnchorPane.bottomAnchor="1.0">
                <children>
-                  <VBox layoutX="25.0" prefHeight="100.0" prefWidth="254.0">
+                  <VBox alignment="CENTER" layoutX="-6.0" prefHeight="100.0" prefWidth="407.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
@@ -44,7 +43,7 @@
                   </VBox>
                </children>
             </Pane>
-            <ImageView fx:id="image" fitHeight="162.0" fitWidth="174.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="image" fitHeight="172.0" fitWidth="172.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/02d.png" />
                </image>

@@ -75,9 +75,13 @@
 }
 .ancho{
 -fx-background-radius:10px;
+-fx-background-radius:10px 10px 0px 0px ;
 }
 .ancho-pane{
 -fx-background-radius:0px 0px 10px 10px;
 }
-
+.btnmet{
+      -fx-background-color: #87CEEB;
+    -fx-background-radius: 50;
+}
 
