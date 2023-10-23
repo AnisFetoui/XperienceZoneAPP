@@ -3,16 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/service/Iserviceinscription.java</file>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/ModifieractiviteController.java</file>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/service/serviceinscription.java</file>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/entity/inscription.java</file>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/card.fxml</file>
+            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/CardController.java</file>
+            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/AbonneractController.java</file>
+            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/service/UService.java</file>
             <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/ActivitéController.java</file>
             <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/AjouterController.java</file>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/css/style.css</file>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/SupprimerController.java</file>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/test/Piedevcrudaziz.java</file>
+            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/gactivite.java</file>
+            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/ajouter.fxml</file>
         </group>
     </open-files>
 </project-private>

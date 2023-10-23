@@ -138,7 +138,7 @@ public class AjouterController implements Initializable {
          datedebut.setValue(LocalDate.of(1999, 01, 01));
         datefin.setValue(LocalDate.of(1999, 01, 01));
         slider.setTranslateX(0);
-        imagesslider.setTranslateX(-1203);
+        imagesslider.setTranslateX(-1300);
         
         menuclose.setVisible(true);
         menu.setVisible(false);
@@ -404,11 +404,11 @@ combobox.setItems(lista);
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.4));
         slide.setNode(imagesslider);
-        if( imagesslider.getTranslateX()== -1203){
+        if( imagesslider.getTranslateX()== -1300){
         slide.setToX(0);
         slide.play();
         }else{
-            slide.setToX(-1203);
+            slide.setToX(-1300);
         slide.play();
         }
         
@@ -444,11 +444,11 @@ combobox.setItems(lista);
          TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.4));
         slide.setNode(imagesslider);
-        if( imagesslider.getTranslateX()== -1203){
+        if( imagesslider.getTranslateX()== -1300){
         slide.setToX(0);
         slide.play();
         }else{
-            slide.setToX(-1203);
+            slide.setToX(-1300);
         slide.play();
         }
       

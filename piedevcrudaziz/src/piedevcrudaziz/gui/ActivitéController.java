@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import java.io.IOException;
 
 import java.net.URL;
+import java.net.HttpURLConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
