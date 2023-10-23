@@ -103,26 +103,26 @@ public void modifierReclamation(ActionEvent event) throws IOException {
 }
 
 
-public void supprimerReclamation(ActionEvent event) {
+public void supprimerReclamation(ActionEvent event) throws IOException {
     
     Reclamation reclamationSelectionnee = list_rec.getSelectionModel().getSelectedItem();
 
     if (reclamationSelectionnee != null) {
         
         int idReclamation = reclamationSelectionnee.getIdR();
+        
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("conf_suppR.fxml"));
+        Parent root = loader.load();
+        Conf_suppRController controller = loader.getController();
+        controller.initS(idReclamation);
 
-        
-        ServiceReclamation serviceReclamation = new ServiceReclamation();
-        serviceReclamation.supprimerR(idReclamation);
-        
-        Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
-        confirmation.setTitle("Suppression réussie");
-        confirmation.setHeaderText(null);
-        confirmation.setContentText("La réclamation a été suprimée avec succès.");
-        confirmation.showAndWait();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(root));
+        stage.showAndWait(); 
 
-        
-        actualiserListViewR(event);
+ 
     } else {
        
     }

@@ -16,11 +16,21 @@ public class MainFXML extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("homeAdmin.fxml"));
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("homeAdmin.fxml"));
+//        Parent root = loader.load();
+//
+//        
+//        HomeAdminController controller = loader.getController();
+//
+//        primaryStage.setTitle("XperienceZone");
+//        primaryStage.setScene(new Scene(root));
+//        primaryStage.show();
+
+   FXMLLoader loader = new FXMLLoader(getClass().getResource("homeUser.fxml"));
         Parent root = loader.load();
 
         
-        HomeAdminController controller = loader.getController();
+        HomeUserController controller = loader.getController();
 
         primaryStage.setTitle("XperienceZone");
         primaryStage.setScene(new Scene(root));

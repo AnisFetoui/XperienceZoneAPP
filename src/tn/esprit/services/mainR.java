@@ -36,7 +36,7 @@ public class mainR {
 //        
 //        
 //               
-//        activites activite1 = new activites("parachute", "joindre nous","xperiencezone", "Tabarka","zone touristique rue 15+ 2358","00",2, "26.00",2,"20/10/2023 - 13/11/2023");
+//        activites activite1 = new activites("paddle", "joindre nous","xperiencezone", "Tabarka","zone touristique rue 15+ 2358","00",2, "26.00",2,"20/10/2023 - 13/11/2023",6);
 //        service.ajouterActivite(activite1);
 //        System.out.println(service.afficherA());
 
@@ -103,11 +103,11 @@ public class mainR {
 //        System.out.println("traitement supprimée : " + traitement.getIdT());
 
         
-        List<Traitement> traitement1 = service.afficherT();
-        System.out.println("Liste des traitements :");
-        for (Traitement t : traitement1) {
-            System.out.println(t.getIdT() + ": " + t.getIdU() + " " + t.getIdrec());
-        }
+//        List<Traitement> traitement1 = service.afficherT();
+//        System.out.println("Liste des traitements :");
+//        for (Traitement t : traitement1) {
+//            System.out.println(t.getIdT() + ": " + t.getIdU() + " " + t.getIdrec());
+//        }
 //        
 //Ajoutez la réclamation
 //        service.ajouterR(nouvelleReclamation);

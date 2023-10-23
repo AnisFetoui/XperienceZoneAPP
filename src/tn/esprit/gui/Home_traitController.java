@@ -150,7 +150,7 @@ public void actualiserListViewNT(ActionEvent event) {
     
     
     
-    public void supprimerTraitement(ActionEvent event) {
+    public void supprimerTraitement(ActionEvent event) throws IOException {
     
     Traitement traitementSelectionnee = listT.getSelectionModel().getSelectedItem();
 
@@ -158,18 +158,18 @@ public void actualiserListViewNT(ActionEvent event) {
         
         int idTrait = traitementSelectionnee.getIdT();
 
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("conf_suppT.fxml"));
+        Parent root = loader.load();
+        Conf_suppTController controller = loader.getController();
+        controller.initST(idTrait);
         
-        ServiceReclamation serviceReclamation = new ServiceReclamation();
-        serviceReclamation.supprimerT(idTrait);
-        
-                Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
-        confirmation.setTitle("Suppression réussie");
-        confirmation.setHeaderText(null);
-        confirmation.setContentText("Le traitement a été suprimée avec succès.");
-        confirmation.showAndWait();
+          Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(root));
+        stage.showAndWait(); 
 
         
-        actualiserListViewT(event);
+        
     } else {
        
     }

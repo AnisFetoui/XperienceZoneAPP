@@ -21,8 +21,9 @@ public class activites {
     private String prix_act;
     private int durée;
     private String periode;
+    private int id_user;
 
-    public activites(int Id_act, String nom_act, String description, String organisateur, String lieu_act, String adresse, String images, int place_dispo, String prix_act, int durée, String periode) {
+    public activites(int Id_act, String nom_act, String description, String organisateur, String lieu_act, String adresse, String images, int place_dispo, String prix_act, int durée, String periode, int id_user) {
         this.Id_act = Id_act;
         this.nom_act = nom_act;
         this.description = description;
@@ -34,9 +35,10 @@ public class activites {
         this.prix_act = prix_act;
         this.durée = durée;
         this.periode = periode;
+        this.id_user = id_user;
     }
 
-    public activites(String nom_act, String description, String organisateur, String lieu_act, String adresse, String images, int place_dispo, String prix_act, int durée, String periode) {
+    public activites(String nom_act, String description, String organisateur, String lieu_act, String adresse, String images, int place_dispo, String prix_act, int durée, String periode, int id_user) {
         this.nom_act = nom_act;
         this.description = description;
         this.organisateur = organisateur;
@@ -47,8 +49,10 @@ public class activites {
         this.prix_act = prix_act;
         this.durée = durée;
         this.periode = periode;
+        this.id_user = id_user;
     }
-   
+
+
     
 
 
@@ -105,6 +109,10 @@ public class activites {
         return periode;
     }
 
+    public int getId_user() {
+        return id_user;
+    }
+
 
 
     public void setId_act(int Id_act) {
@@ -151,10 +159,17 @@ public class activites {
         this.periode = periode;
     }
 
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
     @Override
     public String toString() {
-        return "activites{" + "Id_act=" + Id_act + ", nom_act=" + nom_act + ", description=" + description + ", organisateur=" + organisateur + ", lieu_act=" + lieu_act + ", adresse=" + adresse + ", images=" + images + ", place_dispo=" + place_dispo + ", prix_act=" + prix_act + ", dur\u00e9e=" + durée + ", periode=" + periode + '}';
+        return "activites{" + "Id_act=" + Id_act + ", nom_act=" + nom_act + ", description=" + description + ", organisateur=" + organisateur + ", lieu_act=" + lieu_act + ", adresse=" + adresse + ", images=" + images + ", place_dispo=" + place_dispo + ", prix_act=" + prix_act + ", dur\u00e9e=" + durée + ", periode=" + periode + ", id_user=" + id_user + '}';
     }
+    
+    
+
 
 
 

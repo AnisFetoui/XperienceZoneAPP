@@ -13,12 +13,12 @@
          </font>
       </Text>
       <Text fill="#7c7676" layoutX="41.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Êtes vous sûr de vouloir supprimer ce traitement ?" />
-      <Button layoutX="560.0" layoutY="194.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="79.0" text="Oui">
+      <Button fx:id="ouiST" layoutX="560.0" layoutY="194.0" mnemonicParsing="false" onAction="#suppT" prefHeight="35.0" prefWidth="79.0" text="Oui">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button layoutX="459.0" layoutY="194.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="79.0" text="Non">
+      <Button fx:id="nonST" layoutX="459.0" layoutY="194.0" mnemonicParsing="false" onAction="#retourHome_trait" prefHeight="35.0" prefWidth="79.0" text="Non">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

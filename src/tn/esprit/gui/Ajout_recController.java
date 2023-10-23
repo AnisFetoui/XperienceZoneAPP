@@ -29,6 +29,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import mail.MailSender;
 import tn.esprit.entities.Evenement;
 import tn.esprit.entities.Produit;
 import tn.esprit.entities.Reclamation;
@@ -163,7 +164,13 @@ try {
         reclamation.setDetails(details);
 
         
+        boolean emailSent = MailSender.sendReclamationEmail(email,dateREC, typeRec, refObject, details);
 
+if (emailSent) {
+    // Le courrier électronique a été envoyé avec succès
+} else {
+    // Échec de l'envoi du courrier électronique
+}
         service.ajouterR(reclamation);
         
         Alert confirmation = new Alert(Alert.AlertType.INFORMATION);

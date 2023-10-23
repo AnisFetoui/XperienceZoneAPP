@@ -275,6 +275,7 @@ public void modifierR(Reclamation r) {
                 r.setPrix_act(rs.getString("prix_act"));
                 r.setDurée(rs.getInt("durée"));
                 r.setPeriode(rs.getString("periode"));
+                r.setId_user(rs.getInt("id_user"));
                 
                 
                 activite.add(r);
@@ -330,7 +331,7 @@ public List<Produit> affihcer() {
     
        public void ajouterActivite(activites a) {
         try {
-            String req = "INSERT INTO activites (nom_act, description, organisateur,lieu_act,adresse,images, place_dispo, prix_act,durée,periode)values(?,?,?,?,?,?,?,?,?,?)";
+            String req = "INSERT INTO activites (nom_act, description, organisateur,lieu_act,adresse,images, place_dispo, prix_act,durée,periode,id_user)values(?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pre = con.prepareStatement(req);
             pre.setString(1, a.getNom_act());
             pre.setString(2, a.getDescription());
@@ -342,7 +343,7 @@ public List<Produit> affihcer() {
             pre.setString(8, a.getPrix_act());
             pre.setInt(9, a.getDurée());
             pre.setString(10, a.getPeriode());
-//            pre.setInt(11,1);//lajout de id user
+            pre.setInt(11,a.getId_user());//lajout de id user
             //ajouter la fonction de anis connexion pour recuperer lid du utilisateur connecté
             pre.executeUpdate();
             
