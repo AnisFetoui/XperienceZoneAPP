@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="670.0" prefWidth="984.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ModifierProduitController">
+   <children>
+      <TextField fx:id="nomprodmodif" layoutX="673.0" layoutY="107.0" />
+      <TextField fx:id="prixpromodif" layoutX="673.0" layoutY="155.0" />
+      <TextArea fx:id="despromodif" layoutX="673.0" layoutY="211.0" prefHeight="65.0" prefWidth="187.0" />
+      <TextField fx:id="quantitepromodif" layoutX="669.0" layoutY="299.0" />
+      <ChoiceBox fx:id="choixpmodif" layoutX="673.0" layoutY="359.0" prefHeight="31.0" prefWidth="187.0" />
+      <Button layoutX="399.0" layoutY="487.0" mnemonicParsing="false" onAction="#chooseImage" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: #74da39;" text="choose image" />
+      <ImageView fx:id="image_view" fitHeight="150.0" fitWidth="200.0" layoutX="673.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="image_label" layoutX="848.0" layoutY="596.0" />
+      <Button layoutX="403.0" layoutY="606.0" mnemonicParsing="false" onAction="#modifierProduit" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: #74da39;" text="modifier" />
+      <Text fill="#393333" layoutX="373.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom Produit">
+         <font>
+            <Font name="Book Antiqua" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#3c3838" layoutX="379.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix Produit">
+         <font>
+            <Font name="Book Antiqua" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#433f3f" layoutX="379.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description Produit">
+         <font>
+            <Font name="Book Antiqua" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#3c3b3b" layoutX="373.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Quantite Produit">
+         <font>
+            <Font name="Book Antiqua" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#3c3a3a" layoutX="379.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie">
+         <font>
+            <Font name="Book Antiqua" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#74da39" fontSmoothingType="LCD" layoutX="14.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier Produit" textAlignment="CENTER" wrappingWidth="303.68310546875">
+         <font>
+            <Font name="Book Antiqua" size="36.0" />
+         </font>
+      </Text>
+      <HBox layoutY="-1.0" prefHeight="98.0" prefWidth="984.0" style="-fx-background-color: #354230 #354230;">
+         <children>
+            <Label fx:id="menuclose" onMouseClicked="#onmenuclickedclose" text="ME..." textFill="#61ee36">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" top="50.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="menu" onMouseClicked="#onmenuclicked" text="MENU" textFill="#2eda10">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="-50.0" top="50.0" />
+               </HBox.margin>
+            </Label>
+            <ImageView fitHeight="85.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="30.0" top="10.0" />
+               </HBox.margin>
+               <image>
+                  <Image url="@../image/385496021_292791893519238_8577172701520959440_n.png" />
+               </image>
+            </ImageView>
+            <Button mnemonicParsing="false" style="-fx-background-color: #354230;" text="Produit" textFill="#6ed724">
+               <HBox.margin>
+                  <Insets left="40.0" top="50.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: #354230;" text="Evenements" textFill="WHITE">
+               <HBox.margin>
+                  <Insets left="40.0" top="50.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: #354230;" text="Activités" textFill="WHITE">
+               <HBox.margin>
+                  <Insets left="40.0" top="50.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: #354230;" text="Réclamations" textFill="WHITE">
+               <HBox.margin>
+                  <Insets left="40.0" top="50.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: #354230;" text="Channel" textFill="WHITE">
+               <HBox.margin>
+                  <Insets left="40.0" top="50.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <VBox fx:id="slider" layoutY="258.0" prefHeight="411.0" prefWidth="251.0">
+         <children>
+            <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#Retour" prefHeight="31.0" prefWidth="130.0" style="-fx-background-color: #74da39;" styleClass="btn" stylesheets="@style.css" text="Nos produit">
+               <VBox.margin>
+                  <Insets top="100.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
