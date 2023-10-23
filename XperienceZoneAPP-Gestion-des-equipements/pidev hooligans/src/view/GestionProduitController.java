@@ -6,6 +6,7 @@
 package view;
 
 import classes.Produit;
+import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -263,7 +264,9 @@ private void setOnMouseClicked(ActionEvent event) {
                             .showWarning();
                     }
                 }
-}}
+}
+
+}
         
 
 

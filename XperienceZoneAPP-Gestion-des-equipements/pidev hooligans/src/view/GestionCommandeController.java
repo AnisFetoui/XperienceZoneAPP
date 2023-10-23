@@ -5,6 +5,7 @@
  */
 package view;
 
+import classes.Exemple;
 import classes.Produit;
 import classes.User;
 import classes.panier;
@@ -90,7 +91,8 @@ private Label totalMontantLabel; // Label pour afficher le total du panier
           slider.setTranslateX(0);
         menuclose.setVisible(true);
         menu.setVisible(false);
-    }    
+    
+                }
      @FXML
 private void afficheraction(ActionEvent event)throws SQLException{
     afficher();
@@ -145,6 +147,13 @@ private void ajouterAuPanier(ActionEvent event) {
 
                     panierService.ajout(produitSelectionne, user, quantite_panier);
                     System.out.println("Produit ajouté au panier avec succès !");
+                    
+                
+                //Twilo API              //Twilo API
+        /**/      String recipientPhoneNumber = "+21651791220"; // Replace with the recipient's phone number
+        /**/  String messageText = "Votre commande est ajoutée avec succès au panier"; // Provide your message
+        /**/ Exemple.sendTwilioSMS(recipientPhoneNumber, messageText);
+      
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Veuillez saisir une quantité valide (un nombre entier).");
@@ -193,6 +202,27 @@ private void afficherTotalMontant(ActionEvent event) {
         menu.setVisible(true);
         
     }
+    // Méthode pour charger et afficher l'image de l'offre
+
+    public void initialize() {
+    // ... votre code existant ...
+
+    tableview.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+            String imagePath = newSelection.getImage();
+            if (imagePath != null && !imagePath.isEmpty()) {
+                Image image = new Image("file:" + imagePath);
+                image_View.setImage(image);
+            } else {
+                image_View.setImage(null);
+            }
+        } else {
+            image_View.setImage(null);
+        }
+    });
+
+    // ... votre code existant ...
+}
 }
 
 
