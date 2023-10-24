@@ -40,10 +40,14 @@ import  tn.esprit.gui.CustomListCell;
 import com.mewebstudio.captcha.Captcha;
 import com.mewebstudio.captcha.GeneratedCaptcha;
 import java.awt.image.BufferedImage;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import mail.Spellchecker;
 
 /**
  * FXML Controller class
@@ -59,6 +63,23 @@ public class Ajout_recController implements Initializable {
     String expectedCaptchaAnswer ;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+            corr.setVisible(false);
+
+        // Ajouter un écouteur de changement de texte au TextArea
+        detR.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                // Si le texte dans le TextArea change, vérifiez s'il est vide ou non
+                if (newValue != null && !newValue.trim().isEmpty()) {
+                    // Si le texte n'est pas vide, rendez le Hyperlink visible
+                    corr.setVisible(true);
+                } else {
+                    // Si le texte est vide, rendez le Hyperlink invisible
+                    corr.setVisible(false);
+                }
+            }
+        });
         captcha = new Captcha();
     GeneratedCaptcha generatedcaptcha = captcha.generate();
      expectedCaptchaAnswer = generatedcaptcha.getCode();
@@ -87,6 +108,7 @@ public class Ajout_recController implements Initializable {
     listEVE.setCellFactory((ListView<Evenement> param) -> new CustomListCell<Evenement>());
     listPROD.setCellFactory((ListView<Produit> param) -> new CustomListCell<Produit>());
     listACT.setCellFactory((ListView<activites> param) -> new CustomListCell<activites>());
+    
     }    
 private Captcha captcha;
     @FXML
@@ -149,6 +171,8 @@ private Captcha captcha;
     private TextField captchaTextField;
     @FXML
     private Label captchaErrorLabel;
+    @FXML
+    private Hyperlink corr;
     
 
 
@@ -324,6 +348,15 @@ private void handleChoisirButton(ActionEvent event) {
 
     
 }
+
+    public void corriger(ActionEvent event) {
+    
+   Spellchecker spellCheckerWrapper = new Spellchecker();
+   String textToCorrect = detR.getText();
+   String correctedText = spellCheckerWrapper.autoCorrectText(textToCorrect);
+   detR.setText(correctedText);
+}
+        
     }
     
 
