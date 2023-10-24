@@ -153,6 +153,7 @@ public class SupprimerController implements Initializable {
     if (selectedItem != null) {
         
         int id = selectedItem.getId_act();
+        System.out.println(id);
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmation ");
         alert.setHeaderText("Etes vous sur de vouloir supprimer cet activité?");

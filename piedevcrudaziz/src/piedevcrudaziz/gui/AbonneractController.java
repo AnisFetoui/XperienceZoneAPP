@@ -152,7 +152,7 @@ public class AbonneractController implements Initializable {
  
 
 private void updateUIBasedOnIdAct() {
-        System.out.println(idAct); 
+        System.out.println("here is the id"+idAct); 
          try {
         String req = "SELECT * FROM activites WHERE Id_act = ?";        
         PreparedStatement pre = con.prepareStatement(req);

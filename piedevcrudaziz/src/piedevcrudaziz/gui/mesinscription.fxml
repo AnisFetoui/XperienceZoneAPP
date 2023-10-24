@@ -79,10 +79,38 @@
                <children>
                   <VBox layoutX="62.0" layoutY="74.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="393.0" prefWidth="176.0" text="Inscription en ligne">
+                        <Label alignment="BOTTOM_CENTER" prefHeight="43.0" prefWidth="176.0" text="Vos">
+                           <font>
+                              <Font name="Berlin Sans FB" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="TOP_CENTER" prefHeight="63.0" prefWidth="176.0" text="Inscription en ligne">
                            <font>
                               <Font name="Berlin Sans FB" size="18.0" />
                            </font></Label>
+                        <Label prefHeight="17.0" prefWidth="198.0" text="Conseil :">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label prefHeight="62.0" prefWidth="176.0" text="chaque tické est fournis une seule foix" wrapText="true">
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label prefHeight="62.0" prefWidth="183.0" text="Selectionner l'iabonnement à supprimer" wrapText="true">
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label prefHeight="66.0" prefWidth="183.0" text="vous allez recoit un appel pour confirmer l'annulation" wrapText="true">
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </Label>
                      </children>
                   </VBox>
                </children>
@@ -105,14 +133,14 @@
             </TableView>
          </center>
          <bottom>
-            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="929.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="929.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="supp" mnemonicParsing="false" onAction="#deleteselectedact" prefHeight="41.0" prefWidth="156.0" styleClass="btn1" stylesheets="@../../css/style.css" text="Supprimer" textFill="WHITE">
+                  <Button fx:id="precedent" mnemonicParsing="false" onAction="#goback" prefHeight="41.0" prefWidth="140.0" styleClass="btn1" stylesheets="@../../css/style.css" text="Précedent" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="supp2" mnemonicParsing="false" onAction="#deleteselectedact" prefHeight="41.0" prefWidth="156.0" styleClass="btn1" stylesheets="@../../css/style.css" text="Supprimer" textFill="WHITE">
+                  <Button fx:id="supp" mnemonicParsing="false" onAction="#deleteselectedact" prefHeight="41.0" prefWidth="140.0" styleClass="btn1" stylesheets="@../../css/style.css" text="Supprimer" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

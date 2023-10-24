@@ -95,6 +95,8 @@ public class ModifieractiviteController implements Initializable {
     private DatePicker datedebut;
     @FXML
     private DatePicker datefin;
+    
+    public int idAct;
             
     
 
@@ -108,7 +110,8 @@ public class ModifieractiviteController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        updateUIBasedOnIdAct();
+        System.out.println("id a modifier initialised to = "+idAct);
         slider.setTranslateX(0);
         menuclose.setVisible(true);
         menu.setVisible(false);
@@ -146,71 +149,57 @@ public class ModifieractiviteController implements Initializable {
         SpinnerValueFactory<Integer> A;
         A = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 72, 0);
         duréemod.setValueFactory(A);  
-        ////////////////////////////////////////////////
+        
+        
 
-        serviceactivites sa = new serviceactivites();
-        String searchedname = "khal3a";// hedhi lezm tetbadel
-        ArrayList<activites> resultas = sa.chercherActivites(searchedname);
-        try {
-            String req = "SELECT * FROM activites WHERE nom_act = ?";
-            PreparedStatement pre = con.prepareStatement(req);
-            pre.setString(1, searchedname);
-            
-            
-            try (ResultSet rs = pre.executeQuery()) {
-                while (rs.next()) {
-                    activites activite = new activites();
-                    activite.setNom_act(rs.getString("nom_act"));
-                    activite.setDescription(rs.getString("description"));
-                    activite.setOrganisateur(rs.getString("Organisateur"));
-                    activite.setAdresse(rs.getString("Adresse"));
-                    activite.setImages(rs.getString("Images"));
-                    activite.setLieu_act(rs.getString("lieu_act"));
-                    activite.setPlace_dispo(rs.getInt("place_dispo"));
-                    activite.setPrix_act(rs.getString("prix_act"));
-                    activite.setDurée(rs.getInt("durée"));
-                    activite.setPeriode(rs.getString("periode"));
-                    resultas.add(activite);
-                    
-                    organisateurmod.setText(activite.getOrganisateur());
-                    nommod.setText(activite.getNom_act());
-                    adressemod.setText(activite.getAdresse());
-                    prixmod.setText(activite.getPrix_act());
-                    descriptionmod.setText(activite.getDescription());
-                    //periodemod.setText(activite.getPeriode());
-                    int duree = activite.getDurée();
-                    SpinnerValueFactory<Integer> dureeValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 72, duree);
-                    duréemod.setValueFactory(dureeValueFactory);
-                    int nbrplace = activite.getPlace_dispo();
-                    SpinnerValueFactory<Integer> nbrplaceValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 72, nbrplace);
-                    nbrplacemod.setValueFactory(nbrplaceValueFactory);
-                   combobox.getEditor().setText(activite.getLieu_act());
-                    //recupuration de date periode
-                   String dbperiode;
-                   dbperiode = activite.getPeriode();
-                   String[] dateParts = dbperiode.split(" - ");
-                   String debutdate = dateParts[0];
-                   String findate = dateParts[1];
-
-                   LocalDate startDate = LocalDate.parse(debutdate);
-                   LocalDate endDate = LocalDate.parse(findate);
-
-                   datedebut.setValue(startDate);
-                   datefin.setValue(endDate);
-
-                    
-                    
-                }
-            }
-            
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
+        
+        
+        
     }
 
-    /*public void setNommod(String nommod) {
-        this.nommod.setText(nommod);
-    }*/
+    void setIdAct(int code) {
+       idAct = code;
+        System.out.println("id a modifier setted to = "+idAct);
+        updateUIBasedOnIdAct();
+    }
+      private void updateUIBasedOnIdAct() {
+          
+        System.out.println(idAct);
+        try{
+        serviceactivites sa = new serviceactivites();
+        activites activite = new activites();
+        activite = sa.chercherbyidact(idAct);
+          System.out.println("id a modifier recu = "+idAct);
+        organisateurmod.setText(activite.getOrganisateur());
+        System.out.println(activite.getOrganisateur());
+        nommod.setText(activite.getNom_act());
+        adressemod.setText(activite.getAdresse());
+        prixmod.setText(activite.getPrix_act());
+        descriptionmod.setText(activite.getDescription());
+        //periodemod.setText(activite.getPeriode());
+        int duree = activite.getDurée();
+        SpinnerValueFactory<Integer> dureeValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 72, duree);
+        duréemod.setValueFactory(dureeValueFactory);
+        
+        int nbrplace = activite.getPlace_dispo();
+        SpinnerValueFactory<Integer> nbrplaceValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 72, nbrplace);
+        nbrplacemod.setValueFactory(nbrplaceValueFactory);
+        combobox.getEditor().setText(activite.getLieu_act());
+        //recupuration de date periode
+        String dbperiode;
+        dbperiode = activite.getPeriode();
+        String[] dateParts = dbperiode.split(" - ");
+        String debutdate = dateParts[0];
+        String findate = dateParts[1];
+        LocalDate startDate = LocalDate.parse(debutdate);
+        LocalDate endDate = LocalDate.parse(findate);
+        datedebut.setValue(startDate);
+        datefin.setValue(endDate);
+          } catch (Exception ex) {
+        System.out.println(ex);
+    }
+       
+    }
 
     @FXML
     private void changeActivity(ActionEvent event) {
@@ -255,7 +244,7 @@ String Periode = debutdate + " - " + findate;
         } else {
         
         activites activite1 = new activites(Nom,Description,Organisateur,Gouvernorat,Adresse,image,Placedispo,Prix,Durée,Periode);
-         activite1.setId_act(14); //neqsa fonction qui recupere lid
+         activite1.setId_act(idAct); //neqsa fonction qui recupere lid
         sa.mettreAJourActivite(activite1);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("confirmation de modification de "+ Nom);
@@ -422,6 +411,9 @@ String Periode = debutdate + " - " + findate;
         String namec = combobox.getSelectionModel().getSelectedItem().toString();
         return namec;
     }
+
+  
+   
     
 }
 

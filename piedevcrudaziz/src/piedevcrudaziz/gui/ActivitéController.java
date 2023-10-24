@@ -179,10 +179,12 @@ ObservableList<String> lista = FXCollections.observableArrayList(
         String foundPrix = foundActivity.getPrix_act();
         int nbrparticipant = foundActivity.getPlace_dispo();
         String villeactivite = foundActivity.getLieu_act();
+        int idutilisateur = foundActivity.getId_user();
         
      
         activites newActivite = new activites();
         newActivite.setId_act(codeact);
+        newActivite.setIdUser(idutilisateur);
         newActivite.setNom_act(foundName);
         newActivite.setOrganisateur(foundOrganisateur);
         newActivite.setPrix_act(foundPrix);

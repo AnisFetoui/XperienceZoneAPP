@@ -47,16 +47,25 @@ public class CardController implements Initializable {
     @FXML
     private Label nbrplaces;
     private int idAct;
-
+    @FXML
+    private Button modifieracti;
+    private int connecteduser = 1 ;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     public void setData(activites card){
+        if(connecteduser ==card.getId_user()){
+        modifieracti.setVisible(true);
+        }
+        else{
+        modifieracti.setVisible(false);
+        }
+        //System.out.println(card.getId_user());
          idAct = card.getId_act();
         Image image = new Image(getClass().getResourceAsStream(card.getImages()));
         cardimage.setImage(image);
@@ -73,7 +82,7 @@ public class CardController implements Initializable {
     private void bookact(ActionEvent event) {
             
         try {
-            System.out.println(idAct);
+            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("abonneract.fxml"));
             Parent root = loader.load(); 
             
@@ -90,6 +99,35 @@ public class CardController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+    }
+
+    @FXML
+    private void modificateur(ActionEvent event) {
+          try {
+            // Load the FXML file
+            System.out.println("id a modifier" +idAct);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("modifieractivite.fxml"));
+            Parent root = loader.load();
+            
+             ModifieractiviteController modifieractiviteController = loader.getController();
+             modifieractiviteController.setIdAct(idAct);
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setTitle("Page Modifier");
+             stage.setFullScreen(true);
+            stage.setScene(new Scene(root));
+
+            // Show the new stage
+            stage.show();
+
+            // Close the current stage (if needed)
+            Stage currentStage = (Stage) modifieracti.getScene().getWindow();
+            currentStage.close();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle any exceptions here
+        }
+        
         
     }
   

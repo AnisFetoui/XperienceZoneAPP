@@ -18,6 +18,8 @@ interface Iserviceactivites<T > {
      List<activites> chercherActivites(String nomActivite);
      List<activites> chercherparlieu(String Gouvernorat);
      List<activites> chercherpariduser(Integer iduser);
+     activites chercherbyidact(Integer idact);
+     
     void ajouterActivite(activites activite);
     void mettreAJourActivite(activites activite);
     void supprimerActivite(int id);

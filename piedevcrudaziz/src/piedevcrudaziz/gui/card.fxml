@@ -69,13 +69,14 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="45.0" prefWidth="240.0" spacing="88.0">
+            <HBox alignment="BOTTOM_CENTER" prefHeight="45.0" prefWidth="240.0" spacing="10.0">
                <children>
                   <Label fx:id="price" alignment="CENTER" prefHeight="38.0" prefWidth="71.0" style="-fx-background-color: #60941a;" text="20.0" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="Berlin Sans FB" size="24.0" />
                      </font>
                   </Label>
+                  <Button fx:id="modifieracti" mnemonicParsing="false" onAction="#modificateur" prefHeight="39.0" prefWidth="70.0" text="Modifier" />
                   <Button fx:id="btnbook" alignment="CENTER" mnemonicParsing="false" onAction="#bookact" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #87cb28;" text="Réserver" textFill="WHITE">
                      <font>
                         <Font name="Berlin Sans FB" size="14.0" />

@@ -128,6 +128,7 @@ public ArrayList<activites> chercherActivites(String nomActivite) {
         try (ResultSet rs = pre.executeQuery()) {
             while (rs.next()) {
                 activites activite = new activites();
+                
                 activite.setId_act(rs.getInt("Id_act"));
                 activite.setNom_act(rs.getString("nom_act"));
                 activite.setDescription(rs.getString("description"));
@@ -139,6 +140,7 @@ public ArrayList<activites> chercherActivites(String nomActivite) {
                 activite.setPrix_act(rs.getString("prix_act"));
                 activite.setDurée(rs.getInt("durée"));
                 activite.setPeriode(rs.getString("periode"));
+                activite.setIdUser(rs.getInt("id_user"));
                 resultats.add(activite);
             }
         }
@@ -197,7 +199,7 @@ public ArrayList<activites> chercherpariduser(Integer id_user) {
         try (ResultSet rs = pre.executeQuery()) {
             while (rs.next()) {
                 activites activite = new activites();
-                //activite.setId_act(rs.getInt("Id_act"));
+                activite.setId_act(rs.getInt("Id_act"));
                 activite.setNom_act(rs.getString("nom_act"));
                 activite.setDescription(rs.getString("description"));
                 activite.setOrganisateur(rs.getString("Organisateur"));
@@ -235,20 +237,19 @@ public ArrayList<activites> chercherpariduser(Integer id_user) {
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
-//chercher par  "price range"
-/*public ArrayList<activites> chercherparprix(String pricerange) {
-    ArrayList<activites> resultats = new ArrayList<>();
+    @Override
+    public activites chercherbyidact(Integer idact) {
+    activites activite = null;
 
     try {
-        String req = "SELECT * FROM activites WHERE prix_act = ?";
+        String req = "SELECT * FROM activites WHERE Id_act = ?";
         
-        
-
         PreparedStatement pre = con.prepareStatement(req);
-        pre.setString(1, Gouvernorat);
+        pre.setInt(1, idact);
+
         try (ResultSet rs = pre.executeQuery()) {
-            while (rs.next()) {
-                activites activite = new activites();
+            if (rs.next()) {
+                activite = new activites();
                 activite.setId_act(rs.getInt("Id_act"));
                 activite.setNom_act(rs.getString("nom_act"));
                 activite.setDescription(rs.getString("description"));
@@ -260,16 +261,18 @@ public ArrayList<activites> chercherpariduser(Integer id_user) {
                 activite.setPrix_act(rs.getString("prix_act"));
                 activite.setDurée(rs.getInt("durée"));
                 activite.setPeriode(rs.getString("periode"));
-                resultats.add(activite);
+                activite.setIdUser(rs.getInt("id_user"));
             }
         }
     } catch (SQLException ex) {
         System.out.println(ex);
     }
 
-    return resultats;
-}*/
+    return activite;
+}
 
+
+  
 
 
    
