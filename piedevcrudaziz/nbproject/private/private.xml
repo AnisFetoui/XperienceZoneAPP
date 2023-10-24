@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/images/02d.png</file>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/images/1.jpg</file>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/WeatherController.java</file>
+            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/CardController.java</file>
             <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/AbonneractController.java</file>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/images/03.png</file>
+            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/service/serviceactivites.java</file>
             <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/ActivitéController.java</file>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/gactivite.java</file>
-            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/images/10d.png</file>
+            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/AjouterController.java</file>
+            <file>file:/C:/Users/Med%20Aziz/XperienceZoneAPP/piedevcrudaziz/src/piedevcrudaziz/gui/SupprimerController.java</file>
         </group>
     </open-files>
 </project-private>

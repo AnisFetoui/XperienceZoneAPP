@@ -39,7 +39,7 @@ public class CardController implements Initializable {
     private ImageView cardimage;
     @FXML
     private VBox box;
-    private String[] colors = {"B9E5FF","BDB2FE","FB9AA8","EF5056"};
+    private String[] colors = {"B9E5FF","BDB2FE","F0F8FF","B9D9EB"};
     @FXML
     private Button btnbook;
     @FXML
@@ -56,7 +56,8 @@ public class CardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        //connecteduser = 2;
+        //getconnecteduserid
     }    
     public void setData(activites card){
         if(connecteduser ==card.getId_user()){
@@ -71,7 +72,7 @@ public class CardController implements Initializable {
         cardimage.setImage(image);
         actname.setText(card.getNom_act());
         orgname.setText(card.getOrganisateur());
-        price.setText(card.getPrix_act());
+        price.setText(card.getPrix_act()+"DT");
         nbrplaces.setText(Integer.toString(card.getPlace_dispo()));
         villeact.setText(card.getLieu_act());
         box.setStyle("-fx-background-color: #"+ colors[(int)(Math.random()*colors.length)]);
