@@ -83,6 +83,7 @@ public class SupprimerController implements Initializable {
     private Button pagemodifier;
     @FXML
     private Button pagesupprimer;
+    int userid ;
 
     public SupprimerController() {
          con = MyDB.getinstance().getCon();
@@ -96,26 +97,14 @@ public class SupprimerController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         updateUIBasedOnIdAct();
         slider.setTranslateX(0);
         menuclose.setVisible(true);
         menu.setVisible(false);
         
         ////////////////////////////////
         
-        serviceactivites sa = new serviceactivites();
-        ArrayList<activites> activitesTrouvees = sa.chercherpariduser(1);
-        ObservableList<activites> activitesList = FXCollections.observableArrayList(sa.chercherpariduser(1));
-        tableview.setItems(activitesList);
-
-        act_col.setCellValueFactory(new PropertyValueFactory<>("nom_act"));
-        des_col.setCellValueFactory(new PropertyValueFactory<>("description"));
-       org_col.setCellValueFactory(new PropertyValueFactory<>("organisateur"));
-        couv_col.setCellValueFactory(new PropertyValueFactory<>("lieu_act"));
-        add_col.setCellValueFactory(new PropertyValueFactory<>("adresse"));
-        part_col.setCellValueFactory(new PropertyValueFactory<>("place_dispo"));
-        prix_col.setCellValueFactory(new PropertyValueFactory<>("prix_act"));
-        duree_col.setCellValueFactory(new PropertyValueFactory<>("durée"));
-        periode_col.setCellValueFactory(new PropertyValueFactory<>("periode"));
+        
         
     }  
 
@@ -269,6 +258,33 @@ public class SupprimerController implements Initializable {
             Stage currentStage = (Stage) pagemodifier.getScene().getWindow();
             currentStage.close();
         } catch (Exception e) {
+            e.printStackTrace(); // Handle any exceptions here
+        }
+    }
+
+    void setIduser(int iduserconnected) {
+        userid =iduserconnected;
+        updateUIBasedOnIdAct();
+    }
+
+    private void updateUIBasedOnIdAct() {
+        try{
+        serviceactivites sa = new serviceactivites();
+        
+        ArrayList<activites> activitesTrouvees = sa.chercherpariduser(userid);
+        ObservableList<activites> activitesList = FXCollections.observableArrayList(sa.chercherpariduser(userid));
+        tableview.setItems(activitesList);
+
+        act_col.setCellValueFactory(new PropertyValueFactory<>("nom_act"));
+        des_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+       org_col.setCellValueFactory(new PropertyValueFactory<>("organisateur"));
+        couv_col.setCellValueFactory(new PropertyValueFactory<>("lieu_act"));
+        add_col.setCellValueFactory(new PropertyValueFactory<>("adresse"));
+        part_col.setCellValueFactory(new PropertyValueFactory<>("place_dispo"));
+        prix_col.setCellValueFactory(new PropertyValueFactory<>("prix_act"));
+        duree_col.setCellValueFactory(new PropertyValueFactory<>("durée"));
+        periode_col.setCellValueFactory(new PropertyValueFactory<>("periode"));
+      } catch (Exception e) {
             e.printStackTrace(); // Handle any exceptions here
         }
     }

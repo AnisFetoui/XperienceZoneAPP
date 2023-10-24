@@ -6,6 +6,12 @@
 package piedevcrudaziz.gui;
 
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +25,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import piedevcrudaziz.entity.inscription;
 import piedevcrudaziz.service.serviceinscription;
@@ -139,6 +148,31 @@ public class TicketController implements Initializable {
 
     @FXML
     private void download(ActionEvent event) {
+        String nom = nomactivite.getText();
+        String organisateur = nomorganisateur.getText();
+        generatepdf(nom , organisateur);
+    }
+    private void generatepdf(String nom ,String organisateur){
+        Document document = new Document();
+        try{
+            
+        PdfWriter.getInstance(document, new FileOutputStream("ticket.pdf")); 
+        document.open();
+        document.add(new Paragraph("Nom activité : "+nom));
+        document.add(new Paragraph("Organisateur : "+organisateur));
+        document.close();
+        //System.out.println("le fichier pdf est enregistrer");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("notification");
+        alert.setHeaderText("le fichier pdf est enregistrer");
+
+        ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButton);
+        alert.showAndWait();
+        }catch(DocumentException | FileNotFoundException e){
+        e.printStackTrace();
+        }
+        
     }
     
 }

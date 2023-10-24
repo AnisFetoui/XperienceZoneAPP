@@ -85,6 +85,8 @@ public class AbonneractController implements Initializable {
      public int idAct;
     @FXML
     private ImageView loglog;
+    String plusCode ;
+    String add;
 
     /**
      * Initializes the controller class.
@@ -98,9 +100,9 @@ public class AbonneractController implements Initializable {
                         
        
 
+        //WebEngine webEngine = mapView.getEngine();
+        //String plusCode = "https://www.google.com/maps/place/Brown+Sugar+Coffee+Ariana+Soghra/@36.9022435,10.1854159,16z/data=!4m6!3m5!1s0x12e2cbd5ed9fcf5f:0xfa883b4dec99361c!8m2!3d36.9019827!4d10.1856296!16s%2Fg%2F11hfpbdmvq?entry=ttu";    
         WebEngine webEngine = mapView.getEngine();
-       //changer plus code avec address depuis database
-        String plusCode = "https://www.google.com/maps/place/Brown+Sugar+Coffee+Ariana+Soghra/@36.9022435,10.1854159,16z/data=!4m6!3m5!1s0x12e2cbd5ed9fcf5f:0xfa883b4dec99361c!8m2!3d36.9019827!4d10.1856296!16s%2Fg%2F11hfpbdmvq?entry=ttu";  
         webEngine.load(plusCode);
     
       
@@ -165,8 +167,13 @@ private void updateUIBasedOnIdAct() {
                 nomactrev.setText(rs.getString("nom_act"));
                 discrip.setText(rs.getString("description"));
                 organisateurname.setText(rs.getString("Organisateur"));
-                ad.setText(rs.getString("Adresse"));
-                //activite.setImages(rs.getString("Images"));
+                //ad.setText(rs.getString("Adresse"));
+                
+                //plusCode = "https://www.google.com/maps/place/RESIDENCE+EYA/@36.903913,10.1821004,15z/data=!4m9!1m2!2m1!1sesprit!3m5!1s0x12e2cb991d4e80bb:0xd2834cfff10d5a11!8m2!3d36.9089437!4d10.1903648!16s%2Fg%2F11c2jhwyw4?entry=ttu";
+                plusCode = rs.getString("Adresse");
+                WebEngine webEngine = mapView.getEngine();
+                webEngine.load(plusCode);
+                //String lesimaage = rs.getString("Images");
                 gouv.setText(rs.getString("lieu_act"));           
                 capcite.setText(String.valueOf(rs.getInt("place_dispo")));
                 price.setText(rs.getString("prix_act")+ " DT");

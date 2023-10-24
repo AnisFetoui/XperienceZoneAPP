@@ -118,6 +118,7 @@ public class AjouterController implements Initializable {
     private ImageView ImagePreviw6;
     @FXML
     private Button savedb;
+    int idusercon;
     
     //private String selectedImagePath = null;
     private String[] selectedImagePaths = new String[4];
@@ -200,7 +201,7 @@ combobox.setItems(lista);
         
           //String image = selectedImagePath;
            String image = String.join(",", selectedImagePaths);
-            System.out.println("image");
+            //System.out.println("image");
         
         LocalDate selectedDatedebut = datedebut.getValue();
         LocalDate selectedDatefin = datefin.getValue();
@@ -251,7 +252,7 @@ combobox.setItems(lista);
         } else {
            
            
-            activites activite1 = new activites(Nom, Description, Organisateur, Gouvernorat,Adresse, image,  Placedispo, Prix, Durée, Periode);
+            activites activite1 = new activites(Nom, Description, Organisateur, Gouvernorat,Adresse, image,  Placedispo, Prix, Durée, Periode,idusercon);
             sa.ajouterActivite(activite1);
             
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -457,6 +458,11 @@ combobox.setItems(lista);
         }
       
     }
+
+    void setIduser(int iduserconnected) {
+       idusercon = iduserconnected;  
+    }
+
 
 
   

@@ -97,6 +97,7 @@ public class ModifieractiviteController implements Initializable {
     private DatePicker datefin;
     
     public int idAct;
+    int idusercon;
             
     
 
@@ -161,6 +162,9 @@ public class ModifieractiviteController implements Initializable {
        idAct = code;
         System.out.println("id a modifier setted to = "+idAct);
         updateUIBasedOnIdAct();
+    }
+    void setIduser(int iduserconnected) {
+        idusercon = iduserconnected;
     }
       private void updateUIBasedOnIdAct() {
           
@@ -243,7 +247,7 @@ String Periode = debutdate + " - " + findate;
      
         } else {
         
-        activites activite1 = new activites(Nom,Description,Organisateur,Gouvernorat,Adresse,image,Placedispo,Prix,Durée,Periode);
+        activites activite1 = new activites(Nom,Description,Organisateur,Gouvernorat,Adresse,image,Placedispo,Prix,Durée,Periode,idusercon);
          activite1.setId_act(idAct); //neqsa fonction qui recupere lid
         sa.mettreAJourActivite(activite1);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -411,6 +415,8 @@ String Periode = debutdate + " - " + findate;
         String namec = combobox.getSelectionModel().getSelectedItem().toString();
         return namec;
     }
+
+
 
   
    

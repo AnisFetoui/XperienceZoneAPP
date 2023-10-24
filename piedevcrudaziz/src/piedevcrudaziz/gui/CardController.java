@@ -49,15 +49,16 @@ public class CardController implements Initializable {
     private int idAct;
     @FXML
     private Button modifieracti;
-    private int connecteduser = 1 ;
+    private int connecteduser = 1;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //connecteduser = 2;
-        //getconnecteduserid
+            
+             
+        
     }    
     public void setData(activites card){
         if(connecteduser ==card.getId_user()){
@@ -66,7 +67,7 @@ public class CardController implements Initializable {
         else{
         modifieracti.setVisible(false);
         }
-        //System.out.println(card.getId_user());
+        
          idAct = card.getId_act();
         Image image = new Image(getClass().getResourceAsStream(card.getImages()));
         cardimage.setImage(image);

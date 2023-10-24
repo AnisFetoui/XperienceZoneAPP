@@ -25,9 +25,8 @@ public class activites {
     private int durée;
     private String periode;
     private int id_user;
-    
 
-    public activites(int Id_act, String nom_act, String description, String organisateur, String lieu_act, String adresse, String images, int place_dispo, String prix_act,int durée,String periode) {
+    public activites(int Id_act, String nom_act, String description, String organisateur, String lieu_act, String adresse, String images, int place_dispo, String prix_act, int durée, String periode, int id_user) {
         this.Id_act = Id_act;
         this.nom_act = nom_act;
         this.description = description;
@@ -38,23 +37,27 @@ public class activites {
         this.place_dispo = place_dispo;
         this.prix_act = prix_act;
         this.durée = durée;
-        this.periode= periode;
+        this.periode = periode;
+        this.id_user = id_user;
     }
 
-    public activites(String nom_act, String description, String organisateur,String lieu_act, String adresse, String images, int place_dispo, String prix_act,int durée,String periode) {
+    public activites(String nom_act, String description, String organisateur, String lieu_act, String adresse, String images, int place_dispo, String prix_act, int durée, String periode, int id_user) {
         this.nom_act = nom_act;
         this.description = description;
         this.organisateur = organisateur;
-        
         this.lieu_act = lieu_act;
         this.adresse = adresse;
         this.images = images;
         this.place_dispo = place_dispo;
         this.prix_act = prix_act;
         this.durée = durée;
-        this.periode= periode;
+        this.periode = periode;
+        this.id_user = id_user;
     }
     
+
+
+
 
 
 

@@ -48,7 +48,7 @@ public class serviceactivites implements Iserviceactivites<activites>{
             pre.setString(8, a.getPrix_act());
             pre.setInt(9, a.getDurée());
             pre.setString(10, a.getPeriode());
-            pre.setInt(11,1);//lajout de id user
+            pre.setInt(11,a.getId_user());//lajout de id user
             //ajouter la fonction de anis connexion pour recuperer lid du utilisateur connecté
             pre.executeUpdate();
             

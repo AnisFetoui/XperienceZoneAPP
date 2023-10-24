@@ -91,6 +91,9 @@ public class ActivitéController implements Initializable {
     private ImageView i1;
     @FXML
     private ImageView i2;
+    int iduserconnected = 3;
+    @FXML
+    private Label connectedname;
 
     
     /**
@@ -159,7 +162,12 @@ ObservableList<String> lista = FXCollections.observableArrayList(
 
 
     }
-
+    
+     public int envoyerid (int code) {
+        code =iduserconnected;
+        return code;
+       
+    }
     
     @FXML
     private void selectN(ActionEvent event) {
@@ -283,6 +291,8 @@ ObservableList<String> lista = FXCollections.observableArrayList(
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("supprimer.fxml"));
             Parent root = loader.load();
+             SupprimerController suppController = loader.getController();
+             suppController.setIduser(iduserconnected);
 
             // Create a new stage
             Stage stage = new Stage();
@@ -309,7 +319,9 @@ ObservableList<String> lista = FXCollections.observableArrayList(
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ajouter.fxml"));
             Parent root = loader.load();
-
+                
+            AjouterController ajController = loader.getController();
+             ajController.setIduser(iduserconnected);
             // Create a new stage
             Stage stage = new Stage();
             stage.setTitle(" Page Ajouter");
@@ -333,7 +345,9 @@ ObservableList<String> lista = FXCollections.observableArrayList(
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("modifieractivite.fxml"));
             Parent root = loader.load();
-
+            
+            ModifieractiviteController modController = loader.getController();
+             modController.setIduser(iduserconnected);
             // Create a new stage
             Stage stage = new Stage();
             stage.setTitle("Page Modifier");
