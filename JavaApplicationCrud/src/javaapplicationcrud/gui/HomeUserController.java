@@ -101,7 +101,7 @@ public void initialize(URL url, ResourceBundle rb) {
 
     }
 
-           @FXML
+    @FXML
     private void go_home(MouseEvent event) {
       //  if (event.isPrimaryButtonDown()) {}
          showContent("HomeUser.fxml");
@@ -112,33 +112,33 @@ public void initialize(URL url, ResourceBundle rb) {
         showContent("HomeUser.fxml");
     }
 
-
      @FXML
     private void go_evenements(MouseEvent event) {
     
         showContent("InscriptionUserController.fxml");  
     }
-
-        
-        @FXML
+  
+     @FXML
     private void go_activités(MouseEvent event) {
     
-        showContent("InscriptionUserController.fxml");  
+       // showContent("activié.fxml");  
+        showContent("InscriptionUser.fxml");
     }
    
     @FXML
     private void Go_Reclamations(MouseEvent event) {
-        showContent("InscriptionUserController.fxml");
+        showContent("InscriptionUser.fxml");
+        // showContent("ajout_rec.fxml");
     }
  
      @FXML
     private void go_channel(MouseEvent event) {
-        showContent("InscriptionUserController.fxml");
+        //showContent("InscriptionUserController.fxml");
+        showContent("Acceuil.fxml");
     }
         @FXML
     private void go_profile(MouseEvent event) {
     
-               // showContent("ProfileUser.fxml");
                 try {
     Parent root = FXMLLoader.load(getClass().getResource("ProfileUser.fxml"));
     Scene scene = new Scene(root);

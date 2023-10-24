@@ -21,7 +21,7 @@
                   <Font name="Arial Rounded MT Bold" size="15.0" />
                </font>
             </Button>
-            <ImageView fitHeight="209.0" fitWidth="258.0" layoutX="2.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="239.0" fitWidth="307.0" layoutX="1.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@385496021_292791893519238_8577172701520959440_n.png" />
                </image>
@@ -114,11 +114,6 @@
                   <Font name="Arial Rounded MT Bold" size="47.0" />
                </font>
             </Label>
-            <Button id="btn:connexion:mdpoub" fx:id="btn_profile_desc" layoutX="246.0" layoutY="597.0" mnemonicParsing="false" onAction="#desactiver" prefHeight="25.0" prefWidth="198.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Desactiver votre compte ?" textFill="RED" underline="true">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="13.0" />
-               </font>
-            </Button>
             <PasswordField fx:id="tf_modif_mdp" layoutX="138.0" layoutY="232.0" prefHeight="25.0" prefWidth="170.0" />
             <PasswordField fx:id="tf_modif_cfrmmdp" layoutX="138.0" layoutY="276.0" prefHeight="25.0" prefWidth="170.0" />
          </children>

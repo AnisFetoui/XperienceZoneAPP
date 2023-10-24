@@ -26,7 +26,7 @@ public class JavaApplicationCrud {
     public static void main(String[] args) {
         // TODO code application logic here
         //public User(int id, String username, String mail, String mdp,Role role, String image,int age, String sexe)
-       
+      /* 
           User updatedUser = new User();
     updatedUser.setId_user(1); // Set the ID of the user you want to update
     updatedUser.setUsername("aa");
@@ -42,7 +42,18 @@ public class JavaApplicationCrud {
 
     // Call the 'modifier' method to update the user
     su.modifier(updatedUser);
+    */
     
-    
+      /*  User u = new User();
+            u.setUsername("aa");
+            u.setMail("aa");
+            u.setMdp("aa");
+            u.setAge(5);
+            u.setRole("a");
+            u.setSexe("a");
+            u.setImage("aa");
+            //su.ajouter(u);
+            System.out.println(u);*/
+      
     }
-    }
+} 

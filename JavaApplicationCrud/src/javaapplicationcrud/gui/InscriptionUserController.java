@@ -14,10 +14,14 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javaapplicationcrud.entity.User;
+import static javaapplicationcrud.gui.MdpOubUserController.EmailReset;
+import static javaapplicationcrud.gui.MdpOubUserController.code;
+import javaapplicationcrud.service.EmailSender;
 import javaapplicationcrud.service.ServiceUser;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -49,6 +53,7 @@ import javax.imageio.ImageIO;
  * @author ANIS
  */
 public class InscriptionUserController implements Initializable {
+
     @FXML
     private TextField tf_inscri_ident;
     @FXML
@@ -64,37 +69,37 @@ public class InscriptionUserController implements Initializable {
     @FXML
     private ComboBox<String> cb_inscri_rl;
     @FXML
-    private ComboBox<String> cb_inscri_sx;
-    
+    private ComboBox<String> cb_inscri_sx; 
     private String ImagePath;
      @FXML
     private Button btn_inscri_inscri;
       @FXML
     private Button btn_inscri_cnx;
-      
-
         @FXML
         private Label imageLabel;
-         @FXML
+        @FXML
         private ImageView ImagePreviw;
-         @FXML
+        @FXML
         private Button Add_image_button;
-         @FXML
+        @FXML
         private MediaView MediaView;
-         @FXML
+        @FXML
         private Button prd_photo;
         private Webcam webcam = null;
         Thread webcamThread;
         @FXML
         private Button btnSnap;
-            @FXML
+        @FXML
         private Button btnCancel;
       
     /**
      * Initializes the controller class.
      */
+
+      
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         // TODO
            ObservableList<String> list = FXCollections.observableArrayList("CLIENT","MANAGER");
            cb_inscri_rl.setItems(list);
@@ -106,13 +111,10 @@ public class InscriptionUserController implements Initializable {
            
         ImagePath = "C:\\Users\\ANIS\\Documents/profile.jpg";
         ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
-           
           webcam = Webcam.getDefault();
     }          
 
- @FXML
-    private void insc(ActionEvent event) throws IOException {
-        User u = new User();
+ @FXML private void insc(ActionEvent event) throws IOException {
         ServiceUser su = new ServiceUser();
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
         String mdp1 = tf_inscri_mdp.getText();
@@ -178,14 +180,13 @@ public class InscriptionUserController implements Initializable {
       //  return;
     }else if (Integer.parseInt(age1) < 1 || Integer.parseInt(age1) > 150) {
     
-
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Âge hors de la plage valide");
         alert.setHeaderText(null);
         alert.setContentText("L'âge doit être compris entre 1 et 150.");
         alert.showAndWait();
     } else {
-
+            User u = new User();
             u.setUsername(tf_inscri_ident.getText());
             u.setMail(tf_inscri_email.getText());
             u.setMdp(mdp1);
@@ -199,8 +200,15 @@ public class InscriptionUserController implements Initializable {
             alert.setAlertType(Alert.AlertType.INFORMATION);
            alert.setContentText("Inscription avec success");
             alert.show();
+                EmailReset = u.getMail();
+                EmailSender.sendEmail("anisfetoui2000@gmail.com", "iucw kjxs otpi fsas", tf_inscri_email.getText(), "Bienvenue dans notre communauté !", "Cher(e) " +u.getUsername()+",\n" +
+                "\n" +
+                "Bienvenue ! Nous sommes ravis de vous accueillir sur XperienceZone. Profitez au maximum de votre expérience parmi nous.\n" +
+                "\n" +
+                    "Cordialement,\n" +
+                "[L'équipe de votre site ou application]");
      try {
-            Parent page1 = FXMLLoader.load(getClass().getResource("ConnexionUser.fxml"));
+            Parent page1 = FXMLLoader.load(getClass().getResource("connexionUser.fxml"));
             
             Scene scene = new Scene(page1);
             
@@ -233,8 +241,7 @@ public class InscriptionUserController implements Initializable {
     Path destPath = destDir.toPath().resolve(sourceFile.getName());
     Files.copy(sourcePath, destPath, StandardCopyOption.REPLACE_EXISTING);
     }
-    
-    
+
     @FXML
     private void add_image_action(ActionEvent event) throws IOException {
         FileChooser fc = new FileChooser();
@@ -330,4 +337,3 @@ private void TakePhotoAction(ActionEvent event) {
         }
     }
 }
-

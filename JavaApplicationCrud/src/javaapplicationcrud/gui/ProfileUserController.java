@@ -15,7 +15,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +33,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -120,7 +118,7 @@ public class ProfileUserController implements Initializable {
         
         ImagePreviw.setImage(new Image(new File(ImagePath).toURI().toString()));
         tf_modif_ident.setText(aold.getUsername());
-        label_us.setText("Mr "+aold.getUsername());
+        label_us.setText("Mr "+aold.getUsername()+", Bonjour !");
         tf_modif_email.setText(aold.getMail());
         tf_modif_mdp.setText(aold.getMdp());
         tf_modif_cfrmmdp.setText(aold.getMdp());
@@ -160,7 +158,7 @@ public class ProfileUserController implements Initializable {
     alert.setHeaderText(null);
     alert.setContentText("Veuillez saisir un email valide !");
     alert.showAndWait();
-    //return;
+  
 }else if ( !aold.getMail().equals(tf_modif_email.getText()) ) {
     if(su.checkEmailExists(tf_modif_email.getText())){
     Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -273,7 +271,7 @@ public class ProfileUserController implements Initializable {
 
         }
     }
-
+/*
       @FXML
     private void desactiver(ActionEvent event) {
             ServiceUser su = new ServiceUser();
@@ -310,7 +308,7 @@ public class ProfileUserController implements Initializable {
             }
 
         }
-    
+    */
     @FXML
 private void cancelCameraOpening(ActionEvent event) {
    

@@ -16,12 +16,12 @@
    <children>
       <AnchorPane prefHeight="406.0" prefWidth="215.0">
          <children>
-            <ImageView fitHeight="218.0" fitWidth="272.0" layoutX="3.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="218.0" fitWidth="272.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@385496021_292791893519238_8577172701520959440_n.png" />
                </image>
             </ImageView>
-            <Label layoutX="31.0" layoutY="269.0" prefHeight="43.0" prefWidth="210.0" text="Bienvenue !!" textFill="#2f8000" underline="true">
+            <Label layoutX="31.0" layoutY="240.0" prefHeight="43.0" prefWidth="210.0" text="Bienvenue !!" textFill="#2f8000" underline="true">
                <font>
                   <Font name="Arial Rounded MT Bold" size="32.0" />
                </font>

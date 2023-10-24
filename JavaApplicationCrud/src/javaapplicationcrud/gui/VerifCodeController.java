@@ -70,6 +70,7 @@ public class VerifCodeController implements Initializable {
         }
         else 
         {
+            
             Alert A = new Alert(Alert.AlertType.WARNING);
             A.setContentText("Code erroné ! ");
             A.show();

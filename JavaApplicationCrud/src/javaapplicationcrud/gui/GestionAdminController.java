@@ -5,6 +5,7 @@
  */
 package javaapplicationcrud.gui;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import javaapplicationcrud.entity.SessionManager;
 import javaapplicationcrud.entity.User;
+import javaapplicationcrud.service.ExcelSender;
 import javaapplicationcrud.service.ServiceUser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,7 +34,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * FXML Controller class
@@ -79,6 +84,7 @@ public class GestionAdminController implements Initializable {
     @FXML
     private Button btnActualiser;
     public static int id_modif ;  
+    public static int anous ;  
     @FXML
     private TableColumn<User, String> col_mdp;
     @FXML
@@ -91,6 +97,8 @@ public class GestionAdminController implements Initializable {
 
     @FXML
     private ComboBox<String> searchAttributeComboBox;
+    @FXML
+    private Button btnExcel;
      public void afficherUsers()
     {
          ServiceUser su = new ServiceUser();
@@ -304,6 +312,7 @@ private void sortData(ActionEvent event) {
         private void updateTableView(List<User> data) {
     ObservableList<User> observableData = FXCollections.observableArrayList(data);
     tv_users.setItems(observableData);
+    anous=tv_users.getItems().size();;
 }
         
 @FXML
@@ -366,6 +375,12 @@ private void filtreData(ActionEvent event) {
     } else {
         afficherUsers();
     }
+}
+
+@FXML
+private void export(ActionEvent event) {
+              ExcelSender d = new ExcelSender();
+        d.generateExcel(tv_users);
 }
 
 
